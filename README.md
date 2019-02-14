@@ -1,4 +1,4 @@
+# Knowledge
+Bits and pieces of computer programming related knowledge.
 
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwODg3NDY2MTJdfQ==
--->
+[C++](/cpp,md)
