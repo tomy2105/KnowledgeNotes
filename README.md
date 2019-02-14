@@ -1,2 +1,4 @@
-# Knowledge
-Bits and pieces of computer programming oriented knowledge.
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTIwODg3NDY2MTJdfQ==
+-->
