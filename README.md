@@ -1,4 +1,4 @@
 # Knowledge
 Bits and pieces of computer programming related knowledge.
 
-[C++](cpp/README,md)
+[C++](cpp/README.md)
