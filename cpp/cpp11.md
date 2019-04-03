@@ -8,11 +8,11 @@ A new non-const reference type called an rvalue reference, identified by `T&&` i
 For safety reasons, some restrictions are imposed. A named variable will never be considered to be an rvalue even if it is declared as such. To get an rvalue, the function template `std::move()` should be used. Rvalue references can also be modified only under certain circumstances, being intended to be used primarily with move constructors.
 
 ### Move constructors
-A move constructor of class `T` is a non-template [constructor](https://en.cppreference.com/w/cpp/language/initializer_list "cpp/language/initializer list") whose first parameter is T&&, const T&&, volatile T&&, or const volatile T&&, and either there are no other parameters, or the rest of the parameters all have default values.
 
-### Syntax
+A move constructor of class `T` is a non-template constructor whose first parameter is T&& (can be const and/or volatile) and the rest of the parameters, if present, have default values.
 
-class_name ( class_name `&&` )
+````````   class_name ( class_name `&&` )'''
+
 
 ### Generalized constant expressions
 
@@ -106,6 +106,6 @@ class_name ( class_name `&&` )
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNzM5MDU3MzksNjEyMzM1NzQxLDEwNz
-I2NjQzNDhdfQ==
+eyJoaXN0b3J5IjpbMTE3MjIwNzMyOSw2MTIzMzU3NDEsMTA3Mj
+Y2NDM0OF19
 -->
