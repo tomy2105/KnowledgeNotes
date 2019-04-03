@@ -7,15 +7,19 @@
 ### Generalized constant expressions
 
 ### Modification to the definition of plain old data
-](https://en.wikipedia.org/wiki/C%2B%2B11#Modification_to_the_definition_of_plain_old_data)
-    -   [2.2 Core language build-time performance enhancements](https://en.wikipedia.org/wiki/C%2B%2B11#Core_language_build-time_performance_enhancements)
-        -   [2.2.1 Extern template](https://en.wikipedia.org/wiki/C%2B%2B11#Extern_template)
-    -   [2.3 Core language usability enhancements](https://en.wikipedia.org/wiki/C%2B%2B11#Core_language_usability_enhancements)
-        -   [2.3.1 Initializer lists](https://en.wikipedia.org/wiki/C%2B%2B11#Initializer_lists)
-        -   [2.3.2 Uniform initialization](https://en.wikipedia.org/wiki/C%2B%2B11#Uniform_initialization)
-        -   [2.3.3 Type inference](https://en.wikipedia.org/wiki/C%2B%2B11#Type_inference)
-        -   [2.3.4 Range-based for loop](https://en.wikipedia.org/wiki/C%2B%2B11#Range-based_for_loop)
-        -   [2.3.5 Lambda functions and expressions](https://en.wikipedia.org/wiki/C%2B%2B11#Lambda_functions_and_expressions)
+
+### Extern template
+
+### Initializer lists
+
+### Uniform initialization
+
+### Type inference
+
+### Range-based for loop
+
+### Lambda functions and expressions
+
         -   [2.3.6 Alternative function syntax](https://en.wikipedia.org/wiki/C%2B%2B11#Alternative_function_syntax)
         -   [2.3.7 Object construction improvement](https://en.wikipedia.org/wiki/C%2B%2B11#Object_construction_improvement)
         -   [2.3.8 Explicit overrides and final](https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final)
@@ -57,5 +61,5 @@
 -   [8 References](https://en.wikipedia.org/wiki/C%2B%2B11#References)
 -   [9 External links](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NzMzMjI0MDZdfQ==
+eyJoaXN0b3J5IjpbLTI4NzUwMjg3N119
 -->
