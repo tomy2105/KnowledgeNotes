@@ -5,6 +5,8 @@
 ### Rvalue references and move constructors
 A new non-const reference type called an rvalue reference, identified by `T&&` is added. This refers to temporaries that are permitted to be modified after they are initialized, for the purpose of allowing "move semantics".
 
+a performance problem with C++03 is the costly and unneeded [deep copies](https://en.wikipedia.org/wiki/Deep_copy "Deep copy") that can happen implicitly when objects are passed by value. To illustrate the issue, consider that an `std::vector<T>` is, internally, a wrapper around a C-style array with a defined size. If an `std::vector<T>` temporary is created or returned from a function, it can be stored only by creating a new `std::vector<T>` and copying all the rvalue's data into it. Then the temporary and all its memory is destroyed. (For simplicity, this discussion neglects the [return value optimization](https://en.wikipedia.org/wiki/Return_value_optimization "Return value optimization").)
+
 ### Generalized constant expressions
 
 ### Modification to the definition of plain old data
@@ -97,5 +99,5 @@ A new non-const reference type called an rvalue reference, identified by `T&&` i
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzkzNDc2MzY0LDEwNzI2NjQzNDhdfQ==
+eyJoaXN0b3J5IjpbMTIzMzAyMDgxOSwxMDcyNjY0MzQ4XX0=
 -->
