@@ -5,7 +5,7 @@
 ### Rvalue references
 A new non-const reference type called an rvalue reference, identified by `T&&` is added. This refers to temporaries that are permitted to be modified after they are initialized, for the purpose of allowing "move semantics" (solving a performance problem with costly and unneeded deep copies if an temporary is created or returned from a function, neglecting [return value optimization](https://en.wikipedia.org/wiki/Return_value_optimization "Return value optimization")).
 
-For safety reasons, some restrictions are imposed. A named variable will never be considered to be an rvalue even if it is declared as such. To get an rvalue, the function template `std::move()` should be used. Rvalue references can also be modified only under certain circumstances, being intended to be used primarily with move constructors.
+For safety reasons, some restrictions are imposed. A named variable will never be considered to be an rvalue even if it is declared as such. To get an rvalue, the function template [`std::move()`](https://en.cppreference.com/w/cpp/utility/move) should be used. Rvalue references can also be modified only under certain circumstances, being intended to be used primarily with move constructors.
 
 ### Move constructors
 
@@ -133,6 +133,7 @@ More info can be found [here](https://en.cppreference.com/w/cpp/language/move_as
 -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
 -  [Move assignment](https://en.cppreference.com/w/cpp/language/move_assignment)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNT
-k3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0OF19
+eyJoaXN0b3J5IjpbMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0Nz
+M3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4
+XX0=
 -->
