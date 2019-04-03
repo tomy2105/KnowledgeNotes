@@ -1,3 +1,5 @@
+// sample for move assignment and constructor, based on code found on MSDN as well as cppreference.com.
+
 #include <iostream>
 #include <algorithm>
 #include <vector>
