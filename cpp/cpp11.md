@@ -20,13 +20,21 @@
 
 ### Lambda functions and expressions
 
-        -   [2.3.6 Alternative function syntax](https://en.wikipedia.org/wiki/C%2B%2B11#Alternative_function_syntax)
-        -   [2.3.7 Object construction improvement](https://en.wikipedia.org/wiki/C%2B%2B11#Object_construction_improvement)
-        -   [2.3.8 Explicit overrides and final](https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_overrides_and_final)
-        -   [2.3.9 Null pointer constant](https://en.wikipedia.org/wiki/C%2B%2B11#Null_pointer_constant)
-        -   [2.3.10 Strongly typed enumerations](https://en.wikipedia.org/wiki/C%2B%2B11#Strongly_typed_enumerations)
-        -   [2.3.11 Right angle bracket](https://en.wikipedia.org/wiki/C%2B%2B11#Right_angle_bracket)
-        -   [2.3.12 Explicit conversion operators](https://en.wikipedia.org/wiki/C%2B%2B11#Explicit_conversion_operators)
+### Alternative function syntax
+
+### Object construction improvement
+
+### Explicit overrides and final
+
+### Null pointer constant
+
+### Strongly typed enumerations
+
+### Right angle bracket
+
+### Explicit conversion operators
+
+###
         -   [2.3.13 Template aliases](https://en.wikipedia.org/wiki/C%2B%2B11#Template_aliases)
         -   [2.3.14 Unrestricted unions](https://en.wikipedia.org/wiki/C%2B%2B11#Unrestricted_unions)
     -   [2.4 Core language functionality improvements](https://en.wikipedia.org/wiki/C%2B%2B11#Core_language_functionality_improvements)
@@ -61,5 +69,5 @@
 -   [8 References](https://en.wikipedia.org/wiki/C%2B%2B11#References)
 -   [9 External links](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI4NzUwMjg3N119
+eyJoaXN0b3J5IjpbMTcwMDk3NDA0MF19
 -->
