@@ -92,8 +92,9 @@
 
 ## C11 changes
 
--   [8 References](https://en.wikipedia.org/wiki/C%2B%2B11#References)
--   [9 External links](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
+## References
+
+-   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMjg5OTM2ODFdfQ==
+eyJoaXN0b3J5IjpbMTA3MjY2NDM0OF19
 -->
