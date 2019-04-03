@@ -41,6 +41,8 @@ Identical in usage and restrictions to move constructor (apart from need to prot
 
 More info can be found [here](https://en.cppreference.com/w/cpp/language/move_assignment).
 
+
+
 ### Generalized constant expressions
 
 ### Modification to the definition of plain old data
@@ -135,7 +137,7 @@ More info can be found [here](https://en.cppreference.com/w/cpp/language/move_as
 -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
 -  [Move assignment](https://en.cppreference.com/w/cpp/language/move_assignment)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDcwNTMzMjI4LDc0MzkwMTE0NCwxNDk4NT
-Y5MTk1LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4LDE2MDU5Nzk4OTIs
-NjEyMzM1NzQxLDEwNzI2NjQzNDhdfQ==
+eyJoaXN0b3J5IjpbMTIxOTYxNDYwOCw0NzA1MzMyMjgsNzQzOT
+AxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgs
+MTYwNTk3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0OF19
 -->
