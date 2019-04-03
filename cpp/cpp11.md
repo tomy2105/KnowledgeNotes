@@ -82,14 +82,16 @@
 
 ### Polymorphic wrappers for function objects
 
-### Type traits for metaprogramming](https://en.wikipedia.org/wiki/C%2B%2B11#Type_traits_for_metaprogramming)
-    -   [3.11 Uniform method for computing the return type of function objects](https://en.wikipedia.org/wiki/C%2B%2B11#Uniform_method_for_computing_the_return_type_of_function_objects)
--   [4 Improved C compatibility](https://en.wikipedia.org/wiki/C%2B%2B11#Improved_C_compatibility)
--   [5 Features originally planned but removed or not included](https://en.wikipedia.org/wiki/C%2B%2B11#Features_originally_planned_but_removed_or_not_included)
--   [6 Features removed or deprecated](https://en.wikipedia.org/wiki/C%2B%2B11#Features_removed_or_deprecated)
+### Type traits for metaprogramming
+
+### Uniform method for computing the return type of function objects
+
+## Improved C compatibility
+
+## Features removed or deprecated](https://en.wikipedia.org/wiki/C%2B%2B11#Features_removed_or_deprecated)
 -   [7 See also](https://en.wikipedia.org/wiki/C%2B%2B11#See_also)
 -   [8 References](https://en.wikipedia.org/wiki/C%2B%2B11#References)
 -   [9 External links](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMzMjY3MTAyMl19
+eyJoaXN0b3J5IjpbLTE0MDIwNzExMDldfQ==
 -->
