@@ -3,6 +3,7 @@
 ## Extensions to the C++ core language
 
 ### Rvalue references and move constructors
+A new non-const reference type called an rvalue reference, identified by `T&&` is added. This refers to temporaries that are permitted to be modified after they are initialized, for the purpose of allowing "move semantics".
 
 ### Generalized constant expressions
 
@@ -96,5 +97,5 @@
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3MjY2NDM0OF19
+eyJoaXN0b3J5IjpbMzkzNDc2MzY0LDEwNzI2NjQzNDhdfQ==
 -->
