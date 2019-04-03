@@ -1,10 +1,13 @@
 # CPP 11
 
- [2 Extensions to the C++ core language](https://en.wikipedia.org/wiki/C%2B%2B11#Extensions_to_the_C++_core_language)
-    -   [2.1 Core language runtime performance enhancements](https://en.wikipedia.org/wiki/C%2B%2B11#Core_language_runtime_performance_enhancements)
-        -   [2.1.1 Rvalue references and move constructors](https://en.wikipedia.org/wiki/C%2B%2B11#Rvalue_references_and_move_constructors)
-        -   [2.1.2 constexpr – Generalized constant expressions](https://en.wikipedia.org/wiki/C%2B%2B11#constexpr_–_Generalized_constant_expressions)
-        -   [2.1.3 Modification to the definition of plain old data](https://en.wikipedia.org/wiki/C%2B%2B11#Modification_to_the_definition_of_plain_old_data)
+## Extensions to the C++ core language
+
+### Rvalue references and move constructors
+
+### Generalized constant expressions
+
+### Modification to the definition of plain old data
+](https://en.wikipedia.org/wiki/C%2B%2B11#Modification_to_the_definition_of_plain_old_data)
     -   [2.2 Core language build-time performance enhancements](https://en.wikipedia.org/wiki/C%2B%2B11#Core_language_build-time_performance_enhancements)
         -   [2.2.1 Extern template](https://en.wikipedia.org/wiki/C%2B%2B11#Extern_template)
     -   [2.3 Core language usability enhancements](https://en.wikipedia.org/wiki/C%2B%2B11#Core_language_usability_enhancements)
@@ -54,5 +57,5 @@
 -   [8 References](https://en.wikipedia.org/wiki/C%2B%2B11#References)
 -   [9 External links](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg3MDA1NzM3NF19
+eyJoaXN0b3J5IjpbLTE2NzMzMjI0MDZdfQ==
 -->
