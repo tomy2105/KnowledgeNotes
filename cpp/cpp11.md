@@ -131,8 +131,8 @@ More info can be found [here](https://en.cppreference.com/w/cpp/language/move_as
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
-- -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
+-  [Move assignment](https://en.cppreference.com/w/cpp/language/move_assignment)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MDA2MTIzMTcsMjA0NzM3NDcwOCwxNj
-A1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4XX0=
+eyJoaXN0b3J5IjpbNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNT
+k3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0OF19
 -->
