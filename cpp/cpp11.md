@@ -34,19 +34,29 @@
 
 ### Explicit conversion operators
 
+### Template aliases
+
+### Unrestricted unions
+
+### Variadic templates
+
+### New string literals
+
+### User-defined literals
+
+### Multithreading memory model
+
+### Thread-local storage
+
+### Explicitly defaulted and deleted special member functions
+
+###  Type long long int]
+
+### Static assertions
+
+### Allow sizeof to work on members of classes without an explicit object
+
 ###
-        -   [2.3.13 Template aliases](https://en.wikipedia.org/wiki/C%2B%2B11#Template_aliases)
-        -   [2.3.14 Unrestricted unions](https://en.wikipedia.org/wiki/C%2B%2B11#Unrestricted_unions)
-    -   [2.4 Core language functionality improvements](https://en.wikipedia.org/wiki/C%2B%2B11#Core_language_functionality_improvements)
-        -   [2.4.1 Variadic templates](https://en.wikipedia.org/wiki/C%2B%2B11#Variadic_templates)
-        -   [2.4.2 New string literals](https://en.wikipedia.org/wiki/C%2B%2B11#New_string_literals)
-        -   [2.4.3 User-defined literals](https://en.wikipedia.org/wiki/C%2B%2B11#User-defined_literals)
-        -   [2.4.4 Multithreading memory model](https://en.wikipedia.org/wiki/C%2B%2B11#Multithreading_memory_model)
-        -   [2.4.5 Thread-local storage](https://en.wikipedia.org/wiki/C%2B%2B11#Thread-local_storage)
-        -   [2.4.6 Explicitly defaulted and deleted special member functions](https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions)
-        -   [2.4.7 Type long long int](https://en.wikipedia.org/wiki/C%2B%2B11#Type_long_long_int)
-        -   [2.4.8 Static assertions](https://en.wikipedia.org/wiki/C%2B%2B11#Static_assertions)
-        -   [2.4.9 Allow sizeof to work on members of classes without an explicit object](https://en.wikipedia.org/wiki/C%2B%2B11#Allow_sizeof_to_work_on_members_of_classes_without_an_explicit_object)
         -   [2.4.10 Control and query object alignment](https://en.wikipedia.org/wiki/C%2B%2B11#Control_and_query_object_alignment)
         -   [2.4.11 Allow garbage collected implementations](https://en.wikipedia.org/wiki/C%2B%2B11#Allow_garbage_collected_implementations)
         -   [2.4.12 Attributes](https://en.wikipedia.org/wiki/C%2B%2B11#Attributes)
@@ -69,5 +79,5 @@
 -   [8 References](https://en.wikipedia.org/wiki/C%2B%2B11#References)
 -   [9 External links](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcwMDk3NDA0MF19
+eyJoaXN0b3J5IjpbLTExNTczMDY1OTZdfQ==
 -->
