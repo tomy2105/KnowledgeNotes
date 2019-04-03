@@ -31,6 +31,10 @@ Typically "steals" the resources held by the argument rather than make copies of
 
 More info can be found [here](https://en.cppreference.com/w/cpp/language/move_constructor).
 
+### Move assignment
+
+``class_name& ( [const and/or volatile] class_name&& other)``
+
 ### Generalized constant expressions
 
 ### Modification to the definition of plain old data
@@ -124,6 +128,6 @@ More info can be found [here](https://en.cppreference.com/w/cpp/language/move_co
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA0NzM3NDcwOCwxNjA1OTc5ODkyLDYxMj
-MzNTc0MSwxMDcyNjY0MzQ4XX0=
+eyJoaXN0b3J5IjpbLTQ5ODQ0NDg1MiwyMDQ3Mzc0NzA4LDE2MD
+U5Nzk4OTIsNjEyMzM1NzQxLDEwNzI2NjQzNDhdfQ==
 -->
