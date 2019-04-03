@@ -7,7 +7,7 @@ A new non-const reference type called an rvalue reference, identified by `T&&` i
 
 For safety reasons, some restrictions are imposed. A named variable will never be considered to be an rvalue even if it is declared as such. To get an rvalue, the function template [`std::move()`](https://en.cppreference.com/w/cpp/utility/move) should be used. Rvalue references can also be modified only under certain circumstances, being intended to be used primarily with move constructors.
 
-More info about various value categories (including newer C++ standard ones) can be found [here](https://en.cppreference.com/w/cpp/language/value_category).
+More info about various value categories (including newer C++ standard ones) can be found [here](https://en.cppreference.com/w/cpp/language/value_category) and [here](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 
 ### Move constructors
 
@@ -139,8 +139,9 @@ Sample code with move assignment and move constructor can be found in [Move.cpp]
 -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
 -  [Move assignment](https://en.cppreference.com/w/cpp/language/move_assignment)
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
+- [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU4ODUzMjcwMSwtNjY5NjYwODk0LDQ3MD
+eyJoaXN0b3J5IjpbMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MD
 UzMzIyOCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgs
 MjA0NzM3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNj
 Y0MzQ4XX0=
