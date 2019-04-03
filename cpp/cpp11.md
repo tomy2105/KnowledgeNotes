@@ -13,7 +13,15 @@ A move constructor of class `T` is a non-template constructor whose first parame
 
 ``class_name ( [const and/or volatile] class_name&& other)``
 
+Typically called when an object is initialized temporary of the same type, including:
 
+-   initialization: T a = std::move(b); or T a(std::move(b));, where b is of type `T`;
+-   function argument passing: f(std::move(a));, where `a` is of type `T` and `f` is void f(T t);
+-   function return: return a; inside a function such as T f(), where `a` is of type `T` which has a move constructor.
+
+When the initializer is a prvalue, the move constructor call is often optimized out (until C++17)never made (since C++17), see [copy elision](https://en.cppreference.com/w/cpp/language/copy_elision "cpp/language/copy elision").
+
+Move constructors typically "steal" the resources held by the argument (e.g. pointers to dynamically-allocated objects, file descriptors, TCP sockets, I/O streams, running threads, etc.) rather than make copies of them, and leave the argument in some valid but otherwise indeterminate state. For example, moving from a [std::string](https://en.cppreference.com/w/cpp/string/basic_string "cpp/string/basic string") or from a [std::vector](https://en.cppreference.com/w/cpp/container/vector "cpp/container/vector") may result in the argument being left empty. However, this behavior should not be relied upon. For some types, such as [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr "cpp/memory/unique ptr"), the moved-from state is fully specified.
 
 
 ### Generalized constant expressions
@@ -108,6 +116,6 @@ A move constructor of class `T` is a non-template constructor whose first parame
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3ODY2MjcyNCw2MTIzMzU3NDEsMTA3Mj
+eyJoaXN0b3J5IjpbLTQ4ODM5NTYxOCw2MTIzMzU3NDEsMTA3Mj
 Y2NDM0OF19
 -->
