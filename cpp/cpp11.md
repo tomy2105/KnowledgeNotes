@@ -33,7 +33,11 @@ More info can be found [here](https://en.cppreference.com/w/cpp/language/move_co
 
 ### Move assignment
 
-``class_name& ( [const and/or volatile] class_name&& other)``
+``class_name& class_name::operator= ( [const and/or volatile] class_name&& other)``
+
+Identical in usage and restrictions to move constructor (apart from need to protect from self-assignment).
+
+More info can be found [here](https://en.cppreference.com/w/cpp/language/move_assignment).
 
 ### Generalized constant expressions
 
@@ -127,7 +131,8 @@ More info can be found [here](https://en.cppreference.com/w/cpp/language/move_co
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
+- -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ5ODQ0NDg1MiwyMDQ3Mzc0NzA4LDE2MD
-U5Nzk4OTIsNjEyMzM1NzQxLDEwNzI2NjQzNDhdfQ==
+eyJoaXN0b3J5IjpbLTE1MDA2MTIzMTcsMjA0NzM3NDcwOCwxNj
+A1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4XX0=
 -->
