@@ -2,9 +2,12 @@
 
 ## Extensions to the C++ core language
 
-### Rvalue references and move constructors
+### Rvalue references
 A new non-const reference type called an rvalue reference, identified by `T&&` is added. This refers to temporaries that are permitted to be modified after they are initialized, for the purpose of allowing "move semantics" (solving a performance problem with costly and unneeded deep copies if an temporary is created or returned from a function, neglecting [return value optimization](https://en.wikipedia.org/wiki/Return_value_optimization "Return value optimization")).
 
+For safety reasons, some restrictions are imposed. A named variable will never be considered to be an rvalue even if it is declared as such. To get an rvalue, the function template `std::move()` should be used. Rvalue references can also be modified only under certain circumstances, being intended to be used primarily with move constructors.
+
+### Move constructors
 
 ### Generalized constant expressions
 
@@ -98,5 +101,5 @@ A new non-const reference type called an rvalue reference, identified by `T&&` i
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDQ3ODExMDY1LDEwNzI2NjQzNDhdfQ==
+eyJoaXN0b3J5IjpbNjEyMzM1NzQxLDEwNzI2NjQzNDhdfQ==
 -->
