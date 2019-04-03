@@ -90,9 +90,10 @@
 
 ## Features removed or deprecated
 
--   [7 See also](https://en.wikipedia.org/wiki/C%2B%2B11#See_also)
+## C11 changes
+
 -   [8 References](https://en.wikipedia.org/wiki/C%2B%2B11#References)
 -   [9 External links](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY2NDQwMjI4MF19
+eyJoaXN0b3J5IjpbLTExMjg5OTM2ODFdfQ==
 -->
