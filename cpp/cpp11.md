@@ -17,10 +17,13 @@ Typically called when an object is initialized temporary of the same type, inclu
 
 -   initialization: 
 ``cT b; T a = std::move(b); T a(std::move(b));
+``
 -   function argument passing: 
-``cf(T arg) {}; T a; f(std::move(a));
+``f(T arg) {}; T a; f(std::move(a));
+``
 -   function return: 
-``cT a; return a; 
+``T a; return a; 
+``
 
 When the initializer is a prvalue, the move constructor call is often optimized out (until C++17)never made (since C++17), see [copy elision](https://en.cppreference.com/w/cpp/language/copy_elision "cpp/language/copy elision").
 
@@ -119,6 +122,6 @@ Move constructors typically "steal" the resources held by the argument (e.g. poi
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk0ODA3OTYzOSw2MTIzMzU3NDEsMTA3Mj
+eyJoaXN0b3J5IjpbLTI3MDU1NDE3Nyw2MTIzMzU3NDEsMTA3Mj
 Y2NDM0OF19
 -->
