@@ -41,7 +41,7 @@ Identical in usage and restrictions to move constructor (apart from need to prot
 
 More info can be found [here](https://en.cppreference.com/w/cpp/language/move_assignment).
 
-
+Sample code with move assignment and move constructor can be found in [Move.cpp](Move.cpp)
 
 ### Generalized constant expressions
 
@@ -137,7 +137,7 @@ More info can be found [here](https://en.cppreference.com/w/cpp/language/move_as
 -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
 -  [Move assignment](https://en.cppreference.com/w/cpp/language/move_assignment)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIxOTYxNDYwOCw0NzA1MzMyMjgsNzQzOT
+eyJoaXN0b3J5IjpbLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOT
 AxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgs
 MTYwNTk3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0OF19
 -->
