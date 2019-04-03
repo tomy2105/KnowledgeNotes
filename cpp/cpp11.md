@@ -11,7 +11,9 @@ For safety reasons, some restrictions are imposed. A named variable will never b
 
 A move constructor of class `T` is a non-template constructor whose first parameter is T&& (can be const and/or volatile) and the rest of the parameters, if present, have default values.
 
-````````   class_name ( class_name `&&` )'''
+``class_name ( [const and/or volatile] class_name&& other)``
+
+
 
 
 ### Generalized constant expressions
@@ -106,6 +108,6 @@ A move constructor of class `T` is a non-template constructor whose first parame
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE3MjIwNzMyOSw2MTIzMzU3NDEsMTA3Mj
+eyJoaXN0b3J5IjpbMTA3ODY2MjcyNCw2MTIzMzU3NDEsMTA3Mj
 Y2NDM0OF19
 -->
