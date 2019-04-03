@@ -13,6 +13,8 @@ A move constructor of class `T` is a non-template constructor whose first parame
 
 ``class_name ( [const and/or volatile] class_name&& other)``
 
+Although argument can be const per specification it is seldom so, because it "interferes" with "stealing" the resource from it.
+
 Typically called when an object is initialized temporary of the same type, including:
 
 -   initialization: 
@@ -36,8 +38,6 @@ More info can be found [here](https://en.cppreference.com/w/cpp/language/move_co
 ``class_name& class_name::operator= ( [const and/or volatile] class_name&& other)``
 
 Identical in usage and restrictions to move constructor (apart from need to protect from self-assignment).
-
-Although argument can be const per specification it is seldom so, because it "interferes" with "stealing" the resource from it.
 
 More info can be found [here](https://en.cppreference.com/w/cpp/language/move_assignment).
 
@@ -135,7 +135,7 @@ More info can be found [here](https://en.cppreference.com/w/cpp/language/move_as
 -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
 -  [Move assignment](https://en.cppreference.com/w/cpp/language/move_assignment)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OT
-c2MjQ4LDIwNDczNzQ3MDgsMTYwNTk3OTg5Miw2MTIzMzU3NDEs
-MTA3MjY2NDM0OF19
+eyJoaXN0b3J5IjpbNDcwNTMzMjI4LDc0MzkwMTE0NCwxNDk4NT
+Y5MTk1LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4LDE2MDU5Nzk4OTIs
+NjEyMzM1NzQxLDEwNzI2NjQzNDhdfQ==
 -->
