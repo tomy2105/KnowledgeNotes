@@ -16,7 +16,7 @@ A move constructor of class `T` is a non-template constructor whose first parame
 Typically called when an object is initialized temporary of the same type, including:
 
 -   initialization: 
-``cT b; T a = std::move(b); T a(std::move(b));
+``T b; T a = std::move(b); T a(std::move(b));
 ``
 -   function argument passing: 
 ``f(T arg) {}; T a; f(std::move(a));
@@ -25,9 +25,9 @@ Typically called when an object is initialized temporary of the same type, inclu
 ``T a; return a; 
 ``
 
-When the initializer is a prvalue, the move constructor call is often optimized out (until C++17)never made (since C++17), see [copy elision](https://en.cppreference.com/w/cpp/language/copy_elision "cpp/language/copy elision").
+It is is often optimized out or  never made, see [copy elision](https://en.cppreference.com/w/cpp/language/copy_elision).
 
-Move constructors typically "steal" the resources held by the argument (e.g. pointers to dynamically-allocated objects, file descriptors, TCP sockets, I/O streams, running threads, etc.) rather than make copies of them, and leave the argument in some valid but otherwise indeterminate state. For example, moving from a [std::string](https://en.cppreference.com/w/cpp/string/basic_string "cpp/string/basic string") or from a [std::vector](https://en.cppreference.com/w/cpp/container/vector "cpp/container/vector") may result in the argument being left empty. However, this behavior should not be relied upon. For some types, such as [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr "cpp/memory/unique ptr"), the moved-from state is fully specified.
+Typically "steals" the resources held by the argument (e.g. pointers to dynamically-allocated objects, file descriptors, TCP sockets, I/O streams, running threads, etc.) rather than make copies of them, and leave the argument in some valid but otherwise indeterminate state. For example, moving from a [std::string](https://en.cppreference.com/w/cpp/string/basic_string "cpp/string/basic string") or from a [std::vector](https://en.cppreference.com/w/cpp/container/vector "cpp/container/vector") may result in the argument being left empty. However, this behavior should not be relied upon. For some types, such as [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr "cpp/memory/unique ptr"), the moved-from state is fully specified.
 
 
 ### Generalized constant expressions
@@ -122,6 +122,6 @@ Move constructors typically "steal" the resources held by the argument (e.g. poi
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI3MDU1NDE3Nyw2MTIzMzU3NDEsMTA3Mj
-Y2NDM0OF19
+eyJoaXN0b3J5IjpbMTUwMTcwOTI1LDYxMjMzNTc0MSwxMDcyNj
+Y0MzQ4XX0=
 -->
