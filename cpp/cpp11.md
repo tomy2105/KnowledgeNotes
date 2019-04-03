@@ -37,6 +37,8 @@ More info can be found [here](https://en.cppreference.com/w/cpp/language/move_co
 
 Identical in usage and restrictions to move constructor (apart from need to protect from self-assignment).
 
+Although argument can be const per specification it is seldom so, because it "interferes" with "stealing" the resource from it.
+
 More info can be found [here](https://en.cppreference.com/w/cpp/language/move_assignment).
 
 ### Generalized constant expressions
@@ -133,7 +135,7 @@ More info can be found [here](https://en.cppreference.com/w/cpp/language/move_as
 -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
 -  [Move assignment](https://en.cppreference.com/w/cpp/language/move_assignment)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0Nz
-M3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4
-XX0=
+eyJoaXN0b3J5IjpbNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OT
+c2MjQ4LDIwNDczNzQ3MDgsMTYwNTk3OTg5Miw2MTIzMzU3NDEs
+MTA3MjY2NDM0OF19
 -->
