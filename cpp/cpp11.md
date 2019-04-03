@@ -136,8 +136,10 @@ Sample code with move assignment and move constructor can be found in [Move.cpp]
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
 -  [Move assignment](https://en.cppreference.com/w/cpp/language/move_assignment)
+- [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOT
-AxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgs
-MTYwNTk3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0OF19
+eyJoaXN0b3J5IjpbMTgwNzc2NjUyNiwtNjY5NjYwODk0LDQ3MD
+UzMzIyOCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgs
+MjA0NzM3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNj
+Y0MzQ4XX0=
 -->
