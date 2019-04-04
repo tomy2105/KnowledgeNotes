@@ -165,8 +165,6 @@ Keyword `decltype` can be used to determine the type of expression at compile-ti
 
 The type denoted by `decltype` can be different from the type deduced by `auto`.
 
-**Auto with initializer list**: 
-
 ```cpp
 #include <vector>
 int main()
@@ -182,6 +180,8 @@ int main()
     decltype(0) g;        // g has type int, because 0 is an rvalue
 }
 ```
+
+**Auto with initializer list**: `auto z = { 42 };` type of z is std::initializer_list<int> and not just int!!!
 
 ### Range-based for loop
 
@@ -326,7 +326,7 @@ public:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMTAyODkwNzQsLTE2ODU2OTQwNDksMT
+eyJoaXN0b3J5IjpbLTE1Nzc0OTc5OTMsLTE2ODU2OTQwNDksMT
 A5OTgxMjc0NSw1ODkzMDMxNzcsMTIwODIxNzA3OSw5OTE4Nzkw
 MDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4LC0xMjU3ODM2NDI5LD
 U5MTQ4NTg0MywxMDg3ODg0MDgzLDE3NDY4Mzk3MDAsLTg0MDM3
