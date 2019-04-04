@@ -196,11 +196,12 @@ for (int& x : my_array)
 “Range-based for” will work for C-style arrays, initializer lists, and any type that has `begin()` and `end()` functions.
 
 ### Alternative function syntax
-The type `Ret` is whatever the addition of types `Lhs` and `Rhs` will produce. Even with the aforementioned C++11 functionality of `decltype`, this is not possible:
+"Traditional" function syntax doesn't allow "guessing" of function return type based function parameters.
 
+```cpp
 template<class Lhs, class Rhs>
   decltype(lhs+rhs) adding_func(const Lhs &lhs, const Rhs &rhs) {return lhs + rhs;} //Not valid C++11
-
+```
 This is not valid C++ because `lhs` and `rhs` have not yet been defined; they will not be valid identifiers until after the parser has parsed the rest of the function prototype.
 
 To work around this, C++11 introduced a new function declaration syntax, with a _trailing-return-type_:
@@ -289,11 +290,11 @@ template<class Lhs, class Rhs>
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMyNzU5NDc0Myw1ODkzMDMxNzcsMTIwOD
-IxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4
-LC0xMjU3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3ND
-Y4Mzk3MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4
-NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIyOCw3ND
-M5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0NzM3NDcw
-OF19
+eyJoaXN0b3J5IjpbODUzMzAzNDcwLDU4OTMwMzE3NywxMjA4Mj
+E3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2LC0xNTU4Mzc3Mjgs
+LTEyNTc4MzY0MjksNTkxNDg1ODQzLDEwODc4ODQwODMsMTc0Nj
+gzOTcwMCwtODQwMzc5ODIwLDE4NzY5MjgwMjAsMTQyMzQ3Mzg0
+MCwxNTk2NzA0NjYyLC02Njk2NjA4OTQsNDcwNTMzMjI4LDc0Mz
+kwMTE0NCwxNDk4NTY5MTk1LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4
+XX0=
 -->
