@@ -166,9 +166,19 @@ Keyword `decltype` can be used to determine the type of expression at compile-ti
 The type denoted by `decltype` can be different from the type deduced by `auto`.
 
 ```cpp
-
-
-
+#include <vector>
+int main()
+{
+    const std::vector<int> v(1);
+    auto a = v[0];        // a has type int
+    decltype(v[0]) b = 1; // b has type const int&, the return type of
+                          //   std::vector<int>::operator[](size_type) const
+    auto c = 0;           // c has type int
+    auto d = c;           // d has type int
+    decltype(c) e;        // e has type int, the type of the entity named by c
+    decltype((c)) f = c;  // f has type int&, because (c) is an lvalue
+    decltype(0) g;        // g has type int, because 0 is an rvalue
+}
 ```
 
 ### Range-based for loop
@@ -255,7 +265,7 @@ The type denoted by `decltype` can be different from the type deduced by `auto`.
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg5MjM1ODU1NSwtMTU1ODM3NzI4LC0xMj
+eyJoaXN0b3J5IjpbMTQzOTQ4ODY5NiwtMTU1ODM3NzI4LC0xMj
 U3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3NDY4Mzk3
 MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4NDAsMT
 U5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIyOCw3NDM5MDEx
