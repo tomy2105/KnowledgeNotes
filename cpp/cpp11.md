@@ -65,6 +65,32 @@ In addition constant expressions need not be of integral or enumeration type any
 
 ### Modification to the definition of plain old data
 
+POD concept devided into two separate concepts: _trivial_ (statically initializiable and `memcpy`able) and _standard-layout_ ().
+
+A type that is _trivial_ can be statically initialized. It also means that it is valid to copy data around via `memcpy`, rather than having to use a copy constructor. The lifetime of a _trivial_ type begins when its storage is defined, not when a constructor completes.
+
+A trivial class or struct is defined as one that:
+
+1.  Has a trivial default constructor. This may use the [default constructor syntax](https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions) (`SomeConstructor() = default;`).
+2.  Has trivial copy and move constructors, which may use the default syntax.
+3.  Has trivial copy and move assignment operators, which may use the default syntax.
+4.  Has a trivial destructor, which must not be virtual.
+
+Constructors are trivial only if there are no virtual member functions of the class and no virtual base classes. Copy/move operations also require all non-static data members to be trivial.
+
+A type that is _standard-layout_ means that it orders and packs its members in a way that is compatible with C. A class or struct is standard-layout, by definition, provided:
+
+1.  It has no virtual functions
+2.  It has no virtual base classes
+3.  All its non-static data members have the same access control (public, private, protected)
+4.  All its non-static data members, including any in its base classes, are in the same one class in the hierarchy
+5.  The above rules also apply to all the base classes and to all non-static data members in the class hierarchy
+6.  It has no base classes of the same type as the first defined non-static data member
+
+A class/struct/union is considered POD if it is trivial, standard-layout, and all of its non-static data members and base classes are PODs.
+
+By separating these concepts, it becomes possible to give up one without losing the other. A class with complex move and copy constructors may not be trivial, but it could be standard-layout and thus interoperate with C. Similarly, a class with public and private non-static data members would not be standard-layout, but it could be trivial and thus `memcpy`-able.
+
 ### Extern template
 
 ### Initializer lists
@@ -157,8 +183,8 @@ In addition constant expressions need not be of integral or enumeration type any
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQyMzQ3Mzg0MCwxNTk2NzA0NjYyLC02Nj
-k2NjA4OTQsNDcwNTMzMjI4LDc0MzkwMTE0NCwxNDk4NTY5MTk1
-LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4LDE2MDU5Nzk4OTIsNjEyMz
-M1NzQxLDEwNzI2NjQzNDhdfQ==
+eyJoaXN0b3J5IjpbMTY3MjEyMzk2MSwxNDIzNDczODQwLDE1OT
+Y3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0
+LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNT
+k3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0OF19
 -->
