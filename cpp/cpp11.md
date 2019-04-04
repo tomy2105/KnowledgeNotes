@@ -211,7 +211,8 @@ template<class Lhs, class Rhs>
   auto adding_func(const Lhs &lhs, const Rhs &rhs) -> decltype(lhs+rhs) {return lhs + rhs;}
 ```
 
-Keyword `auto` is only part of the syntax and does not perform automatic type deduction.
+Keyword `auto` is part of the syntax and does not perform automatic type deduction.
+
 ### Lambda functions and expressions
 
 ### Object construction improvement
@@ -292,7 +293,7 @@ Keyword `auto` is only part of the syntax and does not perform automatic type de
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc0NDI4OTgzOSw1ODkzMDMxNzcsMTIwOD
+eyJoaXN0b3J5IjpbMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwOD
 IxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4
 LC0xMjU3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3ND
 Y4Mzk3MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4
