@@ -60,17 +60,9 @@ Keyword `constexpr` is introduced specifying that a function or object construct
 
 In addition constant expressions need not be of integral or enumeration type anymore.
 
-
 `constexpr double earth_gravitational_acceleration = 9.8;`
 `constexpr double moon_gravitational_acceleration = earth_gravitational_acceleration / 6.0;`
 
-Such data variables are implicitly const, and must have an initializer which must be a constant expression.
-
-To construct constant expression data values from user-defined types, constructors can also be declared with `constexpr`. A `constexpr` constructor's function body can contain only declarations and null statements, and cannot declare variables or define types, as with a `constexpr` function. There must exist argument values such that, after argument substitution, it initializes the class's members with constant expressions. The destructors for such types must be trivial.
-
-The copy constructor for a type with any `constexpr` constructors should usually also be defined as a `constexpr` constructor, to allow objects of the type to be returned by value from a constexpr function. Any member function of a class, such as copy constructors, operator overloads, etc., can be declared as `constexpr`, so long as they meet the requirements for constexpr functions. This allows the compiler to copy objects at compile time, perform operations on them, etc.
-
-If a constexpr function or constructor is called with arguments which aren't constant expressions, the call behaves as if the function were not constexpr, and the resulting value is not a constant expression. Likewise, if the expression in the return statement of a constexpr function does not evaluate to a constant expression for a given invocation, the result is not a constant expression.
 ### Modification to the definition of plain old data
 
 ### Extern template
@@ -165,7 +157,7 @@ If a constexpr function or constructor is called with arguments which aren't con
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM0MjEzMjcwNCwxNTk2NzA0NjYyLC02Nj
+eyJoaXN0b3J5IjpbMTQyMzQ3Mzg0MCwxNTk2NzA0NjYyLC02Nj
 k2NjA4OTQsNDcwNTMzMjI4LDc0MzkwMTE0NCwxNDk4NTY5MTk1
 LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4LDE2MDU5Nzk4OTIsNjEyMz
 M1NzQxLDEwNzI2NjQzNDhdfQ==
