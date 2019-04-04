@@ -84,7 +84,7 @@ Initializer-lists are extended to be used for all classes (before they were for 
 
 Concept is bound to [`std::initializer_list`](https://en.cppreference.com/w/cpp/utility/initializer_list) which can be parameter for concstructors/functions.
 
-```
+```cpp
 class SequenceClass
 {
 public:
@@ -92,8 +92,7 @@ public:
 };
 SequenceClass some_var = {1, 4, 5, 6};
 ```
-
-This constructor is a special kind of constructor, called an initializer-list-constructor. Classes with such a constructor are treated specially during uniform initialization (see [below](https://en.wikipedia.org/wiki/C%2B%2B11#Uniform_initialization))
+Constructor with such parameter is treated specially, see below. is a special kind of constructor, called an initializer-list-constructor. Classes with such a constructor are treated specially during uniform initialization (see [below](https://en.wikipedia.org/wiki/C%2B%2B11#Uniform_initialization))
 
 The template class `std::initializer_list<>` is a [first-class](https://en.wikipedia.org/wiki/First-class_citizen "First-class citizen") C++11 standard library type. They can be constructed statically by the C++11 compiler via use of the `{}` syntax without a type name in contexts where such braces will deduce to an `std::initializer_list`, or by explicitly specifying the type like `std::initializer_list<SomeType>{args}` (and so on for other varieties of construction syntax).
 
@@ -200,9 +199,9 @@ std::vector<std::string> v{ "xyzzy", "plugh", "abracadabra" }; // see "Uniform i
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkwMTYxNjUxLDE4NzY5MjgwMjAsMTQyMz
-Q3Mzg0MCwxNTk2NzA0NjYyLC02Njk2NjA4OTQsNDcwNTMzMjI4
-LDc0MzkwMTE0NCwxNDk4NTY5MTk1LDc1ODk3NjI0OCwyMDQ3Mz
-c0NzA4LDE2MDU5Nzk4OTIsNjEyMzM1NzQxLDEwNzI2NjQzNDhd
-fQ==
+eyJoaXN0b3J5IjpbLTcyOTM0Njc4OSwxODc2OTI4MDIwLDE0Mj
+M0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIy
+OCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0Nz
+M3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4
+XX0=
 -->
