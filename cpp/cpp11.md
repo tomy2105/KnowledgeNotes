@@ -83,15 +83,15 @@ Initializer-lists are extended to be used for all classes (before they were for 
 
 Concept is bound to [`std::initializer_list`](https://en.cppreference.com/w/cpp/utility/initializer_list) which can be parameter for concstructors/functions.
 
-`class SequenceClass
+```cpp
+class SequenceClass
 {
 public:
     SequenceClass(std::initializer_list<int> list);
 };
 
-This allows `SequenceClass` to be constructed from a sequence of integers, such as:
-
 SequenceClass some_var = {1, 4, 5, 6};
+```
 
 This constructor is a special kind of constructor, called an initializer-list-constructor. Classes with such a constructor are treated specially during uniform initialization (see [below](https://en.wikipedia.org/wiki/C%2B%2B11#Uniform_initialization))
 
@@ -200,9 +200,9 @@ std::vector<std::string> v{ "xyzzy", "plugh", "abracadabra" }; // see "Uniform i
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NTY4ODY0NDEsMTg3NjkyODAyMCwxND
-IzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMy
-MjgsNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwND
-czNzQ3MDgsMTYwNTk3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0
-OF19
+eyJoaXN0b3J5IjpbLTk3NDA5NDQ5NCwxODc2OTI4MDIwLDE0Mj
+M0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIy
+OCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0Nz
+M3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4
+XX0=
 -->
