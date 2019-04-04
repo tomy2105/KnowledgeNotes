@@ -92,13 +92,9 @@ public:
 };
 SequenceClass some_var = {1, 4, 5, 6};
 ```
-Constructor with such parameter is treated specially, see below. is a special kind of constructor, called an initializer-list-constructor. Classes with such a constructor are treated specially during uniform initialization (see [below](https://en.wikipedia.org/wiki/C%2B%2B11#Uniform_initialization))
+Constructor with such parameter is treated specially during uniform initialization.
 
-The template class `std::initializer_list<>` is a [first-class](https://en.wikipedia.org/wiki/First-class_citizen "First-class citizen") C++11 standard library type. They can be constructed statically by the C++11 compiler via use of the `{}` syntax without a type name in contexts where such braces will deduce to an `std::initializer_list`, or by explicitly specifying the type like `std::initializer_list<SomeType>{args}` (and so on for other varieties of construction syntax).
-
-The list can be copied once constructed, which is cheap and will act as a copy-by-reference (the class is typically implemented as a pair of begin/end pointers). An `std::initializer_list` is constant: its members cannot be changed once it is created, and nor can the data in those members be changed (which rules out moving from them, requiring copies into class members, etc.).
-
-Although its construction is specially treated by the compiler, an `std::initializer_list` is a real type, and so it can be used in other places besides class constructors. Regular functions can take typed `std::initializer_list`s as arguments. For example:
+Class `std::initializer_list<>` can be constructed statically by the compiler using `{}` .
 
 void function_name(std::initializer_list<float> list); // Copying is cheap; see above
 
@@ -199,9 +195,9 @@ std::vector<std::string> v{ "xyzzy", "plugh", "abracadabra" }; // see "Uniform i
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcyOTM0Njc4OSwxODc2OTI4MDIwLDE0Mj
-M0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIy
-OCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0Nz
-M3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4
-XX0=
+eyJoaXN0b3J5IjpbLTE1NTU5NzA2NTYsMTg3NjkyODAyMCwxND
+IzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMy
+MjgsNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwND
+czNzQ3MDgsMTYwNTk3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0
+OF19
 -->
