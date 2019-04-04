@@ -100,10 +100,10 @@ Constructor with such parameter is treated specially during uniform initializati
 Class `std::initializer_list<>` can be constructed statically by the compiler using `{}`  and it's copying is cheap.
 
 ### Uniform initialization
-C++03 has a number of problems with initializing types. Several ways to do this exist, and some produce different results when interchanged. The traditional constructor syntax, for example, can look like a function declaration, and steps must be taken to ensure that the compiler's [most vexing parse](https://en.wikipedia.org/wiki/Most_vexing_parse "Most vexing parse") rule will not mistake it for such. Only aggregates and POD types can be initialized with aggregate initializers (using `SomeType var = {/*stuff*/};`).
+Uniform type initialization works on any object (not just aggregates and PODs as before). 
 
-C++11 provides a syntax that allows for fully uniform type initialization that works on any object. It expands on the initializer list syntax:
 
+```cpp
 struct BasicStruct
 {
     int x;
@@ -124,6 +124,7 @@ private:
 
 BasicStruct var1{5, 3.2};
 AltStruct var2{2, 4.3};
+```
 
 The initialization of `var1` behaves exactly as though it were aggregate-initialization. That is, each data member of an object, in turn, will be copy-initialized with the corresponding value from the initializer-list. Implicit type conversion will be used where needed. If no conversion exists, or only a narrowing conversion exists, the program is ill-formed. The initialization of `var2` invokes the constructor.
 
@@ -231,9 +232,9 @@ will call the initializer list constructor, not the constructor of `std::vector`
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMzAwMDA3NTksLTg0MDM3OTgyMCwxOD
-c2OTI4MDIwLDE0MjM0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYw
-ODk0LDQ3MDUzMzIyOCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NT
-g5NzYyNDgsMjA0NzM3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0
-MSwxMDcyNjY0MzQ4XX0=
+eyJoaXN0b3J5IjpbMTc0NjgzOTcwMCwtODQwMzc5ODIwLDE4Nz
+Y5MjgwMjAsMTQyMzQ3Mzg0MCwxNTk2NzA0NjYyLC02Njk2NjA4
+OTQsNDcwNTMzMjI4LDc0MzkwMTE0NCwxNDk4NTY5MTk1LDc1OD
+k3NjI0OCwyMDQ3Mzc0NzA4LDE2MDU5Nzk4OTIsNjEyMzM1NzQx
+LDEwNzI2NjQzNDhdfQ==
 -->
