@@ -104,31 +104,7 @@ Uniform type initialization works on any object (not just aggregates and PODs as
 
 
 ```cpp
-struct BasicStruct
-{
-    int x;
-    double y;
-};
-
-struct AltStruct
-{
-    AltStruct(int x, double y)
-        : x_{x}
-        , y_{y}
-    {}
-
-private:
-    int x_;
-    double y_;
-};
-
-BasicStruct var1{5, 3.2};
-AltStruct var2{2, 4.3};
-```
-
-
-
-struct IdString
+tring
 {
     std::string name;
     int identifier;
@@ -230,9 +206,9 @@ will call the initializer list constructor, not the constructor of `std::vector`
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA4Nzg4NDA4MywxNzQ2ODM5NzAwLC04ND
-AzNzk4MjAsMTg3NjkyODAyMCwxNDIzNDczODQwLDE1OTY3MDQ2
-NjIsLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0LDE0OT
-g1NjkxOTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNTk3OTg5
-Miw2MTIzMzU3NDEsMTA3MjY2NDM0OF19
+eyJoaXN0b3J5IjpbLTQ1MTE5OTY4MSwxMDg3ODg0MDgzLDE3ND
+Y4Mzk3MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4
+NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIyOCw3ND
+M5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0NzM3NDcw
+OCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4XX0=
 -->
