@@ -4,9 +4,11 @@
 
 Having `int a[100]`, with or without size specified, as a function parameter is identical to having `int* a` due to ancient history C compatibility.
 
-Meaning that you cannot `for (int i: a) {}` 
+Meaning that you cannot `for (int i: a) {}` on such parameter, you will get _no callable 'begin' function found for type 'int []'_ error (and one for _'end'_ too).
 
-Version:1.0 StartHTML:00000145 EndHTML:00003574 StartFragment:00000249 EndFragment:00003542 StartSelection:00000249 EndSelection:00003542 Snippet
+In order to have really array a
+
+
 ```cpp
 #include <iostream>
  
@@ -34,5 +36,5 @@ int main()
 }
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ1MDE5NTkyMywtMTYxMzU3MjAyNl19
+eyJoaXN0b3J5IjpbMTM4NDQyMzQ0NCwtMTYxMzU3MjAyNl19
 -->
