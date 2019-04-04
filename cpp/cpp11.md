@@ -82,7 +82,7 @@ Compiler _will not_ instantiate the template in current translation unit (build 
 
 Initializer-lists are extended to be used for all classes (before they were for PODs, structs and arrays only).
 
-Concept is bound to [`std::initializer_list`](https://en.cppreference.com/w/cpp/utility/initializer_list) which can be parameter for concstructors/functions.
+Concept is bound to [`std::initializer_list`](https://en.cppreference.com/w/cpp/utility/initializer_list) which can be parameter for constructors/functions.
 
 ```cpp
 class SequenceClass
@@ -187,7 +187,7 @@ Class `std::initializer_list<>` can be constructed statically by the compiler us
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYzNzk4NjUyOSwxODc2OTI4MDIwLDE0Mj
+eyJoaXN0b3J5IjpbLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0Mj
 M0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIy
 OCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0Nz
 M3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4
