@@ -104,10 +104,63 @@ Uniform type initialization works on any object (not just aggregates and PODs as
 
 
 ```cpp
+struct BasicStruct
+{
+    int x;
+    std::string s;
+};
+
+class BasicClass
+{
+public:
+    BasicClass(int x, const std::string& as)
+        : x_{ x }
+        , s_{ as }
+    {}
+private:
+    int x_;
+    std::string s_;
+};
+
+class InitializerClass
+{
+public:
+    InitializerClass(std::initializer_list<std::any> list)
+    {
+        assert(list.size() > 1);
+        auto it = list.begin();
+        x_ = std::any_cast<int>(*it++);
+        s_ = std::any_cast<const char *>(*it++);
+    }
+private:
+    int x_;
+    std::string s_;
+};
+
+BasicClass GetBasicClass() {
+    return { 5, "foobar" }; // no explicit type needed here
+}
+
+int a = { 1 };
+int aa[] = { 1, 2, 3, 4 };
+BasicStruct var1{ 5, "foobar" };
+BasicClass var2{ 2, "foobar" };
+BasicClass var3 = GetBasicClass();
+InitializerClass var4{ 5, "foobar" };
+```
+
+
 tring
 {
     std::string name;
-    int identifier;
+    int ide
+
+
+
+
+
+
+ntifier;
 };
 
 IdString get_string()
@@ -206,9 +259,9 @@ will call the initializer list constructor, not the constructor of `std::vector`
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ1MTE5OTY4MSwxMDg3ODg0MDgzLDE3ND
-Y4Mzk3MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4
-NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIyOCw3ND
-M5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0NzM3NDcw
-OCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4XX0=
+eyJoaXN0b3J5IjpbLTE2MTU0NTk4LDEwODc4ODQwODMsMTc0Nj
+gzOTcwMCwtODQwMzc5ODIwLDE4NzY5MjgwMjAsMTQyMzQ3Mzg0
+MCwxNTk2NzA0NjYyLC02Njk2NjA4OTQsNDcwNTMzMjI4LDc0Mz
+kwMTE0NCwxNDk4NTY5MTk1LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4
+LDE2MDU5Nzk4OTIsNjEyMzM1NzQxLDEwNzI2NjQzNDhdfQ==
 -->
