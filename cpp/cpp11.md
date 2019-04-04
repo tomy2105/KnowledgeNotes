@@ -196,7 +196,17 @@ for (int& x : my_array)
 “Range-based for” will work for C-style arrays, initializer lists, and any type that has `begin()` and `end()` functions.
 
 ### Alternative function syntax
+The type `Ret` is whatever the addition of types `Lhs` and `Rhs` will produce. Even with the aforementioned C++11 functionality of `decltype`, this is not possible:
 
+template<class Lhs, class Rhs>
+  decltype(lhs+rhs) adding_func(const Lhs &lhs, const Rhs &rhs) {return lhs + rhs;} //Not valid C++11
+
+This is not valid C++ because `lhs` and `rhs` have not yet been defined; they will not be valid identifiers until after the parser has parsed the rest of the function prototype.
+
+To work around this, C++11 introduced a new function declaration syntax, with a _trailing-return-type_:
+
+template<class Lhs, class Rhs>
+  auto adding_func(const Lhs &lhs, const Rhs &rhs) -> decltype(lhs+rhs) {return lhs + rhs;}
 
 
 ### Lambda functions and expressions
@@ -279,11 +289,11 @@ for (int& x : my_array)
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTg5MzAzMTc3LDEyMDgyMTcwNzksOTkxOD
-c5MDA0LDE0Mzk0ODg2OTYsLTE1NTgzNzcyOCwtMTI1NzgzNjQy
-OSw1OTE0ODU4NDMsMTA4Nzg4NDA4MywxNzQ2ODM5NzAwLC04ND
-AzNzk4MjAsMTg3NjkyODAyMCwxNDIzNDczODQwLDE1OTY3MDQ2
-NjIsLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0LDE0OT
-g1NjkxOTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNTk3OTg5
-Ml19
+eyJoaXN0b3J5IjpbLTMyNzU5NDc0Myw1ODkzMDMxNzcsMTIwOD
+IxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4
+LC0xMjU3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3ND
+Y4Mzk3MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4
+NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIyOCw3ND
+M5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0NzM3NDcw
+OF19
 -->
