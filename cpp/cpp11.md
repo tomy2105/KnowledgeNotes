@@ -100,7 +100,7 @@ Constructor with such parameter is treated specially during uniform initializati
 Class `std::initializer_list<>` can be constructed statically by the compiler using `{}`  and it's copying is cheap.
 
 ### Uniform initialization
-Uniform type initialization works on any object (not just aggregates and PODs as before). 
+Uniform type initialization works on any object (not just aggregates and PODs as before). Now it can be used to initialize simple types, invoke constructors, initialize (public) data members, etc...
 
 
 ```cpp
@@ -243,10 +243,10 @@ std::vector<int> the_vec2(4); // vector with four integers { 0, 0, 0, 0 }
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNTc4MzY0MjksNTkxNDg1ODQzLDEwOD
-c4ODQwODMsMTc0NjgzOTcwMCwtODQwMzc5ODIwLDE4NzY5Mjgw
-MjAsMTQyMzQ3Mzg0MCwxNTk2NzA0NjYyLC02Njk2NjA4OTQsND
-cwNTMzMjI4LDc0MzkwMTE0NCwxNDk4NTY5MTk1LDc1ODk3NjI0
-OCwyMDQ3Mzc0NzA4LDE2MDU5Nzk4OTIsNjEyMzM1NzQxLDEwNz
-I2NjQzNDhdfQ==
+eyJoaXN0b3J5IjpbLTE1NTgzNzcyOCwtMTI1NzgzNjQyOSw1OT
+E0ODU4NDMsMTA4Nzg4NDA4MywxNzQ2ODM5NzAwLC04NDAzNzk4
+MjAsMTg3NjkyODAyMCwxNDIzNDczODQwLDE1OTY3MDQ2NjIsLT
+Y2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0LDE0OTg1Njkx
+OTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNTk3OTg5Miw2MT
+IzMzU3NDEsMTA3MjY2NDM0OF19
 -->
