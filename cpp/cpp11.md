@@ -69,7 +69,7 @@ POD concept devided into two separate concepts: _trivial_ (statically initializi
 
 A _trivial_ class or struct is defined as one that has trivial constructors (default, copy and move), trivial copy and move assignment operator and trivial and non virtual destructor. 
 
-A class or struct is _standard-layout_ if it has not
+A class or struct is _standard-layout_ if it has no virtual functions or base classes, all members have same acess, 
 
 1.  It has no virtual functions
 2.  It has no virtual base classes
@@ -170,8 +170,8 @@ A class or struct is _standard-layout_ if it has not
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDYzMjQyNzksMTQyMzQ3Mzg0MCwxNTk2Nz
-A0NjYyLC02Njk2NjA4OTQsNDcwNTMzMjI4LDc0MzkwMTE0NCwx
-NDk4NTY5MTk1LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4LDE2MDU5Nz
-k4OTIsNjEyMzM1NzQxLDEwNzI2NjQzNDhdfQ==
+eyJoaXN0b3J5IjpbLTIxNDA2OTgxMzQsMTQyMzQ3Mzg0MCwxNT
+k2NzA0NjYyLC02Njk2NjA4OTQsNDcwNTMzMjI4LDc0MzkwMTE0
+NCwxNDk4NTY5MTk1LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4LDE2MD
+U5Nzk4OTIsNjEyMzM1NzQxLDEwNzI2NjQzNDhdfQ==
 -->
