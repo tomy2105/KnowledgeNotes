@@ -183,6 +183,8 @@ int main()
 
 ### Range-based for loop
 
+
+
 ### Lambda functions and expressions
 
 ### Alternative function syntax
@@ -265,10 +267,11 @@ int main()
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQzOTQ4ODY5NiwtMTU1ODM3NzI4LC0xMj
-U3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3NDY4Mzk3
-MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4NDAsMT
-U5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIyOCw3NDM5MDEx
-NDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0NzM3NDcwOCwxNj
-A1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4XX0=
+eyJoaXN0b3J5IjpbOTkxODc5MDA0LDE0Mzk0ODg2OTYsLTE1NT
+gzNzcyOCwtMTI1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nzg4NDA4
+MywxNzQ2ODM5NzAwLC04NDAzNzk4MjAsMTg3NjkyODAyMCwxND
+IzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMy
+MjgsNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwND
+czNzQ3MDgsMTYwNTk3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0
+OF19
 -->
