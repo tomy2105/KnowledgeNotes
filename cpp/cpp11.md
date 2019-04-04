@@ -89,7 +89,6 @@ class SequenceClass
 public:
     SequenceClass(std::initializer_list<int> list);
 };
-
 SequenceClass some_var = {1, 4, 5, 6};
 ```
 
@@ -200,7 +199,7 @@ std::vector<std::string> v{ "xyzzy", "plugh", "abracadabra" }; // see "Uniform i
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk3NDA5NDQ5NCwxODc2OTI4MDIwLDE0Mj
+eyJoaXN0b3J5IjpbMTA0ODczNjExNiwxODc2OTI4MDIwLDE0Mj
 M0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIy
 OCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0Nz
 M3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4
