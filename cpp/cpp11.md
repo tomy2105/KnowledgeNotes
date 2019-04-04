@@ -47,6 +47,28 @@ Sample code with move assignment and move constructor can be found in [Move.cpp]
 
 ### Generalized constant expressions
 
+Keyword `constexpr` is introduced specifying that a function or object constructor is a compile-time constant.
+
+constexpr int get_five() {return 5;}
+
+int some_value[get_five() + 7]; // Create an array of 12 integers. Valid C++11
+
+This allows the compiler to understand, and verify, that `get_five()` is a compile-time constant.
+
+Using `constexpr` on a function imposes some limits on what that function can do. First, the function must have a non-void return type. Second, the function body cannot declare variables or define new types. Third, the body may contain only declarations, null statements and a single return statement. There must exist argument values such that, after argument substitution, the expression in the return statement produces a constant expression.
+
+Before C++11, the values of variables could be used in constant expressions only if the variables are declared const, have an initializer which is a constant expression, and are of integral or enumeration type. C++11 removes the restriction that the variables must be of integral or enumeration type if they are defined with the `constexpr` keyword:
+
+constexpr double earth_gravitational_acceleration = 9.8;
+constexpr double moon_gravitational_acceleration = earth_gravitational_acceleration / 6.0;
+
+Such data variables are implicitly const, and must have an initializer which must be a constant expression.
+
+To construct constant expression data values from user-defined types, constructors can also be declared with `constexpr`. A `constexpr` constructor's function body can contain only declarations and null statements, and cannot declare variables or define types, as with a `constexpr` function. There must exist argument values such that, after argument substitution, it initializes the class's members with constant expressions. The destructors for such types must be trivial.
+
+The copy constructor for a type with any `constexpr` constructors should usually also be defined as a `constexpr` constructor, to allow objects of the type to be returned by value from a constexpr function. Any member function of a class, such as copy constructors, operator overloads, etc., can be declared as `constexpr`, so long as they meet the requirements for constexpr functions. This allows the compiler to copy objects at compile time, perform operations on them, etc.
+
+If a constexpr function or constructor is called with arguments which aren't constant expressions, the call behaves as if the function were not constexpr, and the resulting value is not a constant expression. Likewise, if the expression in the return statement of a constexpr function does not evaluate to a constant expression for a given invocation, the result is not a constant expression.
 ### Modification to the definition of plain old data
 
 ### Extern template
@@ -141,8 +163,8 @@ Sample code with move assignment and move constructor can be found in [Move.cpp]
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MD
-UzMzIyOCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgs
-MjA0NzM3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNj
-Y0MzQ4XX0=
+eyJoaXN0b3J5IjpbLTEyMzU4MDk2ODEsMTU5NjcwNDY2MiwtNj
+Y5NjYwODk0LDQ3MDUzMzIyOCw3NDM5MDExNDQsMTQ5ODU2OTE5
+NSw3NTg5NzYyNDgsMjA0NzM3NDcwOCwxNjA1OTc5ODkyLDYxMj
+MzNTc0MSwxMDcyNjY0MzQ4XX0=
 -->
