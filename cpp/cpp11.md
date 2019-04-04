@@ -183,7 +183,18 @@ int main()
 
 ### Range-based for loop
 
+syntax of the `for` statement to allow for easy iteration over a range of elements:
 
+int my_array[5] = {1, 2, 3, 4, 5};
+// double the value of each element in my_array:
+for (int& x : my_array)
+    x *= 2;
+
+// similar but also using type inference for array elements
+for (auto& x : my_array)
+    x *= 2;
+
+This form of `for`, called the “range-based for”, will iterate over each element in the list. It will work for C-style arrays, initializer lists, and any type that has `begin()` and `end()` functions defined for it that return iterators. All the standard library containers that have begin/end pairs will work with the range-based for statement.
 
 ### Lambda functions and expressions
 
@@ -267,11 +278,11 @@ int main()
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTkxODc5MDA0LDE0Mzk0ODg2OTYsLTE1NT
-gzNzcyOCwtMTI1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nzg4NDA4
-MywxNzQ2ODM5NzAwLC04NDAzNzk4MjAsMTg3NjkyODAyMCwxND
-IzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMy
-MjgsNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwND
-czNzQ3MDgsMTYwNTk3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0
-OF19
+eyJoaXN0b3J5IjpbLTQ1MDU2MTgwOSw5OTE4NzkwMDQsMTQzOT
+Q4ODY5NiwtMTU1ODM3NzI4LC0xMjU3ODM2NDI5LDU5MTQ4NTg0
+MywxMDg3ODg0MDgzLDE3NDY4Mzk3MDAsLTg0MDM3OTgyMCwxOD
+c2OTI4MDIwLDE0MjM0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYw
+ODk0LDQ3MDUzMzIyOCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NT
+g5NzYyNDgsMjA0NzM3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0
+MV19
 -->
