@@ -73,7 +73,9 @@ A class or struct is _standard-layout_ if it has no virtual functions or base cl
 
 ### Extern template
 
+`extern template class std::vector<MyClass>;`
 
+Compiler _will not_ instantiate the template in current translation unit (build time reduced).
 
 ### Initializer lists
 
@@ -165,8 +167,8 @@ A class or struct is _standard-layout_ if it has no virtual functions or base cl
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDQwMzQ4MTAzLDE0MjM0NzM4NDAsMTU5Nj
-cwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIyOCw3NDM5MDExNDQs
-MTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0NzM3NDcwOCwxNjA1OT
-c5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4XX0=
+eyJoaXN0b3J5IjpbMTg3NjkyODAyMCwxNDIzNDczODQwLDE1OT
+Y3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0
+LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNT
+k3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0OF19
 -->
