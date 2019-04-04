@@ -126,9 +126,7 @@ BasicStruct var1{5, 3.2};
 AltStruct var2{2, 4.3};
 ```
 
-The initialization of `var1` behaves exactly as though it were aggregate-initialization. That is, each data member of an object, in turn, will be copy-initialized with the corresponding value from the initializer-list. Implicit type conversion will be used where needed. If no conversion exists, or only a narrowing conversion exists, the program is ill-formed. The initialization of `var2` invokes the constructor.
 
-One can also do this:
 
 struct IdString
 {
@@ -232,9 +230,9 @@ will call the initializer list constructor, not the constructor of `std::vector`
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc0NjgzOTcwMCwtODQwMzc5ODIwLDE4Nz
-Y5MjgwMjAsMTQyMzQ3Mzg0MCwxNTk2NzA0NjYyLC02Njk2NjA4
-OTQsNDcwNTMzMjI4LDc0MzkwMTE0NCwxNDk4NTY5MTk1LDc1OD
-k3NjI0OCwyMDQ3Mzc0NzA4LDE2MDU5Nzk4OTIsNjEyMzM1NzQx
-LDEwNzI2NjQzNDhdfQ==
+eyJoaXN0b3J5IjpbMTA4Nzg4NDA4MywxNzQ2ODM5NzAwLC04ND
+AzNzk4MjAsMTg3NjkyODAyMCwxNDIzNDczODQwLDE1OTY3MDQ2
+NjIsLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0LDE0OT
+g1NjkxOTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNTk3OTg5
+Miw2MTIzMzU3NDEsMTA3MjY2NDM0OF19
 -->
