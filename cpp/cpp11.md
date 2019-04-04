@@ -79,11 +79,11 @@ Compiler _will not_ instantiate the template in current translation unit (build 
 
 ### Initializer lists
 
-Initializer-lists are extended to be used for all classes (before they were for PODs, structs only).
+Initializer-lists are extended to be used for all classes (before they were for PODs, structs and arrays only).
 
-C++11 binds the concept to a template, called `std::initializer_list`. This allows constructors and other functions to take initializer-lists as parameters. For example:
+Concept is bound to [`std::initializer_list`](https://en.cppreference.com/w/cpp/utility/initializer_list) which can be parameter for concstructors/functions.
 
-class SequenceClass
+`class SequenceClass
 {
 public:
     SequenceClass(std::initializer_list<int> list);
@@ -200,9 +200,9 @@ std::vector<std::string> v{ "xyzzy", "plugh", "abracadabra" }; // see "Uniform i
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODYzNjg5MjczLDE4NzY5MjgwMjAsMTQyMz
-Q3Mzg0MCwxNTk2NzA0NjYyLC02Njk2NjA4OTQsNDcwNTMzMjI4
-LDc0MzkwMTE0NCwxNDk4NTY5MTk1LDc1ODk3NjI0OCwyMDQ3Mz
-c0NzA4LDE2MDU5Nzk4OTIsNjEyMzM1NzQxLDEwNzI2NjQzNDhd
-fQ==
+eyJoaXN0b3J5IjpbLTE0NTY4ODY0NDEsMTg3NjkyODAyMCwxND
+IzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMy
+MjgsNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwND
+czNzQ3MDgsMTYwNTk3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0
+OF19
 -->
