@@ -250,6 +250,22 @@ public:
 
 ```
 
+Members can be initialized (not only static const):
+
+
+```cpp
+class SomeClass
+{
+public:
+    SomeClass() {}
+    explicit SomeClass(int new_value) : value(new_value) {}
+
+private:
+    int value = 5;
+};
+
+```cpp
+
 ### Explicit overrides and final
 
 ### Null pointer constant
@@ -326,11 +342,11 @@ public:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzA1MDc4OTE5LC0xNjg1Njk0MDQ5LDEwOT
-k4MTI3NDUsNTg5MzAzMTc3LDEyMDgyMTcwNzksOTkxODc5MDA0
-LDE0Mzk0ODg2OTYsLTE1NTgzNzcyOCwtMTI1NzgzNjQyOSw1OT
-E0ODU4NDMsMTA4Nzg4NDA4MywxNzQ2ODM5NzAwLC04NDAzNzk4
-MjAsMTg3NjkyODAyMCwxNDIzNDczODQwLDE1OTY3MDQ2NjIsLT
-Y2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0LDE0OTg1Njkx
-OTVdfQ==
+eyJoaXN0b3J5IjpbLTE3MjM5MjQxNTUsMzA1MDc4OTE5LC0xNj
+g1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5MzAzMTc3LDEyMDgyMTcw
+NzksOTkxODc5MDA0LDE0Mzk0ODg2OTYsLTE1NTgzNzcyOCwtMT
+I1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nzg4NDA4MywxNzQ2ODM5
+NzAwLC04NDAzNzk4MjAsMTg3NjkyODAyMCwxNDIzNDczODQwLD
+E1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAx
+MTQ0XX0=
 -->
