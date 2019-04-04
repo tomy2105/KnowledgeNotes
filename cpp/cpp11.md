@@ -153,12 +153,9 @@ If a class has an initializer list constructor, then it takes priority over othe
 
 
 ```cpp
-Version:1.0 StartHTML:00000145 EndHTML:00001040 StartFragment:00000249 EndFragment:00001008 StartSelection:00000249 EndSelection:00001008 Snippet
-
 std::vector<int> the_vec{4}; // vector with one integer { 4 }
 std::vector<int> the_vec2(4); // vector with four integers { 0, 0, 0, 0 }
 ```
-
 
 ### Type inference
 
@@ -246,10 +243,10 @@ std::vector<int> the_vec2(4); // vector with four integers { 0, 0, 0, 0 }
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM5ODI1MTc0MSw1OTE0ODU4NDMsMTA4Nz
-g4NDA4MywxNzQ2ODM5NzAwLC04NDAzNzk4MjAsMTg3NjkyODAy
-MCwxNDIzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0Nz
-A1MzMyMjgsNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4
-LDIwNDczNzQ3MDgsMTYwNTk3OTg5Miw2MTIzMzU3NDEsMTA3Mj
-Y2NDM0OF19
+eyJoaXN0b3J5IjpbOTc4NzI5NjUsNTkxNDg1ODQzLDEwODc4OD
+QwODMsMTc0NjgzOTcwMCwtODQwMzc5ODIwLDE4NzY5MjgwMjAs
+MTQyMzQ3Mzg0MCwxNTk2NzA0NjYyLC02Njk2NjA4OTQsNDcwNT
+MzMjI4LDc0MzkwMTE0NCwxNDk4NTY5MTk1LDc1ODk3NjI0OCwy
+MDQ3Mzc0NzA4LDE2MDU5Nzk4OTIsNjEyMzM1NzQxLDEwNzI2Nj
+QzNDhdfQ==
 -->
