@@ -215,8 +215,6 @@ template<class Lhs, class Rhs>
 
 Keyword `auto` is part of the syntax and does not perform automatic type deduction.
 
-### Lambda functions and expressions
-
 ### Object construction improvement
 
 Constructors are allowed to call other peer constructors:
@@ -262,6 +260,8 @@ private:
     int value = 5;
 };
 ```
+
+### Lambda functions and expressions
 
 ### Explicit overrides and final
 
@@ -339,11 +339,11 @@ private:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1MD
-c4OTE5LC0xNjg1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5MzAzMTc3
-LDEyMDgyMTcwNzksOTkxODc5MDA0LDE0Mzk0ODg2OTYsLTE1NT
-gzNzcyOCwtMTI1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nzg4NDA4
-MywxNzQ2ODM5NzAwLC04NDAzNzk4MjAsMTg3NjkyODAyMCwxND
-IzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMy
-MjhdfQ==
+eyJoaXN0b3J5IjpbMTY4NjIzNDQ0OCwxOTYwNzI3MTAsMTY2OT
+M0NjkxNCwzMDUwNzg5MTksLTE2ODU2OTQwNDksMTA5OTgxMjc0
+NSw1ODkzMDMxNzcsMTIwODIxNzA3OSw5OTE4NzkwMDQsMTQzOT
+Q4ODY5NiwtMTU1ODM3NzI4LC0xMjU3ODM2NDI5LDU5MTQ4NTg0
+MywxMDg3ODg0MDgzLDE3NDY4Mzk3MDAsLTg0MDM3OTgyMCwxOD
+c2OTI4MDIwLDE0MjM0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYw
+ODk0XX0=
 -->
