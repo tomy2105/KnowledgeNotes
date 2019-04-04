@@ -79,6 +79,39 @@ Compiler _will not_ instantiate the template in current translation unit (build 
 
 ### Initializer lists
 
+Initializer-lists are extended to be used for all classes (before they were for PODs, structs only).
+
+C++11 binds the concept to a template, called `std::initializer_list`. This allows constructors and other functions to take initializer-lists as parameters. For example:
+
+class SequenceClass
+{
+public:
+    SequenceClass(std::initializer_list<int> list);
+};
+
+This allows `SequenceClass` to be constructed from a sequence of integers, such as:
+
+SequenceClass some_var = {1, 4, 5, 6};
+
+This constructor is a special kind of constructor, called an initializer-list-constructor. Classes with such a constructor are treated specially during uniform initialization (see [below](https://en.wikipedia.org/wiki/C%2B%2B11#Uniform_initialization))
+
+The template class `std::initializer_list<>` is a [first-class](https://en.wikipedia.org/wiki/First-class_citizen "First-class citizen") C++11 standard library type. They can be constructed statically by the C++11 compiler via use of the `{}` syntax without a type name in contexts where such braces will deduce to an `std::initializer_list`, or by explicitly specifying the type like `std::initializer_list<SomeType>{args}` (and so on for other varieties of construction syntax).
+
+The list can be copied once constructed, which is cheap and will act as a copy-by-reference (the class is typically implemented as a pair of begin/end pointers). An `std::initializer_list` is constant: its members cannot be changed once it is created, and nor can the data in those members be changed (which rules out moving from them, requiring copies into class members, etc.).
+
+Although its construction is specially treated by the compiler, an `std::initializer_list` is a real type, and so it can be used in other places besides class constructors. Regular functions can take typed `std::initializer_list`s as arguments. For example:
+
+void function_name(std::initializer_list<float> list); // Copying is cheap; see above
+
+function_name({1.0f, -3.45f, -0.4f});
+
+Examples of this in the standard library include the `std::min()` and `std::max()` templates taking `std::initializer_list`s of numeric type.
+
+Standard containers can also be initialized in these ways:
+
+std::vector<std::string> v = { "xyzzy", "plugh", "abracadabra" };
+std::vector<std::string> v({ "xyzzy", "plugh", "abracadabra" });
+std::vector<std::string> v{ "xyzzy", "plugh", "abracadabra" }; // see "Uniform initialization" below
 ### Uniform initialization
 
 ### Type inference
@@ -167,8 +200,9 @@ Compiler _will not_ instantiate the template in current translation unit (build 
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg3NjkyODAyMCwxNDIzNDczODQwLDE1OT
-Y3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0
-LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNT
-k3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0OF19
+eyJoaXN0b3J5IjpbODYzNjg5MjczLDE4NzY5MjgwMjAsMTQyMz
+Q3Mzg0MCwxNTk2NzA0NjYyLC02Njk2NjA4OTQsNDcwNTMzMjI4
+LDc0MzkwMTE0NCwxNDk4NTY5MTk1LDc1ODk3NjI0OCwyMDQ3Mz
+c0NzA4LDE2MDU5Nzk4OTIsNjEyMzM1NzQxLDEwNzI2NjQzNDhd
+fQ==
 -->
