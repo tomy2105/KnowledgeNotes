@@ -6,8 +6,7 @@ Having `int a[100]`, with or without size specified, as a function parameter is 
 
 Meaning that you cannot `for (int i: a) {}` on such parameter, you will get _no callable 'begin' function found for type 'int []'_ error (and one for _'end'_ too).
 
-In order to have really array a
-
+In order to have really array as function parameter you need some template magic.
 
 ```cpp
 #include <iostream>
@@ -36,5 +35,5 @@ int main()
 }
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM4NDQyMzQ0NCwtMTYxMzU3MjAyNl19
+eyJoaXN0b3J5IjpbLTgwNzU0NjMxNiwtMTYxMzU3MjAyNl19
 -->
