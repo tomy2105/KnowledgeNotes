@@ -228,7 +228,23 @@ public:
 };
 ```
 
-**Warning**:  An object is constructed once _any_ constructor finishes execution. This means that delegating constructor will be executing on a fully constructed object of its own type. 
+**Warning**:  An object is constructed once _any_ constructor finishes execution. This means that delegating constructor will be executing on a fully constructed object. 
+
+A class is allowed to specify that base class constructors will be inherited. Compiler will automatically generate code needed.neededto perform the inheritance and the forwarding of the derived class to the base class. This is an all-or-nothing feature: either all of that base class's constructors are forwarded or none of them are. Also, an inherited constructor will be [shadowed](https://en.wikipedia.org/wiki/Name_resolution_(programming_languages)#Name_masking "Name resolution (programming languages)") if it matches the signature of a constructor of the derived class, and restrictions exist for multiple inheritance: class constructors cannot be inherited from two classes that use constructors with the same signature.
+
+The syntax is as follows:
+
+class BaseClass
+{
+public:
+    BaseClass(int value);
+};
+
+class DerivedClass : public BaseClass
+{
+public:
+    using BaseClass::BaseClass;
+};
 
 ### Explicit overrides and final
 
@@ -306,11 +322,11 @@ public:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTAzMzQ2ODkyLDEwOTk4MTI3NDUsNTg5Mz
-AzMTc3LDEyMDgyMTcwNzksOTkxODc5MDA0LDE0Mzk0ODg2OTYs
-LTE1NTgzNzcyOCwtMTI1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nz
-g4NDA4MywxNzQ2ODM5NzAwLC04NDAzNzk4MjAsMTg3NjkyODAy
-MCwxNDIzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0Nz
-A1MzMyMjgsNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4
-XX0=
+eyJoaXN0b3J5IjpbMTkwMDM4NzE4MCwxMDk5ODEyNzQ1LDU4OT
+MwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2
+LC0xNTU4Mzc3MjgsLTEyNTc4MzY0MjksNTkxNDg1ODQzLDEwOD
+c4ODQwODMsMTc0NjgzOTcwMCwtODQwMzc5ODIwLDE4NzY5Mjgw
+MjAsMTQyMzQ3Mzg0MCwxNTk2NzA0NjYyLC02Njk2NjA4OTQsND
+cwNTMzMjI4LDc0MzkwMTE0NCwxNDk4NTY5MTk1LDc1ODk3NjI0
+OF19
 -->
