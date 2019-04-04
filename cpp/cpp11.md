@@ -159,6 +159,10 @@ std::vector<int> the_vec2(4); // vector with four integers { 0, 0, 0, 0 }
 
 ### Type inference
 
+The definition of a variable with an explicit initialization can use the `auto` keyword. This creates a variable of the specific type of the initializer.
+
+
+
 ### Range-based for loop
 
 ### Lambda functions and expressions
@@ -243,10 +247,10 @@ std::vector<int> the_vec2(4); // vector with four integers { 0, 0, 0, 0 }
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NTgzNzcyOCwtMTI1NzgzNjQyOSw1OT
-E0ODU4NDMsMTA4Nzg4NDA4MywxNzQ2ODM5NzAwLC04NDAzNzk4
-MjAsMTg3NjkyODAyMCwxNDIzNDczODQwLDE1OTY3MDQ2NjIsLT
-Y2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0LDE0OTg1Njkx
-OTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNTk3OTg5Miw2MT
-IzMzU3NDEsMTA3MjY2NDM0OF19
+eyJoaXN0b3J5IjpbMzkxOTIyMjQ3LC0xNTU4Mzc3MjgsLTEyNT
+c4MzY0MjksNTkxNDg1ODQzLDEwODc4ODQwODMsMTc0NjgzOTcw
+MCwtODQwMzc5ODIwLDE4NzY5MjgwMjAsMTQyMzQ3Mzg0MCwxNT
+k2NzA0NjYyLC02Njk2NjA4OTQsNDcwNTMzMjI4LDc0MzkwMTE0
+NCwxNDk4NTY5MTk1LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4LDE2MD
+U5Nzk4OTIsNjEyMzM1NzQxLDEwNzI2NjQzNDhdfQ==
 -->
