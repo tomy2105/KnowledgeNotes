@@ -61,6 +61,7 @@ Keyword `constexpr` is introduced specifying that a function or object construct
 In addition constant expressions need not be of integral or enumeration type anymore.
 
 `constexpr double earth_gravitational_acceleration = 9.8;`
+
 `constexpr double moon_gravitational_acceleration = earth_gravitational_acceleration / 6.0;`
 
 ### Modification to the definition of plain old data
@@ -199,9 +200,9 @@ std::vector<std::string> v{ "xyzzy", "plugh", "abracadabra" }; // see "Uniform i
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA0ODczNjExNiwxODc2OTI4MDIwLDE0Mj
-M0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIy
-OCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0Nz
-M3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4
-XX0=
+eyJoaXN0b3J5IjpbLTEzNDkwNzcyMTQsMTg3NjkyODAyMCwxND
+IzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMy
+MjgsNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwND
+czNzQ3MDgsMTYwNTk3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0
+OF19
 -->
