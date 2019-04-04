@@ -195,9 +195,11 @@ for (int& x : my_array)
 
 “Range-based for” will work for C-style arrays, initializer lists, and any type that has `begin()` and `end()` functions.
 
-### Lambda functions and expressions
-
 ### Alternative function syntax
+
+
+
+### Lambda functions and expressions
 
 ### Object construction improvement
 
@@ -277,11 +279,11 @@ for (int& x : my_array)
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIwODIxNzA3OSw5OTE4NzkwMDQsMTQzOT
-Q4ODY5NiwtMTU1ODM3NzI4LC0xMjU3ODM2NDI5LDU5MTQ4NTg0
-MywxMDg3ODg0MDgzLDE3NDY4Mzk3MDAsLTg0MDM3OTgyMCwxOD
-c2OTI4MDIwLDE0MjM0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYw
-ODk0LDQ3MDUzMzIyOCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NT
-g5NzYyNDgsMjA0NzM3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0
-MV19
+eyJoaXN0b3J5IjpbNTg5MzAzMTc3LDEyMDgyMTcwNzksOTkxOD
+c5MDA0LDE0Mzk0ODg2OTYsLTE1NTgzNzcyOCwtMTI1NzgzNjQy
+OSw1OTE0ODU4NDMsMTA4Nzg4NDA4MywxNzQ2ODM5NzAwLC04ND
+AzNzk4MjAsMTg3NjkyODAyMCwxNDIzNDczODQwLDE1OTY3MDQ2
+NjIsLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0LDE0OT
+g1NjkxOTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNTk3OTg5
+Ml19
 -->
