@@ -100,7 +100,51 @@ Constructor with such parameter is treated specially during uniform initializati
 Class `std::initializer_list<>` can be constructed statically by the compiler using `{}`  and it's copying is cheap.
 
 ### Uniform initialization
+C++03 has a number of problems with initializing types. Several ways to do this exist, and some produce different results when interchanged. The traditional constructor syntax, for example, can look like a function declaration, and steps must be taken to ensure that the compiler's [most vexing parse](https://en.wikipedia.org/wiki/Most_vexing_parse "Most vexing parse") rule will not mistake it for such. Only aggregates and POD types can be initialized with aggregate initializers (using `SomeType var = {/*stuff*/};`).
 
+C++11 provides a syntax that allows for fully uniform type initialization that works on any object. It expands on the initializer list syntax:
+
+struct BasicStruct
+{
+    int x;
+    double y;
+};
+
+struct AltStruct
+{
+    AltStruct(int x, double y)
+        : x_{x}
+        , y_{y}
+    {}
+
+private:
+    int x_;
+    double y_;
+};
+
+BasicStruct var1{5, 3.2};
+AltStruct var2{2, 4.3};
+
+The initialization of `var1` behaves exactly as though it were aggregate-initialization. That is, each data member of an object, in turn, will be copy-initialized with the corresponding value from the initializer-list. Implicit type conversion will be used where needed. If no conversion exists, or only a narrowing conversion exists, the program is ill-formed. The initialization of `var2` invokes the constructor.
+
+One can also do this:
+
+struct IdString
+{
+    std::string name;
+    int identifier;
+};
+
+IdString get_string()
+{
+    return {"foo", 42}; //Note the lack of explicit type.
+}
+
+Uniform initialization does not replace constructor syntax, which is still needed at times. If a class has an initializer list constructor (`TypeName(initializer_list<SomeType>);`), then it takes priority over other forms of construction, provided that the initializer list conforms to the sequence constructor's type. The C++11 version of `std::vector` has an initializer list constructor for its template type. Thus this code:
+
+std::vector<int> the_vec{4};
+
+will call the initializer list constructor, not the constructor of `std::vector` that takes a single size parameter and creates the vector with that size. To access the latter constructor, the user will need to use the standard constructor syntax directly.
 ### Type inference
 
 ### Range-based for loop
@@ -187,9 +231,9 @@ Class `std::initializer_list<>` can be constructed statically by the compiler us
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0Mj
-M0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIy
-OCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0Nz
-M3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4
-XX0=
+eyJoaXN0b3J5IjpbLTIxMzAwMDA3NTksLTg0MDM3OTgyMCwxOD
+c2OTI4MDIwLDE0MjM0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYw
+ODk0LDQ3MDUzMzIyOCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NT
+g5NzYyNDgsMjA0NzM3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0
+MSwxMDcyNjY0MzQ4XX0=
 -->
