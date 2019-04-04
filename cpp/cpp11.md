@@ -161,7 +161,15 @@ std::vector<int> the_vec2(4); // vector with four integers { 0, 0, 0, 0 }
 
 The definition of a variable with an explicit initialization can use the `auto` keyword. This creates a variable of the specific type of the initializer.
 
+Keyword `decltype` can be used to determine the type of expression at compile-time.
 
+The type denoted by `decltype` can be different from the type deduced by `auto`.
+
+```cpp
+
+
+
+```
 
 ### Range-based for loop
 
@@ -247,10 +255,10 @@ The definition of a variable with an explicit initialization can use the `auto` 
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzkxOTIyMjQ3LC0xNTU4Mzc3MjgsLTEyNT
-c4MzY0MjksNTkxNDg1ODQzLDEwODc4ODQwODMsMTc0NjgzOTcw
-MCwtODQwMzc5ODIwLDE4NzY5MjgwMjAsMTQyMzQ3Mzg0MCwxNT
-k2NzA0NjYyLC02Njk2NjA4OTQsNDcwNTMzMjI4LDc0MzkwMTE0
-NCwxNDk4NTY5MTk1LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4LDE2MD
-U5Nzk4OTIsNjEyMzM1NzQxLDEwNzI2NjQzNDhdfQ==
+eyJoaXN0b3J5IjpbMTg5MjM1ODU1NSwtMTU1ODM3NzI4LC0xMj
+U3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3NDY4Mzk3
+MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4NDAsMT
+U5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIyOCw3NDM5MDEx
+NDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0NzM3NDcwOCwxNj
+A1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4XX0=
 -->
