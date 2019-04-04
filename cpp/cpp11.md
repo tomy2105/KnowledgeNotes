@@ -65,11 +65,9 @@ In addition constant expressions need not be of integral or enumeration type any
 
 ### Modification to the definition of plain old data
 
-POD concept devided into two separate concepts: _trivial_ (statically initializiable and `memcpy`able) and _standard-layout_ ().
+POD concept devided into two separate concepts: _trivial_ (statically initializiable and `memcpy`able) and _standard-layout_ (compatible with C, member ordering and packing).
 
-A type that is _trivial_ can be statically initialized. It also means that it is valid to copy data around via `memcpy`, rather than having to use a copy constructor. The lifetime of a _trivial_ type begins when its storage is defined, not when a constructor completes.
-
-A trivial class or struct is defined as one that:
+A trivial class or struct is defined as one that has trivial constructors (default, copy and move), trivial copy and move assignment operator and trivial and non virtual destructor. 
 
 1.  Has a trivial default constructor. This may use the [default constructor syntax](https://en.wikipedia.org/wiki/C%2B%2B11#Explicitly_defaulted_and_deleted_special_member_functions) (`SomeConstructor() = default;`).
 2.  Has trivial copy and move constructors, which may use the default syntax.
@@ -183,7 +181,7 @@ By separating these concepts, it becomes possible to give up one without losing 
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3MjEyMzk2MSwxNDIzNDczODQwLDE1OT
+eyJoaXN0b3J5IjpbMTE1NjIzNzk0MywxNDIzNDczODQwLDE1OT
 Y3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0
 LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNT
 k3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0OF19
