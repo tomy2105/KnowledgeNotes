@@ -58,10 +58,11 @@ Keyword `constexpr` is introduced specifying that a function or object construct
 - may contain only declarations, null statements and a single return statement
 - return statement produces a constant expression (after argument substitution)
 
-In addition constant expressions need not be of integral or enumeBefore C++11, the values of variables could be used in constant expressions only if the variables are declared const, have an initializer which is a constant expression, and are of integral or enumeration type. C++11 removes the restriction that the variables must be of integral or enumeration type if they are defined with the `constexpr` keyword:
+In addition constant expressions need not be of integral or enumeration type anymore.
 
-constexpr double earth_gravitational_acceleration = 9.8;
-constexpr double moon_gravitational_acceleration = earth_gravitational_acceleration / 6.0;
+
+`constexpr double earth_gravitational_acceleration = 9.8;`
+`constexpr double moon_gravitational_acceleration = earth_gravitational_acceleration / 6.0;`
 
 Such data variables are implicitly const, and must have an initializer which must be a constant expression.
 
@@ -164,8 +165,8 @@ If a constexpr function or constructor is called with arguments which aren't con
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNDYyMzE4ODIsMTU5NjcwNDY2MiwtNj
-Y5NjYwODk0LDQ3MDUzMzIyOCw3NDM5MDExNDQsMTQ5ODU2OTE5
-NSw3NTg5NzYyNDgsMjA0NzM3NDcwOCwxNjA1OTc5ODkyLDYxMj
-MzNTc0MSwxMDcyNjY0MzQ4XX0=
+eyJoaXN0b3J5IjpbMTM0MjEzMjcwNCwxNTk2NzA0NjYyLC02Nj
+k2NjA4OTQsNDcwNTMzMjI4LDc0MzkwMTE0NCwxNDk4NTY5MTk1
+LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4LDE2MDU5Nzk4OTIsNjEyMz
+M1NzQxLDEwNzI2NjQzNDhdfQ==
 -->
