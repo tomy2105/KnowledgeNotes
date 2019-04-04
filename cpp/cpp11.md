@@ -263,8 +263,7 @@ public:
 private:
     int value = 5;
 };
-
-```cpp
+```
 
 ### Explicit overrides and final
 
@@ -342,11 +341,11 @@ private:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjM5MjQxNTUsMzA1MDc4OTE5LC0xNj
-g1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5MzAzMTc3LDEyMDgyMTcw
-NzksOTkxODc5MDA0LDE0Mzk0ODg2OTYsLTE1NTgzNzcyOCwtMT
-I1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nzg4NDA4MywxNzQ2ODM5
-NzAwLC04NDAzNzk4MjAsMTg3NjkyODAyMCwxNDIzNDczODQwLD
-E1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAx
-MTQ0XX0=
+eyJoaXN0b3J5IjpbMTY2OTM0NjkxNCwzMDUwNzg5MTksLTE2OD
+U2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwODIxNzA3
+OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4LC0xMj
+U3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3NDY4Mzk3
+MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4NDAsMT
+U5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIyOCw3NDM5MDEx
+NDRdfQ==
 -->
