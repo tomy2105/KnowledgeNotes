@@ -90,23 +90,15 @@ class SequenceClass
 public:
     SequenceClass(std::initializer_list<int> list);
 };
+
 SequenceClass some_var = {1, 4, 5, 6};
+
+function_name({1.0f, -3.45f, -0.4f});
 ```
 Constructor with such parameter is treated specially during uniform initialization.
 
-Class `std::initializer_list<>` can be constructed statically by the compiler using `{}` .
+Class `std::initializer_list<>` can be constructed statically by the compiler using `{}`  and it's copying is cheap.
 
-void function_name(std::initializer_list<float> list); // Copying is cheap; see above
-
-function_name({1.0f, -3.45f, -0.4f});
-
-Examples of this in the standard library include the `std::min()` and `std::max()` templates taking `std::initializer_list`s of numeric type.
-
-Standard containers can also be initialized in these ways:
-
-std::vector<std::string> v = { "xyzzy", "plugh", "abracadabra" };
-std::vector<std::string> v({ "xyzzy", "plugh", "abracadabra" });
-std::vector<std::string> v{ "xyzzy", "plugh", "abracadabra" }; // see "Uniform initialization" below
 ### Uniform initialization
 
 ### Type inference
@@ -195,9 +187,9 @@ std::vector<std::string> v{ "xyzzy", "plugh", "abracadabra" }; // see "Uniform i
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NTU5NzA2NTYsMTg3NjkyODAyMCwxND
-IzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMy
-MjgsNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4LDIwND
-czNzQ3MDgsMTYwNTk3OTg5Miw2MTIzMzU3NDEsMTA3MjY2NDM0
-OF19
+eyJoaXN0b3J5IjpbLTYzNzk4NjUyOSwxODc2OTI4MDIwLDE0Mj
+M0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIy
+OCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDgsMjA0Nz
+M3NDcwOCwxNjA1OTc5ODkyLDYxMjMzNTc0MSwxMDcyNjY0MzQ4
+XX0=
 -->
