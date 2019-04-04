@@ -149,30 +149,14 @@ BasicClass var3 = GetBasicClass();
 InitializerClass var4{ 5, "foobar" };
 ```
 
-
-tring
-{
-    std::string name;
-    int ide
+If a class has an initializer list constructor, then it takes priority over other forms of construction
 
 
-
-
-
-
-ntifier;
-};
-
-IdString get_string()
-{
-    return {"foo", 42}; //Note the lack of explicit type.
-}
-
-Uniform initialization does not replace constructor syntax, which is still needed at times. If a class has an initializer list constructor (`TypeName(initializer_list<SomeType>);`), then it takes priority over other forms of construction, provided that the initializer list conforms to the sequence constructor's type. The C++11 version of `std::vector` has an initializer list constructor for its template type. Thus this code:
-
+```cpp
 std::vector<int> the_vec{4};
+```
 
-will call the initializer list constructor, not the constructor of `std::vector` that takes a single size parameter and creates the vector with that size. To access the latter constructor, the user will need to use the standard constructor syntax directly.
+
 ### Type inference
 
 ### Range-based for loop
@@ -259,7 +243,7 @@ will call the initializer list constructor, not the constructor of `std::vector`
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MTU0NTk4LDEwODc4ODQwODMsMTc0Nj
+eyJoaXN0b3J5IjpbNTkxNDg1ODQzLDEwODc4ODQwODMsMTc0Nj
 gzOTcwMCwtODQwMzc5ODIwLDE4NzY5MjgwMjAsMTQyMzQ3Mzg0
 MCwxNTk2NzA0NjYyLC02Njk2NjA4OTQsNDcwNTMzMjI4LDc0Mz
 kwMTE0NCwxNDk4NTY5MTk1LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4
