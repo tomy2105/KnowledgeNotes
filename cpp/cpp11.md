@@ -181,7 +181,7 @@ int main()
 }
 ```
 
-**Auto with initializer list**: `auto z = { 42 };` type of z is std::initializer_list<int> and not just int!!!
+**Auto with initializer list**: `auto z = { 42 };` type of `z` is `std::initializer_list<int>` and not just `int`!!!
 
 ### Range-based for loop
 
@@ -326,11 +326,11 @@ public:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1Nzc0OTc5OTMsLTE2ODU2OTQwNDksMT
-A5OTgxMjc0NSw1ODkzMDMxNzcsMTIwODIxNzA3OSw5OTE4Nzkw
-MDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4LC0xMjU3ODM2NDI5LD
-U5MTQ4NTg0MywxMDg3ODg0MDgzLDE3NDY4Mzk3MDAsLTg0MDM3
-OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4NDAsMTU5NjcwNDY2Mi
-wtNjY5NjYwODk0LDQ3MDUzMzIyOCw3NDM5MDExNDQsMTQ5ODU2
-OTE5NV19
+eyJoaXN0b3J5IjpbMzA1MDc4OTE5LC0xNjg1Njk0MDQ5LDEwOT
+k4MTI3NDUsNTg5MzAzMTc3LDEyMDgyMTcwNzksOTkxODc5MDA0
+LDE0Mzk0ODg2OTYsLTE1NTgzNzcyOCwtMTI1NzgzNjQyOSw1OT
+E0ODU4NDMsMTA4Nzg4NDA4MywxNzQ2ODM5NzAwLC04NDAzNzk4
+MjAsMTg3NjkyODAyMCwxNDIzNDczODQwLDE1OTY3MDQ2NjIsLT
+Y2OTY2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0LDE0OTg1Njkx
+OTVdfQ==
 -->
