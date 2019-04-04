@@ -228,7 +228,7 @@ public:
 };
 ```
 
-**Caveat**:  An object is constructed once _any_ constructor finishes execution. Since multiple constructors will be allowed to execute, this will mean that each delegating constructor will be executing on a fully constructed object of its own type. 
+**Warning**:  An object is constructed once _any_ constructor finishes execution. This means that delegating constructor will be executing on a fully constructed object of its own type. 
 
 ### Explicit overrides and final
 
@@ -306,11 +306,11 @@ public:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjc5NzEzMzIsMTA5OTgxMjc0NSw1ODkzMD
-MxNzcsMTIwODIxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5Niwt
-MTU1ODM3NzI4LC0xMjU3ODM2NDI5LDU5MTQ4NTg0MywxMDg3OD
-g0MDgzLDE3NDY4Mzk3MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIw
-LDE0MjM0NzM4NDAsMTU5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MD
-UzMzIyOCw3NDM5MDExNDQsMTQ5ODU2OTE5NSw3NTg5NzYyNDhd
-fQ==
+eyJoaXN0b3J5IjpbOTAzMzQ2ODkyLDEwOTk4MTI3NDUsNTg5Mz
+AzMTc3LDEyMDgyMTcwNzksOTkxODc5MDA0LDE0Mzk0ODg2OTYs
+LTE1NTgzNzcyOCwtMTI1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nz
+g4NDA4MywxNzQ2ODM5NzAwLC04NDAzNzk4MjAsMTg3NjkyODAy
+MCwxNDIzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0Nz
+A1MzMyMjgsNzQzOTAxMTQ0LDE0OTg1NjkxOTUsNzU4OTc2MjQ4
+XX0=
 -->
