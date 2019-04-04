@@ -49,12 +49,13 @@ Sample code with move assignment and move constructor can be found in [Move.cpp]
 
 Keyword `constexpr` is introduced specifying that a function or object constructor is a compile-time constant.
 
-``constexpr int get_five() {return 5;}
-int some_value[get_five() + 7]; // Create an array of 12 integers. Valid C++11
-``
-This allows the compiler to understand, and verify, that `get_five()` is a compile-time constant.
+`constexpr int get_five() {return 5;}`
 
-Using `constexpr` on a function imposes some limits on what that function can do. First, the function must have a non-void return type. Second, the function body cannot declare variables or define new types. Third, the body may contain only declarations, null statements and a single return statement. There must exist argument values such that, after argument substitution, the expression in the return statement produces a constant expression.
+`int some_value[get_five() + 7]; // Create an array of 12 integers. Invalid without constexpr above.`
+
+- function must have a non-void return type
+- cannot declare variables or define new types
+- . Third, the body may contain only declarations, null statements and a single return statement. There must exist argument values such that, after argument substitution, the expression in the return statement produces a constant expression.
 
 Before C++11, the values of variables could be used in constant expressions only if the variables are declared const, have an initializer which is a constant expression, and are of integral or enumeration type. C++11 removes the restriction that the variables must be of integral or enumeration type if they are defined with the `constexpr` keyword:
 
@@ -162,8 +163,8 @@ If a constexpr function or constructor is called with arguments which aren't con
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODY3NzY5OTQ5LDE1OTY3MDQ2NjIsLTY2OT
-Y2MDg5NCw0NzA1MzMyMjgsNzQzOTAxMTQ0LDE0OTg1NjkxOTUs
-NzU4OTc2MjQ4LDIwNDczNzQ3MDgsMTYwNTk3OTg5Miw2MTIzMz
-U3NDEsMTA3MjY2NDM0OF19
+eyJoaXN0b3J5IjpbMTI1NDUyNzI2OCwxNTk2NzA0NjYyLC02Nj
+k2NjA4OTQsNDcwNTMzMjI4LDc0MzkwMTE0NCwxNDk4NTY5MTk1
+LDc1ODk3NjI0OCwyMDQ3Mzc0NzA4LDE2MDU5Nzk4OTIsNjEyMz
+M1NzQxLDEwNzI2NjQzNDhdfQ==
 -->
