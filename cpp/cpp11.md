@@ -143,10 +143,10 @@ BasicClass GetBasicClass() {
 
 int a = { 1 };
 int aa[] = { 1, 2, 3, 4 };
-BasicStruct var1{ 5, "foobar" };
-BasicClass var2{ 2, "foobar" };
+BasicStruct var1{ 5, "foobar" }; // initialize public members
+BasicClass var2{ 2, "foobar" }; // call constructor
 BasicClass var3 = GetBasicClass();
-InitializerClass var4{ 5, "foobar" };
+InitializerClass var4{ 5, "foobar" }; // call initializer list constructor
 ```
 
 If a class has an initializer list constructor, then it takes priority over other forms of construction
@@ -243,10 +243,10 @@ std::vector<int> the_vec2(4); // vector with four integers { 0, 0, 0, 0 }
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTc4NzI5NjUsNTkxNDg1ODQzLDEwODc4OD
-QwODMsMTc0NjgzOTcwMCwtODQwMzc5ODIwLDE4NzY5MjgwMjAs
-MTQyMzQ3Mzg0MCwxNTk2NzA0NjYyLC02Njk2NjA4OTQsNDcwNT
-MzMjI4LDc0MzkwMTE0NCwxNDk4NTY5MTk1LDc1ODk3NjI0OCwy
-MDQ3Mzc0NzA4LDE2MDU5Nzk4OTIsNjEyMzM1NzQxLDEwNzI2Nj
-QzNDhdfQ==
+eyJoaXN0b3J5IjpbLTEyNTc4MzY0MjksNTkxNDg1ODQzLDEwOD
+c4ODQwODMsMTc0NjgzOTcwMCwtODQwMzc5ODIwLDE4NzY5Mjgw
+MjAsMTQyMzQ3Mzg0MCwxNTk2NzA0NjYyLC02Njk2NjA4OTQsND
+cwNTMzMjI4LDc0MzkwMTE0NCwxNDk4NTY5MTk1LDc1ODk3NjI0
+OCwyMDQ3Mzc0NzA4LDE2MDU5Nzk4OTIsNjEyMzM1NzQxLDEwNz
+I2NjQzNDhdfQ==
 -->
