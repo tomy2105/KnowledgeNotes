@@ -251,8 +251,6 @@ public:
 ```
 
 Members can be initialized (not only static const):
-
-
 ```cpp
 class SomeClass
 {
@@ -341,11 +339,11 @@ private:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY2OTM0NjkxNCwzMDUwNzg5MTksLTE2OD
-U2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwODIxNzA3
-OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4LC0xMj
-U3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3NDY4Mzk3
-MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4NDAsMT
-U5NjcwNDY2MiwtNjY5NjYwODk0LDQ3MDUzMzIyOCw3NDM5MDEx
-NDRdfQ==
+eyJoaXN0b3J5IjpbMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1MD
+c4OTE5LC0xNjg1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5MzAzMTc3
+LDEyMDgyMTcwNzksOTkxODc5MDA0LDE0Mzk0ODg2OTYsLTE1NT
+gzNzcyOCwtMTI1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nzg4NDA4
+MywxNzQ2ODM5NzAwLC04NDAzNzk4MjAsMTg3NjkyODAyMCwxND
+IzNDczODQwLDE1OTY3MDQ2NjIsLTY2OTY2MDg5NCw0NzA1MzMy
+MjhdfQ==
 -->
