@@ -418,6 +418,15 @@ int main()
 
 ### Template aliases
 
+It is now possible to create a typedef template, like:
+
+```cpp
+
+
+
+```
+
+
 ### Unrestricted unions
 
 ### Variadic templates
@@ -483,11 +492,11 @@ int main()
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTcyNTg0MzMsLTE2NDc5OTU4MjgsLT
-E2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2
-OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNS
-wtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2
-MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMC
-wxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5
-ODEyNzQ1XX0=
+eyJoaXN0b3J5IjpbLTMwODY2MTU0MiwtMTY0Nzk5NTgyOCwtMT
+YwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MDkyNzIzMiw2NjY5
+NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwtMTc2NzE0MTA1LC
+0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMzYz
+NDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgsMTk2MDcyNzEwLD
+E2NjkzNDY5MTQsMzA1MDc4OTE5LC0xNjg1Njk0MDQ5LDEwOTk4
+MTI3NDVdfQ==
 -->
