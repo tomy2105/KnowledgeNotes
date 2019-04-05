@@ -220,6 +220,7 @@ Keyword `auto` is part of the syntax and does not perform automatic type deducti
 _Lambda expressions_ are anonymous functions of the form:
 
 `[capture](parameters) -> return_type { function_body }`
+Return type and parameters can be omitted
 
 e.g. `[](int x, int y) -> int { return x + y; }`
 
@@ -412,11 +413,11 @@ private:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MTkwNTE1OTYsLTMyOTgxMTM1OCwxNj
-g2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNTA3ODkx
-OSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMwMzE3NywxMj
-A4MjE3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2LC0xNTU4Mzc3
-MjgsLTEyNTc4MzY0MjksNTkxNDg1ODQzLDEwODc4ODQwODMsMT
-c0NjgzOTcwMCwtODQwMzc5ODIwLDE4NzY5MjgwMjAsMTQyMzQ3
-Mzg0MF19
+eyJoaXN0b3J5IjpbLTc4MTI5NzMyMCwtMzI5ODExMzU4LDE2OD
+YyMzQ0NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1MDc4OTE5
+LC0xNjg1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5MzAzMTc3LDEyMD
+gyMTcwNzksOTkxODc5MDA0LDE0Mzk0ODg2OTYsLTE1NTgzNzcy
+OCwtMTI1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nzg4NDA4MywxNz
+Q2ODM5NzAwLC04NDAzNzk4MjAsMTg3NjkyODAyMCwxNDIzNDcz
+ODQwXX0=
 -->
