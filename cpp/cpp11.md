@@ -250,6 +250,8 @@ Class members cannot be captured explicitly by a capture (only **variables**), u
 
 **Caution** when a lambda captures a member using implicit by-copy capture, it does not make a copy of that member variable (it captures _this_ and access memeber by reference using _this_).
 
+For example see [Lambda.cpp](Lambda.cpp), lines 31 through 47.
+
 If a nested lambda `m2` captures something that is also captured by the immediately enclosing lambda `m1`, then `m2`'s capture is transformed as follows:
 -   if the enclosing lambda `m1` captures by copy, `m2` is capturing the non-static member of `m1`'s closure type, not the original variable or `this`.
 -   if the enclosing lambda `m1` captures by reference, `m2` is capturing the original variable or `this`.
@@ -397,11 +399,11 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMjIxNjc3ODYsLTE3NjcxNDEwNSwtMT
-k1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQz
-NDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNj
-Y5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEy
-NzQ1LDU4OTMwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAwNCwxND
-M5NDg4Njk2LC0xNTU4Mzc3MjgsLTEyNTc4MzY0MjksNTkxNDg1
-ODQzXX0=
+eyJoaXN0b3J5IjpbOTcwMTc4NTgsLTE3NjcxNDEwNSwtMTk1ND
+E2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQzNDUs
+LTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5Mz
+Q2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1
+LDU4OTMwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAwNCwxNDM5ND
+g4Njk2LC0xNTU4Mzc3MjgsLTEyNTc4MzY0MjksNTkxNDg1ODQz
+XX0=
 -->
