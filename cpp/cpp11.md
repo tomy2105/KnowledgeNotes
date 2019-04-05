@@ -260,39 +260,6 @@ The special case is a reference parameter that is captured by reference, it is u
 
 Lambda functions can be stored in [`std::function`](https://en.cppreference.com/w/cpp/utility/functional/function)  or `auto` variable (their exact type is implementation specific).
 
-
-```cpp
-#include <functional>
-#include <vector>
-#include <iostream>
-
-double eval(std::function <double(double)> f, double x = 2.0)
-{
-	return f(x);
-}
-
-int main()
-{
-	std::function<double(double)> f0    = [](double x){return 1;};
-	auto                          f1    = [](double x){return x;};
-	decltype(f0)                  fa[3] = {f0,f1,[](double x){return x*x;}};
-	std::vector<decltype(f0)>     fv    = {f0,f1};
-	fv.push_back                  ([](double x){return x*x;});
-	for(int i=0;i<fv.size();i++)
-		std::cout << fv[i](2.0) << std::endl;
-	for(int i=0;i<3;i++)
-		std::cout << fa[i](2.0) << std::endl;
-	for(auto &f : fv)
-		std::cout << f(2.0) << std::endl;
-	for(auto &f : fa)
-		std::cout << f(2.0) << std::endl;
-	std::cout << eval(f0) << std::endl;
-	std::cout << eval(f1) << std::endl;
-	std::cout << eval([](double x){return x*x;}) << std::endl;
-	return 0;
-}
-```
-
 A lambda expression with an empty capture specification (`[]`) can be implicitly converted into a function pointer with the same type as the lambda was declared with. 
 
 ```cpp
@@ -303,6 +270,7 @@ func_ptr(4); //calls the lambda.
 
 More info can be found [here](https://en.cppreference.com/w/cpp/language/lambda).
 
+Sample code with lambda can be found in [Lambda.cpp](Lambda.cpp)
 
 ### Object construction improvement
 
@@ -427,11 +395,11 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjcxNDEwNSwtMTk1NDE2MTgsLTE1ND
-U0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOTgxMTM1
-OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNT
-A3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMwMzE3
-NywxMjA4MjE3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2LC0xNT
-U4Mzc3MjgsLTEyNTc4MzY0MjksNTkxNDg1ODQzLDEwODc4ODQw
-ODNdfQ==
+eyJoaXN0b3J5IjpbLTEzMDcxMzAxMzYsLTE3NjcxNDEwNSwtMT
+k1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQz
+NDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNj
+Y5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEy
+NzQ1LDU4OTMwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAwNCwxND
+M5NDg4Njk2LC0xNTU4Mzc3MjgsLTEyNTc4MzY0MjksNTkxNDg1
+ODQzXX0=
 -->
