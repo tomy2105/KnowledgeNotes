@@ -468,20 +468,20 @@ To to avoid escaping strings there is raw string literal:
 
 
 ```cpp
-Version:1.0 StartHTML:00000145 EndHTML:00000616 StartFragment:00000249 EndFragment:00000584 StartSelection:00000249 EndSelection:00000584 Snippet
-
 R"(The String Data \ Stuff " )";
 R"delimiter(The String Data ()\ Stuff " )delimiter";
 ```
 
-Everything between the `"(` and the `)"` is part of the string. No need to escape anythingThe `"` and `\` characters do not need to be escaped. In the second case, the `"delimiter(` starts the string, and it ends only when `)delimiter"` is reached. The string `delimiter` can be any string up to 16 characters in length, including the empty string. This string cannot contain spaces, control characters, `(`, `)`, or the `\` character. Using this delimiter string allows the user to have `)` characters within raw string literals. For example, `R"delimiter((a-z))delimiter"` is equivalent to `"(a-z)"`.[[4]](https://en.wikipedia.org/wiki/C%2B%2B11#endnote_n3000)
+Everything between the `"(` and the `)"` is part of the string. No need to escape anything.
 
 Raw string literals can be combined with the wide literal or any of the Unicode literal prefixes:
 
+
+```cpp
 u8R"XXX(I'm a "raw UTF-8" string.)XXX"
 uR"*(This is a "raw UTF-16" string.)*"
 UR"(This is a "raw UTF-32" string.)"
-
+```
 
 ### Variadic templates
 
@@ -544,11 +544,11 @@ UR"(This is a "raw UTF-32" string.)"
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTgwNDUxNSwxNDM1NjMyNTE2LC0xND
-cwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5
-NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MD
-AzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0xNzY3MTQxMDUsLTE5
-NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OTM1MTcsNDEzNjM0Mz
-Q1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0OCwxOTYwNzI3MTAsMTY2
-OTM0NjkxNF19
+eyJoaXN0b3J5IjpbLTE1NDg0OTA4NjMsMTQzNTYzMjUxNiwtMT
+Q3MDI0MDA2NywtMTI4MzY4NTgwOCwtMTY0Nzk5NTgyOCwtMTYw
+OTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MDkyNzIzMiw2NjY5NT
+AwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwtMTc2NzE0MTA1LC0x
+OTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMzYzND
+M0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgsMTk2MDcyNzEwLDE2
+NjkzNDY5MTRdfQ==
 -->
