@@ -369,7 +369,7 @@ enum class Gender : unsigned short {
 	Neutral
 };
 ```
-Type can be omi
+Type can be omitted and defaults to `int`.
 
 
 ### Right angle bracket
@@ -443,11 +443,11 @@ Type can be omi
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU3ODI0MTY0NCwtMTA2MDkyNzIzMiw2Nj
-Y5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwtMTc2NzE0MTA1
-LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMz
-YzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgsMTk2MDcyNzEw
-LDE2NjkzNDY5MTQsMzA1MDc4OTE5LC0xNjg1Njk0MDQ5LDEwOT
-k4MTI3NDUsNTg5MzAzMTc3LDEyMDgyMTcwNzksOTkxODc5MDA0
-XX0=
+eyJoaXN0b3J5IjpbLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNj
+Y2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEw
+NSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MT
+M2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3Mjcx
+MCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMD
+k5ODEyNzQ1LDU4OTMwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAw
+NF19
 -->
