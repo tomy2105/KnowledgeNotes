@@ -421,13 +421,12 @@ int main()
 It is now possible to create a typedef template as well as use `using` as type aliasing, like:
 
 ```cpp
-template <typename  First,  typename  Second,  int  Third>  class  SomeType;  
-template  <typename  Second>  using  TypedefName  =  SomeType<OtherType,  Second,  5>;
+template <typename First, typename Second, int Third> class SomeType;
+template <typename Second> using TypedefName = SomeType<OtherType, Second, 5>;
 
-typedef  void  (*FunctionType)(double);  // Old style  
-using  FunctionType  =  void  (*)(double);  // New introduced syntax
+typedef void(*FunctionType)(double); // Old style 
+using FunctionType = void(*)(double); // New introduced syntax
 ```
-
 
 ### Unrestricted unions
 
@@ -494,11 +493,11 @@ using  FunctionType  =  void  (*)(double);  // New introduced syntax
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMzNTUyNzY0NCwtMTY0Nzk5NTgyOCwtMT
-YwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MDkyNzIzMiw2NjY5
-NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwtMTc2NzE0MTA1LC
-0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMzYz
-NDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgsMTk2MDcyNzEwLD
-E2NjkzNDY5MTQsMzA1MDc4OTE5LC0xNjg1Njk0MDQ5LDEwOTk4
-MTI3NDVdfQ==
+eyJoaXN0b3J5IjpbLTEyODM2ODU4MDgsLTE2NDc5OTU4MjgsLT
+E2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2
+OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNS
+wtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2
+MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMC
+wxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5
+ODEyNzQ1XX0=
 -->
