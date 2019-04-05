@@ -238,7 +238,9 @@ Variables captured by value are constant by default, `mutable` after the paramet
 
 The capture of `this` is special. It can only be captured by value, not by reference. The lambda will have the same access as the member that created it, in terms of protected/private members.
 
-If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behavior is undefined.
+If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behavior is undefined. 
+
+The special case is a reference parameter that is captured by reference, it is using the object referred-to by the original reference, not the captured reference itself.
 
 ```cpp
 std::vector<int> some_list{ 1, 2, 3, 4, 5 };
@@ -415,11 +417,11 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4Nj
-IzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTks
-LTE2ODU2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwOD
-IxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4
-LC0xMjU3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3ND
-Y4Mzk3MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4
-NDBdfQ==
+eyJoaXN0b3J5IjpbLTYwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOT
+gxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0
+LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OT
+MwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2
+LC0xNTU4Mzc3MjgsLTEyNTc4MzY0MjksNTkxNDg1ODQzLDEwOD
+c4ODQwODMsMTc0NjgzOTcwMCwtODQwMzc5ODIwLDE4NzY5Mjgw
+MjBdfQ==
 -->
