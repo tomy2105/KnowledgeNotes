@@ -223,7 +223,15 @@ _Lambda expressions_ are anonymous functions of the form:
 
 Return type and/or parameters can be omitted: `[capture] { function_body }`
 
-e.g. `[](int x, int y) -> int { return x + y; }`
+Example:
+```cpp
+std::vector<int> some_list{ 1, 2, 3, 4, 5 };
+int total = 0;
+int value = 5;
+std::for_each(begin(some_list), end(some_list), [&, value, this](int x) {
+	total += x * value * this->some_func();
+});
+```
 
 _capture_ specifies which **variables** outside of the lambda can be used inside it's body and can be:
 
@@ -242,9 +250,13 @@ Class members cannot be captured explicitly by a capture (only **variables**), u
 
 **Caution** when a lambda captures a member using implicit by-copy capture, it does not make a copy of that member variable (it captures _this_ and access memeber by reference using _this_).
 
+If a nested lambda `m2` captures something that is also captured by the immediately enclosing lambda `m1`, then `m2`'s capture is transformed as follows:
+-   if the enclosing lambda `m1` captures by copy, `m2` is capturing the non-static member of `m1`'s closure type, not the original variable or `this`.
+-   if the enclosing lambda `m1` captures by reference, `m2` is capturing the original variable or `this`.
+
 If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behavior is undefined. 
 
-The special case is a reference parameter that is captured by reference, it is using the object referred-to by the original reference, not the captured reference itself.``
+The special case is a reference parameter that is captured by reference, it is using the object referred-to by the original reference, not the captured reference itself.
 
 Lambda functions can be stored in [`std::function`](https://en.cppreference.com/w/cpp/utility/functional/function)  or `auto` variable (their exact type is implementation specific).
 
@@ -415,11 +427,11 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5OTUxNDM5MTksLTE5NTQxNjE4LC0xNT
-Q1NDQ4Mzc2LC02MDI1OTM1MTcsNDEzNjM0MzQ1LC0zMjk4MTEz
-NTgsMTY4NjIzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMD
-UwNzg5MTksLTE2ODU2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMx
-NzcsMTIwODIxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMT
-U1ODM3NzI4LC0xMjU3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0
-MDgzXX0=
+eyJoaXN0b3J5IjpbLTE3NjcxNDEwNSwtMTk1NDE2MTgsLTE1ND
+U0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOTgxMTM1
+OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNT
+A3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMwMzE3
+NywxMjA4MjE3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2LC0xNT
+U4Mzc3MjgsLTEyNTc4MzY0MjksNTkxNDg1ODQzLDEwODc4ODQw
+ODNdfQ==
 -->
