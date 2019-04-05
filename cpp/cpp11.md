@@ -229,20 +229,12 @@ _capture_ specifies which variables outside of the lambda can be used inside it'
 - `[x, &y]` - x is captured by value, y is captured by reference
 - `[&]` - any external variable is implicitly captured by reference if used
 - `[=]` - any external variable is implicitly captured by value if used
-- `[&, x]    //x is explicitly captured by value. Other variables will be captured by reference
-[=, &z]   //z is explicitly captured by reference. Other variables will be captured by value
+- `[&, x]` - x is explicitly captured by value, other variables will be captured by reference
+- `[=, &z]` - z is explicitly captured by reference, other variables will be captured by value
 
-Variables captured by value are constant by default. Adding `mutable` after the parameter list makes them non-constant.
+Variables captured by value are constant by default, `mutable` after the parameter list makes them non-constant.
 
-The following two examples demonstrate use of a lambda expression:
-
-std::vector<int> some_list{ 1, 2, 3, 4, 5 };
-int total = 0;
-std::for_each(begin(some_list), end(some_list), [&total](int x) {
-	total += x;
-});
-
-This computes the total of all elements in the list. The variable `total` is stored as a part of the lambda function's closure. Since it is a reference to the stack variable `total`, it can change its value.
+ computes the total of all elements in the list. The variable `total` is stored as a part of the lambda function's closure. Since it is a reference to the stack variable `total`, it can change its value.
 
 std::vector<int> some_list{ 1, 2, 3, 4, 5 };
 int total = 0;
@@ -427,11 +419,11 @@ private:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ1MDA4NDk4NiwtMzI5ODExMzU4LDE2OD
-YyMzQ0NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1MDc4OTE5
-LC0xNjg1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5MzAzMTc3LDEyMD
-gyMTcwNzksOTkxODc5MDA0LDE0Mzk0ODg2OTYsLTE1NTgzNzcy
-OCwtMTI1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nzg4NDA4MywxNz
-Q2ODM5NzAwLC04NDAzNzk4MjAsMTg3NjkyODAyMCwxNDIzNDcz
-ODQwXX0=
+eyJoaXN0b3J5IjpbNjU2ODIzNjMxLC0zMjk4MTEzNTgsMTY4Nj
+IzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTks
+LTE2ODU2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwOD
+IxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4
+LC0xMjU3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3ND
+Y4Mzk3MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4
+NDBdfQ==
 -->
