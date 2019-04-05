@@ -360,11 +360,18 @@ It is of type `nullptr_t`, which is implicitly convertible and comparable to any
 
 ### Strongly typed enumerations
 
-Enumeration that are type-safe and cannot be implicitly converted to integers are defined as:
+Enumeration that are type-safe, are not introduced into enclosing scope and cannot be implicitly converted to integers are defined as:
 
 ```cpp
-
+enum class Gender : unsigned short {
+	Male,
+	Female,
+	Neutral
+};
 ```
+Type can be omi
+
+
 ### Right angle bracket
 
 ### Explicit conversion operators
@@ -436,11 +443,11 @@ Enumeration that are type-safe and cannot be implicitly converted to integers ar
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNjA5MjcyMzIsNjY2OTUwMDMxLC04OT
-Q5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNSwtMTk1NDE2MTgs
-LTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOT
-gxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0
-LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OT
-MwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2
+eyJoaXN0b3J5IjpbMTU3ODI0MTY0NCwtMTA2MDkyNzIzMiw2Nj
+Y5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwtMTc2NzE0MTA1
+LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMz
+YzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgsMTk2MDcyNzEw
+LDE2NjkzNDY5MTQsMzA1MDc4OTE5LC0xNjg1Njk0MDQ5LDEwOT
+k4MTI3NDUsNTg5MzAzMTc3LDEyMDgyMTcwNzksOTkxODc5MDA0
 XX0=
 -->
