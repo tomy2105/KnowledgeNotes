@@ -355,8 +355,8 @@ struct DerivedFromFinal : FinalBase { }; // ill-formed because the class FinalBa
 
 ### Null pointer constant
 
-New keyword to serve as a distinguished null pointer constant: `nullptr`
-
+New keyword to serve as a distinguished null pointer constant: `nullptr` so it can be distinguished from `0` integer constant.
+It is of type `nullptr_t`, which is implicitly convertible and comparable to any pointer type or pointer-to-member type. It is not implicitly convertible or comparable to integral types, except for `bool`.
 
 ### Strongly typed enumerations
 
@@ -431,11 +431,11 @@ New keyword to serve as a distinguished null pointer constant: `nullptr`
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc4Mjc3NzUyNSwtODk0OTA2NDI2LDk3MD
-E3ODU4LC0xNzY3MTQxMDUsLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2
-LC02MDI1OTM1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4Nj
-IzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTks
-LTE2ODU2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwOD
-IxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4
-XX0=
+eyJoaXN0b3J5IjpbNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMT
+c4NTgsLTE3NjcxNDEwNSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYs
+LTYwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2Mj
+M0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwt
+MTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMwMzE3NywxMjA4Mj
+E3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2LC0xNTU4Mzc3Mjhd
+fQ==
 -->
