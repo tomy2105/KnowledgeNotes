@@ -353,8 +353,10 @@ struct FinalBase final { };
 struct DerivedFromFinal : FinalBase { }; // ill-formed because the class FinalBase has been marked final
 ```
 
-
 ### Null pointer constant
+
+
+
 
 ### Strongly typed enumerations
 
@@ -429,11 +431,11 @@ struct DerivedFromFinal : FinalBase { }; // ill-formed because the class FinalBa
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg5NDkwNjQyNiw5NzAxNzg1OCwtMTc2Nz
-E0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNTkzNTE3
-LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgsMTk2MD
-cyNzEwLDE2NjkzNDY5MTQsMzA1MDc4OTE5LC0xNjg1Njk0MDQ5
-LDEwOTk4MTI3NDUsNTg5MzAzMTc3LDEyMDgyMTcwNzksOTkxOD
-c5MDA0LDE0Mzk0ODg2OTYsLTE1NTgzNzcyOCwtMTI1NzgzNjQy
-OV19
+eyJoaXN0b3J5IjpbMTYyMzE2OTAzOCwtODk0OTA2NDI2LDk3MD
+E3ODU4LC0xNzY3MTQxMDUsLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2
+LC02MDI1OTM1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4Nj
+IzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTks
+LTE2ODU2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwOD
+IxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4
+XX0=
 -->
