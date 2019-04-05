@@ -254,6 +254,8 @@ If a nested lambda `m2` captures something that is also captured by the immediat
 -   if the enclosing lambda `m1` captures by copy, `m2` is capturing the non-static member of `m1`'s closure type, not the original variable or `this`.
 -   if the enclosing lambda `m1` captures by reference, `m2` is capturing the original variable or `this`.
 
+For example see [Lambda.cpp](Lambda.cpp), lines 88 and below.
+
 If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behavior is undefined. 
 
 The special case is a reference parameter that is captured by reference, it is using the object referred-to by the original reference, not the captured reference itself.
@@ -395,7 +397,7 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMDcxMzAxMzYsLTE3NjcxNDEwNSwtMT
+eyJoaXN0b3J5IjpbLTExMjIxNjc3ODYsLTE3NjcxNDEwNSwtMT
 k1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQz
 NDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNj
 Y5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEy
