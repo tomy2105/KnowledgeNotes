@@ -379,7 +379,7 @@ Multiple right angle brackets will be interpreted as closing the template argume
 ### Explicit conversion operators
 
 The `explicit` keyword can now be applied to conversion operators. It prevents using those conversion functions in implicit conversions. 
-**Note**: Language contexts that specifically need a boolean value (the conditions of if-statements and loops, and operands to the logical operators) count as explicit conversions
+**Note**: Language contexts that specifically need a boolean value (the conditions of if-statements and loops, and operands to the logical operators) count as explicit conversions!
 
 ### Template aliases
 
@@ -448,11 +448,11 @@ The `explicit` keyword can now be applied to conversion operators. It prevents u
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk3NDI4NDI3NywtMTYwOTU5ODM4NSwtMT
-cwMzQ1MzY3NCwtMTA2MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkw
-NjQyNiw5NzAxNzg1OCwtMTc2NzE0MTA1LC0xOTU0MTYxOCwtMT
-U0NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMzYzNDM0NSwtMzI5ODEx
-MzU4LDE2ODYyMzQ0NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMz
-A1MDc4OTE5LC0xNjg1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5MzAz
-MTc3XX0=
+eyJoaXN0b3J5IjpbLTE2NDc5OTU4MjgsLTE2MDk1OTgzODUsLT
+E3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2OTUwMDMxLC04OTQ5
+MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNSwtMTk1NDE2MTgsLT
+E1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOTgx
+MTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LD
+MwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMw
+MzE3N119
 -->
