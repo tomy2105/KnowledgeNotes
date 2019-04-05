@@ -324,6 +324,33 @@ private:
 
 ### Explicit overrides and final
 
+
+```cpp
+struct Base
+{
+	virtual void some_func(float f) {
+		std::cout << "Base::some_func(float) " << f << std::endl;
+	};
+ 
+	virtual void some_other(float f) {};
+	virtual void some_final(float f) final {};
+};
+ 
+struct Derived : Base
+{
+	virtual void some_func(double i) {  // error while overriding, wrong parameter type/signature so actually creating new function
+		std::cout << "Derived::some_func(int) " << i << std::endl;
+	};
+ 	virtual void some_other(double f) override {}; // error while compiling because override looks for base class function
+ 	virtual void some_final(float f)  {}; // error while compiling because base class function is final
+};
+
+struct FinalBase final { };
+ 
+struct DerivedFromFinal : FinalBase { }; // ill-formed because the class FinalBase has been marked final
+```
+
+
 ### Null pointer constant
 
 ### Strongly typed enumerations
@@ -399,11 +426,11 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTcwMTc4NTgsLTE3NjcxNDEwNSwtMTk1ND
-E2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQzNDUs
-LTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5Mz
-Q2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1
-LDU4OTMwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAwNCwxNDM5ND
-g4Njk2LC0xNTU4Mzc3MjgsLTEyNTc4MzY0MjksNTkxNDg1ODQz
+eyJoaXN0b3J5IjpbNTE4ODIyODkxLDk3MDE3ODU4LC0xNzY3MT
+QxMDUsLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OTM1MTcs
+NDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0OCwxOTYwNz
+I3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTksLTE2ODU2OTQwNDks
+MTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwODIxNzA3OSw5OTE4Nz
+kwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4LC0xMjU3ODM2NDI5
 XX0=
 -->
