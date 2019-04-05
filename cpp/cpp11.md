@@ -225,7 +225,9 @@ Return type and/or parameters can be omitted: `[capture] { function_body }`
 
 e.g. `[](int x, int y) -> int { return x + y; }`
 
-_capture_ specifies which **variables** (class members cannot be captured explicitly by a capture, using them requires explicit or implicit capture of _this_) outside of the lambda can be used inside it's body and can be:
+_capture_ specifies which **variables** outside of the lambda can be used inside it's body. Class members cannot be captured explicitly by a capture, using them requires explicit or implicit capture of _this_. **Caution** when a lambda captures a member using implicit by-copy capture, it does not make a copy of that member variable (it captures _thi
+
+It can be:
 
 - `[]` - no variables captured.
 - `[x, &y]` - x is captured by value, y is captured by reference
@@ -420,11 +422,11 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYzMjMwMjU0OCwtMTU0NTQ0ODM3NiwtNj
-AyNTkzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0
-NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1MDc4OTE5LC0xNj
-g1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5MzAzMTc3LDEyMDgyMTcw
-NzksOTkxODc5MDA0LDE0Mzk0ODg2OTYsLTE1NTgzNzcyOCwtMT
-I1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nzg4NDA4MywxNzQ2ODM5
-NzAwXX0=
+eyJoaXN0b3J5IjpbLTE4MzU0MDY2NzcsLTE1NDU0NDgzNzYsLT
+YwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0
+NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMT
+Y4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMwMzE3NywxMjA4MjE3
+MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2LC0xNTU4Mzc3MjgsLT
+EyNTc4MzY0MjksNTkxNDg1ODQzLDEwODc4ODQwODMsMTc0Njgz
+OTcwMF19
 -->
