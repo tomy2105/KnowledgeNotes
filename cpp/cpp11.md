@@ -244,16 +244,7 @@ Class members cannot be captured explicitly by a capture (only **variables**), u
 
 If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behavior is undefined. 
 
-The special case is a reference parameter that is captured by reference, it is using the object referred-to by the original reference, not the captured reference itself.
-
-```cpp
-std::vector<int> some_list{ 1, 2, 3, 4, 5 };
-int total = 0;
-int value = 5;
-std::for_each(begin(some_list), end(some_list), [&, value, this](int x) {
-	total += x * value * this->some_func();
-});
-```
+The special case is a reference parameter that is captured by reference, it is using the object referred-to by the original reference, not the captured reference itself.``
 
 Lambda functions can be stored in [`std::function`](https://en.cppreference.com/w/cpp/utility/functional/function)  or `auto` variable (their exact type is implementation specific).
 
@@ -424,11 +415,11 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MD
-I1OTM1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0
-OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTksLTE2OD
-U2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwODIxNzA3
-OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4LC0xMj
-U3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3NDY4Mzk3
-MDBdfQ==
+eyJoaXN0b3J5IjpbLTE5OTUxNDM5MTksLTE5NTQxNjE4LC0xNT
+Q1NDQ4Mzc2LC02MDI1OTM1MTcsNDEzNjM0MzQ1LC0zMjk4MTEz
+NTgsMTY4NjIzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMD
+UwNzg5MTksLTE2ODU2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMx
+NzcsMTIwODIxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMT
+U1ODM3NzI4LC0xMjU3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0
+MDgzXX0=
 -->
