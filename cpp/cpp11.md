@@ -458,10 +458,12 @@ Type `char` is at least eight-bit , two new character types: `char16_t` and `cha
 
 News string literals added:
 
-```cpp[
-u8"I'm a UTF-8 string."
-u"This is a UTF-16 string."
-U"This is a UTF-32 string."
+```cpp
+Version:1.0 StartHTML:00000145 EndHTML:00000925 StartFragment:00000249 EndFragment:00000893 StartSelection:00000249 EndSelection:00000893 Snippet
+
+u8"This is a Unicode Character: \u2018."; // const char[]
+u"This is a bigger Unicode Character: \u2018."; // const char16_t[]
+U"This is a Unicode Character: \U00002018."; // const char32_t[]
 ```
 
 To to avoid escaping strings there is raw string literal:
@@ -539,11 +541,11 @@ UR"(This is a "raw UTF-32" string.)"
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU1OTU5MzkxNywxNDM1NjMyNTE2LC0xND
-cwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5
-NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MD
-AzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0xNzY3MTQxMDUsLTE5
-NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OTM1MTcsNDEzNjM0Mz
-Q1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0OCwxOTYwNzI3MTAsMTY2
-OTM0NjkxNF19
+eyJoaXN0b3J5IjpbMjY0MzI4MTU1LDE0MzU2MzI1MTYsLTE0Nz
+AyNDAwNjcsLTEyODM2ODU4MDgsLTE2NDc5OTU4MjgsLTE2MDk1
+OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2OTUwMD
+MxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNSwtMTk1
+NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQzND
+UsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5
+MzQ2OTE0XX0=
 -->
