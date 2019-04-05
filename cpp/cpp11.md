@@ -243,16 +243,8 @@ std::for_each(begin(some_list), end(some_list), [&, value, this](int x) {
 });
 ```
 
-The capture of `this` is special. It can only be captured by value, not by reference. The lambda will have the same access as the member that created it, in terms of protected/private members.
 
-If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behaviour is undefined.
-
-Lambda functions are function objects of an implementation-dependent type; this type's name is only available to the compiler. If the user wishes to take a lambda function as a parameter, the parameter type must be a template type, or they must create a `std::function` or a similar object to capture the lambda value. The use of the `auto` keyword can help store the lambda function,
-
-auto my_lambda_func = [&](int x) { /*...*/ };
-auto my_onheap_lambda_func = new auto([=](int x) { /*...*/ });
-
-Here is an example of storing anonymous functions in variables, vectors, and arrays; and passing them as named parameters:
+Lambda functions can be stored in `std::function` or `auto` variable (their exact type is implementation specific).
 
 #include <functional>
 #include <vector>
@@ -413,11 +405,11 @@ private:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDIwMDA3NDYzLC0zMjk4MTEzNTgsMTY4Nj
-IzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTks
-LTE2ODU2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwOD
-IxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4
-LC0xMjU3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3ND
-Y4Mzk3MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4
-NDBdfQ==
+eyJoaXN0b3J5IjpbLTE0NjY3MDc2MjAsLTMyOTgxMTM1OCwxNj
+g2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNTA3ODkx
+OSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMwMzE3NywxMj
+A4MjE3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2LC0xNTU4Mzc3
+MjgsLTEyNTc4MzY0MjksNTkxNDg1ODQzLDEwODc4ODQwODMsMT
+c0NjgzOTcwMCwtODQwMzc5ODIwLDE4NzY5MjgwMjAsMTQyMzQ3
+Mzg0MF19
 -->
