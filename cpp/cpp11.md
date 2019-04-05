@@ -381,7 +381,42 @@ Multiple right angle brackets will be interpreted as closing the template argume
 The `explicit` keyword can now be applied to conversion operators. It prevents using those conversion functions in implicit conversions. 
 **Note**: Language contexts that specifically need a boolean value (the conditions of if-statements and loops, and operands to the logical operators) count as explicit conversions!
 
-### Template aliases
+```cpp
+Version:1.0 StartHTML:00000145 EndHTML:00004075 StartFragment:00000249 EndFragment:00004043 StartSelection:00000249 EndSelection:00004043 Snippet
+
+struct Testable
+{
+    operator bool() const {
+        return false;
+    }
+};
+ 
+struct ExplicitTestable
+{
+    explicit operator bool() const {
+        return false;
+    }
+};
+    
+int main()
+{
+    {
+        Testable a, b;
+        if (a) { /*do something*/ }
+        if (a == b) { /*do something*/ }  // might not be really intended usage but works
+        if (a < b) { /*do something*/ }  // might not be  intended usage but works
+    }
+ 
+ 
+    {
+        ExplicitTestable a, b;
+        if (a) { /*do something*/ }  // this is correct
+        if (a == b) { /*do something*/ }  // compiler error
+        if (a == b) { /*do something*/ }  // compiler error
+        if (a < b) { /*do something*/ }  // compiler error
+    }
+}
+```
 
 ### Unrestricted unions
 
@@ -448,11 +483,11 @@ The `explicit` keyword can now be applied to conversion operators. It prevents u
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NDc5OTU4MjgsLTE2MDk1OTgzODUsLT
-E3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2OTUwMDMxLC04OTQ5
-MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNSwtMTk1NDE2MTgsLT
-E1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOTgx
-MTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LD
-MwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMw
-MzE3N119
+eyJoaXN0b3J5IjpbLTIwNTAwMzkwMzQsLTE2NDc5OTU4MjgsLT
+E2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2
+OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNS
+wtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2
+MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMC
+wxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5
+ODEyNzQ1XX0=
 -->
