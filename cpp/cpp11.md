@@ -374,6 +374,8 @@ Type can be omitted and defaults to `int`.
 
 ### Right angle bracket
 
+Multiple right angle brackets will be interpreted as closing the template argument list where it is reasonable. This can be overridden by using parentheses around parameter expressions using the “`>`”, “`>=`” or “`>>`” binary operators.
+
 ### Explicit conversion operators
 
 ### Template aliases
@@ -443,11 +445,11 @@ Type can be omitted and defaults to `int`.
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNj
-Y2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEw
-NSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MT
-M2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3Mjcx
-MCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMD
-k5ODEyNzQ1LDU4OTMwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAw
-NF19
+eyJoaXN0b3J5IjpbLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLT
+EwNjA5MjcyMzIsNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4
+NTgsLTE3NjcxNDEwNSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLT
+YwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0
+NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMT
+Y4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMwMzE3NywxMjA4MjE3
+MDc5XX0=
 -->
