@@ -452,12 +452,10 @@ union U
     U& operator=(const Point& pt) { new(&p) Point(pt); return *this; } // Assign Point object using placement 'new'.
 };
 ```
+### New string literals
+
 
 ### Variadic templates
-
-
-
-### New string literals
 
 ### User-defined literals
 
@@ -518,11 +516,11 @@ union U
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NzAyNDAwNjcsLTEyODM2ODU4MDgsLT
-E2NDc5OTU4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEw
-NjA5MjcyMzIsNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NT
-gsLTE3NjcxNDEwNSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYw
-MjU5MzUxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0ND
-Q4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4
-NTY5NDA0OV19
+eyJoaXN0b3J5IjpbMTg0MDAyNDkxOSwtMTQ3MDI0MDA2NywtMT
+I4MzY4NTgwOCwtMTY0Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcw
+MzQ1MzY3NCwtMTA2MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNj
+QyNiw5NzAxNzg1OCwtMTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0
+NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMzYzNDM0NSwtMzI5ODExMz
+U4LDE2ODYyMzQ0NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1
+MDc4OTE5XX0=
 -->
