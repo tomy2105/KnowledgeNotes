@@ -225,9 +225,7 @@ Return type and/or parameters can be omitted: `[capture] { function_body }`
 
 e.g. `[](int x, int y) -> int { return x + y; }`
 
-_capture_ specifies which **variables** outside of the lambda can be used inside it's body. Class members cannot be captured explicitly by a capture, using them requires explicit or implicit capture of _this_. **Caution** when a lambda captures a member using implicit by-copy capture, it does not make a copy of that member variable (it captures _thi
-
-It can be:
+_capture_ specifies which **variables** outside of the lambda can be used inside it's body and can be:
 
 - `[]` - no variables captured.
 - `[x, &y]` - x is captured by value, y is captured by reference
@@ -239,6 +237,10 @@ It can be:
 Variables captured by value are constant by default, `mutable` after the parameter list makes them non-constant.
 
 The capture of `this` is special. It can only be captured by value, not by reference. The lambda will have the same access as the member that created it, in terms of protected/private members. 
+
+Class members cannot be captured explicitly by a capture (only **variables**), using them requires explicit or implicit capture of _this_. 
+
+**Caution** when a lambda captures a member using implicit by-copy capture, it does not make a copy of that member variable (it captures _this_ and access memeber by reference using _this_).
 
 If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behavior is undefined. 
 
@@ -422,11 +424,11 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MzU0MDY2NzcsLTE1NDU0NDgzNzYsLT
-YwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0
-NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMT
-Y4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMwMzE3NywxMjA4MjE3
-MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2LC0xNTU4Mzc3MjgsLT
-EyNTc4MzY0MjksNTkxNDg1ODQzLDEwODc4ODQwODMsMTc0Njgz
-OTcwMF19
+eyJoaXN0b3J5IjpbLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MD
+I1OTM1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0
+OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTksLTE2OD
+U2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwODIxNzA3
+OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4LC0xMj
+U3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3NDY4Mzk3
+MDBdfQ==
 -->
