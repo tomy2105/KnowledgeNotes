@@ -382,8 +382,6 @@ The `explicit` keyword can now be applied to conversion operators. It prevents u
 **Note**: Language contexts that specifically need a boolean value (the conditions of if-statements and loops, and operands to the logical operators) count as explicit conversions!
 
 ```cpp
-Version:1.0 StartHTML:00000145 EndHTML:00004075 StartFragment:00000249 EndFragment:00004043 StartSelection:00000249 EndSelection:00004043 Snippet
-
 struct Testable
 {
     operator bool() const {
@@ -483,11 +481,11 @@ int main()
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNTAwMzkwMzQsLTE2NDc5OTU4MjgsLT
-E2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2
-OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNS
-wtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2
-MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMC
-wxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5
-ODEyNzQ1XX0=
+eyJoaXN0b3J5IjpbLTg4MDA2MTMsLTE2NDc5OTU4MjgsLTE2MD
+k1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2OTUw
+MDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNSwtMT
+k1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQz
+NDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNj
+Y5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEy
+NzQ1XX0=
 -->
