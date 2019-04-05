@@ -459,8 +459,6 @@ Type `char` is at least eight-bit , two new character types: `char16_t` and `cha
 News string literals added:
 
 ```cpp
-Version:1.0 StartHTML:00000145 EndHTML:00000925 StartFragment:00000249 EndFragment:00000893 StartSelection:00000249 EndSelection:00000893 Snippet
-
 u8"This is a Unicode Character: \u2018."; // const char[]
 u"This is a bigger Unicode Character: \u2018."; // const char16_t[]
 U"This is a Unicode Character: \U00002018."; // const char32_t[]
@@ -468,10 +466,15 @@ U"This is a Unicode Character: \U00002018."; // const char32_t[]
 
 To to avoid escaping strings there is raw string literal:
 
-R"(The String Data \ Stuff " )"
-R"delimiter(The String Data \ Stuff " )delimiter"
 
-In the first case, everything between the `"(` and the `)"` is part of the string. The `"` and `\` characters do not need to be escaped. In the second case, the `"delimiter(` starts the string, and it ends only when `)delimiter"` is reached. The string `delimiter` can be any string up to 16 characters in length, including the empty string. This string cannot contain spaces, control characters, `(`, `)`, or the `\` character. Using this delimiter string allows the user to have `)` characters within raw string literals. For example, `R"delimiter((a-z))delimiter"` is equivalent to `"(a-z)"`.[[4]](https://en.wikipedia.org/wiki/C%2B%2B11#endnote_n3000)
+```cpp
+Version:1.0 StartHTML:00000145 EndHTML:00000616 StartFragment:00000249 EndFragment:00000584 StartSelection:00000249 EndSelection:00000584 Snippet
+
+R"(The String Data \ Stuff " )";
+R"delimiter(The String Data ()\ Stuff " )delimiter";
+```
+
+Everything between the `"(` and the `)"` is part of the string. No need to escape anythingThe `"` and `\` characters do not need to be escaped. In the second case, the `"delimiter(` starts the string, and it ends only when `)delimiter"` is reached. The string `delimiter` can be any string up to 16 characters in length, including the empty string. This string cannot contain spaces, control characters, `(`, `)`, or the `\` character. Using this delimiter string allows the user to have `)` characters within raw string literals. For example, `R"delimiter((a-z))delimiter"` is equivalent to `"(a-z)"`.[[4]](https://en.wikipedia.org/wiki/C%2B%2B11#endnote_n3000)
 
 Raw string literals can be combined with the wide literal or any of the Unicode literal prefixes:
 
@@ -541,11 +544,11 @@ UR"(This is a "raw UTF-32" string.)"
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjY0MzI4MTU1LDE0MzU2MzI1MTYsLTE0Nz
-AyNDAwNjcsLTEyODM2ODU4MDgsLTE2NDc5OTU4MjgsLTE2MDk1
-OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2OTUwMD
-MxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNSwtMTk1
-NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQzND
-UsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5
-MzQ2OTE0XX0=
+eyJoaXN0b3J5IjpbLTE4OTgwNDUxNSwxNDM1NjMyNTE2LC0xND
+cwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5
+NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MD
+AzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0xNzY3MTQxMDUsLTE5
+NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OTM1MTcsNDEzNjM0Mz
+Q1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0OCwxOTYwNzI3MTAsMTY2
+OTM0NjkxNF19
 -->
