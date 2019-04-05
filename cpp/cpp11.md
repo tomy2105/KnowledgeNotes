@@ -430,6 +430,29 @@ using FunctionType = void(*)(double); // New introduced syntax
 
 ### Unrestricted unions
 
+If a `union` member has a non trivial (copy/move) constructor, destructor and/or copy/move assignment operator, the compiler will not generate the equivalent member function for the `union` and it must be manually defined.
+
+```cpp
+
+#include <new> // Needed for placement 'new'.
+
+struct Point
+{
+    Point() {}
+    Point(int x, int y): x_(x), y_(y) {} 
+    int x_, y_;
+};
+
+union U
+{
+    int z;
+    double w;
+    Point p; // Invalid in C++03; valid in C++11.
+    U() {} // Due to the Point member, a constructor definition is now needed.
+    U(const Point& pt) : p(pt) {} // Construct Point object using initializer list.
+    U& operator=(const Point& pt) { new(&p) Point(pt); return *this; } // Assign Point object using placement 'new'.
+};
+
 ### Variadic templates
 
 ### New string literals
@@ -493,11 +516,11 @@ using FunctionType = void(*)(double); // New introduced syntax
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyODM2ODU4MDgsLTE2NDc5OTU4MjgsLT
-E2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2
-OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNS
-wtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2
-MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMC
-wxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5
-ODEyNzQ1XX0=
+eyJoaXN0b3J5IjpbLTI4NDk0MTkyNywtMTI4MzY4NTgwOCwtMT
+Y0Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2
+MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OC
+wtMTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAy
+NTkzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0ND
+gsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1MDc4OTE5LC0xNjg1
+Njk0MDQ5XX0=
 -->
