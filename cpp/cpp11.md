@@ -216,7 +216,94 @@ template<class Lhs, class Rhs>
 Keyword `auto` is part of the syntax and does not perform automatic type deduction.
 
 ### Lambda functions and expressions
+[C++11](/wiki/C%2B%2B11 "C++11") supports anonymous functions, called _ambda expressions_, which have the form:
 
+[capture](parameters) -> return_type { function_body }
+
+An example lambda function is defined as follows:
+
+[](int x, int y) -> int { return x + y; }
+
+C++11 also supports [closures](/wiki/Closure_(computer_science) "Closure (computer science)"). Closures are defined between square brackets `[`and `]` in the declaration of lambda expression. The mechanism allows these variables to be captured by value or by reference. The following table demonstrates this:
+
+[]        //no variables defined. Attempting to use any external variables in the lambda is an error.
+[x, &y]   //x is captured by value, y is captured by reference
+[&]       //any external variable is implicitly captured by reference if used
+[=]       //any external variable is implicitly captured by value if used
+[&, x]    //x is explicitly captured by value. Other variables will be captured by reference
+[=, &z]   //z is explicitly captured by reference. Other variables will be captured by value
+
+Variables captured by value are constant by default. Adding `mutable` after the parameter list makes them non-constant.
+
+The following two examples demonstrate use of a lambda expression:
+
+std::vector<int> some_list{ 1, 2, 3, 4, 5 };
+int total = 0;
+std::for_each(begin(some_list), end(some_list), [&total](int x) {
+	total += x;
+});
+
+This computes the total of all elements in the list. The variable `total` is stored as a part of the lambda function's closure. Since it is a reference to the stack variable `total`, it can change its value.
+
+std::vector<int> some_list{ 1, 2, 3, 4, 5 };
+int total = 0;
+int value = 5;
+std::for_each(begin(some_list), end(some_list), [&, value, this](int x) {
+	total += x * value * this->some_func();
+});
+
+This will cause `total` to be stored as a reference, but `value` will be stored as a copy.
+
+The capture of `this` is special. It can only be captured by value, not by reference. `this` can only be captured if the closest enclosing function is a non-static member function. The lambda will have the same access as the member that created it, in terms of protected/private members.
+
+If `this` is captured, either explicitly or implicitly, then the scope of the enclosed class members is also tested. Accessing members of `this` does not need explicit use of `this->` syntax.
+
+The specific internal implementation can vary, but the expectation is that a lambda function that captures everything by reference will store the actual stack pointer of the function it is created in, rather than individual references to stack variables. However, because most lambda functions are small and local in scope, they are likely candidates for [inlining](/wiki/Inline_expansion "Inline expansion"), and thus need no added storage for references.
+
+If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behaviour is [undefined](/wiki/Undefined_behaviour "Undefined behaviour").
+
+Lambda functions are function objects of an implementation-dependent type; this type's name is only available to the compiler. If the user wishes to take a lambda function as a parameter, the parameter type must be a template type, or they must create a `std::function` or a similar object to capture the lambda value. The use of the `auto` keyword can help store the lambda function,
+
+auto my_lambda_func = [&](int x) { /*...*/ };
+auto my_onheap_lambda_func = new auto([=](int x) { /*...*/ });
+
+Here is an example of storing anonymous functions in variables, vectors, and arrays; and passing them as named parameters:
+
+#include <functional>
+#include <vector>
+#include <iostream>
+
+double eval(std::function <double(double)> f, double x = 2.0)
+{
+	return f(x);
+}
+
+int main()
+{
+	std::function<double(double)> f0    = [](double x){return 1;};
+	auto                          f1    = [](double x){return x;};
+	decltype(f0)                  fa[3] = {f0,f1,[](double x){return x*x;}};
+	std::vector<decltype(f0)>     fv    = {f0,f1};
+	fv.push_back                  ([](double x){return x*x;});
+	for(int i=0;i<fv.size();i++)
+		std::cout << fv[i](2.0) << std::endl;
+	for(int i=0;i<3;i++)
+		std::cout << fa[i](2.0) << std::endl;
+	for(auto &f : fv)
+		std::cout << f(2.0) << std::endl;
+	for(auto &f : fa)
+		std::cout << f(2.0) << std::endl;
+	std::cout << eval(f0) << std::endl;
+	std::cout << eval(f1) << std::endl;
+	std::cout << eval([](double x){return x*x;}) << std::endl;
+	return 0;
+}
+
+A lambda expression with an empty capture specification (`[]`) can be implicitly converted into a function pointer with the same type as the lambda was declared with. So this is legal:
+
+auto a_lambda_func = [](int x) { /*...*/ };
+void (* func_ptr)(int) = a_lambda_func;
+func_ptr(4); //calls the lambda.
 
 
 ### Object construction improvement
@@ -341,11 +428,11 @@ private:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5Nj
-A3MjcxMCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0
-OSwxMDk5ODEyNzQ1LDU4OTMwMzE3NywxMjA4MjE3MDc5LDk5MT
-g3OTAwNCwxNDM5NDg4Njk2LC0xNTU4Mzc3MjgsLTEyNTc4MzY0
-MjksNTkxNDg1ODQzLDEwODc4ODQwODMsMTc0NjgzOTcwMCwtOD
-QwMzc5ODIwLDE4NzY5MjgwMjAsMTQyMzQ3Mzg0MCwxNTk2NzA0
-NjYyXX0=
+eyJoaXN0b3J5IjpbMTI0NzY1NTM4LC0zMjk4MTEzNTgsMTY4Nj
+IzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTks
+LTE2ODU2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwOD
+IxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4
+LC0xMjU3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3ND
+Y4Mzk3MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4
+NDBdfQ==
 -->
