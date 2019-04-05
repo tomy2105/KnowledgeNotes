@@ -433,7 +433,6 @@ using FunctionType = void(*)(double); // New introduced syntax
 If a `union` member has a non trivial (copy/move) constructor, destructor and/or copy/move assignment operator, the compiler will not generate the equivalent member function for the `union` and it must be manually defined.
 
 ```cpp
-
 #include <new> // Needed for placement 'new'.
 
 struct Point
@@ -452,6 +451,7 @@ union U
     U(const Point& pt) : p(pt) {} // Construct Point object using initializer list.
     U& operator=(const Point& pt) { new(&p) Point(pt); return *this; } // Assign Point object using placement 'new'.
 };
+```
 
 ### Variadic templates
 
@@ -516,7 +516,7 @@ union U
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI4NDk0MTkyNywtMTI4MzY4NTgwOCwtMT
+eyJoaXN0b3J5IjpbLTc0MTg1MDI3MSwtMTI4MzY4NTgwOCwtMT
 Y0Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2
 MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OC
 wtMTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAy
