@@ -454,13 +454,15 @@ union U
 ```
 ### New string literals
 
-Type `char` is at least the size needed to store an eight-bit coding of UTF-8, two new character types: `char16_t` and `char32_t` are added. 
+Type `char` is at least eight-bit , two new character types: `char16_t` and `char32_t` are added (16 and 32 bit). 
 
-Creating string literals for each of these encodings can be done thusly:
+News string literals added:
 
+```cpp[
 u8"I'm a UTF-8 string."
 u"This is a UTF-16 string."
 U"This is a UTF-32 string."
+```
 
 The type of the first string is the usual `const char[]`. The type of the second string is `const char16_t[]` (note lower case 'u' prefix). The type of the third string is `const char32_t[]` (upper case 'U' prefix).
 
@@ -547,11 +549,11 @@ UR"(This is a "raw UTF-32" string.)"
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTk2NDI2OTg4LC0xNDcwMjQwMDY3LC0xMj
-gzNjg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAz
-NDUzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MDAzMSwtODk0OTA2ND
-I2LDk3MDE3ODU4LC0xNzY3MTQxMDUsLTE5NTQxNjE4LC0xNTQ1
-NDQ4Mzc2LC02MDI1OTM1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNT
-gsMTY4NjIzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUw
-Nzg5MTldfQ==
+eyJoaXN0b3J5IjpbMTQzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMT
+I4MzY4NTgwOCwtMTY0Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcw
+MzQ1MzY3NCwtMTA2MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNj
+QyNiw5NzAxNzg1OCwtMTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0
+NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMzYzNDM0NSwtMzI5ODExMz
+U4LDE2ODYyMzQ0NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1
+MDc4OTE5XX0=
 -->
