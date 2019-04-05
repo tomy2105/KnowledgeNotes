@@ -359,7 +359,7 @@ New keyword to serve as a distinguished null pointer constant: `nullptr` so it c
 It is of type `nullptr_t`, which is implicitly convertible and comparable to any pointer type or pointer-to-member type. It is not implicitly convertible or comparable to integral types, except for `bool`.
 
 ### Strongly typed enumerations
-
+This enumeration is type-safe. Enum class values are not implicitly converted to integers.
 ### Right angle bracket
 
 ### Explicit conversion operators
@@ -431,11 +431,11 @@ It is of type `nullptr_t`, which is implicitly convertible and comparable to any
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMT
-c4NTgsLTE3NjcxNDEwNSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYs
-LTYwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2Mj
-M0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwt
-MTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMwMzE3NywxMjA4Mj
-E3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2LC0xNTU4Mzc3Mjhd
+eyJoaXN0b3J5IjpbMTUwNTE1ODIxNCw2NjY5NTAwMzEsLTg5ND
+kwNjQyNiw5NzAxNzg1OCwtMTc2NzE0MTA1LC0xOTU0MTYxOCwt
+MTU0NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMzYzNDM0NSwtMzI5OD
+ExMzU4LDE2ODYyMzQ0NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQs
+MzA1MDc4OTE5LC0xNjg1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5Mz
+AzMTc3LDEyMDgyMTcwNzksOTkxODc5MDA0LDE0Mzk0ODg2OTZd
 fQ==
 -->
