@@ -455,6 +455,8 @@ union U
 
 ### Variadic templates
 
+
+
 ### New string literals
 
 ### User-defined literals
@@ -516,11 +518,11 @@ union U
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc0MTg1MDI3MSwtMTI4MzY4NTgwOCwtMT
-Y0Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2
-MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OC
-wtMTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAy
-NTkzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0ND
-gsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1MDc4OTE5LC0xNjg1
-Njk0MDQ5XX0=
+eyJoaXN0b3J5IjpbLTE0NzAyNDAwNjcsLTEyODM2ODU4MDgsLT
+E2NDc5OTU4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEw
+NjA5MjcyMzIsNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NT
+gsLTE3NjcxNDEwNSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYw
+MjU5MzUxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0ND
+Q4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4
+NTY5NDA0OV19
 -->
