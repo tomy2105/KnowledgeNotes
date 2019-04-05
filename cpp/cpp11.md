@@ -464,17 +464,7 @@ u"This is a UTF-16 string."
 U"This is a UTF-32 string."
 ```
 
-The type of the first string is the usual `const char[]`. The type of the second string is `const char16_t[]` (note lower case 'u' prefix). The type of the third string is `const char32_t[]` (upper case 'U' prefix).
-
-When building Unicode string literals, it is often useful to insert Unicode code points directly into the string. To do this, C++11 allows this syntax:
-
-u8"This is a Unicode Character: \u2018."
-u"This is a bigger Unicode Character: \u2018."
-U"This is a Unicode Character: \U00002018."
-
-The number after the `\u` is a hexadecimal number; it does not need the usual `0x` prefix. The identifier `\u` represents a 16-bit Unicode code point; to enter a 32-bit code point, use `\U` and a 32-bit hexadecimal number. Only valid Unicode code points can be entered. For example, code points on the range U+D800–U+DFFF are forbidden, as they are reserved for surrogate pairs in UTF-16 encodings.
-
-It is also sometimes useful to avoid escaping strings manually, particularly for using literals of [XML](https://en.wikipedia.org/wiki/XML "XML") files, scripting languages, or regular expressions. C++11 provides a raw string literal:
+To to avoid escaping strings there is raw string literal:
 
 R"(The String Data \ Stuff " )"
 R"delimiter(The String Data \ Stuff " )delimiter"
@@ -549,11 +539,11 @@ UR"(This is a "raw UTF-32" string.)"
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMT
-I4MzY4NTgwOCwtMTY0Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcw
-MzQ1MzY3NCwtMTA2MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNj
-QyNiw5NzAxNzg1OCwtMTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0
-NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMzYzNDM0NSwtMzI5ODExMz
-U4LDE2ODYyMzQ0NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1
-MDc4OTE5XX0=
+eyJoaXN0b3J5IjpbMTU1OTU5MzkxNywxNDM1NjMyNTE2LC0xND
+cwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5
+NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MD
+AzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0xNzY3MTQxMDUsLTE5
+NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OTM1MTcsNDEzNjM0Mz
+Q1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0OCwxOTYwNzI3MTAsMTY2
+OTM0NjkxNF19
 -->
