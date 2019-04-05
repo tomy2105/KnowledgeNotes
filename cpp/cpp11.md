@@ -483,9 +483,10 @@ uR"*(This is a "raw UTF-16" string.)*"
 UR"(This is a "raw UTF-32" string.)"
 ```
 
-### Variadic templates
-
 ### User-defined literals
+
+
+### Variadic templates
 
 ### Multithreading memory model
 
@@ -544,7 +545,7 @@ UR"(This is a "raw UTF-32" string.)"
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NDg0OTA4NjMsMTQzNTYzMjUxNiwtMT
+eyJoaXN0b3J5IjpbLTE0Nzc4NTQyOTEsMTQzNTYzMjUxNiwtMT
 Q3MDI0MDA2NywtMTI4MzY4NTgwOCwtMTY0Nzk5NTgyOCwtMTYw
 OTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MDkyNzIzMiw2NjY5NT
 AwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwtMTc2NzE0MTA1LC0x
