@@ -355,7 +355,7 @@ struct DerivedFromFinal : FinalBase { }; // ill-formed because the class FinalBa
 
 ### Null pointer constant
 
-
+New keyword to serve as a distinguished null pointer constant: `nullptr`
 
 
 ### Strongly typed enumerations
@@ -431,7 +431,7 @@ struct DerivedFromFinal : FinalBase { }; // ill-formed because the class FinalBa
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYyMzE2OTAzOCwtODk0OTA2NDI2LDk3MD
+eyJoaXN0b3J5IjpbLTc4Mjc3NzUyNSwtODk0OTA2NDI2LDk3MD
 E3ODU4LC0xNzY3MTQxMDUsLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2
 LC02MDI1OTM1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4Nj
 IzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTks
