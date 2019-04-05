@@ -223,13 +223,13 @@ _Lambda expressions_ are anonymous functions of the form:
 
 e.g. `[](int x, int y) -> int { return x + y; }`
 
-_capture_ can be:
+_capture_ specifies which variables outside of the lambda can be used inside it's body and can be:
 
-- `[]        //no variables defined. Attempting to use any external variables in the lambda is an error.
-[x, &y]   //x is captured by value, y is captured by reference
-[&]       //any external variable is implicitly captured by reference if used
-[=]       //any external variable is implicitly captured by value if used
-[&, x]    //x is explicitly captured by value. Other variables will be captured by reference
+- `[]` - no variables captured.
+- `[x, &y]` - x is captured by value, y is captured by reference
+- `[&]` - any external variable is implicitly captured by reference if used
+- `[=]` - any external variable is implicitly captured by value if used
+- `[&, x]    //x is explicitly captured by value. Other variables will be captured by reference
 [=, &z]   //z is explicitly captured by reference. Other variables will be captured by value
 
 Variables captured by value are constant by default. Adding `mutable` after the parameter list makes them non-constant.
@@ -427,7 +427,7 @@ private:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUyNzk4MDEyOSwtMzI5ODExMzU4LDE2OD
+eyJoaXN0b3J5IjpbMTQ1MDA4NDk4NiwtMzI5ODExMzU4LDE2OD
 YyMzQ0NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1MDc4OTE5
 LC0xNjg1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5MzAzMTc3LDEyMD
 gyMTcwNzksOTkxODc5MDA0LDE0Mzk0ODg2OTYsLTE1NTgzNzcy
