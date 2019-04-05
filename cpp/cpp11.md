@@ -454,6 +454,37 @@ union U
 ```
 ### New string literals
 
+Type `char` is at least the size needed to store an eight-bit coding of UTF-8, two new character types: `char16_t` and `char32_t` are added. 
+
+Creating string literals for each of these encodings can be done thusly:
+
+u8"I'm a UTF-8 string."
+u"This is a UTF-16 string."
+U"This is a UTF-32 string."
+
+The type of the first string is the usual `const char[]`. The type of the second string is `const char16_t[]` (note lower case 'u' prefix). The type of the third string is `const char32_t[]` (upper case 'U' prefix).
+
+When building Unicode string literals, it is often useful to insert Unicode code points directly into the string. To do this, C++11 allows this syntax:
+
+u8"This is a Unicode Character: \u2018."
+u"This is a bigger Unicode Character: \u2018."
+U"This is a Unicode Character: \U00002018."
+
+The number after the `\u` is a hexadecimal number; it does not need the usual `0x` prefix. The identifier `\u` represents a 16-bit Unicode code point; to enter a 32-bit code point, use `\U` and a 32-bit hexadecimal number. Only valid Unicode code points can be entered. For example, code points on the range U+D800–U+DFFF are forbidden, as they are reserved for surrogate pairs in UTF-16 encodings.
+
+It is also sometimes useful to avoid escaping strings manually, particularly for using literals of [XML](https://en.wikipedia.org/wiki/XML "XML") files, scripting languages, or regular expressions. C++11 provides a raw string literal:
+
+R"(The String Data \ Stuff " )"
+R"delimiter(The String Data \ Stuff " )delimiter"
+
+In the first case, everything between the `"(` and the `)"` is part of the string. The `"` and `\` characters do not need to be escaped. In the second case, the `"delimiter(` starts the string, and it ends only when `)delimiter"` is reached. The string `delimiter` can be any string up to 16 characters in length, including the empty string. This string cannot contain spaces, control characters, `(`, `)`, or the `\` character. Using this delimiter string allows the user to have `)` characters within raw string literals. For example, `R"delimiter((a-z))delimiter"` is equivalent to `"(a-z)"`.[[4]](https://en.wikipedia.org/wiki/C%2B%2B11#endnote_n3000)
+
+Raw string literals can be combined with the wide literal or any of the Unicode literal prefixes:
+
+u8R"XXX(I'm a "raw UTF-8" string.)XXX"
+uR"*(This is a "raw UTF-16" string.)*"
+UR"(This is a "raw UTF-32" string.)"
+
 
 ### Variadic templates
 
@@ -516,11 +547,11 @@ union U
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg0MDAyNDkxOSwtMTQ3MDI0MDA2NywtMT
-I4MzY4NTgwOCwtMTY0Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcw
-MzQ1MzY3NCwtMTA2MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNj
-QyNiw5NzAxNzg1OCwtMTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0
-NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMzYzNDM0NSwtMzI5ODExMz
-U4LDE2ODYyMzQ0NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1
-MDc4OTE5XX0=
+eyJoaXN0b3J5IjpbOTk2NDI2OTg4LC0xNDcwMjQwMDY3LC0xMj
+gzNjg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAz
+NDUzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MDAzMSwtODk0OTA2ND
+I2LDk3MDE3ODU4LC0xNzY3MTQxMDUsLTE5NTQxNjE4LC0xNTQ1
+NDQ4Mzc2LC02MDI1OTM1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNT
+gsMTY4NjIzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUw
+Nzg5MTldfQ==
 -->
