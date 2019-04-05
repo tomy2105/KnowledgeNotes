@@ -234,6 +234,10 @@ _capture_ specifies which variables outside of the lambda can be used inside it'
 
 Variables captured by value are constant by default, `mutable` after the parameter list makes them non-constant.
 
+The capture of `this` is special. It can only be captured by value, not by reference. The lambda will have the same access as the member that created it, in terms of protected/private members.
+
+If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behavior is undefined.
+
 ```cpp
 std::vector<int> some_list{ 1, 2, 3, 4, 5 };
 int total = 0;
@@ -243,9 +247,10 @@ std::for_each(begin(some_list), end(some_list), [&, value, this](int x) {
 });
 ```
 
+Lambda functions can be stored in [`std::function`](https://en.cppreference.com/w/cpp/utility/functional/function)  or `auto` variable (their exact type is implementation specific).
 
-Lambda functions can be stored in `std::function` or `auto` variable (their exact type is implementation specific).
 
+```cpp
 #include <functional>
 #include <vector>
 #include <iostream>
@@ -275,8 +280,9 @@ int main()
 	std::cout << eval([](double x){return x*x;}) << std::endl;
 	return 0;
 }
+```
 
-A lambda expression with an empty capture specification (`[]`) can be implicitly converted into a function pointer with the same type as the lambda was declared with. So this is legal:
+A lambda expression with an empty capture specification (`[]`) can be implicitly converted into a function pointer with the same type as the lambda was declared with. 
 
 auto a_lambda_func = [](int x) { /*...*/ };
 void (* func_ptr)(int) = a_lambda_func;
@@ -405,11 +411,11 @@ private:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NjY3MDc2MjAsLTMyOTgxMTM1OCwxNj
-g2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0LDMwNTA3ODkx
-OSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OTMwMzE3NywxMj
-A4MjE3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2LC0xNTU4Mzc3
-MjgsLTEyNTc4MzY0MjksNTkxNDg1ODQzLDEwODc4ODQwODMsMT
-c0NjgzOTcwMCwtODQwMzc5ODIwLDE4NzY5MjgwMjAsMTQyMzQ3
-Mzg0MF19
+eyJoaXN0b3J5IjpbNTYwMTEyNjUxLC0zMjk4MTEzNTgsMTY4Nj
+IzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTks
+LTE2ODU2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwOD
+IxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4
+LC0xMjU3ODM2NDI5LDU5MTQ4NTg0MywxMDg3ODg0MDgzLDE3ND
+Y4Mzk3MDAsLTg0MDM3OTgyMCwxODc2OTI4MDIwLDE0MjM0NzM4
+NDBdfQ==
 -->
