@@ -225,7 +225,7 @@ Return type and/or parameters can be omitted: `[capture] { function_body }`
 
 e.g. `[](int x, int y) -> int { return x + y; }`
 
-_capture_ specifies which **variables** (class members cannot be captured explicitly by a capture, using them requires explicit or implicit capture of this) outside of the lambda can be used inside it's body and can be:
+_capture_ specifies which **variables** (class members cannot be captured explicitly by a capture, using them requires explicit or implicit capture of _this_) outside of the lambda can be used inside it's body and can be:
 
 - `[]` - no variables captured.
 - `[x, &y]` - x is captured by value, y is captured by reference
@@ -420,7 +420,7 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIxOTAyOTgwOCwtMTU0NTQ0ODM3NiwtNj
+eyJoaXN0b3J5IjpbMTYzMjMwMjU0OCwtMTU0NTQ0ODM3NiwtNj
 AyNTkzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0
 NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1MDc4OTE5LC0xNj
 g1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5MzAzMTc3LDEyMDgyMTcw
