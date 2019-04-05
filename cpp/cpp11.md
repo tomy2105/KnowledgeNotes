@@ -225,7 +225,7 @@ Return type and/or parameters can be omitted: `[capture] { function_body }`
 
 e.g. `[](int x, int y) -> int { return x + y; }`
 
-_capture_ specifies which variables outside of the lambda can be used inside it's body and can be:
+_capture_ specifies which **variables** (class members cannot be captured explicitly by a capture, using them requires explicit or implicit capture of this) outside of the lambda can be used inside it's body and can be:
 
 - `[]` - no variables captured.
 - `[x, &y]` - x is captured by value, y is captured by reference
@@ -236,7 +236,7 @@ _capture_ specifies which variables outside of the lambda can be used inside it'
 
 Variables captured by value are constant by default, `mutable` after the parameter list makes them non-constant.
 
-The capture of `this` is special. It can only be captured by value, not by reference. The lambda will have the same access as the member that created it, in terms of protected/private members.
+The capture of `this` is special. It can only be captured by value, not by reference. The lambda will have the same access as the member that created it, in terms of protected/private members. 
 
 If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behavior is undefined. 
 
@@ -420,11 +420,11 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MT
-M2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3Mjcx
-MCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMD
-k5ODEyNzQ1LDU4OTMwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAw
-NCwxNDM5NDg4Njk2LC0xNTU4Mzc3MjgsLTEyNTc4MzY0MjksNT
-kxNDg1ODQzLDEwODc4ODQwODMsMTc0NjgzOTcwMCwtODQwMzc5
-ODIwXX0=
+eyJoaXN0b3J5IjpbMTIxOTAyOTgwOCwtMTU0NTQ0ODM3NiwtNj
+AyNTkzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0
+NDgsMTk2MDcyNzEwLDE2NjkzNDY5MTQsMzA1MDc4OTE5LC0xNj
+g1Njk0MDQ5LDEwOTk4MTI3NDUsNTg5MzAzMTc3LDEyMDgyMTcw
+NzksOTkxODc5MDA0LDE0Mzk0ODg2OTYsLTE1NTgzNzcyOCwtMT
+I1NzgzNjQyOSw1OTE0ODU4NDMsMTA4Nzg4NDA4MywxNzQ2ODM5
+NzAwXX0=
 -->
