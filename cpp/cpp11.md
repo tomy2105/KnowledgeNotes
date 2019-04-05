@@ -416,6 +416,8 @@ int main()
 }
 ```
 
+### Template aliases
+
 ### Unrestricted unions
 
 ### Variadic templates
@@ -481,7 +483,7 @@ int main()
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NjMyMTIyNTAsLTE2NDc5OTU4MjgsLT
+eyJoaXN0b3J5IjpbLTE4OTcyNTg0MzMsLTE2NDc5OTU4MjgsLT
 E2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2
 OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNS
 wtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2
