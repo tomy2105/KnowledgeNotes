@@ -324,6 +324,9 @@ private:
 
 ### Explicit overrides and final
 
+The `override` identifier forces compiler check if the base class have a virtual function with this exact signature. 
+
+C++11 also adds the ability to prevent inheriting from classes or simply preventing overriding methods in derived classes. This is done with the special identifier `final`.
 
 ```cpp
 struct Base
@@ -426,11 +429,11 @@ struct DerivedFromFinal : FinalBase { }; // ill-formed because the class FinalBa
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTE4ODIyODkxLDk3MDE3ODU4LC0xNzY3MT
-QxMDUsLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OTM1MTcs
-NDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0OCwxOTYwNz
-I3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTksLTE2ODU2OTQwNDks
-MTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwODIxNzA3OSw5OTE4Nz
-kwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4LC0xMjU3ODM2NDI5
-XX0=
+eyJoaXN0b3J5IjpbMTgxMjczMjc5Niw5NzAxNzg1OCwtMTc2Nz
+E0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNTkzNTE3
+LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgsMTk2MD
+cyNzEwLDE2NjkzNDY5MTQsMzA1MDc4OTE5LC0xNjg1Njk0MDQ5
+LDEwOTk4MTI3NDUsNTg5MzAzMTc3LDEyMDgyMTcwNzksOTkxOD
+c5MDA0LDE0Mzk0ODg2OTYsLTE1NTgzNzcyOCwtMTI1NzgzNjQy
+OV19
 -->
