@@ -234,24 +234,18 @@ _capture_ specifies which variables outside of the lambda can be used inside it'
 
 Variables captured by value are constant by default, `mutable` after the parameter list makes them non-constant.
 
- computes the total of all elements in the list. The variable `total` is stored as a part of the lambda function's closure. Since it is a reference to the stack variable `total`, it can change its value.
-
+```cpp
 std::vector<int> some_list{ 1, 2, 3, 4, 5 };
 int total = 0;
 int value = 5;
 std::for_each(begin(some_list), end(some_list), [&, value, this](int x) {
 	total += x * value * this->some_func();
 });
+```
 
-This will cause `total` to be stored as a reference, but `value` will be stored as a copy.
+The capture of `this` is special. It can only be captured by value, not by reference. The lambda will have the same access as the member that created it, in terms of protected/private members.
 
-The capture of `this` is special. It can only be captured by value, not by reference. `this` can only be captured if the closest enclosing function is a non-static member function. The lambda will have the same access as the member that created it, in terms of protected/private members.
-
-If `this` is captured, either explicitly or implicitly, then the scope of the enclosed class members is also tested. Accessing members of `this` does not need explicit use of `this->` syntax.
-
-The specific internal implementation can vary, but the expectation is that a lambda function that captures everything by reference will store the actual stack pointer of the function it is created in, rather than individual references to stack variables. However, because most lambda functions are small and local in scope, they are likely candidates for [inlining](/wiki/Inline_expansion "Inline expansion"), and thus need no added storage for references.
-
-If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behaviour is [undefined](/wiki/Undefined_behaviour "Undefined behaviour").
+If a closure object containing references to local variables is invoked after the innermost block scope of its creation, the behaviour is undefined.
 
 Lambda functions are function objects of an implementation-dependent type; this type's name is only available to the compiler. If the user wishes to take a lambda function as a parameter, the parameter type must be a template type, or they must create a `std::function` or a similar object to capture the lambda value. The use of the `auto` keyword can help store the lambda function,
 
@@ -419,7 +413,7 @@ private:
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjU2ODIzNjMxLC0zMjk4MTEzNTgsMTY4Nj
+eyJoaXN0b3J5IjpbNDIwMDA3NDYzLC0zMjk4MTEzNTgsMTY4Nj
 IzNDQ0OCwxOTYwNzI3MTAsMTY2OTM0NjkxNCwzMDUwNzg5MTks
 LTE2ODU2OTQwNDksMTA5OTgxMjc0NSw1ODkzMDMxNzcsMTIwOD
 IxNzA3OSw5OTE4NzkwMDQsMTQzOTQ4ODY5NiwtMTU1ODM3NzI4
