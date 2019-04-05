@@ -294,6 +294,9 @@ void (* func_ptr)(int) = a_lambda_func;
 func_ptr(4); //calls the lambda.
 ```
 
+More info can be found [here](https://en.cppreference.com/w/cpp/language/lambda).
+
+
 ### Object construction improvement
 
 Constructors are allowed to call other peer constructors:
@@ -417,11 +420,11 @@ private:
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYwMjU5MzUxNyw0MTM2MzQzNDUsLTMyOT
-gxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3MjcxMCwxNjY5MzQ2OTE0
-LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMDk5ODEyNzQ1LDU4OT
-MwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAwNCwxNDM5NDg4Njk2
-LC0xNTU4Mzc3MjgsLTEyNTc4MzY0MjksNTkxNDg1ODQzLDEwOD
-c4ODQwODMsMTc0NjgzOTcwMCwtODQwMzc5ODIwLDE4NzY5Mjgw
-MjBdfQ==
+eyJoaXN0b3J5IjpbLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MT
+M2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5NjA3Mjcx
+MCwxNjY5MzQ2OTE0LDMwNTA3ODkxOSwtMTY4NTY5NDA0OSwxMD
+k5ODEyNzQ1LDU4OTMwMzE3NywxMjA4MjE3MDc5LDk5MTg3OTAw
+NCwxNDM5NDg4Njk2LC0xNTU4Mzc3MjgsLTEyNTc4MzY0MjksNT
+kxNDg1ODQzLDEwODc4ODQwODMsMTc0NjgzOTcwMCwtODQwMzc5
+ODIwXX0=
 -->
