@@ -640,7 +640,9 @@ OutputType  some_variable  =  U"1234"_ssuffix;  // Uses the 'const char32_t *' o
 More verbose explanation of user-defined literals can be found [here](https://akrzemi1.wordpress.com/2012/08/12/user-defined-literals-part-i/),  [here](https://akrzemi1.wordpress.com/2012/10/23/user-defined-literals-part-ii/) and  [here](https://akrzemi1.wordpress.com/2012/10/29/user-defined-literals-part-iii/).
 
 ### Multithreading memory model
-Read
+
+Read more [here](https://en.cppreference.com/w/cpp/language/memory_model).
+
 ### Thread-local storage
 
 ### Explicitly defaulted and deleted special member functions
@@ -697,11 +699,11 @@ Read
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMjM0MDAyMjksMTk5NDMwNzg3NywxMj
-c5NjM1NjQ1LC00NDk0NDc5MjMsMzA2NzE3MTExLDIwNzg3ODg5
-NzYsLTExMzEyODMxMzIsODU5MTg2NjMzLDIwNTEyNjg4MjcsLT
-E0NDM3NzY5MTMsMTUxMzYwNDg1NiwtMjI1Nzg0NDU2LC0xOTk1
-NjY3MTE4LDMzMzE5MzAzMiwzMDcxNTQ0ODgsLTQ5OTYwMTQ5MC
-wtMTQ3Nzg1NDI5MSwxNDM1NjMyNTE2LC0xNDcwMjQwMDY3LC0x
-MjgzNjg1ODA4XX0=
+eyJoaXN0b3J5IjpbMjA2NjgyNjg3MywxOTk0MzA3ODc3LDEyNz
+k2MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcxMTEsMjA3ODc4ODk3
+NiwtMTEzMTI4MzEzMiw4NTkxODY2MzMsMjA1MTI2ODgyNywtMT
+Q0Mzc3NjkxMywxNTEzNjA0ODU2LC0yMjU3ODQ0NTYsLTE5OTU2
+NjcxMTgsMzMzMTkzMDMyLDMwNzE1NDQ4OCwtNDk5NjAxNDkwLC
+0xNDc3ODU0MjkxLDE0MzU2MzI1MTYsLTE0NzAyNDAwNjcsLTEy
+ODM2ODU4MDhdfQ==
 -->
