@@ -493,6 +493,7 @@ Allows template definitions to take an arbitrary number of arguments of any type
 ```cpp
 template<typename... Values> class tuple               // takes zero or more arguments
 {
+	tuple(Values... values);
 }
 ```
 
@@ -501,6 +502,19 @@ Variadic templates may also apply to functions.
 The ellipsis (...) operator has two roles. 
 - to the left of the name of a parameter, it declares a parameter pack, user can bind zero or more arguments to the variadic template parameters.
 - to the right of a template or function call argument, it unpacks the parameter packs into separate arguments. 
+
+In other words example above reads:
+
+```cpp
+```cpp
+template<typename Value1, typename Value2, ..., typename Valuen> class tuple               // takes zero or more arguments
+{
+	tuple(Value1 v1, Value2 v2, ..., Valuen  values);
+}
+```
+``
+
+
 
 The variadic parameters themselves are not readily available to the implementation of a function or class. To make use of them either recursion or a dummy function/struct must be used.
 
@@ -643,7 +657,7 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NzIzMDk0ODMsLTE0Nzc4NTQyOTEsMT
+eyJoaXN0b3J5IjpbLTE2NTM4ODUwNzUsLTE0Nzc4NTQyOTEsMT
 QzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4NTgwOCwtMTY0
 Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MD
 kyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwt
