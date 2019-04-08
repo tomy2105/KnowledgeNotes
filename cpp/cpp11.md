@@ -502,6 +502,8 @@ The ellipsis (...) operator has two roles.
 
 The variadic parameters themselves are not readily available to the implementation of a function or class. To make use of them either recursion or a dummy function/struct must be used.
 
+Recursive case:
+
 ```cpp
 func() {} // recursion termination
 
@@ -512,6 +514,8 @@ void func(const Arg1& arg1, const Args&&... args)
     func(args...); // note: arg1 does not appear here!
 }
 ```
+
+Dummy function/struct used:
 
 ```cpp
 
@@ -529,7 +533,7 @@ template<typename... Args> inline void expandStruct(Args&&... args)
 }
 template<typename... Args> inline void expandStruct2(Args&&... args)
 {
-	passStruct{ (do(args), 1)... }; // non void return done via comma operator, order of evaluation guaranteed
+	passStruct{ (doSomething(args), 1)... }; // non void return done via comma operator, order of evaluation guaranteed
 }
 template<typename... Args> inline void expandStruct3(Args&&... args)
 {
@@ -637,11 +641,11 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTczNDYwODkyNywtMTQ3Nzg1NDI5MSwxND
-M1NjMyNTE2LC0xNDcwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3
-OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOT
-I3MjMyLDY2Njk1MDAzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0x
-NzY3MTQxMDUsLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OT
-M1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0OCwx
-OTYwNzI3MTBdfQ==
+eyJoaXN0b3J5IjpbNjcwMjYzMDgyLC0xNDc3ODU0MjkxLDE0Mz
+U2MzI1MTYsLTE0NzAyNDAwNjcsLTEyODM2ODU4MDgsLTE2NDc5
+OTU4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5Mj
+cyMzIsNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3
+NjcxNDEwNSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5Mz
+UxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5
+NjA3MjcxMF19
 -->
