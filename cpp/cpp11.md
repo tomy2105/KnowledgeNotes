@@ -502,50 +502,16 @@ The ellipsis (...) operator has two roles.
 
 The variadic parameters themselves are not readily available to the implementation of a function or class. To make use of them either recursion or a dummy function/struct must be used.
 
-te over the values of the variadic template. However, there are several ways to translate the argument pack into a single argument that can be evaluated separately for each parameter. Usually this will rely on function overloading, or — if the function can simply pick one argument at a time — using a dumb expansion marker:
-
-template<typename... Args> inline void pass(Args&&...) {}
-
-which can be used as follows:
-
-  template<typename... Args> inline void expand(Args&&... args)
-  {
-    pass( some_function(args)... );
-  }
-
-  expand(42, "answer", true);
-
-which will expand to something like:
-
-  pass( some_function(arg1), some_function(arg2), some_function(arg3) etc... );
-
-The use of this "pass" function is necessary, since the expansion of the argument pack proceeds by separating the function call arguments by commas, which are not equivalent to the comma operator. Therefore, some_function(args)...; will never work. Moreover, the solution above will only work when the return type of some_function is not void. Furthermore, the some_function calls will be executed in an unspecified order, because the order of evaluation of function arguments is undefined. To avoid the unspecified order, brace-enclosed initializer lists can be used, which guarantee strict left-to-right order of evaluation. An initializer list requires a non-void return type, but the comma operator can be used to yield 1 for each expansion element.
-
-  struct pass
-  {
-    template<typename ...T> pass(T...) {}
-  };
-
-  pass{(some_function(args), 1)...};
-
-Instead of executing a function, a lambda expression may be specified and executed in place, which allows executing arbitrary sequences of statements in-place.
-
-   pass{([&](){ std::cout << args << std::endl; }(), 1)...};
-
-However, in this particular example, a lambda function is not necessary. A more ordinary expression can be used instead:
-
-   pass{(std::cout << args << std::endl, 1)...};
-
-Another way is to use overloading with "termination versions" of functions. This is more universal, but requires a bit more code and more effort to create. One function receives one argument of some type _and_ the argument pack, whereas the other receives neither. (If both had the same list of initial parameters, the call would be ambiguous — a variadic parameter pack alone cannot disambiguate a call.) For example:
-
-void func() {} // termination version
+```cpp
+func() {} // recursion termination
 
 template<typename Arg1, typename... Args>
 void func(const Arg1& arg1, const Args&&... args)
 {
-    process( arg1 );
+    process(arg1); //do something with arg1
     func(args...); // note: arg1 does not appear here!
 }
+````
 
 If args... contains at least one argument, it will redirect to the second version — a parameter pack can be empty, in which case it will simply redirect to the termination version, which will do nothing.
 
@@ -643,11 +609,11 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTczOTQ5Mjg3NCwtMTQ3Nzg1NDI5MSwxND
-M1NjMyNTE2LC0xNDcwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3
-OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOT
-I3MjMyLDY2Njk1MDAzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0x
-NzY3MTQxMDUsLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OT
-M1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0OCwx
-OTYwNzI3MTBdfQ==
+eyJoaXN0b3J5IjpbLTE3NDI4MzQyNTIsLTE0Nzc4NTQyOTEsMT
+QzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4NTgwOCwtMTY0
+Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MD
+kyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwt
+MTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNT
+kzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgs
+MTk2MDcyNzEwXX0=
 -->
