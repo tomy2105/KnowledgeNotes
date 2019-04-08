@@ -488,6 +488,145 @@ UR"(This is a "raw UTF-32" string.)"
 
 ### Variadic templates
 
+Allows template definitions to take an arbitrary number of arguments of any type.
+
+```cpp
+template<typename... Values> class tuple;               // takes zero or more arguments
+```
+
+Variadic templates may also apply to functions.
+
+The ellipsis (...) operator has two roles. 
+- to the left of the name of a parameter, it declares a parameter pack. Using the parameter pack, the user can bind zero or more arguments to the variadic template parameters. Parameter packs can also be used for non-type parameters. By contrast, when the ellipsis operator occurs to the right of a template or function call argument, it unpacks the parameter packs into separate arguments, like the `args...` in the body of `printf` below. In practice, the use of an ellipsis operator in the code causes the whole expression that precedes the ellipsis to be repeated for every subsequent argument unpacked from the argument pack, with the expressions separated by commas.
+
+The use of variadic templates is often recursive. The variadic parameters themselves are not readily available to the implementation of a function or class. Therefore, the typical mechanism for defining something like a C++11 variadic printf replacement would be as follows:
+
+// base case
+void printf(const char *s)
+{
+    while (*s)
+    {
+        if (*s == '%')
+        {
+            if (*(s + 1) == '%')
+                ++s;
+            else
+                throw std::runtime_error("invalid format string: missing arguments");
+        }
+
+        std::cout << *s++;
+    }
+}
+
+// recursive
+template<typename T, typename... Args>
+void printf(const char *s, T value, Args... args)
+{
+    while (*s)
+    {
+        if (*s == '%')
+        {
+            if (*(s + 1) != '%')
+            {
+                std::cout << value;
+                s += 2; // only works on 2-character format strings ( %d, %f, etc ); fails with %5.4f
+                printf(s, args...); // called even when *s is 0 but does nothing in that case (and ignores extra arguments)
+                return;
+            }
+
+            ++s;
+        }
+
+        std::cout << *s++;
+    }    
+}
+
+This is a recursive template. Notice that the variadic template version of printf calls itself, or (in the event that args... is empty) calls the base case.
+
+There is no simple mechanism to iterate over the values of the variadic template. However, there are several ways to translate the argument pack into a single argument that can be evaluated separately for each parameter. Usually this will rely on function overloading, or — if the function can simply pick one argument at a time — using a dumb expansion marker:
+
+template<typename... Args> inline void pass(Args&&...) {}
+
+which can be used as follows:
+
+  template<typename... Args> inline void expand(Args&&... args)
+  {
+    pass( some_function(args)... );
+  }
+
+  expand(42, "answer", true);
+
+which will expand to something like:
+
+  pass( some_function(arg1), some_function(arg2), some_function(arg3) etc... );
+
+The use of this "pass" function is necessary, since the expansion of the argument pack proceeds by separating the function call arguments by commas, which are not equivalent to the comma operator. Therefore, some_function(args)...; will never work. Moreover, the solution above will only work when the return type of some_function is not void. Furthermore, the some_function calls will be executed in an unspecified order, because the order of evaluation of function arguments is undefined. To avoid the unspecified order, brace-enclosed initializer lists can be used, which guarantee strict left-to-right order of evaluation. An initializer list requires a non-void return type, but the comma operator can be used to yield 1 for each expansion element.
+
+  struct pass
+  {
+    template<typename ...T> pass(T...) {}
+  };
+
+  pass{(some_function(args), 1)...};
+
+Instead of executing a function, a lambda expression may be specified and executed in place, which allows executing arbitrary sequences of statements in-place.
+
+   pass{([&](){ std::cout << args << std::endl; }(), 1)...};
+
+However, in this particular example, a lambda function is not necessary. A more ordinary expression can be used instead:
+
+   pass{(std::cout << args << std::endl, 1)...};
+
+Another way is to use overloading with "termination versions" of functions. This is more universal, but requires a bit more code and more effort to create. One function receives one argument of some type _and_ the argument pack, whereas the other receives neither. (If both had the same list of initial parameters, the call would be ambiguous — a variadic parameter pack alone cannot disambiguate a call.) For example:
+
+void func() {} // termination version
+
+template<typename Arg1, typename... Args>
+void func(const Arg1& arg1, const Args&&... args)
+{
+    process( arg1 );
+    func(args...); // note: arg1 does not appear here!
+}
+
+If args... contains at least one argument, it will redirect to the second version — a parameter pack can be empty, in which case it will simply redirect to the termination version, which will do nothing.
+
+Variadic templates can also be used in an exception specification, a base class list, or the initialization list of a constructor. For example, a class can specify the following:
+
+template <typename... BaseClasses>
+class ClassName : public BaseClasses...
+{
+public:
+    ClassName (BaseClasses&&... base_classes)
+        : BaseClasses(base_classes)...
+    {}
+};
+
+The unpack operator will replicate the types for the base classes of `ClassName`, such that this class will be derived from each of the types passed in. Also, the constructor must take a reference to each base class, so as to initialize the base classes of `ClassName`.
+
+With regard to function templates, the variadic parameters can be forwarded. When combined with universal references (see above), this allows for perfect forwarding:
+
+template<typename TypeToConstruct>
+struct SharedPtrAllocator
+{
+    template<typename ...Args>
+    std::shared_ptr<TypeToConstruct> construct_with_shared_ptr(Args&&... params)
+    {
+        return std::shared_ptr<TypeToConstruct>(new TypeToConstruct(std::forward<Args>(params)...));
+    }
+};
+
+This unpacks the argument list into the constructor of TypeToConstruct. The `std::forward<Args>(params)` syntax perfectly forwards arguments as their proper types, even with regard to rvalue-ness, to the constructor. The unpack operator will propagate the forwarding syntax to each parameter. This particular factory function automatically wraps the allocated memory in a `std::shared_ptr` for a degree of safety with regard to memory leaks.
+
+Additionally, the number of arguments in a template parameter pack can be determined as follows:
+
+template<typename ...Args>
+struct SomeStruct
+{
+    static const int size = sizeof...(Args);
+};
+
+The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<>::size` will give 0.
+
 ### Multithreading memory model
 
 ### Thread-local storage
@@ -545,11 +684,11 @@ UR"(This is a "raw UTF-32" string.)"
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0Nzc4NTQyOTEsMTQzNTYzMjUxNiwtMT
-Q3MDI0MDA2NywtMTI4MzY4NTgwOCwtMTY0Nzk5NTgyOCwtMTYw
-OTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MDkyNzIzMiw2NjY5NT
-AwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwtMTc2NzE0MTA1LC0x
-OTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNTkzNTE3LDQxMzYzND
-M0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgsMTk2MDcyNzEwLDE2
-NjkzNDY5MTRdfQ==
+eyJoaXN0b3J5IjpbLTIwMjcwMjMzODYsLTE0Nzc4NTQyOTEsMT
+QzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4NTgwOCwtMTY0
+Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MD
+kyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwt
+MTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNT
+kzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgs
+MTk2MDcyNzEwXX0=
 -->
