@@ -37,7 +37,7 @@ int main()
 
 ## Reference collapsing rule
 
-What is the type ok `k`? What does `int & &` colapse
+What is the type ok `k`? What does `int & &` colapse to?
 ```cpp
 template <typename T>
 void baz(T t) {
@@ -45,7 +45,11 @@ void baz(T t) {
 }
 int ii = 4;
 baz<int&>(ii);
+baz<int&&>(ii);
 ```
+
+The _reference collapsing_ rule. `&` always wins. So `& &` is `&`, and so are `&& &` and `& &&`. The only case where `&&` emerges from collapsing is `&& &&`.
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgxMjk0MDU2NywtMTYxMzU3MjAyNl19
+eyJoaXN0b3J5IjpbMTgxNjI0OTgzOSwtMTYxMzU3MjAyNl19
 -->
