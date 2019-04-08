@@ -501,51 +501,8 @@ The ellipsis (...) operator has two roles.
 - to the right of a template or function call argument, it unpacks the parameter packs into separate arguments. 
 
 The variadic parameters themselves are not readily available to the implementation of a function or class. To make use of them either recursion or a dummy function/struct must be used.
-Therefore, the typical mechanism for defining something like a C++11 variadic printf replacement would be as follows:
 
-// base case
-void printf(const char *s)
-{
-    while (*s)
-    {
-        if (*s == '%')
-        {
-            if (*(s + 1) == '%')
-                ++s;
-            else
-                throw std::runtime_error("invalid format string: missing arguments");
-        }
-
-        std::cout << *s++;
-    }
-}
-
-// recursive
-template<typename T, typename... Args>
-void printf(const char *s, T value, Args... args)
-{
-    while (*s)
-    {
-        if (*s == '%')
-        {
-            if (*(s + 1) != '%')
-            {
-                std::cout << value;
-                s += 2; // only works on 2-character format strings ( %d, %f, etc ); fails with %5.4f
-                printf(s, args...); // called even when *s is 0 but does nothing in that case (and ignores extra arguments)
-                return;
-            }
-
-            ++s;
-        }
-
-        std::cout << *s++;
-    }    
-}
-
-This is a recursive template. Notice that the variadic template version of printf calls itself, or (in the event that args... is empty) calls the base case.
-
-There is no simple mechanism to iterate over the values of the variadic template. However, there are several ways to translate the argument pack into a single argument that can be evaluated separately for each parameter. Usually this will rely on function overloading, or — if the function can simply pick one argument at a time — using a dumb expansion marker:
+te over the values of the variadic template. However, there are several ways to translate the argument pack into a single argument that can be evaluated separately for each parameter. Usually this will rely on function overloading, or — if the function can simply pick one argument at a time — using a dumb expansion marker:
 
 template<typename... Args> inline void pass(Args&&...) {}
 
@@ -686,7 +643,7 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc1OTQ4OTM4NiwtMTQ3Nzg1NDI5MSwxND
+eyJoaXN0b3J5IjpbLTczOTQ5Mjg3NCwtMTQ3Nzg1NDI5MSwxND
 M1NjMyNTE2LC0xNDcwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3
 OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOT
 I3MjMyLDY2Njk1MDAzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0x
