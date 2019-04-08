@@ -637,7 +637,7 @@ OutputType  some_variable  =  L"1234"_ssuffix;  // Uses the 'const wchar_t *' ov
 OutputType  some_variable  =  u"1234"_ssuffix;  // Uses the 'const char16_t *' overload.  
 OutputType  some_variable  =  U"1234"_ssuffix;  // Uses the 'const char32_t *' overload.
 ```
-
+More verbose explanation of user-defined literals can be found [here](https://akrzemi1.wordpress.com/2012/08/12/user-defined-literals-part-i/)
 
 ### Multithreading memory model
 
@@ -697,11 +697,11 @@ OutputType  some_variable  =  U"1234"_ssuffix;  // Uses the 'const char32_t *' o
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzA2NzE3MTExLDIwNzg3ODg5NzYsLTExMz
-EyODMxMzIsODU5MTg2NjMzLDIwNTEyNjg4MjcsLTE0NDM3NzY5
-MTMsMTUxMzYwNDg1NiwtMjI1Nzg0NDU2LC0xOTk1NjY3MTE4LD
-MzMzE5MzAzMiwzMDcxNTQ0ODgsLTQ5OTYwMTQ5MCwtMTQ3Nzg1
-NDI5MSwxNDM1NjMyNTE2LC0xNDcwMjQwMDY3LC0xMjgzNjg1OD
-A4LC0xNjQ3OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAzNDUzNjc0
-LC0xMDYwOTI3MjMyXX0=
+eyJoaXN0b3J5IjpbLTQ0OTQ0NzkyMywzMDY3MTcxMTEsMjA3OD
+c4ODk3NiwtMTEzMTI4MzEzMiw4NTkxODY2MzMsMjA1MTI2ODgy
+NywtMTQ0Mzc3NjkxMywxNTEzNjA0ODU2LC0yMjU3ODQ0NTYsLT
+E5OTU2NjcxMTgsMzMzMTkzMDMyLDMwNzE1NDQ4OCwtNDk5NjAx
+NDkwLC0xNDc3ODU0MjkxLDE0MzU2MzI1MTYsLTE0NzAyNDAwNj
+csLTEyODM2ODU4MDgsLTE2NDc5OTU4MjgsLTE2MDk1OTgzODUs
+LTE3MDM0NTM2NzRdfQ==
 -->
