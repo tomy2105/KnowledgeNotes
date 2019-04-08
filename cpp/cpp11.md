@@ -557,6 +557,8 @@ template<typename... Args> inline void expandStruct4(Args&&... args)
 }
 ```
 
+Creating `std::initializer_list` can be used instead of dummy struct.
+
 Variadic templates can also be used in an exception specification, a base class list, or the initialization list of a constructor. For example, a class can specify the following:
 
 ```cpp
@@ -653,7 +655,7 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAyMDQ4NzE5LC00OTk2MDE0OTAsLTE0Nz
+eyJoaXN0b3J5IjpbMzA3MTU0NDg4LC00OTk2MDE0OTAsLTE0Nz
 c4NTQyOTEsMTQzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4
 NTgwOCwtMTY0Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1Mz
 Y3NCwtMTA2MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5
