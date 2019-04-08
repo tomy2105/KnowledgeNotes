@@ -531,14 +531,14 @@ Dummy function/struct used:
 
 ```cpp
 
-template<typename... Args> inline void pass(Args&&...) {}
+template<typename... Args> inline void dummy(Args&&...) {}
 template<typename... Args> inline void expand(Args&&... args)
 {  pass(doSomethingWithReturn(args)...); // requires non void return, order of evaluation not guaranteed
 }
  
 struct  passStruct
 {
-  	template<typename ...T> passStruct(T...) {}  };
+  	template<typename ...T> dummyStruct(T...) {}  };
 template<typename... Args> inline void expandStruct(Args&&... args)
 {
 	passStruct{ doSomethingWithReturn(args)... }; // requires non void return, order of evaluation guaranteed
@@ -653,11 +653,11 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTk3NTM4MDc2LC0xNDc3ODU0MjkxLDE0Mz
-U2MzI1MTYsLTE0NzAyNDAwNjcsLTEyODM2ODU4MDgsLTE2NDc5
-OTU4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5Mj
-cyMzIsNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3
-NjcxNDEwNSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5Mz
-UxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5
-NjA3MjcxMF19
+eyJoaXN0b3J5IjpbLTQ5OTYwMTQ5MCwtMTQ3Nzg1NDI5MSwxND
+M1NjMyNTE2LC0xNDcwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3
+OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOT
+I3MjMyLDY2Njk1MDAzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0x
+NzY3MTQxMDUsLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OT
+M1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0OCwx
+OTYwNzI3MTBdfQ==
 -->
