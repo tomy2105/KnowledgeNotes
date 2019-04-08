@@ -693,12 +693,13 @@ OutputType  some_variable  =  U"1234"_ssuffix;  // Uses the 'const char32_t *' o
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
+https://en.cppreference.com/w/cpp/language/user_literal
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA3ODc4ODk3NiwtMTEzMTI4MzEzMiw4NT
-kxODY2MzMsMjA1MTI2ODgyNywtMTQ0Mzc3NjkxMywxNTEzNjA0
-ODU2LC0yMjU3ODQ0NTYsLTE5OTU2NjcxMTgsMzMzMTkzMDMyLD
-MwNzE1NDQ4OCwtNDk5NjAxNDkwLC0xNDc3ODU0MjkxLDE0MzU2
-MzI1MTYsLTE0NzAyNDAwNjcsLTEyODM2ODU4MDgsLTE2NDc5OT
-U4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5Mjcy
-MzIsNjY2OTUwMDMxXX0=
+eyJoaXN0b3J5IjpbMzk3MDIxOTI2LDIwNzg3ODg5NzYsLTExMz
+EyODMxMzIsODU5MTg2NjMzLDIwNTEyNjg4MjcsLTE0NDM3NzY5
+MTMsMTUxMzYwNDg1NiwtMjI1Nzg0NDU2LC0xOTk1NjY3MTE4LD
+MzMzE5MzAzMiwzMDcxNTQ0ODgsLTQ5OTYwMTQ5MCwtMTQ3Nzg1
+NDI5MSwxNDM1NjMyNTE2LC0xNDcwMjQwMDY3LC0xMjgzNjg1OD
+A4LC0xNjQ3OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAzNDUzNjc0
+LC0xMDYwOTI3MjMyXX0=
 -->
