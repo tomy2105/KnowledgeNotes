@@ -513,10 +513,9 @@ void func(const Arg1& arg1, const Args&&... args)
 }
 ````
 
-If args... contains at least one argument, it will redirect to the second version — a parameter pack can be empty, in which case it will simply redirect to the termination version, which will do nothing.
-
 Variadic templates can also be used in an exception specification, a base class list, or the initialization list of a constructor. For example, a class can specify the following:
 
+```cpp
 template <typename... BaseClasses>
 class ClassName : public BaseClasses...
 {
@@ -525,11 +524,11 @@ public:
         : BaseClasses(base_classes)...
     {}
 };
+```
 
-The unpack operator will replicate the types for the base classes of `ClassName`, such that this class will be derived from each of the types passed in. Also, the constructor must take a reference to each base class, so as to initialize the base classes of `ClassName`.
+When combined with universal references we get perfect forwarding:
 
-With regard to function templates, the variadic parameters can be forwarded. When combined with universal references (see above), this allows for perfect forwarding:
-
+```cpp
 template<typename TypeToConstruct>
 struct SharedPtrAllocator
 {
@@ -539,16 +538,17 @@ struct SharedPtrAllocator
         return std::shared_ptr<TypeToConstruct>(new TypeToConstruct(std::forward<Args>(params)...));
     }
 };
-
-This unpacks the argument list into the constructor of TypeToConstruct. The `std::forward<Args>(params)` syntax perfectly forwards arguments as their proper types, even with regard to rvalue-ness, to the constructor. The unpack operator will propagate the forwarding syntax to each parameter. This particular factory function automatically wraps the allocated memory in a `std::shared_ptr` for a degree of safety with regard to memory leaks.
+```
 
 Additionally, the number of arguments in a template parameter pack can be determined as follows:
 
+```cpp
 template<typename ...Args>
 struct SomeStruct
 {
     static const int size = sizeof...(Args);
 };
+```
 
 The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<>::size` will give 0.
 
@@ -609,11 +609,11 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDI4MzQyNTIsLTE0Nzc4NTQyOTEsMT
-QzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4NTgwOCwtMTY0
-Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MD
-kyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwt
-MTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNT
-kzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgs
-MTk2MDcyNzEwXX0=
+eyJoaXN0b3J5IjpbLTM1NzY5ODcxLC0xNDc3ODU0MjkxLDE0Mz
+U2MzI1MTYsLTE0NzAyNDAwNjcsLTEyODM2ODU4MDgsLTE2NDc5
+OTU4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5Mj
+cyMzIsNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3
+NjcxNDEwNSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5Mz
+UxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5
+NjA3MjcxMF19
 -->
