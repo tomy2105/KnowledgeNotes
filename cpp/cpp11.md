@@ -571,6 +571,8 @@ Some examples of usages of variadic template can be found [here](https://eli.the
 
 Type `char` is at least eight-bit , two new character types: `char16_t` and `char32_t` are added (16 and 32 bit). 
 
+All user-defined literals are suffixes. All user-defined literals must have suffixes starting with an underscore (`_`).
+
 News string literals added:
 
 ```cpp
@@ -693,9 +695,9 @@ OutputType  some_variable  =  U"1234"_ssuffix;  // Uses the 'const char32_t *' o
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
-https://en.cppreference.com/w/cpp/language/user_literal
+- [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzk3MDIxOTI2LDIwNzg3ODg5NzYsLTExMz
+eyJoaXN0b3J5IjpbMzA2NzE3MTExLDIwNzg3ODg5NzYsLTExMz
 EyODMxMzIsODU5MTg2NjMzLDIwNTEyNjg4MjcsLTE0NDM3NzY5
 MTMsMTUxMzYwNDg1NiwtMjI1Nzg0NDU2LC0xOTk1NjY3MTE4LD
 MzMzE5MzAzMiwzMDcxNTQ0ODgsLTQ5OTYwMTQ5MCwtMTQ3Nzg1
