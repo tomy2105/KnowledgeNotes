@@ -50,6 +50,27 @@ baz<int&&>(ii);
 
 The _reference collapsing_ rule. `&` always wins. So `& &` is `&`, and so are `&& &` and `& &&`. The only case where `&&` emerges from collapsing is `&& &&`.
 
+## Type deduction rules for rvalue references
+
+```cpp
+template <class T>
+void func(T&& t) {
+}
+
+func(4);            // 4 is an rvalue: T deduced to int
+
+double d = 3.14;
+func(d);            // d is an lvalue; T deduced to double&
+
+float f() {...}
+func(f());          // f() is an rvalue; T deduced to float
+
+int bar(int i) {
+  func(i);          // i is an lvalue; T deduced to int&
+}
+```
+`T&&` t is not an rvalue reference here. When it appears in a type-deducing context, T&& acquires a special meaning. When func is instantiated, T depends on whether the argument passed to func is an lvalue or an rvalue. If it's an lvalue of type U, T is deduced to U&. If it's an rvalue, T is deduced to U.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgxNjI0OTgzOSwtMTYxMzU3MjAyNl19
+eyJoaXN0b3J5IjpbLTEzNTcyNjY5NjUsLTE2MTM1NzIwMjZdfQ
+==
 -->
