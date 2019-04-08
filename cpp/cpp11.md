@@ -677,6 +677,10 @@ int main()
 }
 ```
 
+
+
+
+
 ### Explicitly defaulted and deleted special member functions
 
 ###  Type long long int
@@ -731,11 +735,11 @@ int main()
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MTA4MTY4MDYsMjA2NjgyNjg3MywxOT
-k0MzA3ODc3LDEyNzk2MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcx
-MTEsMjA3ODc4ODk3NiwtMTEzMTI4MzEzMiw4NTkxODY2MzMsMj
-A1MTI2ODgyNywtMTQ0Mzc3NjkxMywxNTEzNjA0ODU2LC0yMjU3
-ODQ0NTYsLTE5OTU2NjcxMTgsMzMzMTkzMDMyLDMwNzE1NDQ4OC
-wtNDk5NjAxNDkwLC0xNDc3ODU0MjkxLDE0MzU2MzI1MTYsLTE0
-NzAyNDAwNjddfQ==
+eyJoaXN0b3J5IjpbMTcwOTk4MDQ1MCwyMDY2ODI2ODczLDE5OT
+QzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcxNzEx
+MSwyMDc4Nzg4OTc2LC0xMTMxMjgzMTMyLDg1OTE4NjYzMywyMD
+UxMjY4ODI3LC0xNDQzNzc2OTEzLDE1MTM2MDQ4NTYsLTIyNTc4
+NDQ1NiwtMTk5NTY2NzExOCwzMzMxOTMwMzIsMzA3MTU0NDg4LC
+00OTk2MDE0OTAsLTE0Nzc4NTQyOTEsMTQzNTYzMjUxNiwtMTQ3
+MDI0MDA2N119
 -->
