@@ -600,6 +600,14 @@ UR"(This is a "raw UTF-32" string.)"
 
 ### User-defined literals
 
+Enables defining new kinds of literal modifiers that will construct objects based on the string of characters that the literal modifies.
+
+```cpp
+OutputType  operator  ""  _ssuffix(const  char  *  string_values,  size_t  num_chars);  OutputType  operator  ""  _ssuffix(const  wchar_t  *  string_values,  size_t  num_chars);  OutputType  operator  ""  _ssuffix(const  char16_t  *  string_values,  size_t  num_chars);  OutputType  operator  ""  _ssuffix(const  char32_t  *  string_values,  size_t  num_chars);  OutputType  some_variable  =  "1234"_ssuffix;  // Uses the 'const char *' overload.  OutputType  some_variable  =  u8"1234"_ssuffix;  // Uses the 'const char *' overload.  OutputType  some_variable  =  L"1234"_ssuffix;  // Uses the 'const wchar_t *' overload.  OutputType  some_variable  =  u"1234"_ssuffix;  // Uses the 'const char16_t *' overload.  OutputType  some_variable  =  U"1234"_ssuffix;  // Uses the 'const char32_t *' overload.
+
+```
+
+
 ### Multithreading memory model
 
 ### Thread-local storage
@@ -657,11 +665,11 @@ UR"(This is a "raw UTF-32" string.)"
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDM3NzY5MTMsMTUxMzYwNDg1NiwtMj
-I1Nzg0NDU2LC0xOTk1NjY3MTE4LDMzMzE5MzAzMiwzMDcxNTQ0
-ODgsLTQ5OTYwMTQ5MCwtMTQ3Nzg1NDI5MSwxNDM1NjMyNTE2LC
-0xNDcwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3OTk1ODI4LC0x
-NjA5NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOTI3MjMyLDY2Nj
-k1MDAzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0xNzY3MTQxMDUs
-LTE5NTQxNjE4XX0=
+eyJoaXN0b3J5IjpbMjA1MTI2ODgyNywtMTQ0Mzc3NjkxMywxNT
+EzNjA0ODU2LC0yMjU3ODQ0NTYsLTE5OTU2NjcxMTgsMzMzMTkz
+MDMyLDMwNzE1NDQ4OCwtNDk5NjAxNDkwLC0xNDc3ODU0MjkxLD
+E0MzU2MzI1MTYsLTE0NzAyNDAwNjcsLTEyODM2ODU4MDgsLTE2
+NDc5OTU4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNj
+A5MjcyMzIsNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgs
+LTE3NjcxNDEwNV19
 -->
