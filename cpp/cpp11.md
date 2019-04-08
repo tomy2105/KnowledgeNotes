@@ -509,12 +509,9 @@ In other words example above reads:
 ```cpp
 template<typename Value1, typename Value2, ..., typename Valuen> class tuple               // takes zero or more arguments
 {
-	tuple(Value1 v1, Value2 v2, ..., Valuen  values);
+	tuple(Value1 v1, Value2 v2, ..., Valuen vn);
 }
 ```
-``
-
-
 
 The variadic parameters themselves are not readily available to the implementation of a function or class. To make use of them either recursion or a dummy function/struct must be used.
 
@@ -657,7 +654,7 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NTM4ODUwNzUsLTE0Nzc4NTQyOTEsMT
+eyJoaXN0b3J5IjpbLTE4MzA3MTQ4MzEsLTE0Nzc4NTQyOTEsMT
 QzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4NTgwOCwtMTY0
 Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MD
 kyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwt
