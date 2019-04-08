@@ -34,6 +34,18 @@ int main()
 	return 0;
 }
 ```
+
+## Reference collapsing rule
+
+What is the type ok `k`? What does `int & &` colapse
+```cpp
+template <typename T>
+void baz(T t) {
+  T& k = t;
+}
+int ii = 4;
+baz<int&>(ii);
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgwNzU0NjMxNiwtMTYxMzU3MjAyNl19
+eyJoaXN0b3J5IjpbMTgxMjk0MDU2NywtMTYxMzU3MjAyNl19
 -->
