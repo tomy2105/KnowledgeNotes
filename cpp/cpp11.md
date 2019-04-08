@@ -645,6 +645,8 @@ Read more [here](https://en.cppreference.com/w/cpp/language/memory_model).
 
 ### Thread-local storage
 
+A new Thread-Local Storage storage duration (in addition to the existing _static_, _dynamic_ and _automatic_) is indicated by the storage specifier `thread_local`.
+
 ### Explicitly defaulted and deleted special member functions
 
 ###  Type long long int
@@ -699,11 +701,11 @@ Read more [here](https://en.cppreference.com/w/cpp/language/memory_model).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA2NjgyNjg3MywxOTk0MzA3ODc3LDEyNz
-k2MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcxMTEsMjA3ODc4ODk3
-NiwtMTEzMTI4MzEzMiw4NTkxODY2MzMsMjA1MTI2ODgyNywtMT
-Q0Mzc3NjkxMywxNTEzNjA0ODU2LC0yMjU3ODQ0NTYsLTE5OTU2
-NjcxMTgsMzMzMTkzMDMyLDMwNzE1NDQ4OCwtNDk5NjAxNDkwLC
-0xNDc3ODU0MjkxLDE0MzU2MzI1MTYsLTE0NzAyNDAwNjcsLTEy
-ODM2ODU4MDhdfQ==
+eyJoaXN0b3J5IjpbLTExOTEyNjQ4MjAsMjA2NjgyNjg3MywxOT
+k0MzA3ODc3LDEyNzk2MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcx
+MTEsMjA3ODc4ODk3NiwtMTEzMTI4MzEzMiw4NTkxODY2MzMsMj
+A1MTI2ODgyNywtMTQ0Mzc3NjkxMywxNTEzNjA0ODU2LC0yMjU3
+ODQ0NTYsLTE5OTU2NjcxMTgsMzMzMTkzMDMyLDMwNzE1NDQ4OC
+wtNDk5NjAxNDkwLC0xNDc3ODU0MjkxLDE0MzU2MzI1MTYsLTE0
+NzAyNDAwNjddfQ==
 -->
