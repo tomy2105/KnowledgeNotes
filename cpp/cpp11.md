@@ -681,6 +681,8 @@ int main()
 
 ###  Type long long int
 
+It is guaranteed to be at least as large as a `long int`, and have no fewer than 64 bits.
+
 ### Static assertions
 
 ### Allow sizeof to work on members of classes without an explicit object
@@ -731,7 +733,7 @@ int main()
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA3MzUxOTE3NSwyMDY2ODI2ODczLDE5OT
+eyJoaXN0b3J5IjpbLTcwMzQwOTAwNywyMDY2ODI2ODczLDE5OT
 QzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcxNzEx
 MSwyMDc4Nzg4OTc2LC0xMTMxMjgzMTMyLDg1OTE4NjYzMywyMD
 UxMjY4ODI3LC0xNDQzNzc2OTEzLDE1MTM2MDQ4NTYsLTIyNTc4
