@@ -602,6 +602,33 @@ UR"(This is a "raw UTF-32" string.)"
 
 Enables defining new kinds of literal modifiers that will construct objects based on the string of characters that the literal modifies.
 
+For integer and float literals we have:
+```cpp
+OutputType operator "" _mysuffix(const char * literal_string)
+{
+    // assumes that OutputType has a constructor that takes a const char *
+    OutputType ret(literal_string);
+    return ret;
+}
+
+OutputType some_variable = 1234_mysuffix;
+// assumes that OutputType has a get_value() method that returns a double
+assert(some_variable.get_value() == 1234.0)
+
+The assignment statement `OutputType some_variable = 1234_mysuffix;` executes the code defined by the user-defined literal function. This function is passed `"1234"` as a C-style string, so it has a null terminator.
+
+An alternative mechanism for processing integer and floating point raw literals is via a [variadic template](https://en.wikipedia.org/wiki/Variadic_template "Variadic template"):
+
+template<char...> OutputType operator "" _tuffix();
+
+OutputType some_variable = 1234_tuffix;
+OutputType another_variable = 2.17_tuffix;
+
+This instantiates the literal processing function as `operator "" _tuffix<'1', '2', '3', '4'>()`. In this form, there is no null character terminating the string.
+```
+
+For string literals we have following operators:
+
 ```cpp
 OutputType  operator  ""  _ssuffix(const  char  *  string_values,  size_t  num_chars);  
 OutputType  operator  ""  _ssuffix(const  wchar_t  *  string_values,  size_t  num_chars);
@@ -672,11 +699,11 @@ OutputType  some_variable  =  U"1234"_ssuffix;  // Uses the 'const char32_t *' o
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODU5MTg2NjMzLDIwNTEyNjg4MjcsLTE0ND
-M3NzY5MTMsMTUxMzYwNDg1NiwtMjI1Nzg0NDU2LC0xOTk1NjY3
-MTE4LDMzMzE5MzAzMiwzMDcxNTQ0ODgsLTQ5OTYwMTQ5MCwtMT
-Q3Nzg1NDI5MSwxNDM1NjMyNTE2LC0xNDcwMjQwMDY3LC0xMjgz
-Njg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAzND
-UzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MDAzMSwtODk0OTA2NDI2
-LDk3MDE3ODU4XX0=
+eyJoaXN0b3J5IjpbLTE1ODAyMjU0MjAsODU5MTg2NjMzLDIwNT
+EyNjg4MjcsLTE0NDM3NzY5MTMsMTUxMzYwNDg1NiwtMjI1Nzg0
+NDU2LC0xOTk1NjY3MTE4LDMzMzE5MzAzMiwzMDcxNTQ0ODgsLT
+Q5OTYwMTQ5MCwtMTQ3Nzg1NDI5MSwxNDM1NjMyNTE2LC0xNDcw
+MjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5NT
+k4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MDAz
+MSwtODk0OTA2NDI2XX0=
 -->
