@@ -598,7 +598,7 @@ struct SomeStruct
 
 The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<>::size` will give 0.
 
-Some examples of usages o
+Some examples of usages of variadic template can be found [here](https://eli.thegreenplace.net/2014/variadic-templates-in-c/).
 
 ### Multithreading memory model
 
@@ -657,11 +657,11 @@ Some examples of usages o
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NjkwNzUzMTMsLTE5OTU2NjcxMTgsMz
-MzMTkzMDMyLDMwNzE1NDQ4OCwtNDk5NjAxNDkwLC0xNDc3ODU0
-MjkxLDE0MzU2MzI1MTYsLTE0NzAyNDAwNjcsLTEyODM2ODU4MD
-gsLTE2NDc5OTU4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQs
-LTEwNjA5MjcyMzIsNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMT
-c4NTgsLTE3NjcxNDEwNSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYs
-LTYwMjU5MzUxN119
+eyJoaXN0b3J5IjpbLTIyNTc4NDQ1NiwtMTk5NTY2NzExOCwzMz
+MxOTMwMzIsMzA3MTU0NDg4LC00OTk2MDE0OTAsLTE0Nzc4NTQy
+OTEsMTQzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4NTgwOC
+wtMTY0Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwt
+MTA2MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNz
+g1OCwtMTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3Niwt
+NjAyNTkzNTE3XX0=
 -->
