@@ -603,8 +603,15 @@ UR"(This is a "raw UTF-32" string.)"
 Enables defining new kinds of literal modifiers that will construct objects based on the string of characters that the literal modifies.
 
 ```cpp
-OutputType  operator  ""  _ssuffix(const  char  *  string_values,  size_t  num_chars);  OutputType  operator  ""  _ssuffix(const  wchar_t  *  string_values,  size_t  num_chars);  OutputType  operator  ""  _ssuffix(const  char16_t  *  string_values,  size_t  num_chars);  OutputType  operator  ""  _ssuffix(const  char32_t  *  string_values,  size_t  num_chars);  OutputType  some_variable  =  "1234"_ssuffix;  // Uses the 'const char *' overload.  OutputType  some_variable  =  u8"1234"_ssuffix;  // Uses the 'const char *' overload.  OutputType  some_variable  =  L"1234"_ssuffix;  // Uses the 'const wchar_t *' overload.  OutputType  some_variable  =  u"1234"_ssuffix;  // Uses the 'const char16_t *' overload.  OutputType  some_variable  =  U"1234"_ssuffix;  // Uses the 'const char32_t *' overload.
-
+OutputType  operator  ""  _ssuffix(const  char  *  string_values,  size_t  num_chars);  
+OutputType  operator  ""  _ssuffix(const  wchar_t  *  string_values,  size_t  num_chars);
+OutputType  operator  ""  _ssuffix(const  char16_t  *  string_values,  size_t  num_chars);  
+OutputType  operator  ""  _ssuffix(const  char32_t  *  string_values,  size_t  num_chars);  
+OutputType  some_variable  =  "1234"_ssuffix;  // Uses the 'const char *' overload.  
+OutputType  some_variable  =  u8"1234"_ssuffix;  // Uses the 'const char *' overload.  
+OutputType  some_variable  =  L"1234"_ssuffix;  // Uses the 'const wchar_t *' overload.  
+OutputType  some_variable  =  u"1234"_ssuffix;  // Uses the 'const char16_t *' overload.  
+OutputType  some_variable  =  U"1234"_ssuffix;  // Uses the 'const char32_t *' overload.
 ```
 
 
@@ -665,11 +672,11 @@ OutputType  operator  ""  _ssuffix(const  char  *  string_values,  size_t  num_c
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA1MTI2ODgyNywtMTQ0Mzc3NjkxMywxNT
-EzNjA0ODU2LC0yMjU3ODQ0NTYsLTE5OTU2NjcxMTgsMzMzMTkz
-MDMyLDMwNzE1NDQ4OCwtNDk5NjAxNDkwLC0xNDc3ODU0MjkxLD
-E0MzU2MzI1MTYsLTE0NzAyNDAwNjcsLTEyODM2ODU4MDgsLTE2
-NDc5OTU4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNj
-A5MjcyMzIsNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgs
-LTE3NjcxNDEwNV19
+eyJoaXN0b3J5IjpbODU5MTg2NjMzLDIwNTEyNjg4MjcsLTE0ND
+M3NzY5MTMsMTUxMzYwNDg1NiwtMjI1Nzg0NDU2LC0xOTk1NjY3
+MTE4LDMzMzE5MzAzMiwzMDcxNTQ0ODgsLTQ5OTYwMTQ5MCwtMT
+Q3Nzg1NDI5MSwxNDM1NjMyNTE2LC0xNDcwMjQwMDY3LC0xMjgz
+Njg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAzND
+UzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MDAzMSwtODk0OTA2NDI2
+LDk3MDE3ODU4XX0=
 -->
