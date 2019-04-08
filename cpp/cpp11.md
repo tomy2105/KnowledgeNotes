@@ -565,7 +565,7 @@ struct SomeStruct
 
 The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<>::size` will give 0.
 
-Some examples of usages of variadic template can be found [here](https://eli.thegreenplace.net/2014/variadic-templates-in-c/).
+Some examples of usages of variadic template can be found [here](https://eli.thegreenplace.net/2014/variadic-templates-in-c/) and in [Variadic.cpp](Variadic.cpp) example.
 
 ### New string literals
 
@@ -657,11 +657,11 @@ UR"(This is a "raw UTF-32" string.)"
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUxMzYwNDg1NiwtMjI1Nzg0NDU2LC0xOT
-k1NjY3MTE4LDMzMzE5MzAzMiwzMDcxNTQ0ODgsLTQ5OTYwMTQ5
-MCwtMTQ3Nzg1NDI5MSwxNDM1NjMyNTE2LC0xNDcwMjQwMDY3LC
-0xMjgzNjg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5NTk4Mzg1LC0x
-NzAzNDUzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MDAzMSwtODk0OT
-A2NDI2LDk3MDE3ODU4LC0xNzY3MTQxMDUsLTE5NTQxNjE4LC0x
-NTQ1NDQ4Mzc2XX0=
+eyJoaXN0b3J5IjpbLTE0NDM3NzY5MTMsMTUxMzYwNDg1NiwtMj
+I1Nzg0NDU2LC0xOTk1NjY3MTE4LDMzMzE5MzAzMiwzMDcxNTQ0
+ODgsLTQ5OTYwMTQ5MCwtMTQ3Nzg1NDI5MSwxNDM1NjMyNTE2LC
+0xNDcwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3OTk1ODI4LC0x
+NjA5NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOTI3MjMyLDY2Nj
+k1MDAzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0xNzY3MTQxMDUs
+LTE5NTQxNjE4XX0=
 -->
