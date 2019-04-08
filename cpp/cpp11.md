@@ -709,6 +709,11 @@ Integral foo(Integral x, Integral y)
 
 ### Allow sizeof to work on members of classes without an explicit object
 
+```cpp
+struct  SomeType  {  OtherType  member;  };  
+sizeof(SomeType::member);  // Does not work with C++03. Okay with C++11
+```
+
 ### Control and query object alignment
 
 ### Allow garbage collected implementations
@@ -755,11 +760,11 @@ Integral foo(Integral x, Integral y)
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE0MDYxMjY1LDIwNjY4MjY4NzMsMTk5ND
-MwNzg3NywxMjc5NjM1NjQ1LC00NDk0NDc5MjMsMzA2NzE3MTEx
-LDIwNzg3ODg5NzYsLTExMzEyODMxMzIsODU5MTg2NjMzLDIwNT
-EyNjg4MjcsLTE0NDM3NzY5MTMsMTUxMzYwNDg1NiwtMjI1Nzg0
-NDU2LC0xOTk1NjY3MTE4LDMzMzE5MzAzMiwzMDcxNTQ0ODgsLT
-Q5OTYwMTQ5MCwtMTQ3Nzg1NDI5MSwxNDM1NjMyNTE2LC0xNDcw
-MjQwMDY3XX0=
+eyJoaXN0b3J5IjpbLTE0ODcxODk4MTksMjA2NjgyNjg3MywxOT
+k0MzA3ODc3LDEyNzk2MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcx
+MTEsMjA3ODc4ODk3NiwtMTEzMTI4MzEzMiw4NTkxODY2MzMsMj
+A1MTI2ODgyNywtMTQ0Mzc3NjkxMywxNTEzNjA0ODU2LC0yMjU3
+ODQ0NTYsLTE5OTU2NjcxMTgsMzMzMTkzMDMyLDMwNzE1NDQ4OC
+wtNDk5NjAxNDkwLC0xNDc3ODU0MjkxLDE0MzU2MzI1MTYsLTE0
+NzAyNDAwNjddfQ==
 -->
