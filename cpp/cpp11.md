@@ -613,6 +613,13 @@ template<char...> OutputType operator "" _tuffix();
 
 OutputType some_variable = 1234_tuffix;
 OutputType another_variable = 2.17_tuffix;
+
+
+OutputType  operator  ""  _suffix(unsigned  long  long);  
+OutputType  operator  ""  _suffix(long  double);
+
+OutputType  some_variable  =  1234_suffix;  // Uses the 'unsigned long long' overload.  
+OutputType  another_variable  =  3.1416_suffix;  // Uses the 'long double' overload.
 ```
 
 For string literals we have following operators:
@@ -687,11 +694,11 @@ OutputType  some_variable  =  U"1234"_ssuffix;  // Uses the 'const char32_t *' o
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMzEyODMxMzIsODU5MTg2NjMzLDIwNT
-EyNjg4MjcsLTE0NDM3NzY5MTMsMTUxMzYwNDg1NiwtMjI1Nzg0
-NDU2LC0xOTk1NjY3MTE4LDMzMzE5MzAzMiwzMDcxNTQ0ODgsLT
-Q5OTYwMTQ5MCwtMTQ3Nzg1NDI5MSwxNDM1NjMyNTE2LC0xNDcw
-MjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5NT
-k4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MDAz
-MSwtODk0OTA2NDI2XX0=
+eyJoaXN0b3J5IjpbMjA3ODc4ODk3NiwtMTEzMTI4MzEzMiw4NT
+kxODY2MzMsMjA1MTI2ODgyNywtMTQ0Mzc3NjkxMywxNTEzNjA0
+ODU2LC0yMjU3ODQ0NTYsLTE5OTU2NjcxMTgsMzMzMTkzMDMyLD
+MwNzE1NDQ4OCwtNDk5NjAxNDkwLC0xNDc3ODU0MjkxLDE0MzU2
+MzI1MTYsLTE0NzAyNDAwNjcsLTEyODM2ODU4MDgsLTE2NDc5OT
+U4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5Mjcy
+MzIsNjY2OTUwMDMxXX0=
 -->
