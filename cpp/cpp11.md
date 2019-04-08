@@ -653,33 +653,29 @@ A new Thread-Local Storage storage duration (in addition to the existing _static
 #include <thread>
 #include <mutex>
  
-thread_local unsigned int rage = 1; 
-[std::mutex](http://en.cppreference.com/w/cpp/thread/mutex) cout_mutex;
+thread_local unsigned int rage = 1;
+std::mutex cout_mutex;
  
-void increase_rage(const [std::string](http://en.cppreference.com/w/cpp/string/basic_string)& thread_name)
+void increase_rage(const std::string& thread_name)
 {
-    ++rage; // modifying outside a lock is okay; this is a thread-local variable
-    [std::lock_guard](http://en.cppreference.com/w/cpp/thread/lock_guard)<[std::mutex](http://en.cppreference.com/w/cpp/thread/mutex)> lock(cout_mutex);
-    [std::cout](http://en.cppreference.com/w/cpp/io/cout) << "Rage counter for " << thread_name << ": " << rage << '\n';
+	++rage; // modifying outside a lock is okay; this is a thread-local variable
+	std::lock_guard<std::mutex> lock(cout_mutex);
+	std::cout << "Rage counter for " << thread_name << ": " << rage << '\n';
 }
  
 int main()
 {
-    [std::thread](http://en.cppreference.com/w/cpp/thread/thread) a(increase_rage, "a"), b(increase_rage, "b");
+	std::thread a(increase_rage, "a"), b(increase_rage, "b");
  
-    {
-        [std::lock_guard](http://en.cppreference.com/w/cpp/thread/lock_guard)<[std::mutex](http://en.cppreference.com/w/cpp/thread/mutex)> lock(cout_mutex);
-        [std::cout](http://en.cppreference.com/w/cpp/io/cout) << "Rage counter for main: " << rage << '\n';
-    }
+	{
+		std::lock_guard<std::mutex> lock(cout_mutex);
+		std::cout << "Rage counter for main: " << rage << '\n';
+	}
  
-    a.join();
-    b.join();
+	a.join();
+	b.join();
 }
 ```
-
-
-
-
 
 ### Explicitly defaulted and deleted special member functions
 
@@ -735,7 +731,7 @@ int main()
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcwOTk4MDQ1MCwyMDY2ODI2ODczLDE5OT
+eyJoaXN0b3J5IjpbMjA3MzUxOTE3NSwyMDY2ODI2ODczLDE5OT
 QzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcxNzEx
 MSwyMDc4Nzg4OTc2LC0xMTMxMjgzMTMyLDg1OTE4NjYzMywyMD
 UxMjY4ODI3LC0xNDQzNzc2OTEzLDE1MTM2MDQ4NTYsLTIyNTc4
