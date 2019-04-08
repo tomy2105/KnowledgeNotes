@@ -491,7 +491,9 @@ UR"(This is a "raw UTF-32" string.)"
 Allows template definitions to take an arbitrary number of arguments of any type.
 
 ```cpp
-template<typename... Values> class tuple;               // takes zero or more arguments
+template<typename... Values> class tuple               // takes zero or more arguments
+{
+}
 ```
 
 Variadic templates may also apply to functions.
@@ -641,11 +643,11 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjcwMjYzMDgyLC0xNDc3ODU0MjkxLDE0Mz
-U2MzI1MTYsLTE0NzAyNDAwNjcsLTEyODM2ODU4MDgsLTE2NDc5
-OTU4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5Mj
-cyMzIsNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3
-NjcxNDEwNSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5Mz
-UxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5
-NjA3MjcxMF19
+eyJoaXN0b3J5IjpbLTE3NzIzMDk0ODMsLTE0Nzc4NTQyOTEsMT
+QzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4NTgwOCwtMTY0
+Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MD
+kyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwt
+MTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNT
+kzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgs
+MTk2MDcyNzEwXX0=
 -->
