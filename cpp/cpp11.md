@@ -501,7 +501,7 @@ Variadic templates may also apply to functions.
 
 The ellipsis (...) operator has two roles. 
 - to the left of the name of a parameter, it declares a parameter pack, user can bind zero or more arguments to the variadic template parameters.
-- to the right of a template or function call argument, it unpacks the parameter packs into separate arguments. 
+- to the right of a template or function call argument, it unpacks the parameter packs into separate arguments (can be done in function argument list, parenthesized initializers, brace-enclosed initializers, template arguments lists, function parameter list, template parameter list, base specifier. 
 
 In other words example above reads:
 
@@ -655,11 +655,11 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzMzMTkzMDMyLDMwNzE1NDQ4OCwtNDk5Nj
-AxNDkwLC0xNDc3ODU0MjkxLDE0MzU2MzI1MTYsLTE0NzAyNDAw
-NjcsLTEyODM2ODU4MDgsLTE2NDc5OTU4MjgsLTE2MDk1OTgzOD
-UsLTE3MDM0NTM2NzQsLTEwNjA5MjcyMzIsNjY2OTUwMDMxLC04
-OTQ5MDY0MjYsOTcwMTc4NTgsLTE3NjcxNDEwNSwtMTk1NDE2MT
-gsLTE1NDU0NDgzNzYsLTYwMjU5MzUxNyw0MTM2MzQzNDUsLTMy
-OTgxMTM1OF19
+eyJoaXN0b3J5IjpbNTQ0MTU2MTA4LDMzMzE5MzAzMiwzMDcxNT
+Q0ODgsLTQ5OTYwMTQ5MCwtMTQ3Nzg1NDI5MSwxNDM1NjMyNTE2
+LC0xNDcwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3OTk1ODI4LC
+0xNjA5NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOTI3MjMyLDY2
+Njk1MDAzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0xNzY3MTQxMD
+UsLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OTM1MTcsNDEz
+NjM0MzQ1XX0=
 -->
