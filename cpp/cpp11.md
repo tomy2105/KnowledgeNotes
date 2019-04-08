@@ -647,6 +647,36 @@ Read more [here](https://en.cppreference.com/w/cpp/language/memory_model).
 
 A new Thread-Local Storage storage duration (in addition to the existing _static_, _dynamic_ and _automatic_) is indicated by the storage specifier `thread_local`.
 
+```cpp
+#include <iostream>
+#include <string>
+#include <thread>
+#include <mutex>
+ 
+thread_local unsigned int rage = 1; 
+[std::mutex](http://en.cppreference.com/w/cpp/thread/mutex) cout_mutex;
+ 
+void increase_rage(const [std::string](http://en.cppreference.com/w/cpp/string/basic_string)& thread_name)
+{
+    ++rage; // modifying outside a lock is okay; this is a thread-local variable
+    [std::lock_guard](http://en.cppreference.com/w/cpp/thread/lock_guard)<[std::mutex](http://en.cppreference.com/w/cpp/thread/mutex)> lock(cout_mutex);
+    [std::cout](http://en.cppreference.com/w/cpp/io/cout) << "Rage counter for " << thread_name << ": " << rage << '\n';
+}
+ 
+int main()
+{
+    [std::thread](http://en.cppreference.com/w/cpp/thread/thread) a(increase_rage, "a"), b(increase_rage, "b");
+ 
+    {
+        [std::lock_guard](http://en.cppreference.com/w/cpp/thread/lock_guard)<[std::mutex](http://en.cppreference.com/w/cpp/thread/mutex)> lock(cout_mutex);
+        [std::cout](http://en.cppreference.com/w/cpp/io/cout) << "Rage counter for main: " << rage << '\n';
+    }
+ 
+    a.join();
+    b.join();
+}
+```
+
 ### Explicitly defaulted and deleted special member functions
 
 ###  Type long long int
@@ -701,7 +731,7 @@ A new Thread-Local Storage storage duration (in addition to the existing _static
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExOTEyNjQ4MjAsMjA2NjgyNjg3MywxOT
+eyJoaXN0b3J5IjpbLTE2MTA4MTY4MDYsMjA2NjgyNjg3MywxOT
 k0MzA3ODc3LDEyNzk2MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcx
 MTEsMjA3ODc4ODk3NiwtMTEzMTI4MzEzMiw4NTkxODY2MzMsMj
 A1MTI2ODgyNywtMTQ0Mzc3NjkxMywxNTEzNjA0ODU2LC0yMjU3
