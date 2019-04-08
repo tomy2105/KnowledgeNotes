@@ -506,7 +506,6 @@ The ellipsis (...) operator has two roles.
 In other words example above reads:
 
 ```cpp
-```cpp
 template<typename Value1, typename Value2, ..., typename Valuen> class tuple               // takes zero or more arguments
 {
 	tuple(Value1 v1, Value2 v2, ..., Valuen vn);
@@ -654,11 +653,11 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MzA3MTQ4MzEsLTE0Nzc4NTQyOTEsMT
-QzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4NTgwOCwtMTY0
-Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MD
-kyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwt
-MTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNT
-kzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgs
-MTk2MDcyNzEwXX0=
+eyJoaXN0b3J5IjpbNTk3NTM4MDc2LC0xNDc3ODU0MjkxLDE0Mz
+U2MzI1MTYsLTE0NzAyNDAwNjcsLTEyODM2ODU4MDgsLTE2NDc5
+OTU4MjgsLTE2MDk1OTgzODUsLTE3MDM0NTM2NzQsLTEwNjA5Mj
+cyMzIsNjY2OTUwMDMxLC04OTQ5MDY0MjYsOTcwMTc4NTgsLTE3
+NjcxNDEwNSwtMTk1NDE2MTgsLTE1NDU0NDgzNzYsLTYwMjU5Mz
+UxNyw0MTM2MzQzNDUsLTMyOTgxMTM1OCwxNjg2MjM0NDQ4LDE5
+NjA3MjcxMF19
 -->
