@@ -452,39 +452,6 @@ union U
     U& operator=(const Point& pt) { new(&p) Point(pt); return *this; } // Assign Point object using placement 'new'.
 };
 ```
-### New string literals
-
-Type `char` is at least eight-bit , two new character types: `char16_t` and `char32_t` are added (16 and 32 bit). 
-
-News string literals added:
-
-```cpp
-u8"This is a Unicode Character: \u2018."; // const char[]
-u"This is a bigger Unicode Character: \u2018."; // const char16_t[]
-U"This is a Unicode Character: \U00002018."; // const char32_t[]
-```
-
-To to avoid escaping strings there is raw string literal:
-
-
-```cpp
-R"(The String Data \ Stuff " )";
-R"delimiter(The String Data ()\ Stuff " )delimiter";
-```
-
-Everything between the `"(` and the `)"` is part of the string. No need to escape anything.
-
-Raw string literals can be combined with the wide literal or any of the Unicode literal prefixes:
-
-
-```cpp
-u8R"XXX(I'm a "raw UTF-8" string.)XXX"
-uR"*(This is a "raw UTF-16" string.)*"
-UR"(This is a "raw UTF-32" string.)"
-```
-
-### User-defined literals
-
 
 ### Variadic templates
 
@@ -600,6 +567,39 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 
 Some examples of usages of variadic template can be found [here](https://eli.thegreenplace.net/2014/variadic-templates-in-c/).
 
+### New string literals
+
+Type `char` is at least eight-bit , two new character types: `char16_t` and `char32_t` are added (16 and 32 bit). 
+
+News string literals added:
+
+```cpp
+u8"This is a Unicode Character: \u2018."; // const char[]
+u"This is a bigger Unicode Character: \u2018."; // const char16_t[]
+U"This is a Unicode Character: \U00002018."; // const char32_t[]
+```
+
+To to avoid escaping strings there is raw string literal:
+
+
+```cpp
+R"(The String Data \ Stuff " )";
+R"delimiter(The String Data ()\ Stuff " )delimiter";
+```
+
+Everything between the `"(` and the `)"` is part of the string. No need to escape anything.
+
+Raw string literals can be combined with the wide literal or any of the Unicode literal prefixes:
+
+
+```cpp
+u8R"XXX(I'm a "raw UTF-8" string.)XXX"
+uR"*(This is a "raw UTF-16" string.)*"
+UR"(This is a "raw UTF-32" string.)"
+```
+
+### User-defined literals
+
 ### Multithreading memory model
 
 ### Thread-local storage
@@ -657,11 +657,11 @@ Some examples of usages of variadic template can be found [here](https://eli.the
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIyNTc4NDQ1NiwtMTk5NTY2NzExOCwzMz
-MxOTMwMzIsMzA3MTU0NDg4LC00OTk2MDE0OTAsLTE0Nzc4NTQy
-OTEsMTQzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4NTgwOC
-wtMTY0Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwt
-MTA2MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNz
-g1OCwtMTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3Niwt
-NjAyNTkzNTE3XX0=
+eyJoaXN0b3J5IjpbMTUxMzYwNDg1NiwtMjI1Nzg0NDU2LC0xOT
+k1NjY3MTE4LDMzMzE5MzAzMiwzMDcxNTQ0ODgsLTQ5OTYwMTQ5
+MCwtMTQ3Nzg1NDI5MSwxNDM1NjMyNTE2LC0xNDcwMjQwMDY3LC
+0xMjgzNjg1ODA4LC0xNjQ3OTk1ODI4LC0xNjA5NTk4Mzg1LC0x
+NzAzNDUzNjc0LC0xMDYwOTI3MjMyLDY2Njk1MDAzMSwtODk0OT
+A2NDI2LDk3MDE3ODU4LC0xNzY3MTQxMDUsLTE5NTQxNjE4LC0x
+NTQ1NDQ4Mzc2XX0=
 -->
