@@ -685,6 +685,28 @@ It is guaranteed to be at least as large as a `long int`, and have no fewer than
 
 ### Static assertions
 
+A new way to test assertions at compile-time, using the new keyword `static_assert`. The declaration assumes this form:
+
+`static_assert (_constant-expression_, _error-message_);`
+
+Here are some examples of how `static_assert` can be used:
+
+`static_assert((GREEKPI > 3.14) && (GREEKPI < 3.15), "GREEKPI is inaccurate!");`
+
+```cpp
+template<class T>
+struct Check
+{
+    static_assert(sizeof(int) <= sizeof(T), "T is not big enough!");
+};
+
+template<class Integral>
+Integral foo(Integral x, Integral y)
+{
+    static_assert(std::is_integral<Integral>::value, "foo() parameter must be an integral type.");
+}
+```
+
 ### Allow sizeof to work on members of classes without an explicit object
 
 ### Control and query object alignment
@@ -733,11 +755,11 @@ It is guaranteed to be at least as large as a `long int`, and have no fewer than
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcwMzQwOTAwNywyMDY2ODI2ODczLDE5OT
-QzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcxNzEx
-MSwyMDc4Nzg4OTc2LC0xMTMxMjgzMTMyLDg1OTE4NjYzMywyMD
-UxMjY4ODI3LC0xNDQzNzc2OTEzLDE1MTM2MDQ4NTYsLTIyNTc4
-NDQ1NiwtMTk5NTY2NzExOCwzMzMxOTMwMzIsMzA3MTU0NDg4LC
-00OTk2MDE0OTAsLTE0Nzc4NTQyOTEsMTQzNTYzMjUxNiwtMTQ3
-MDI0MDA2N119
+eyJoaXN0b3J5IjpbOTE0MDYxMjY1LDIwNjY4MjY4NzMsMTk5ND
+MwNzg3NywxMjc5NjM1NjQ1LC00NDk0NDc5MjMsMzA2NzE3MTEx
+LDIwNzg3ODg5NzYsLTExMzEyODMxMzIsODU5MTg2NjMzLDIwNT
+EyNjg4MjcsLTE0NDM3NzY5MTMsMTUxMzYwNDg1NiwtMjI1Nzg0
+NDU2LC0xOTk1NjY3MTE4LDMzMzE5MzAzMiwzMDcxNTQ0ODgsLT
+Q5OTYwMTQ5MCwtMTQ3Nzg1NDI5MSwxNDM1NjMyNTE2LC0xNDcw
+MjQwMDY3XX0=
 -->
