@@ -497,9 +497,11 @@ template<typename... Values> class tuple;               // takes zero or more ar
 Variadic templates may also apply to functions.
 
 The ellipsis (...) operator has two roles. 
-- to the left of the name of a parameter, it declares a parameter pack. Using the parameter pack, the user can bind zero or more arguments to the variadic template parameters. Parameter packs can also be used for non-type parameters. By contrast, when the ellipsis operator occurs to the right of a template or function call argument, it unpacks the parameter packs into separate arguments, like the `args...` in the body of `printf` below. In practice, the use of an ellipsis operator in the code causes the whole expression that precedes the ellipsis to be repeated for every subsequent argument unpacked from the argument pack, with the expressions separated by commas.
+- to the left of the name of a parameter, it declares a parameter pack, user can bind zero or more arguments to the variadic template parameters.
+- to the right of a template or function call argument, it unpacks the parameter packs into separate arguments. 
 
-The use of variadic templates is often recursive. The variadic parameters themselves are not readily available to the implementation of a function or class. Therefore, the typical mechanism for defining something like a C++11 variadic printf replacement would be as follows:
+The variadic parameters themselves are not readily available to the implementation of a function or class. To make use of them either recursion or a dummy function/struct must be used.
+Therefore, the typical mechanism for defining something like a C++11 variadic printf replacement would be as follows:
 
 // base case
 void printf(const char *s)
@@ -684,11 +686,11 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMjcwMjMzODYsLTE0Nzc4NTQyOTEsMT
-QzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4NTgwOCwtMTY0
-Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1MzY3NCwtMTA2MD
-kyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5NzAxNzg1OCwt
-MTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0ODM3NiwtNjAyNT
-kzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2ODYyMzQ0NDgs
-MTk2MDcyNzEwXX0=
+eyJoaXN0b3J5IjpbMTc1OTQ4OTM4NiwtMTQ3Nzg1NDI5MSwxND
+M1NjMyNTE2LC0xNDcwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3
+OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOT
+I3MjMyLDY2Njk1MDAzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0x
+NzY3MTQxMDUsLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OT
+M1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0OCwx
+OTYwNzI3MTBdfQ==
 -->
