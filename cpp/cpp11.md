@@ -536,24 +536,24 @@ template<typename... Args> inline void expand(Args&&... args)
 {  pass(doSomethingWithReturn(args)...); // requires non void return, order of evaluation not guaranteed
 }
  
-struct  passStruct
+struct  dummyStruct
 {
   	template<typename ...T> dummyStruct(T...) {}  };
 template<typename... Args> inline void expandStruct(Args&&... args)
 {
-	passStruct{ doSomethingWithReturn(args)... }; // requires non void return, order of evaluation guaranteed
+	dummyStruct{ doSomethingWithReturn(args)... }; // requires non void return, order of evaluation guaranteed
 }
 template<typename... Args> inline void expandStruct2(Args&&... args)
 {
-	passStruct{ (doSomething(args), 1)... }; // non void return done via comma operator, order of evaluation guaranteed
+	dummyStruct{ (doSomething(args), 1)... }; // non void return done via comma operator, order of evaluation guaranteed
 }
 template<typename... Args> inline void expandStruct3(Args&&... args)
 {
-	passStruct{ ([&]() { std::cout << args << std::endl; }(), 1)... }; // lamda used instead of separate function
+	dummyStruct{ ([&]() { std::cout << args << std::endl; }(), 1)... }; // lamda used instead of separate function
 }
 template<typename... Args> inline void expandStruct4(Args&&... args)
 {
-	passStruct{ (std::cout << args << std::endl, 1)... }; // expression used instead of separate function
+	dummyStruct{ (std::cout << args << std::endl, 1)... }; // expression used instead of separate function
 }
 ```
 
@@ -653,11 +653,11 @@ The expression `SomeStruct<Type1, Type2>::size` will yield 2, while `SomeStruct<
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ5OTYwMTQ5MCwtMTQ3Nzg1NDI5MSwxND
-M1NjMyNTE2LC0xNDcwMjQwMDY3LC0xMjgzNjg1ODA4LC0xNjQ3
-OTk1ODI4LC0xNjA5NTk4Mzg1LC0xNzAzNDUzNjc0LC0xMDYwOT
-I3MjMyLDY2Njk1MDAzMSwtODk0OTA2NDI2LDk3MDE3ODU4LC0x
-NzY3MTQxMDUsLTE5NTQxNjE4LC0xNTQ1NDQ4Mzc2LC02MDI1OT
-M1MTcsNDEzNjM0MzQ1LC0zMjk4MTEzNTgsMTY4NjIzNDQ0OCwx
-OTYwNzI3MTBdfQ==
+eyJoaXN0b3J5IjpbMTAyMDQ4NzE5LC00OTk2MDE0OTAsLTE0Nz
+c4NTQyOTEsMTQzNTYzMjUxNiwtMTQ3MDI0MDA2NywtMTI4MzY4
+NTgwOCwtMTY0Nzk5NTgyOCwtMTYwOTU5ODM4NSwtMTcwMzQ1Mz
+Y3NCwtMTA2MDkyNzIzMiw2NjY5NTAwMzEsLTg5NDkwNjQyNiw5
+NzAxNzg1OCwtMTc2NzE0MTA1LC0xOTU0MTYxOCwtMTU0NTQ0OD
+M3NiwtNjAyNTkzNTE3LDQxMzYzNDM0NSwtMzI5ODExMzU4LDE2
+ODYyMzQ0NDhdfQ==
 -->
