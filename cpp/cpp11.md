@@ -678,7 +678,38 @@ int main()
 ```
 
 ### Explicitly defaulted and deleted special member functions
+Explicit defaulting and deleting of these member functions.[[17]](https://en.wikipedia.org/wiki/C%2B%2B11#cite_note-17) For example, this type explicitly declares that it is using the default constructor:
 
+struct SomeType
+{
+    SomeType() = default; //The default constructor is explicitly stated.
+    SomeType(OtherType value);
+};
+
+Alternatively, certain features can be explicitly disabled. For example, this type is non-copyable:
+
+struct NonCopyable
+{
+    NonCopyable() = default;
+    NonCopyable(const NonCopyable&) = delete;
+    NonCopyable& operator=(const NonCopyable&) = delete;
+};
+
+The `= delete` specifier can be used to prohibit calling any function, which can be used to disallow calling a member function with particular parameters. For example:
+
+struct NoInt
+{
+    void f(double i);
+    void f(int) = delete;
+};
+
+An attempt to call `f()` with an `int` will be rejected by the compiler, instead of performing a silent conversion to `double`. This can be generalized to disallow calling the function with any type other than `double` as follows:
+
+struct OnlyDouble
+{
+    void f(double d);
+    template<class T> void f(T) = delete;
+};
 ###  Type long long int
 
 It is guaranteed to be at least as large as a `long int`, and have no fewer than 64 bits.
@@ -760,11 +791,11 @@ sizeof(SomeType::member);  // Does not work with C++03. Okay with C++11
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0ODcxODk4MTksMjA2NjgyNjg3MywxOT
-k0MzA3ODc3LDEyNzk2MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcx
-MTEsMjA3ODc4ODk3NiwtMTEzMTI4MzEzMiw4NTkxODY2MzMsMj
-A1MTI2ODgyNywtMTQ0Mzc3NjkxMywxNTEzNjA0ODU2LC0yMjU3
-ODQ0NTYsLTE5OTU2NjcxMTgsMzMzMTkzMDMyLDMwNzE1NDQ4OC
-wtNDk5NjAxNDkwLC0xNDc3ODU0MjkxLDE0MzU2MzI1MTYsLTE0
-NzAyNDAwNjddfQ==
+eyJoaXN0b3J5IjpbMTEwMDIwMjc4MSwtMTQ4NzE4OTgxOSwyMD
+Y2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3
+OTIzLDMwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMxMjgzMTMyLD
+g1OTE4NjYzMywyMDUxMjY4ODI3LC0xNDQzNzc2OTEzLDE1MTM2
+MDQ4NTYsLTIyNTc4NDQ1NiwtMTk5NTY2NzExOCwzMzMxOTMwMz
+IsMzA3MTU0NDg4LC00OTk2MDE0OTAsLTE0Nzc4NTQyOTEsMTQz
+NTYzMjUxNl19
 -->
