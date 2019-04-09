@@ -762,8 +762,6 @@ More, including standard attributes can be found [here](https://en.cppreference.
 
 ## C++ standard library changes
 
-### Upgrades to standard library components
-
 ### Threading facilities
 
 ### Tuple types
@@ -800,11 +798,11 @@ More, including standard attributes can be found [here](https://en.cppreference.
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU2NzA2MzgwNSwtMTc5OTgxMjI4NiwxND
-A1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4
-OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NS
-wtNDQ5NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMx
-MjgzMTMyLDg1OTE4NjYzMywyMDUxMjY4ODI3LC0xNDQzNzc2OT
-EzLDE1MTM2MDQ4NTYsLTIyNTc4NDQ1NiwtMTk5NTY2NzExOCwz
-MzMxOTMwMzJdfQ==
+eyJoaXN0b3J5IjpbNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OT
+gxMjI4NiwxNDA1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkw
+NiwtMTQ4NzE4OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMT
+I3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4
+OTc2LC0xMTMxMjgzMTMyLDg1OTE4NjYzMywyMDUxMjY4ODI3LC
+0xNDQzNzc2OTEzLDE1MTM2MDQ4NTYsLTIyNTc4NDQ1NiwtMTk5
+NTY2NzExOF19
 -->
