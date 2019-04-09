@@ -756,9 +756,9 @@ More [here](http://www.cplusplus.com/reference/memory/pointer_safety/) and [here
 
 ### Attributes
 
-Standardized syntax for compiler/tool extensions to the language.
+Standardized syntax for compiler/tool extensions to the language, added information can be specified in a form of an attribute enclosed in double square brackets.
 
-
+More, including standard attributes can be found [here](https://en.cppreference.com/w/cpp/language/attributes).
 
 ## C++ standard library changes
 
@@ -800,7 +800,7 @@ Standardized syntax for compiler/tool extensions to the language.
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg4NjA0NzQ0MSwtMTc5OTgxMjI4NiwxND
+eyJoaXN0b3J5IjpbLTU2NzA2MzgwNSwtMTc5OTgxMjI4NiwxND
 A1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4
 OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NS
 wtNDQ5NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMx
