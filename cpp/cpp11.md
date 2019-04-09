@@ -756,6 +756,10 @@ More [here](http://www.cplusplus.com/reference/memory/pointer_safety/) and [here
 
 ### Attributes
 
+Standardized syntax for compiler/tool extensions to the language.
+
+
+
 ## C++ standard library changes
 
 ### Upgrades to standard library components
@@ -796,11 +800,11 @@ More [here](http://www.cplusplus.com/reference/memory/pointer_safety/) and [here
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2Nzc5NTc5MDAsLTE3OTk4MTIyODYsMT
-QwNTc2NjYzMiwtNDc5MDM1OTE4LC00MTYxMDU5MDYsLTE0ODcx
-ODk4MTksMjA2NjgyNjg3MywxOTk0MzA3ODc3LDEyNzk2MzU2ND
-UsLTQ0OTQ0NzkyMywzMDY3MTcxMTEsMjA3ODc4ODk3NiwtMTEz
-MTI4MzEzMiw4NTkxODY2MzMsMjA1MTI2ODgyNywtMTQ0Mzc3Nj
-kxMywxNTEzNjA0ODU2LC0yMjU3ODQ0NTYsLTE5OTU2NjcxMTgs
-MzMzMTkzMDMyXX0=
+eyJoaXN0b3J5IjpbLTg4NjA0NzQ0MSwtMTc5OTgxMjI4NiwxND
+A1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4
+OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NS
+wtNDQ5NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMx
+MjgzMTMyLDg1OTE4NjYzMywyMDUxMjY4ODI3LC0xNDQzNzc2OT
+EzLDE1MTM2MDQ4NTYsLTIyNTc4NDQ1NiwtMTk5NTY2NzExOCwz
+MzMxOTMwMzJdfQ==
 -->
