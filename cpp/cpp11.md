@@ -746,6 +746,9 @@ sizeof(SomeType::member);  // Does not work with C++03. Okay with C++11
 
 ### Control and query object alignment
 
+
+
+
 ### Allow garbage collected implementations
 
 ### Attributes
@@ -790,11 +793,11 @@ sizeof(SomeType::member);  // Does not work with C++03. Okay with C++11
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ3OTAzNTkxOCwtNDE2MTA1OTA2LC0xND
-g3MTg5ODE5LDIwNjY4MjY4NzMsMTk5NDMwNzg3NywxMjc5NjM1
-NjQ1LC00NDk0NDc5MjMsMzA2NzE3MTExLDIwNzg3ODg5NzYsLT
-ExMzEyODMxMzIsODU5MTg2NjMzLDIwNTEyNjg4MjcsLTE0NDM3
-NzY5MTMsMTUxMzYwNDg1NiwtMjI1Nzg0NDU2LC0xOTk1NjY3MT
-E4LDMzMzE5MzAzMiwzMDcxNTQ0ODgsLTQ5OTYwMTQ5MCwtMTQ3
-Nzg1NDI5MV19
+eyJoaXN0b3J5IjpbMTQwNTc2NjYzMiwtNDc5MDM1OTE4LC00MT
+YxMDU5MDYsLTE0ODcxODk4MTksMjA2NjgyNjg3MywxOTk0MzA3
+ODc3LDEyNzk2MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcxMTEsMj
+A3ODc4ODk3NiwtMTEzMTI4MzEzMiw4NTkxODY2MzMsMjA1MTI2
+ODgyNywtMTQ0Mzc3NjkxMywxNTEzNjA0ODU2LC0yMjU3ODQ0NT
+YsLTE5OTU2NjcxMTgsMzMzMTkzMDMyLDMwNzE1NDQ4OCwtNDk5
+NjAxNDkwXX0=
 -->
