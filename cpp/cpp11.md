@@ -748,8 +748,9 @@ sizeof(SomeType::member);  // Does not work with C++03. Okay with C++11
 
 Variable alignment can be queried and controlled with `alignof` and `alignas`.
 
-
 ### Allow garbage collected implementations
+
+
 
 ### Attributes
 
@@ -793,11 +794,11 @@ Variable alignment can be queried and controlled with `alignof` and `alignas`.
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEzMTgzODUyMCwxNDA1NzY2NjMyLC00Nz
-kwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMDY2ODI2
-ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLD
-MwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMxMjgzMTMyLDg1OTE4
-NjYzMywyMDUxMjY4ODI3LC0xNDQzNzc2OTEzLDE1MTM2MDQ4NT
-YsLTIyNTc4NDQ1NiwtMTk5NTY2NzExOCwzMzMxOTMwMzIsMzA3
-MTU0NDg4XX0=
+eyJoaXN0b3J5IjpbLTE3OTk4MTIyODYsMTQwNTc2NjYzMiwtND
+c5MDM1OTE4LC00MTYxMDU5MDYsLTE0ODcxODk4MTksMjA2Njgy
+Njg3MywxOTk0MzA3ODc3LDEyNzk2MzU2NDUsLTQ0OTQ0NzkyMy
+wzMDY3MTcxMTEsMjA3ODc4ODk3NiwtMTEzMTI4MzEzMiw4NTkx
+ODY2MzMsMjA1MTI2ODgyNywtMTQ0Mzc3NjkxMywxNTEzNjA0OD
+U2LC0yMjU3ODQ0NTYsLTE5OTU2NjcxMTgsMzMzMTkzMDMyLDMw
+NzE1NDQ4OF19
 -->
