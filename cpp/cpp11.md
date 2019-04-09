@@ -678,7 +678,8 @@ int main()
 ```
 
 ### Explicitly defaulted and deleted special member functions
-Explicit defaulting and deleting of these member functions, for example, this type is non-copyable:
+
+Explicit defaulting and deleting of special member functions, for example, this type is non-copyable:
 
 ```cpp
 struct NonCopyable
@@ -789,11 +790,11 @@ sizeof(SomeType::member);  // Does not work with C++03. Okay with C++11
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMD
-Y2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3
-OTIzLDMwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMxMjgzMTMyLD
-g1OTE4NjYzMywyMDUxMjY4ODI3LC0xNDQzNzc2OTEzLDE1MTM2
-MDQ4NTYsLTIyNTc4NDQ1NiwtMTk5NTY2NzExOCwzMzMxOTMwMz
-IsMzA3MTU0NDg4LC00OTk2MDE0OTAsLTE0Nzc4NTQyOTEsMTQz
-NTYzMjUxNl19
+eyJoaXN0b3J5IjpbLTQ3OTAzNTkxOCwtNDE2MTA1OTA2LC0xND
+g3MTg5ODE5LDIwNjY4MjY4NzMsMTk5NDMwNzg3NywxMjc5NjM1
+NjQ1LC00NDk0NDc5MjMsMzA2NzE3MTExLDIwNzg3ODg5NzYsLT
+ExMzEyODMxMzIsODU5MTg2NjMzLDIwNTEyNjg4MjcsLTE0NDM3
+NzY5MTMsMTUxMzYwNDg1NiwtMjI1Nzg0NDU2LC0xOTk1NjY3MT
+E4LDMzMzE5MzAzMiwzMDcxNTQ0ODgsLTQ5OTYwMTQ5MCwtMTQ3
+Nzg1NDI5MV19
 -->
