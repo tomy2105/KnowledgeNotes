@@ -752,8 +752,7 @@ Variable alignment can be queried and controlled with `alignof` and `alignas`.
 
 Defines conditions under which pointer values are "safely derived" from other values. An implementation may specify that it operates under _strict pointer safety_, in which case pointers that are not derived according to these rules can become invalid.
 
-More [here](http://www.cplusplus.com/reference/memory/pointer_safety/).
-
+More [here](http://www.cplusplus.com/reference/memory/pointer_safety/) and [here](http://www.cplusplus.com/reference/memory/).
 
 ### Attributes
 
@@ -797,11 +796,11 @@ More [here](http://www.cplusplus.com/reference/memory/pointer_safety/).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk5NDEzNjAzOCwtMTc5OTgxMjI4NiwxND
-A1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4
-OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NS
-wtNDQ5NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMx
-MjgzMTMyLDg1OTE4NjYzMywyMDUxMjY4ODI3LC0xNDQzNzc2OT
-EzLDE1MTM2MDQ4NTYsLTIyNTc4NDQ1NiwtMTk5NTY2NzExOCwz
-MzMxOTMwMzJdfQ==
+eyJoaXN0b3J5IjpbLTE2Nzc5NTc5MDAsLTE3OTk4MTIyODYsMT
+QwNTc2NjYzMiwtNDc5MDM1OTE4LC00MTYxMDU5MDYsLTE0ODcx
+ODk4MTksMjA2NjgyNjg3MywxOTk0MzA3ODc3LDEyNzk2MzU2ND
+UsLTQ0OTQ0NzkyMywzMDY3MTcxMTEsMjA3ODc4ODk3NiwtMTEz
+MTI4MzEzMiw4NTkxODY2MzMsMjA1MTI2ODgyNywtMTQ0Mzc3Nj
+kxMywxNTEzNjA0ODU2LC0yMjU3ODQ0NTYsLTE5OTU2NjcxMTgs
+MzMzMTkzMDMyXX0=
 -->
