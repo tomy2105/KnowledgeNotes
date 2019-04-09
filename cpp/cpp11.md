@@ -746,7 +746,7 @@ sizeof(SomeType::member);  // Does not work with C++03. Okay with C++11
 
 ### Control and query object alignment
 
-variable alignment to be queried and controlled with `alignof` and `alignas`.
+Variable alignment can be queried and controlled with `alignof` and `alignas`.
 
 
 ### Allow garbage collected implementations
@@ -793,7 +793,7 @@ variable alignment to be queried and controlled with `alignof` and `alignas`.
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI0NDQ2Mzc2MywxNDA1NzY2NjMyLC00Nz
+eyJoaXN0b3J5IjpbMTEzMTgzODUyMCwxNDA1NzY2NjMyLC00Nz
 kwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMDY2ODI2
 ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLD
 MwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMxMjgzMTMyLDg1OTE4
