@@ -778,7 +778,7 @@ Futures and promises for passing asynchronous results between threads, and `std:
 
 More info with examples [here](https://en.cppreference.com/w/cpp/thread).
 
-
+Some info and problems about `std::async` [here](https://eli.thegreenplace.net/2016/the-promises-and-challenges-of-stdasync-task-based-parallelism-in-c11/).
 
 
 For high-performance, low-level work, communicating between threads is sometimes needed without the overhead of mutexes. This is done using [atomic operations](https://en.wikipedia.org/wiki/Atomic_operation "Atomic operation") on memory locations. These can optionally specify the minimum memory visibility constraints needed for an operation. Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
@@ -820,11 +820,11 @@ For high-performance, low-level work, communicating between threads is sometimes
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzUyNTYyMDM5LC04MjQzMDE0MDMsNDY1Mz
-I2NDcwLDk0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwt
-NTY3MDYzODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OT
-AzNTkxOCwtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LDIwNjY4MjY4
-NzMsMTk5NDMwNzg3NywxMjc5NjM1NjQ1LC00NDk0NDc5MjMsMz
-A2NzE3MTExLDIwNzg3ODg5NzYsLTExMzEyODMxMzIsODU5MTg2
-NjMzXX0=
+eyJoaXN0b3J5IjpbLTIwMTE0MjIwNiwtODI0MzAxNDAzLDQ2NT
+MyNjQ3MCw5NDc1NDI3MjgsLTE1NzkzODgwMzcsNDc1Nzg4MzAs
+LTU2NzA2MzgwNSwtMTc5OTgxMjI4NiwxNDA1NzY2NjMyLC00Nz
+kwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMDY2ODI2
+ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLD
+MwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMxMjgzMTMyLDg1OTE4
+NjYzM119
 -->
