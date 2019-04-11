@@ -774,7 +774,7 @@ Usable either directly or via RAII locks `std::lock_guard`, `std::scoped_lock` (
 
 There is also `std::call_once` helper for invoking function only once.
 
-
+Futures and promises for passing asynchronous results between threads, and `std::packaged_task` for wrapping up a function call that can generate such an asynchronous result is also introduced. `std::async` facility provides a convenient method of running tasks and tying them to a `std::future`.
 
 
 
@@ -782,7 +782,8 @@ There is also `std::call_once` helper for invoking function only once.
 
 For high-performance, low-level work, communicating between threads is sometimes needed without the overhead of mutexes. This is done using [atomic operations](https://en.wikipedia.org/wiki/Atomic_operation "Atomic operation") on memory locations. These can optionally specify the minimum memory visibility constraints needed for an operation. Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
 
-Futures and promises for passing asynchronous results between threads, and `std::packaged_task` for wrapping up a function call that can generate such an asynchronous result is also introduced. `std::async` facility provides a convenient method of running tasks and tying them to a `std::future`. The user can choose whether the task is to be run asynchronously on a separate thread or synchronously on a thread that waits for the value. By default, the implementation can choose, which provides an easy way to take advantage of hardware concurrency without oversubscription, and provides some of the advantages of a thread pool for simple usages.
+ 
+
 
 ### Tuple types
 
@@ -818,11 +819,11 @@ Futures and promises for passing asynchronous results between threads, and `std:
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEzNjY4ODY2Nyw5NDc1NDI3MjgsLTE1Nz
-kzODgwMzcsNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OTgxMjI4
-NiwxNDA1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkwNiwtMT
-Q4NzE4OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYz
-NTY0NSwtNDQ5NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4OTc2LC
-0xMTMxMjgzMTMyLDg1OTE4NjYzMywyMDUxMjY4ODI3LC0xNDQz
-Nzc2OTEzXX0=
+eyJoaXN0b3J5IjpbNDY1MzI2NDcwLDk0NzU0MjcyOCwtMTU3OT
+M4ODAzNyw0NzU3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEyMjg2
+LDE0MDU3NjY2MzIsLTQ3OTAzNTkxOCwtNDE2MTA1OTA2LC0xND
+g3MTg5ODE5LDIwNjY4MjY4NzMsMTk5NDMwNzg3NywxMjc5NjM1
+NjQ1LC00NDk0NDc5MjMsMzA2NzE3MTExLDIwNzg3ODg5NzYsLT
+ExMzEyODMxMzIsODU5MTg2NjMzLDIwNTEyNjg4MjcsLTE0NDM3
+NzY5MTNdfQ==
 -->
