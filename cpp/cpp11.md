@@ -766,10 +766,14 @@ More, including standard attributes can be found [here](https://en.cppreference.
 
 A thread class `std::thread` is provided, which takes a function object (with optional arguments) to run in the new thread. 
 
-For synchronization between threads there are `std::mutex`, `std::recursive_mutex`, `std::shared_mutex` (along with "timed" versions which try locking for specified amount of time). Usable either directly or via RAII locks `std::lock_guard`, `std::scoped_lock` (C++17), `std::unique_lock` and `std::shared_lock` (C++14). In addition `std::lock` and `std::try_lock` are available for locking multiple objects.
+For synchronization between threads there are `std::mutex`, `std::recursive_mutex`, `std::shared_mutex` (along with "timed" versions which try locking for specified amount of time). 
+
+In addition condition variables `std::condition_variable` and `std::condition_variable_any`
+
+Usable either directly or via RAII locks `std::lock_guard`, `std::scoped_lock` (C++17), `std::unique_lock` and `std::shared_lock` (C++14). In addition `std::lock` and `std::try_lock` are available for locking multiple objects.
 
 
-etc.) and [condition variables](https://en.wikipedia.org/wiki/Monitor_(synchronization) "Monitor (synchronization)") (`std::condition_variable` and `std::condition_variable_any`) are added to the library. These are accessible via [Resource Acquisition Is Initialization](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization "Resource Acquisition Is Initialization") (RAII) locks (`std::lock_guard` and `std::unique_lock`) and locking algorithms for easy use.
+etc.) and are added to the library. These are accessible via [Resource Acquisition Is Initialization](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization "Resource Acquisition Is Initialization") (RAII) locks (`std::lock_guard` and `std::unique_lock`) and locking algorithms for easy use.
 
 For high-performance, low-level work, communicating between threads is sometimes needed without the overhead of mutexes. This is done using [atomic operations](https://en.wikipedia.org/wiki/Atomic_operation "Atomic operation") on memory locations. These can optionally specify the minimum memory visibility constraints needed for an operation. Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
 
@@ -813,11 +817,11 @@ The new `std::async` facility provides a convenient method of running tasks and 
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkxNTI5MTMwMiwtMTU3OTM4ODAzNyw0Nz
-U3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2
-MzIsLTQ3OTAzNTkxOCwtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LD
-IwNjY4MjY4NzMsMTk5NDMwNzg3NywxMjc5NjM1NjQ1LC00NDk0
-NDc5MjMsMzA2NzE3MTExLDIwNzg3ODg5NzYsLTExMzEyODMxMz
-IsODU5MTg2NjMzLDIwNTEyNjg4MjcsLTE0NDM3NzY5MTMsMTUx
-MzYwNDg1Nl19
+eyJoaXN0b3J5IjpbLTEzODY5NDk2MzksLTE1NzkzODgwMzcsND
+c1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OTgxMjI4NiwxNDA1NzY2
+NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4OTgxOS
+wyMDY2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5
+NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMxMjgzMT
+MyLDg1OTE4NjYzMywyMDUxMjY4ODI3LC0xNDQzNzc2OTEzLDE1
+MTM2MDQ4NTZdfQ==
 -->
