@@ -764,6 +764,8 @@ More, including standard attributes can be found [here](https://en.cppreference.
 
 ### Threading facilities
 
+
+
 ### Tuple types
 
 ### Hash tables
@@ -798,11 +800,11 @@ More, including standard attributes can be found [here](https://en.cppreference.
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OT
-gxMjI4NiwxNDA1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkw
-NiwtMTQ4NzE4OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMT
-I3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4
-OTc2LC0xMTMxMjgzMTMyLDg1OTE4NjYzMywyMDUxMjY4ODI3LC
-0xNDQzNzc2OTEzLDE1MTM2MDQ4NTYsLTIyNTc4NDQ1NiwtMTk5
-NTY2NzExOF19
+eyJoaXN0b3J5IjpbMTUxMjUyMzgxOCw0NzU3ODgzMCwtNTY3MD
+YzODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OTAzNTkx
+OCwtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LDIwNjY4MjY4NzMsMT
+k5NDMwNzg3NywxMjc5NjM1NjQ1LC00NDk0NDc5MjMsMzA2NzE3
+MTExLDIwNzg3ODg5NzYsLTExMzEyODMxMzIsODU5MTg2NjMzLD
+IwNTEyNjg4MjcsLTE0NDM3NzY5MTMsMTUxMzYwNDg1NiwtMjI1
+Nzg0NDU2XX0=
 -->
