@@ -780,6 +780,7 @@ More info with examples [here](https://en.cppreference.com/w/cpp/thread).
 
 
 
+
 For high-performance, low-level work, communicating between threads is sometimes needed without the overhead of mutexes. This is done using [atomic operations](https://en.wikipedia.org/wiki/Atomic_operation "Atomic operation") on memory locations. These can optionally specify the minimum memory visibility constraints needed for an operation. Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
 
  
@@ -819,11 +820,11 @@ For high-performance, low-level work, communicating between threads is sometimes
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgyNDMwMTQwMyw0NjUzMjY0NzAsOTQ3NT
-QyNzI4LC0xNTc5Mzg4MDM3LDQ3NTc4ODMwLC01NjcwNjM4MDUs
-LTE3OTk4MTIyODYsMTQwNTc2NjYzMiwtNDc5MDM1OTE4LC00MT
-YxMDU5MDYsLTE0ODcxODk4MTksMjA2NjgyNjg3MywxOTk0MzA3
-ODc3LDEyNzk2MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcxMTEsMj
-A3ODc4ODk3NiwtMTEzMTI4MzEzMiw4NTkxODY2MzMsMjA1MTI2
-ODgyN119
+eyJoaXN0b3J5IjpbNzUyNTYyMDM5LC04MjQzMDE0MDMsNDY1Mz
+I2NDcwLDk0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwt
+NTY3MDYzODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OT
+AzNTkxOCwtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LDIwNjY4MjY4
+NzMsMTk5NDMwNzg3NywxMjc5NjM1NjQ1LC00NDk0NDc5MjMsMz
+A2NzE3MTExLDIwNzg3ODg5NzYsLTExMzEyODMxMzIsODU5MTg2
+NjMzXX0=
 -->
