@@ -766,9 +766,7 @@ More, including standard attributes can be found [here](https://en.cppreference.
 
 A thread class `std::thread` is provided, which takes a function object (with optional arguments) to run in the new thread. 
 
-For synchronization between threads there are `std::mutex`, `std::recursive_mutex`, `std::shared_mutex` (along with "timed" versions which try locking for specified amount of time).
-
-In addition
+For synchronization between threads there are `std::mutex`, `std::recursive_mutex`, `std::shared_mutex` (along with "timed" versions which try locking for specified amount of time). Usable either directly or via RAII locks `std::lock_guard`, `std::scoped_lock` (C++17), `std::unique_lock` and `std::shared_lock` (C and locking algorithms for easy use.
 
 
 
@@ -816,7 +814,7 @@ The new `std::async` facility provides a convenient method of running tasks and 
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA4MDY2MjkyOCw0NzU3ODgzMCwtNTY3MD
+eyJoaXN0b3J5IjpbMTU1Mjg1NjM0Myw0NzU3ODgzMCwtNTY3MD
 YzODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OTAzNTkx
 OCwtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LDIwNjY4MjY4NzMsMT
 k5NDMwNzg3NywxMjc5NjM1NjQ1LC00NDk0NDc5MjMsMzA2NzE3
