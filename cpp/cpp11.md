@@ -772,6 +772,7 @@ In addition condition variables `std::condition_variable` and `std::condition_va
 
 Usable either directly or via RAII locks `std::lock_guard`, `std::scoped_lock` (C++17), `std::unique_lock` and `std::shared_lock` (C++14). In addition `std::lock` and `std::try_lock` are available for locking multiple objects.
 
+
 For high-performance, low-level work, communicating between threads is sometimes needed without the overhead of mutexes. This is done using [atomic operations](https://en.wikipedia.org/wiki/Atomic_operation "Atomic operation") on memory locations. These can optionally specify the minimum memory visibility constraints needed for an operation. Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
 
 The C++11 thread library also includes [futures and promises](https://en.wikipedia.org/wiki/Futures_and_promises "Futures and promises") for passing asynchronous results between threads, and `std::packaged_task` for wrapping up a function call that can generate such an asynchronous result. The futures proposal was criticized because it lacks a way to combine futures and check for the completion of one promise inside a set of promises.[[21]](https://en.wikipedia.org/wiki/C%2B%2B11#cite_note-21)
@@ -814,11 +815,11 @@ The new `std::async` facility provides a convenient method of running tasks and 
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTQ3NTQyNzI4LC0xNTc5Mzg4MDM3LDQ3NT
-c4ODMwLC01NjcwNjM4MDUsLTE3OTk4MTIyODYsMTQwNTc2NjYz
-MiwtNDc5MDM1OTE4LC00MTYxMDU5MDYsLTE0ODcxODk4MTksMj
-A2NjgyNjg3MywxOTk0MzA3ODc3LDEyNzk2MzU2NDUsLTQ0OTQ0
-NzkyMywzMDY3MTcxMTEsMjA3ODc4ODk3NiwtMTEzMTI4MzEzMi
-w4NTkxODY2MzMsMjA1MTI2ODgyNywtMTQ0Mzc3NjkxMywxNTEz
-NjA0ODU2XX0=
+eyJoaXN0b3J5IjpbLTExNTE0MDg3NzgsOTQ3NTQyNzI4LC0xNT
+c5Mzg4MDM3LDQ3NTc4ODMwLC01NjcwNjM4MDUsLTE3OTk4MTIy
+ODYsMTQwNTc2NjYzMiwtNDc5MDM1OTE4LC00MTYxMDU5MDYsLT
+E0ODcxODk4MTksMjA2NjgyNjg3MywxOTk0MzA3ODc3LDEyNzk2
+MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcxMTEsMjA3ODc4ODk3Ni
+wtMTEzMTI4MzEzMiw4NTkxODY2MzMsMjA1MTI2ODgyNywtMTQ0
+Mzc3NjkxM119
 -->
