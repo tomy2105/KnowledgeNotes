@@ -774,13 +774,15 @@ Usable either directly or via RAII locks `std::lock_guard`, `std::scoped_lock` (
 
 There is also `std::call_once` helper for invoking function only once.
 
+
+
+
+
+
+
 For high-performance, low-level work, communicating between threads is sometimes needed without the overhead of mutexes. This is done using [atomic operations](https://en.wikipedia.org/wiki/Atomic_operation "Atomic operation") on memory locations. These can optionally specify the minimum memory visibility constraints needed for an operation. Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
 
-The C++11 thread library also includes [futures and promises](https://en.wikipedia.org/wiki/Futures_and_promises "Futures and promises") for passing asynchronous results between threads, and `std::packaged_task` for wrapping up a function call that can generate such an asynchronous result. The futures proposal was criticized because it lacks a way to combine futures and check for the completion of one promise inside a set of promises.[[21]](https://en.wikipedia.org/wiki/C%2B%2B11#cite_note-21)
-
-Further high-level threading facilities such as [thread pools](https://en.wikipedia.org/wiki/Thread_pool "Thread pool") have been remanded to a future C++ [technical report](https://en.wikipedia.org/wiki/Technical_Report_1 "Technical Report 1"). They are not part of C++11, but their eventual implementation is expected to be built entirely on top of the thread library features.
-
-The new `std::async` facility provides a convenient method of running tasks and tying them to a `std::future`. The user can choose whether the task is to be run asynchronously on a separate thread or synchronously on a thread that waits for the value. By default, the implementation can choose, which provides an easy way to take advantage of hardware concurrency without oversubscription, and provides some of the advantages of a thread pool for simple usages.
+Futures and promises for passing asynchronous results between threads, and `std::packaged_task` for wrapping up a function call that can generate such an asynchronous result is also introduced. `std::async` facility provides a convenient method of running tasks and tying them to a `std::future`. The user can choose whether the task is to be run asynchronously on a separate thread or synchronously on a thread that waits for the value. By default, the implementation can choose, which provides an easy way to take advantage of hardware concurrency without oversubscription, and provides some of the advantages of a thread pool for simple usages.
 
 ### Tuple types
 
@@ -816,7 +818,7 @@ The new `std::async` facility provides a convenient method of running tasks and 
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM5NzUxODA3NSw5NDc1NDI3MjgsLTE1Nz
+eyJoaXN0b3J5IjpbMTEzNjY4ODY2Nyw5NDc1NDI3MjgsLTE1Nz
 kzODgwMzcsNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OTgxMjI4
 NiwxNDA1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkwNiwtMT
 Q4NzE4OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYz
