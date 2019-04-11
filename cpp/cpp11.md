@@ -766,8 +766,7 @@ More, including standard attributes can be found [here](https://en.cppreference.
 
 A thread class `std::thread` is provided, which takes a function object (with optional arguments) to run in the new thread. 
 
-For synchronization between threads there are `std::mutex`, `std::recursive_mutex`, `std::shared_mutex` (along with "timed" versions which try locking for specified amount of time). Usable either directly or via RAII locks `std::lock_guard`, `std::scoped_lock` (C++17), `std::unique_lock` and `std::shared_lock` (C and locking algorithms for easy use.
-
+For synchronization between threads there are `std::mutex`, `std::recursive_mutex`, `std::shared_mutex` (along with "timed" versions which try locking for specified amount of time). Usable either directly or via RAII locks `std::lock_guard`, `std::scoped_lock` (C++17), `std::unique_lock` and `std::shared_lock` (C++14).
 
 
 etc.) and [condition variables](https://en.wikipedia.org/wiki/Monitor_(synchronization) "Monitor (synchronization)") (`std::condition_variable` and `std::condition_variable_any`) are added to the library. These are accessible via [Resource Acquisition Is Initialization](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization "Resource Acquisition Is Initialization") (RAII) locks (`std::lock_guard` and `std::unique_lock`) and locking algorithms for easy use.
@@ -814,11 +813,11 @@ The new `std::async` facility provides a convenient method of running tasks and 
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU1Mjg1NjM0Myw0NzU3ODgzMCwtNTY3MD
-YzODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OTAzNTkx
-OCwtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LDIwNjY4MjY4NzMsMT
-k5NDMwNzg3NywxMjc5NjM1NjQ1LC00NDk0NDc5MjMsMzA2NzE3
-MTExLDIwNzg3ODg5NzYsLTExMzEyODMxMzIsODU5MTg2NjMzLD
-IwNTEyNjg4MjcsLTE0NDM3NzY5MTMsMTUxMzYwNDg1NiwtMjI1
-Nzg0NDU2XX0=
+eyJoaXN0b3J5IjpbLTE1NzkzODgwMzcsNDc1Nzg4MzAsLTU2Nz
+A2MzgwNSwtMTc5OTgxMjI4NiwxNDA1NzY2NjMyLC00NzkwMzU5
+MTgsLTQxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMDY2ODI2ODczLD
+E5OTQzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcx
+NzExMSwyMDc4Nzg4OTc2LC0xMTMxMjgzMTMyLDg1OTE4NjYzMy
+wyMDUxMjY4ODI3LC0xNDQzNzc2OTEzLDE1MTM2MDQ4NTYsLTIy
+NTc4NDQ1Nl19
 -->
