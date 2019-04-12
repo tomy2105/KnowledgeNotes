@@ -798,26 +798,21 @@ lengthy = std::get<0>(proof);  // Assign to 'lengthy' the value 18.
 std::get<3>(proof) = " Beautiful!";  // Modify the tuple’s fourth element.
 ```
 
-tuple has a suitable constructor.
+`std::make_tuple` automatically creates `std::tuple`s using type deduction. `std::tie` creates tuples of lvalue references to help unpack tuples. `std::ignore` also helps here. 
 
-typedef std::tuple <int , double, string       > tuple_1 t1;
-typedef std::tuple <char, short , const char * > tuple_2 t2 ('X', 2, "Hola!");
-t1 = t2; // Ok, first two elements can be converted,
-         // the third one can be constructed from a 'const char *'.
-
-Just like `std::make_pair` for `std::pair`, there exists `std::make_tuple` to automatically create `std::tuple`s using type deduction and `auto` helps to declare such a tuple. `std::tie` creates tuples of lvalue references to help unpack tuples. `std::ignore` also helps here. See the example:
-
+```cpp
 auto record = std::make_tuple("Hari Ram", "New Delhi", 3.5, 'A');
 std::string name ; float gpa ; char grade ;
 std::tie(name, std::ignore, gpa, grade) = record ; // std::ignore helps drop the place name
 std::cout << name << ' ' << gpa << ' ' << grade << std::endl ;
+```
 
-Relational operators are available (among tuples with the same number of elements), and two expressions are available to check a tuple’s characteristics (only during compilation):
+Expressions are available to check a tuple’s characteristics (only during compilation):
 
 -   `std::tuple_size<T>::value` returns the number of elements in the tuple `T`,
 -   `std::tuple_element<I, T>::type` returns the type of the object number `I` of the tuple `T`.
 
-
+Relation operations as well as assignment betwee
 
 ### Hash tables
 
@@ -851,11 +846,11 @@ Relational operators are available (among tuples with the same number of element
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDQxNzgzNjU3LC03NTUxNjgzNSwyMDM2ND
-I3NzU4LC0yMDExNDIyMDYsLTgyNDMwMTQwMyw0NjUzMjY0NzAs
-OTQ3NTQyNzI4LC0xNTc5Mzg4MDM3LDQ3NTc4ODMwLC01NjcwNj
-M4MDUsLTE3OTk4MTIyODYsMTQwNTc2NjYzMiwtNDc5MDM1OTE4
-LC00MTYxMDU5MDYsLTE0ODcxODk4MTksMjA2NjgyNjg3MywxOT
-k0MzA3ODc3LDEyNzk2MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcx
-MTFdfQ==
+eyJoaXN0b3J5IjpbLTE2Njg2MTI2MjEsLTc1NTE2ODM1LDIwMz
+Y0Mjc3NTgsLTIwMTE0MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3
+MCw5NDc1NDI3MjgsLTE1NzkzODgwMzcsNDc1Nzg4MzAsLTU2Nz
+A2MzgwNSwtMTc5OTgxMjI4NiwxNDA1NzY2NjMyLC00NzkwMzU5
+MTgsLTQxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMDY2ODI2ODczLD
+E5OTQzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcx
+NzExMV19
 -->
