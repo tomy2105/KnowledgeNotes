@@ -787,6 +787,38 @@ One more code example is in [Philosophers.cpp](Philosophers.cpp).
 
 ### Tuple types
 
+Tuples are collections composed of heterogeneous objects of pre-arranged dimensions. 
+
+```cpp
+typedef std::tuple <int, double, long &, const char *> test_tuple;
+long lengthy = 12;
+test_tuple proof (18, 6.5, lengthy, "Ciao!");
+
+lengthy = std::get<0>(proof);  // Assign to 'lengthy' the value 18.
+std::get<3>(proof) = " Beautiful!";  // Modify the tuple’s fourth element.
+```
+
+tuple has a suitable constructor.
+
+typedef std::tuple <int , double, string       > tuple_1 t1;
+typedef std::tuple <char, short , const char * > tuple_2 t2 ('X', 2, "Hola!");
+t1 = t2; // Ok, first two elements can be converted,
+         // the third one can be constructed from a 'const char *'.
+
+Just like `std::make_pair` for `std::pair`, there exists `std::make_tuple` to automatically create `std::tuple`s using type deduction and `auto` helps to declare such a tuple. `std::tie` creates tuples of lvalue references to help unpack tuples. `std::ignore` also helps here. See the example:
+
+auto record = std::make_tuple("Hari Ram", "New Delhi", 3.5, 'A');
+std::string name ; float gpa ; char grade ;
+std::tie(name, std::ignore, gpa, grade) = record ; // std::ignore helps drop the place name
+std::cout << name << ' ' << gpa << ' ' << grade << std::endl ;
+
+Relational operators are available (among tuples with the same number of elements), and two expressions are available to check a tuple’s characteristics (only during compilation):
+
+-   `std::tuple_size<T>::value` returns the number of elements in the tuple `T`,
+-   `std::tuple_element<I, T>::type` returns the type of the object number `I` of the tuple `T`.
+
+
+
 ### Hash tables
 
 ### Regular expressions
@@ -819,11 +851,11 @@ One more code example is in [Philosophers.cpp](Philosophers.cpp).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc1NTE2ODM1LDIwMzY0Mjc3NTgsLTIwMT
-E0MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3MCw5NDc1NDI3Mjgs
-LTE1NzkzODgwMzcsNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OT
-gxMjI4NiwxNDA1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkw
-NiwtMTQ4NzE4OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMT
-I3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4
-OTc2XX0=
+eyJoaXN0b3J5IjpbNDQxNzgzNjU3LC03NTUxNjgzNSwyMDM2ND
+I3NzU4LC0yMDExNDIyMDYsLTgyNDMwMTQwMyw0NjUzMjY0NzAs
+OTQ3NTQyNzI4LC0xNTc5Mzg4MDM3LDQ3NTc4ODMwLC01NjcwNj
+M4MDUsLTE3OTk4MTIyODYsMTQwNTc2NjYzMiwtNDc5MDM1OTE4
+LC00MTYxMDU5MDYsLTE0ODcxODk4MTksMjA2NjgyNjg3MywxOT
+k0MzA3ODc3LDEyNzk2MzU2NDUsLTQ0OTQ0NzkyMywzMDY3MTcx
+MTFdfQ==
 -->
