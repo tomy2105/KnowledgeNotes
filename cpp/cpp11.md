@@ -780,13 +780,9 @@ More info with examples [here](https://en.cppreference.com/w/cpp/thread).
 
 Some info and problems about `std::async` [here](https://eli.thegreenplace.net/2016/the-promises-and-challenges-of-stdasync-task-based-parallelism-in-c11/).
 
+For programming without locks one can use  [atomic operations](https://en.cppreference.com/w/cpp/atomic), especially using `std::atomic` variables.
+
 One more code example is in [Philosophers.cpp](Philosophers.cpp).
-
-For data used by multiple threads without locks one can use  [atomic operations](https://en.cppreference.com/w/cpp/atomic), especially using `std::atomic` variables.
-
-Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
-
- 
 
 
 ### Tuple types
@@ -823,11 +819,11 @@ Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory 
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMjU2MzcyMjAsMjAzNjQyNzc1OCwtMj
-AxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLDk0NzU0Mjcy
-OCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYzODA1LC0xNz
-k5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OTAzNTkxOCwtNDE2MTA1
-OTA2LC0xNDg3MTg5ODE5LDIwNjY4MjY4NzMsMTk5NDMwNzg3Ny
-wxMjc5NjM1NjQ1LC00NDk0NDc5MjMsMzA2NzE3MTExLDIwNzg3
-ODg5NzZdfQ==
+eyJoaXN0b3J5IjpbLTc1NTE2ODM1LDIwMzY0Mjc3NTgsLTIwMT
+E0MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3MCw5NDc1NDI3Mjgs
+LTE1NzkzODgwMzcsNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OT
+gxMjI4NiwxNDA1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkw
+NiwtMTQ4NzE4OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMT
+I3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4
+OTc2XX0=
 -->
