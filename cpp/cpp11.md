@@ -782,7 +782,7 @@ Some info and problems about `std::async` [here](https://eli.thegreenplace.net/2
 
 One more code example is in [Philosophers.cpp](Philosophers.cpp).
 
-For data used by multiple threads without locks one can use  [atomic operations](https://en.cppreference.com/w/cpp/atomic/atomic).
+For data used by multiple threads without locks one can use  [atomic operations](https://en.cppreference.com/w/cpp/atomic), especially using `std::atomic` .
 
 Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
 
@@ -823,11 +823,11 @@ Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory 
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzNjQyNzc1OCwtMjAxMTQyMjA2LC04Mj
-QzMDE0MDMsNDY1MzI2NDcwLDk0NzU0MjcyOCwtMTU3OTM4ODAz
-Nyw0NzU3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEyMjg2LDE0MD
-U3NjY2MzIsLTQ3OTAzNTkxOCwtNDE2MTA1OTA2LC0xNDg3MTg5
-ODE5LDIwNjY4MjY4NzMsMTk5NDMwNzg3NywxMjc5NjM1NjQ1LC
-00NDk0NDc5MjMsMzA2NzE3MTExLDIwNzg3ODg5NzYsLTExMzEy
-ODMxMzJdfQ==
+eyJoaXN0b3J5IjpbLTE3MzQ5NzEyNDcsMjAzNjQyNzc1OCwtMj
+AxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLDk0NzU0Mjcy
+OCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYzODA1LC0xNz
+k5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OTAzNTkxOCwtNDE2MTA1
+OTA2LC0xNDg3MTg5ODE5LDIwNjY4MjY4NzMsMTk5NDMwNzg3Ny
+wxMjc5NjM1NjQ1LC00NDk0NDc5MjMsMzA2NzE3MTExLDIwNzg3
+ODg5NzZdfQ==
 -->
