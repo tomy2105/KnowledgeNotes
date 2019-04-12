@@ -780,8 +780,9 @@ More info with examples [here](https://en.cppreference.com/w/cpp/thread).
 
 Some info and problems about `std::async` [here](https://eli.thegreenplace.net/2016/the-promises-and-challenges-of-stdasync-task-based-parallelism-in-c11/).
 
+One more code example is in [Philosophers.cpp](Philosophers.cpp).
 
-For high-performance, low-level work, communicating between threads is sometimes needed without the overhead of mutexes. This is done using [atomic operations](https://en.wikipedia.org/wiki/Atomic_operation "Atomic operation") on memory locations. These can optionally specify the minimum memory visibility constraints needed for an operation. Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
+For data used by multiple threads without locks one can use  [atomic operations](https://en.cppreference.com/w/cpp/atomic/atomic) on memory locations. These can optionally specify the minimum memory visibility constraints needed for an operation. Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
 
  
 
@@ -820,11 +821,11 @@ For high-performance, low-level work, communicating between threads is sometimes
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMTE0MjIwNiwtODI0MzAxNDAzLDQ2NT
-MyNjQ3MCw5NDc1NDI3MjgsLTE1NzkzODgwMzcsNDc1Nzg4MzAs
-LTU2NzA2MzgwNSwtMTc5OTgxMjI4NiwxNDA1NzY2NjMyLC00Nz
-kwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMDY2ODI2
-ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLD
-MwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMxMjgzMTMyLDg1OTE4
-NjYzM119
+eyJoaXN0b3J5IjpbLTE3NDY5NDA2NzMsLTIwMTE0MjIwNiwtOD
+I0MzAxNDAzLDQ2NTMyNjQ3MCw5NDc1NDI3MjgsLTE1NzkzODgw
+MzcsNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OTgxMjI4NiwxND
+A1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4
+OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NS
+wtNDQ5NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMx
+MjgzMTMyXX0=
 -->
