@@ -815,28 +815,7 @@ Expressions are available to check a tuple’s characteristics (only during comp
 Relation operations as well as assignment between tuples is possible provided they have same number of elements and corresponding element types can be assigned/compared.
 
 ### Hash tables
-`std::unordered_set(https://en.wikipedia.org/wiki/Unordered_associative_containers_(C%2B%2B) "Unordered associative containers (C++)")`
-
-No
-
-No
-
-`[std::unordered_multiset](https://en.wikipedia.org/wiki/Unordered_associative_containers_(C%2B%2B) "Unordered associative containers (C++)")`
-
-No
-
-Yes
-
-`[std::unordered_map](https://en.wikipedia.org/wiki/Unordered_associative_containers_(C%2B%2B) "Unordered associative containers (C++)")`
-
-Yes
-
-No
-
-`[std::unordered_multimap](https://en.wikipedia.org/wiki/Unordered_associative_containers_(C%2B%2B) "Unordered associative containers (C++)")`
-
-Yes
-
+`std::unordered_set`, `std::unordered_multiset`, `std::unordered_map` and `std::unordered_multimap`
 Yes
 ### Regular expressions
 
@@ -868,11 +847,11 @@ Yes
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMDAwNzE1ODksLTc1NTE2ODM1LDIwMz
-Y0Mjc3NTgsLTIwMTE0MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3
-MCw5NDc1NDI3MjgsLTE1NzkzODgwMzcsNDc1Nzg4MzAsLTU2Nz
-A2MzgwNSwtMTc5OTgxMjI4NiwxNDA1NzY2NjMyLC00NzkwMzU5
-MTgsLTQxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMDY2ODI2ODczLD
-E5OTQzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcx
-NzExMV19
+eyJoaXN0b3J5IjpbMTA1NjcxNjQzMSwtNzU1MTY4MzUsMjAzNj
+QyNzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2NDcw
+LDk0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MD
+YzODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OTAzNTkx
+OCwtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LDIwNjY4MjY4NzMsMT
+k5NDMwNzg3NywxMjc5NjM1NjQ1LC00NDk0NDc5MjMsMzA2NzE3
+MTExXX0=
 -->
