@@ -782,7 +782,9 @@ Some info and problems about `std::async` [here](https://eli.thegreenplace.net/2
 
 One more code example is in [Philosophers.cpp](Philosophers.cpp).
 
-For data used by multiple threads without locks one can use  [atomic operations](https://en.cppreference.com/w/cpp/atomic/atomic) on memory locations. These can optionally specify the minimum memory visibility constraints needed for an operation. Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
+For data used by multiple threads without locks one can use  [atomic operations](https://en.cppreference.com/w/cpp/atomic/atomic).
+
+Explicit [memory barriers](https://en.wikipedia.org/wiki/Memory_barrier "Memory barrier") may also be used for this purpose.
 
  
 
@@ -821,11 +823,11 @@ For data used by multiple threads without locks one can use  [atomic operations]
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDY5NDA2NzMsLTIwMTE0MjIwNiwtOD
-I0MzAxNDAzLDQ2NTMyNjQ3MCw5NDc1NDI3MjgsLTE1NzkzODgw
-MzcsNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OTgxMjI4NiwxND
-A1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4
-OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYzNTY0NS
-wtNDQ5NDQ3OTIzLDMwNjcxNzExMSwyMDc4Nzg4OTc2LC0xMTMx
-MjgzMTMyXX0=
+eyJoaXN0b3J5IjpbMjAzNjQyNzc1OCwtMjAxMTQyMjA2LC04Mj
+QzMDE0MDMsNDY1MzI2NDcwLDk0NzU0MjcyOCwtMTU3OTM4ODAz
+Nyw0NzU3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEyMjg2LDE0MD
+U3NjY2MzIsLTQ3OTAzNTkxOCwtNDE2MTA1OTA2LC0xNDg3MTg5
+ODE5LDIwNjY4MjY4NzMsMTk5NDMwNzg3NywxMjc5NjM1NjQ1LC
+00NDk0NDc5MjMsMzA2NzE3MTExLDIwNzg3ODg5NzYsLTExMzEy
+ODMxMzJdfQ==
 -->
