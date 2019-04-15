@@ -950,7 +950,7 @@ Template class `std::result_of` that allows one to determine and use the return 
 
 Dynamic exception specifications are deprecated (removed in C++17). Compile-time specification of non-exception-throwing functions is available with the [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept_spec) keyword (useful for optimization).
 
-Beware destructors are by default `noexcept(true)` which is backward incompatible, for more see [here](https://akrzemi1.wordpress.com/2013/08/20/noexcept-destructors/).
+Beware destructors and constructors are by default `noexcept(true)` which is backward incompatible, for more see [here](https://akrzemi1.wordpress.com/2013/08/20/noexcept-destructors/).
 
 ## Some of the references
 
@@ -962,11 +962,11 @@ Beware destructors are by default `noexcept(true)` which is backward incompatibl
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU4MDQ4OTU0MywxMzU1NjAyODY1LDI2Nj
-Q0NjkyMCwtMzY0NjI3ODc3LC0yNzI4MzU1MTMsMTIyMDk0MjMz
-NCwtMTI2NjczMzc3OCwxNDg2MTg0NDUwLDE4MTc4NzE1MjcsLT
-gxMDExMTc1MSw3ODIxMjIzMjAsMTgxNzg3MTUyNywtOTYwNDY5
-MDI0LC0xMjg5MjU4NDMwLC0zNDc0ODc5MjIsLTE3MzAxNDI0Mj
-IsLTc1NTE2ODM1LDIwMzY0Mjc3NTgsLTIwMTE0MjIwNiwtODI0
-MzAxNDAzXX0=
+eyJoaXN0b3J5IjpbODcxMjQ1ODQxLDE1ODA0ODk1NDMsMTM1NT
+YwMjg2NSwyNjY0NDY5MjAsLTM2NDYyNzg3NywtMjcyODM1NTEz
+LDEyMjA5NDIzMzQsLTEyNjY3MzM3NzgsMTQ4NjE4NDQ1MCwxOD
+E3ODcxNTI3LC04MTAxMTE3NTEsNzgyMTIyMzIwLDE4MTc4NzE1
+MjcsLTk2MDQ2OTAyNCwtMTI4OTI1ODQzMCwtMzQ3NDg3OTIyLC
+0xNzMwMTQyNDIyLC03NTUxNjgzNSwyMDM2NDI3NzU4LC0yMDEx
+NDIyMDZdfQ==
 -->
