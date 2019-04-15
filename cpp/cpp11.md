@@ -820,6 +820,8 @@ Relation operations as well as assignment between tuples is possible provided th
 
 ### Regular expressions
 
+
+
 ### General-purpose smart pointers
 
 ### Extensible random number facility
@@ -848,11 +850,11 @@ Relation operations as well as assignment between tuples is possible provided th
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MzAxNDI0MjIsLTc1NTE2ODM1LDIwMz
-Y0Mjc3NTgsLTIwMTE0MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3
-MCw5NDc1NDI3MjgsLTE1NzkzODgwMzcsNDc1Nzg4MzAsLTU2Nz
-A2MzgwNSwtMTc5OTgxMjI4NiwxNDA1NzY2NjMyLC00NzkwMzU5
-MTgsLTQxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMDY2ODI2ODczLD
-E5OTQzMDc4NzcsMTI3OTYzNTY0NSwtNDQ5NDQ3OTIzLDMwNjcx
-NzExMV19
+eyJoaXN0b3J5IjpbLTM0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNz
+U1MTY4MzUsMjAzNjQyNzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0
+MDMsNDY1MzI2NDcwLDk0NzU0MjcyOCwtMTU3OTM4ODAzNyw0Nz
+U3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2
+MzIsLTQ3OTAzNTkxOCwtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LD
+IwNjY4MjY4NzMsMTk5NDMwNzg3NywxMjc5NjM1NjQ1LC00NDk0
+NDc5MjNdfQ==
 -->
