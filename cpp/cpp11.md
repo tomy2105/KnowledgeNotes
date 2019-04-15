@@ -929,9 +929,9 @@ int main()
 
 ### Polymorphic wrappers for function objects
 
-The template class `std::function` is defined as a wrapper holder for function pointers, member function pointers, or functors. 
+The template class `std::function` is defined as a wrapper holder for function pointers, member function pointers, or functors. `std::mem?`
 
-See more [here](https://en.cppreference.com/w/cpp/numeric/random).
+See more [here](https://en.cppreference.com/w/cpp/utility/functional).
 
 ### Type traits for metaprogramming
 
@@ -953,7 +953,7 @@ See more [here](https://en.cppreference.com/w/cpp/numeric/random).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY2MDg2NjcxMCwxNDg2MTg0NDUwLDE4MT
+eyJoaXN0b3J5IjpbMTQ2OTcxMjMyNiwxNDg2MTg0NDUwLDE4MT
 c4NzE1MjcsLTgxMDExMTc1MSw3ODIxMjIzMjAsMTgxNzg3MTUy
 NywtOTYwNDY5MDI0LC0xMjg5MjU4NDMwLC0zNDc0ODc5MjIsLT
 E3MzAxNDI0MjIsLTc1NTE2ODM1LDIwMzY0Mjc3NTgsLTIwMTE0
