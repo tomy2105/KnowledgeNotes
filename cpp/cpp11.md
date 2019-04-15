@@ -943,6 +943,9 @@ See more [here](https://en.cppreference.com/w/cpp/header/type_traits).
 
 ### Uniform method for computing the return type of function objects
 
+Template class `std::result_of` that allows one to determine and use the return type of a function object for every declaration.
+
+
 ## Improved C compatibility
 
 ## Features removed or deprecated
@@ -959,11 +962,11 @@ See more [here](https://en.cppreference.com/w/cpp/header/type_traits).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIyMDk0MjMzNCwtMTI2NjczMzc3OCwxND
-g2MTg0NDUwLDE4MTc4NzE1MjcsLTgxMDExMTc1MSw3ODIxMjIz
-MjAsMTgxNzg3MTUyNywtOTYwNDY5MDI0LC0xMjg5MjU4NDMwLC
-0zNDc0ODc5MjIsLTE3MzAxNDI0MjIsLTc1NTE2ODM1LDIwMzY0
-Mjc3NTgsLTIwMTE0MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3MC
-w5NDc1NDI3MjgsLTE1NzkzODgwMzcsNDc1Nzg4MzAsLTU2NzA2
-MzgwNV19
+eyJoaXN0b3J5IjpbLTEzMDk2NTg3NywxMjIwOTQyMzM0LC0xMj
+Y2NzMzNzc4LDE0ODYxODQ0NTAsMTgxNzg3MTUyNywtODEwMTEx
+NzUxLDc4MjEyMjMyMCwxODE3ODcxNTI3LC05NjA0NjkwMjQsLT
+EyODkyNTg0MzAsLTM0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNzU1
+MTY4MzUsMjAzNjQyNzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0MD
+MsNDY1MzI2NDcwLDk0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3
+ODgzMF19
 -->
