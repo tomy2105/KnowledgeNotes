@@ -863,6 +863,7 @@ std::cout << new_s << '\n';
 
 Provides `std::unique_ptr`,  `std::shared_ptr` and `std::weak_ptr`. `std::auto_ptr` is deprecated.
 
+A `unique_ptr` is a container for a raw pointer, which the `unique_ptr` is said to own. A `unique_ptr` explicitly prevents copying of its contained pointer (as would happen with normal assignment), but the `std::move` function can be used to transfer ownership of the contained pointer to another `unique_ptr`. A `unique_ptr` cannot be copied because its copy constructor and assignment operators are explicitly deleted.
 
 ### Extensible random number facility
 
@@ -890,7 +891,7 @@ Provides `std::unique_ptr`,  `std::shared_ptr` and `std::weak_ptr`. `std::auto_p
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMTY3MjgyNzksLTEyODkyNTg0MzAsLT
+eyJoaXN0b3J5IjpbLTE5MDkzNDEyNjQsLTEyODkyNTg0MzAsLT
 M0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQy
 Nzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLD
 k0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYz
