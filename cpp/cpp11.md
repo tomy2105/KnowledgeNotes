@@ -871,6 +871,8 @@ A `weak_ptr` is a container for a raw pointer. It is created as a copy of a `sha
 
 `std::make_shared` (C++17) and `std::make_unique` (C++14) can be used to completely avoid using new (delete is never invoked directly anyway, only by implementation of smart pointers).
 
+In addition
+
 ```cpp
 	std::shared_ptr<int> p1 = std::make_shared<int>(5);
 	std::weak_ptr<int> wp1{ p1 }; //p1 owns the memory.
@@ -921,11 +923,11 @@ See more [here](https://en.cppreference.com/w/cpp/memory).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk2MDQ2OTAyNCwtMTI4OTI1ODQzMCwtMz
-Q3NDg3OTIyLC0xNzMwMTQyNDIyLC03NTUxNjgzNSwyMDM2NDI3
-NzU4LC0yMDExNDIyMDYsLTgyNDMwMTQwMyw0NjUzMjY0NzAsOT
-Q3NTQyNzI4LC0xNTc5Mzg4MDM3LDQ3NTc4ODMwLC01NjcwNjM4
-MDUsLTE3OTk4MTIyODYsMTQwNTc2NjYzMiwtNDc5MDM1OTE4LC
-00MTYxMDU5MDYsLTE0ODcxODk4MTksMjA2NjgyNjg3MywxOTk0
-MzA3ODc3XX0=
+eyJoaXN0b3J5IjpbLTY1ODI3MDk4MSwtOTYwNDY5MDI0LC0xMj
+g5MjU4NDMwLC0zNDc0ODc5MjIsLTE3MzAxNDI0MjIsLTc1NTE2
+ODM1LDIwMzY0Mjc3NTgsLTIwMTE0MjIwNiwtODI0MzAxNDAzLD
+Q2NTMyNjQ3MCw5NDc1NDI3MjgsLTE1NzkzODgwMzcsNDc1Nzg4
+MzAsLTU2NzA2MzgwNSwtMTc5OTgxMjI4NiwxNDA1NzY2NjMyLC
+00NzkwMzU5MTgsLTQxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMDY2
+ODI2ODczXX0=
 -->
