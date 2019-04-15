@@ -935,7 +935,11 @@ See more [here](https://en.cppreference.com/w/cpp/utility/functional).
 
 ### Type traits for metaprogramming
 
-_Type traits_ can identify the category of an object and all the characteristics of a class (or of a struct). They are defined in the new header `<type_traits>`.
+_Type traits_ can identify the category of an object and all the characteristics of a class (or of a struct). They are defined in the new header `<type_traits>`. 
+
+For example determining, at compile time, if type is and array, class or if it is scalar, or object.
+
+See more [here](https://en.cppreference.com/w/cpp/header/type_traits).
 
 ### Uniform method for computing the return type of function objects
 
@@ -955,11 +959,11 @@ _Type traits_ can identify the category of an object and all the characteristics
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwODU2NDk5LC0xMjY2NzMzNzc4LDE0OD
-YxODQ0NTAsMTgxNzg3MTUyNywtODEwMTExNzUxLDc4MjEyMjMy
-MCwxODE3ODcxNTI3LC05NjA0NjkwMjQsLTEyODkyNTg0MzAsLT
-M0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQy
-Nzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLD
-k0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYz
-ODA1XX0=
+eyJoaXN0b3J5IjpbMTIyMDk0MjMzNCwtMTI2NjczMzc3OCwxND
+g2MTg0NDUwLDE4MTc4NzE1MjcsLTgxMDExMTc1MSw3ODIxMjIz
+MjAsMTgxNzg3MTUyNywtOTYwNDY5MDI0LC0xMjg5MjU4NDMwLC
+0zNDc0ODc5MjIsLTE3MzAxNDI0MjIsLTc1NTE2ODM1LDIwMzY0
+Mjc3NTgsLTIwMTE0MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3MC
+w5NDc1NDI3MjgsLTE1NzkzODgwMzcsNDc1Nzg4MzAsLTU2NzA2
+MzgwNV19
 -->
