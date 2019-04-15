@@ -904,7 +904,27 @@ Random number functionality is split into two parts: a generator engine that con
 See more [here](https://en.cppreference.com/w/cpp/numeric/random).
 
 ### Wrapper reference
+A [wrapper](https://en.wikipedia.org/wiki/Adapter_pattern "Adapter pattern") reference is obtained from an instance of the template class `reference_wrapper`. Wrapper references are similar to normal references (‘`&`’) of the C++ language. To obtain a wrapper reference from any object the function template `ref` is used (for a constant reference `cref` is used).
 
+Wrapper references are useful above all for function templates, where references to parameters rather than copies are needed:
+
+// This function will obtain a reference to the parameter 'r' and increment it.
+void func (int &r)  { r++; }
+
+// Template function.
+template<class F, class P> void g (F f, P t)  { f(t); }
+
+int main()
+{
+    int i = 0;
+    g (func, i); // 'g<void (int &r), int>' is instantiated
+                 // then 'i' will not be modified.
+    std::cout << i << std::endl; // Output -> 0
+
+    g (func, std::ref(i)); // 'g<void(int &r),reference_wrapper<int>>' is instantiated
+                           // then 'i' will be modified.
+    std::cout << i << std::endl; // Output -> 1
+}
 ### Polymorphic wrappers for function objects
 
 ### Type traits for metaprogramming
@@ -927,11 +947,11 @@ See more [here](https://en.cppreference.com/w/cpp/numeric/random).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ4NjE4NDQ1MCwxODE3ODcxNTI3LC04MT
-AxMTE3NTEsNzgyMTIyMzIwLDE4MTc4NzE1MjcsLTk2MDQ2OTAy
-NCwtMTI4OTI1ODQzMCwtMzQ3NDg3OTIyLC0xNzMwMTQyNDIyLC
-03NTUxNjgzNSwyMDM2NDI3NzU4LC0yMDExNDIyMDYsLTgyNDMw
-MTQwMyw0NjUzMjY0NzAsOTQ3NTQyNzI4LC0xNTc5Mzg4MDM3LD
-Q3NTc4ODMwLC01NjcwNjM4MDUsLTE3OTk4MTIyODYsMTQwNTc2
-NjYzMl19
+eyJoaXN0b3J5IjpbLTIzNzU2NjE1LDE0ODYxODQ0NTAsMTgxNz
+g3MTUyNywtODEwMTExNzUxLDc4MjEyMjMyMCwxODE3ODcxNTI3
+LC05NjA0NjkwMjQsLTEyODkyNTg0MzAsLTM0NzQ4NzkyMiwtMT
+czMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQyNzc1OCwtMjAxMTQy
+MjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLDk0NzU0MjcyOCwtMT
+U3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEy
+Mjg2XX0=
 -->
