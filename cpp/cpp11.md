@@ -820,7 +820,9 @@ Relation operations as well as assignment between tuples is possible provided th
 
 ### Regular expressions
 
-
+Regular expression support is based on class `std::regex`, template class `std::match_results`, function `std::regex_search` and  function `std::regex_replace`.
+csdafsd
+See more []o[][]šđšđ
 
 ### General-purpose smart pointers
 
@@ -850,11 +852,11 @@ Relation operations as well as assignment between tuples is possible provided th
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNz
-U1MTY4MzUsMjAzNjQyNzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0
-MDMsNDY1MzI2NDcwLDk0NzU0MjcyOCwtMTU3OTM4ODAzNyw0Nz
-U3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2
-MzIsLTQ3OTAzNTkxOCwtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LD
-IwNjY4MjY4NzMsMTk5NDMwNzg3NywxMjc5NjM1NjQ1LC00NDk0
-NDc5MjNdfQ==
+eyJoaXN0b3J5IjpbOTk2MTgxNDIwLC0zNDc0ODc5MjIsLTE3Mz
+AxNDI0MjIsLTc1NTE2ODM1LDIwMzY0Mjc3NTgsLTIwMTE0MjIw
+NiwtODI0MzAxNDAzLDQ2NTMyNjQ3MCw5NDc1NDI3MjgsLTE1Nz
+kzODgwMzcsNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OTgxMjI4
+NiwxNDA1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEwNTkwNiwtMT
+Q4NzE4OTgxOSwyMDY2ODI2ODczLDE5OTQzMDc4NzcsMTI3OTYz
+NTY0NV19
 -->
