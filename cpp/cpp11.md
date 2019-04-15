@@ -952,8 +952,6 @@ Dynamic exception specifications are deprecated (removed in C++17). Compile-time
 
 Beware destructors are by default `noexcept(true)` which is backward incompatible, for more see [here](https://akrzemi1.wordpress.com/2013/08/20/noexcept-destructors/).
 
-## C11 changes
-
 ## Some of the references
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
@@ -964,11 +962,11 @@ Beware destructors are by default `noexcept(true)` which is backward incompatibl
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM1NTYwMjg2NSwyNjY0NDY5MjAsLTM2ND
-YyNzg3NywtMjcyODM1NTEzLDEyMjA5NDIzMzQsLTEyNjY3MzM3
-NzgsMTQ4NjE4NDQ1MCwxODE3ODcxNTI3LC04MTAxMTE3NTEsNz
-gyMTIyMzIwLDE4MTc4NzE1MjcsLTk2MDQ2OTAyNCwtMTI4OTI1
-ODQzMCwtMzQ3NDg3OTIyLC0xNzMwMTQyNDIyLC03NTUxNjgzNS
-wyMDM2NDI3NzU4LC0yMDExNDIyMDYsLTgyNDMwMTQwMyw0NjUz
-MjY0NzBdfQ==
+eyJoaXN0b3J5IjpbMTU4MDQ4OTU0MywxMzU1NjAyODY1LDI2Nj
+Q0NjkyMCwtMzY0NjI3ODc3LC0yNzI4MzU1MTMsMTIyMDk0MjMz
+NCwtMTI2NjczMzc3OCwxNDg2MTg0NDUwLDE4MTc4NzE1MjcsLT
+gxMDExMTc1MSw3ODIxMjIzMjAsMTgxNzg3MTUyNywtOTYwNDY5
+MDI0LC0xMjg5MjU4NDMwLC0zNDc0ODc5MjIsLTE3MzAxNDI0Mj
+IsLTc1NTE2ODM1LDIwMzY0Mjc3NTgsLTIwMTE0MjIwNiwtODI0
+MzAxNDAzXX0=
 -->
