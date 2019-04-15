@@ -904,10 +904,10 @@ Random number functionality is split into two parts: a generator engine that con
 See more [here](https://en.cppreference.com/w/cpp/numeric/random).
 
 ### Wrapper reference
-A [wrapper](https://en.wikipedia.org/wiki/Adapter_pattern "Adapter pattern") reference is obtained from an instance of the template class `reference_wrapper`. Wrapper references are similar to normal references (‘`&`’) of the C++ language. To obtain a wrapper reference from any object the function template `ref` is used (for a constant reference `cref` is used).
 
-Wrapper references are useful above all for function templates, where references to parameters rather than copies are needed:
+To obtain a wrapper reference from any object the function template `ref` is used (for a constant reference `cref` is used). Useful for function templates, where references to parameters rather than copies are needed:
 
+```cpp
 // This function will obtain a reference to the parameter 'r' and increment it.
 void func (int &r)  { r++; }
 
@@ -925,6 +925,8 @@ int main()
                            // then 'i' will be modified.
     std::cout << i << std::endl; // Output -> 1
 }
+```
+
 ### Polymorphic wrappers for function objects
 
 ### Type traits for metaprogramming
@@ -947,11 +949,11 @@ int main()
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIzNzU2NjE1LDE0ODYxODQ0NTAsMTgxNz
-g3MTUyNywtODEwMTExNzUxLDc4MjEyMjMyMCwxODE3ODcxNTI3
-LC05NjA0NjkwMjQsLTEyODkyNTg0MzAsLTM0NzQ4NzkyMiwtMT
-czMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQyNzc1OCwtMjAxMTQy
-MjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLDk0NzU0MjcyOCwtMT
-U3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEy
-Mjg2XX0=
+eyJoaXN0b3J5IjpbLTYzMDI4ODIxMywxNDg2MTg0NDUwLDE4MT
+c4NzE1MjcsLTgxMDExMTc1MSw3ODIxMjIzMjAsMTgxNzg3MTUy
+NywtOTYwNDY5MDI0LC0xMjg5MjU4NDMwLC0zNDc0ODc5MjIsLT
+E3MzAxNDI0MjIsLTc1NTE2ODM1LDIwMzY0Mjc3NTgsLTIwMTE0
+MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3MCw5NDc1NDI3MjgsLT
+E1NzkzODgwMzcsNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OTgx
+MjI4Nl19
 -->
