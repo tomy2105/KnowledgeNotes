@@ -929,7 +929,9 @@ int main()
 
 ### Polymorphic wrappers for function objects
 
-The template class `srd>>function` was defined
+The template class `std::function` is defined as a wrapper holder for function pointers, member function pointers, or functors. 
+
+See more [here](https://en.cppreference.com/w/cpp/numeric/random).
 
 ### Type traits for metaprogramming
 
@@ -951,11 +953,11 @@ The template class `srd>>function` was defined
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDkyNzE0ODMzLDE0ODYxODQ0NTAsMTgxNz
-g3MTUyNywtODEwMTExNzUxLDc4MjEyMjMyMCwxODE3ODcxNTI3
-LC05NjA0NjkwMjQsLTEyODkyNTg0MzAsLTM0NzQ4NzkyMiwtMT
-czMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQyNzc1OCwtMjAxMTQy
-MjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLDk0NzU0MjcyOCwtMT
-U3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEy
-Mjg2XX0=
+eyJoaXN0b3J5IjpbLTY2MDg2NjcxMCwxNDg2MTg0NDUwLDE4MT
+c4NzE1MjcsLTgxMDExMTc1MSw3ODIxMjIzMjAsMTgxNzg3MTUy
+NywtOTYwNDY5MDI0LC0xMjg5MjU4NDMwLC0zNDc0ODc5MjIsLT
+E3MzAxNDI0MjIsLTc1NTE2ODM1LDIwMzY0Mjc3NTgsLTIwMTE0
+MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3MCw5NDc1NDI3MjgsLT
+E1NzkzODgwMzcsNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OTgx
+MjI4Nl19
 -->
