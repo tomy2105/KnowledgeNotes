@@ -824,6 +824,41 @@ Regular expression support is based on template class `std::basic_regex`, templa
 
 See more [here](https://en.cppreference.com/w/cpp/regex).
 
+```cpp
+std::string s = "Some people, when confronted with a problem, think "
+	"\"I know, I'll use regular expressions.\" "
+	"Now they have two problems.";
+ 
+std::regex self_regex("REGULAR EXPRESSIONS",
+	std::regex_constants::ECMAScript | std::regex_constants::icase);
+if (std::regex_search(s, self_regex)) {
+	std::cout << "Text contains the phrase 'regular expressions'\n";
+}
+ 
+std::regex word_regex("(\\S+)");
+auto words_begin =
+	std::sregex_iterator(s.begin(), s.end(), word_regex);
+auto words_end = std::sregex_iterator();
+ 
+std::cout << "Found "
+	<< std::distance(words_begin, words_end)
+	<< " words\n";
+ 
+const int N = 6;
+std::cout << "Words longer than " << N << " characters:\n";
+for (std::sregex_iterator i = words_begin; i != words_end; ++i) {
+	std::smatch match = *i;
+	std::string match_str = match.str();
+	if (match_str.size() > N) {
+		std::cout << "  " << match_str << '\n';
+	}
+}
+ 
+std::regex long_word_regex("(\\w{7,})");
+std::string new_s = std::regex_replace(s, long_word_regex, "[$&]");
+std::cout << new_s << '\n';
+```
+
 ### General-purpose smart pointers
 
 ### Extensible random number facility
@@ -852,11 +887,11 @@ See more [here](https://en.cppreference.com/w/cpp/regex).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzODIzMjU5NCwtMzQ3NDg3OTIyLC0xNz
-MwMTQyNDIyLC03NTUxNjgzNSwyMDM2NDI3NzU4LC0yMDExNDIy
-MDYsLTgyNDMwMTQwMyw0NjUzMjY0NzAsOTQ3NTQyNzI4LC0xNT
-c5Mzg4MDM3LDQ3NTc4ODMwLC01NjcwNjM4MDUsLTE3OTk4MTIy
-ODYsMTQwNTc2NjYzMiwtNDc5MDM1OTE4LC00MTYxMDU5MDYsLT
-E0ODcxODk4MTksMjA2NjgyNjg3MywxOTk0MzA3ODc3LDEyNzk2
-MzU2NDVdfQ==
+eyJoaXN0b3J5IjpbLTEyODkyNTg0MzAsLTM0NzQ4NzkyMiwtMT
+czMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQyNzc1OCwtMjAxMTQy
+MjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLDk0NzU0MjcyOCwtMT
+U3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEy
+Mjg2LDE0MDU3NjY2MzIsLTQ3OTAzNTkxOCwtNDE2MTA1OTA2LC
+0xNDg3MTg5ODE5LDIwNjY4MjY4NzMsMTk5NDMwNzg3NywxMjc5
+NjM1NjQ1XX0=
 -->
