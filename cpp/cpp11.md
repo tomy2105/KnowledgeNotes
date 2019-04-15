@@ -946,9 +946,9 @@ See more [here](https://en.cppreference.com/w/cpp/header/type_traits).
 Template class `std::result_of` that allows one to determine and use the return type of a function object for every declaration.
 
 
-## Improved C compatibility
-
 ## Features removed or deprecated
+
+Dynamic exception specifications are deprecated. Compile-time specification of non-exception-throwing functions is available with the `noexcept` keyword (useful for optimization).
 
 ## C11 changes
 
@@ -962,7 +962,7 @@ Template class `std::result_of` that allows one to determine and use the return 
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMDk2NTg3NywxMjIwOTQyMzM0LC0xMj
+eyJoaXN0b3J5IjpbLTI3MjgzNTUxMywxMjIwOTQyMzM0LC0xMj
 Y2NzMzNzc4LDE0ODYxODQ0NTAsMTgxNzg3MTUyNywtODEwMTEx
 NzUxLDc4MjEyMjMyMCwxODE3ODcxNTI3LC05NjA0NjkwMjQsLT
 EyODkyNTg0MzAsLTM0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNzU1
