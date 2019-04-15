@@ -893,6 +893,7 @@ A `weak_ptr` is a container for a raw pointer. It is created as a copy of a `sha
 		action_that_needs_a_live_pointer(p3);
 	}
 ```
+See more [here](https://en.cppreference.com/w/cpp/memory).
 
 ### Extensible random number facility
 
@@ -920,11 +921,11 @@ A `weak_ptr` is a container for a raw pointer. It is created as a copy of a `sha
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzkzNjQyNzk4LC0xMjg5MjU4NDMwLC0zND
-c0ODc5MjIsLTE3MzAxNDI0MjIsLTc1NTE2ODM1LDIwMzY0Mjc3
-NTgsLTIwMTE0MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3MCw5ND
-c1NDI3MjgsLTE1NzkzODgwMzcsNDc1Nzg4MzAsLTU2NzA2Mzgw
-NSwtMTc5OTgxMjI4NiwxNDA1NzY2NjMyLC00NzkwMzU5MTgsLT
-QxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMDY2ODI2ODczLDE5OTQz
-MDc4NzddfQ==
+eyJoaXN0b3J5IjpbLTk2MDQ2OTAyNCwtMTI4OTI1ODQzMCwtMz
+Q3NDg3OTIyLC0xNzMwMTQyNDIyLC03NTUxNjgzNSwyMDM2NDI3
+NzU4LC0yMDExNDIyMDYsLTgyNDMwMTQwMyw0NjUzMjY0NzAsOT
+Q3NTQyNzI4LC0xNTc5Mzg4MDM3LDQ3NTc4ODMwLC01NjcwNjM4
+MDUsLTE3OTk4MTIyODYsMTQwNTc2NjYzMiwtNDc5MDM1OTE4LC
+00MTYxMDU5MDYsLTE0ODcxODk4MTksMjA2NjgyNjg3MywxOTk0
+MzA3ODc3XX0=
 -->
