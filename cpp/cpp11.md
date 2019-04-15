@@ -950,11 +950,11 @@ Template class `std::result_of` that allows one to determine and use the return 
 
 Dynamic exception specifications are deprecated (removed in C++17). Compile-time specification of non-exception-throwing functions is available with the [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept_spec) keyword (useful for optimization).
 
-Beware destructors are by default noexcept(
+Beware destructors are by default `noexcept(true)` which is backward incompatible, for more see [here](https://akrzemi1.wordpress.com/2013/08/20/noexcept-destructors/).
 
 ## C11 changes
 
-## References
+## Some of the references
 
 -   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
 -  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
@@ -964,7 +964,7 @@ Beware destructors are by default noexcept(
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI5MTc3Njk5MiwyNjY0NDY5MjAsLTM2ND
+eyJoaXN0b3J5IjpbMTM1NTYwMjg2NSwyNjY0NDY5MjAsLTM2ND
 YyNzg3NywtMjcyODM1NTEzLDEyMjA5NDIzMzQsLTEyNjY3MzM3
 NzgsMTQ4NjE4NDQ1MCwxODE3ODcxNTI3LC04MTAxMTE3NTEsNz
 gyMTIyMzIwLDE4MTc4NzE1MjcsLTk2MDQ2OTAyNCwtMTI4OTI1
