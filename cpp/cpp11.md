@@ -896,7 +896,9 @@ In addition `std::enable_shared_from_this` must be used if trying to create shar
 	}
 ```
 See more [here](https://en.cppreference.com/w/cpp/memory).
-https://www.acodersjourney.com/top-10-dumb-mistakes-avoid-c-11-smart-pointers/
+and something not to do [here](https://www.acodersjourney.com/top-10-dumb-mistakes-avoid-c-11-smart-pointers/).
+
+
 ### Extensible random number facility
 
 ### Wrapper reference
@@ -923,11 +925,11 @@ https://www.acodersjourney.com/top-10-dumb-mistakes-avoid-c-11-smart-pointers/
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk1NzgwMjYxMSwxODE3ODcxNTI3LC05Nj
-A0NjkwMjQsLTEyODkyNTg0MzAsLTM0NzQ4NzkyMiwtMTczMDE0
-MjQyMiwtNzU1MTY4MzUsMjAzNjQyNzc1OCwtMjAxMTQyMjA2LC
-04MjQzMDE0MDMsNDY1MzI2NDcwLDk0NzU0MjcyOCwtMTU3OTM4
-ODAzNyw0NzU3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEyMjg2LD
-E0MDU3NjY2MzIsLTQ3OTAzNTkxOCwtNDE2MTA1OTA2LC0xNDg3
-MTg5ODE5XX0=
+eyJoaXN0b3J5IjpbNzgyMTIyMzIwLDE4MTc4NzE1MjcsLTk2MD
+Q2OTAyNCwtMTI4OTI1ODQzMCwtMzQ3NDg3OTIyLC0xNzMwMTQy
+NDIyLC03NTUxNjgzNSwyMDM2NDI3NzU4LC0yMDExNDIyMDYsLT
+gyNDMwMTQwMyw0NjUzMjY0NzAsOTQ3NTQyNzI4LC0xNTc5Mzg4
+MDM3LDQ3NTc4ODMwLC01NjcwNjM4MDUsLTE3OTk4MTIyODYsMT
+QwNTc2NjYzMiwtNDc5MDM1OTE4LC00MTYxMDU5MDYsLTE0ODcx
+ODk4MTldfQ==
 -->
