@@ -935,6 +935,8 @@ See more [here](https://en.cppreference.com/w/cpp/utility/functional).
 
 ### Type traits for metaprogramming
 
+_Type traits_ can identify the category of an object and all the characteristics of a class (or of a struct). They are defined in the new header `<type_traits>`.
+
 ### Uniform method for computing the return type of function objects
 
 ## Improved C compatibility
@@ -953,11 +955,11 @@ See more [here](https://en.cppreference.com/w/cpp/utility/functional).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNjY3MzM3NzgsMTQ4NjE4NDQ1MCwxOD
-E3ODcxNTI3LC04MTAxMTE3NTEsNzgyMTIyMzIwLDE4MTc4NzE1
-MjcsLTk2MDQ2OTAyNCwtMTI4OTI1ODQzMCwtMzQ3NDg3OTIyLC
-0xNzMwMTQyNDIyLC03NTUxNjgzNSwyMDM2NDI3NzU4LC0yMDEx
-NDIyMDYsLTgyNDMwMTQwMyw0NjUzMjY0NzAsOTQ3NTQyNzI4LC
-0xNTc5Mzg4MDM3LDQ3NTc4ODMwLC01NjcwNjM4MDUsLTE3OTk4
-MTIyODZdfQ==
+eyJoaXN0b3J5IjpbLTEwODU2NDk5LC0xMjY2NzMzNzc4LDE0OD
+YxODQ0NTAsMTgxNzg3MTUyNywtODEwMTExNzUxLDc4MjEyMjMy
+MCwxODE3ODcxNTI3LC05NjA0NjkwMjQsLTEyODkyNTg0MzAsLT
+M0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQy
+Nzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLD
+k0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYz
+ODA1XX0=
 -->
