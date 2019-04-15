@@ -948,7 +948,7 @@ Template class `std::result_of` that allows one to determine and use the return 
 
 ## Features removed or deprecated
 
-Dynamic exception specifications are deprecated. Compile-time specification of non-exception-throwing functions is available with the [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept_spec) keyword (useful for optimization).
+Dynamic exception specifications are deprecated (removed in C++17). Compile-time specification of non-exception-throwing functions is available with the [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept_spec) keyword (useful for optimization).
 
 ## C11 changes
 
@@ -962,11 +962,11 @@ Dynamic exception specifications are deprecated. Compile-time specification of n
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2NDYyNzg3NywtMjcyODM1NTEzLDEyMj
-A5NDIzMzQsLTEyNjY3MzM3NzgsMTQ4NjE4NDQ1MCwxODE3ODcx
-NTI3LC04MTAxMTE3NTEsNzgyMTIyMzIwLDE4MTc4NzE1MjcsLT
-k2MDQ2OTAyNCwtMTI4OTI1ODQzMCwtMzQ3NDg3OTIyLC0xNzMw
-MTQyNDIyLC03NTUxNjgzNSwyMDM2NDI3NzU4LC0yMDExNDIyMD
-YsLTgyNDMwMTQwMyw0NjUzMjY0NzAsOTQ3NTQyNzI4LC0xNTc5
-Mzg4MDM3XX0=
+eyJoaXN0b3J5IjpbMjY2NDQ2OTIwLC0zNjQ2Mjc4NzcsLTI3Mj
+gzNTUxMywxMjIwOTQyMzM0LC0xMjY2NzMzNzc4LDE0ODYxODQ0
+NTAsMTgxNzg3MTUyNywtODEwMTExNzUxLDc4MjEyMjMyMCwxOD
+E3ODcxNTI3LC05NjA0NjkwMjQsLTEyODkyNTg0MzAsLTM0NzQ4
+NzkyMiwtMTczMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQyNzc1OC
+wtMjAxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLDk0NzU0
+MjcyOF19
 -->
