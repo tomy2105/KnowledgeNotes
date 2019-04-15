@@ -871,6 +871,10 @@ A `weak_ptr` is a container for a raw pointer. It is created as a copy of a `sha
 
 `std::make_shared` (C++17) and `std::make_unique` (C++14) can be used to completely avoid using new (delete is never invoked directly anyway, only by implementation of smart pointers).
 
+```cpp
+std::shared_ptr<int>  p1  =  std::make_shared<int>(5);  std::weak_ptr<int>  wp1  {p1};  //p1 owns the memory.  {  std::shared_ptr<int>  p2  =  wp1.lock();  //Now p1 and p2 own the memory.  // p2 is initialized from a weak pointer, so // you have to check if the memory still exists!  if  (p2)  {  do_something_with(p2);  }  }  //p2 is destroyed. Memory is owned by p1.  p1.reset();  // Delete the memory.  std::shared_ptr<int>  p3  =  wp1.lock();  //Memory is gone, so we get an empty shared_ptr.  if  (p3)  {  // code will not execute  action_that_needs_a_live_pointer(p3);  }
+```
+
 ### Extensible random number facility
 
 ### Wrapper reference
@@ -897,11 +901,11 @@ A `weak_ptr` is a container for a raw pointer. It is created as a copy of a `sha
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDg5ODM5NzAxLC0xMjg5MjU4NDMwLC0zND
-c0ODc5MjIsLTE3MzAxNDI0MjIsLTc1NTE2ODM1LDIwMzY0Mjc3
-NTgsLTIwMTE0MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3MCw5ND
-c1NDI3MjgsLTE1NzkzODgwMzcsNDc1Nzg4MzAsLTU2NzA2Mzgw
-NSwtMTc5OTgxMjI4NiwxNDA1NzY2NjMyLC00NzkwMzU5MTgsLT
-QxNjEwNTkwNiwtMTQ4NzE4OTgxOSwyMDY2ODI2ODczLDE5OTQz
-MDc4NzddfQ==
+eyJoaXN0b3J5IjpbLTEyOTk5NDQwMTQsLTEyODkyNTg0MzAsLT
+M0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQy
+Nzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLD
+k0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYz
+ODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OTAzNTkxOC
+wtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LDIwNjY4MjY4NzMsMTk5
+NDMwNzg3N119
 -->
