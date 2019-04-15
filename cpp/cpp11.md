@@ -929,7 +929,7 @@ int main()
 
 ### Polymorphic wrappers for function objects
 
-The template class `std::function` is defined as a wrapper holder for function pointers, member function pointers, or functors. `std::mem?`
+The template class `std::function` is defined as a wrapper holder for function pointers, member function pointers, or functors. `std::mem_fn` wrapper for pointers to members. `std::bind` can be used to bind one or more arguments.
 
 See more [here](https://en.cppreference.com/w/cpp/utility/functional).
 
@@ -953,11 +953,11 @@ See more [here](https://en.cppreference.com/w/cpp/utility/functional).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ2OTcxMjMyNiwxNDg2MTg0NDUwLDE4MT
-c4NzE1MjcsLTgxMDExMTc1MSw3ODIxMjIzMjAsMTgxNzg3MTUy
-NywtOTYwNDY5MDI0LC0xMjg5MjU4NDMwLC0zNDc0ODc5MjIsLT
-E3MzAxNDI0MjIsLTc1NTE2ODM1LDIwMzY0Mjc3NTgsLTIwMTE0
-MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3MCw5NDc1NDI3MjgsLT
-E1NzkzODgwMzcsNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMTc5OTgx
-MjI4Nl19
+eyJoaXN0b3J5IjpbLTEyNjY3MzM3NzgsMTQ4NjE4NDQ1MCwxOD
+E3ODcxNTI3LC04MTAxMTE3NTEsNzgyMTIyMzIwLDE4MTc4NzE1
+MjcsLTk2MDQ2OTAyNCwtMTI4OTI1ODQzMCwtMzQ3NDg3OTIyLC
+0xNzMwMTQyNDIyLC03NTUxNjgzNSwyMDM2NDI3NzU4LC0yMDEx
+NDIyMDYsLTgyNDMwMTQwMyw0NjUzMjY0NzAsOTQ3NTQyNzI4LC
+0xNTc5Mzg4MDM3LDQ3NTc4ODMwLC01NjcwNjM4MDUsLTE3OTk4
+MTIyODZdfQ==
 -->
