@@ -863,7 +863,11 @@ std::cout << new_s << '\n';
 
 Provides `std::unique_ptr`,  `std::shared_ptr` and `std::weak_ptr`. `std::auto_ptr` is deprecated.
 
-A `unique_ptr` is a container for a raw pointer, which the `unique_ptr` is said to own. A `unique_ptr` explicitly prevents copying of its contained pointer (as would happen with normal assignment), but the `std::move` function can be used to transfer ownership of the contained pointer to another `unique_ptr`. A `unique_ptr` cannot be copied because its copy constructor and assignment operators are explicitly deleted.
+A `unique_ptr` is a container for a raw pointer, which the `unique_ptr` is said to own. A `unique_ptr` cannot be copied because its copy constructor and assignment operators are explicitly deleted.
+
+A `shared_ptr` is a container for a raw pointer. It maintains reference counting ownership of its contained pointer in cooperation with all copies of the `shared_ptr`. An object referenced by the contained raw pointer will be destroyed when and only when all copies of the `shared_ptr` have been destroyed.
+
+A `weak_ptr` is a container for a raw pointer. It is created as a copy of a `shared_ptr`. The existence or destruction of `weak_ptr` copies of a `shared_ptr` have no effect on the `shared_ptr` or its other copies. After all copies of a `shared_ptr` have been destroyed, all `weak_ptr` copies become empty.
 
 ### Extensible random number facility
 
@@ -891,11 +895,11 @@ A `unique_ptr` is a container for a raw pointer, which the `unique_ptr` is said 
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MDkzNDEyNjQsLTEyODkyNTg0MzAsLT
-M0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQy
-Nzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLD
-k0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYz
-ODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OTAzNTkxOC
-wtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LDIwNjY4MjY4NzMsMTk5
-NDMwNzg3N119
+eyJoaXN0b3J5IjpbMTE2Njk5NzQyMSwtMTI4OTI1ODQzMCwtMz
+Q3NDg3OTIyLC0xNzMwMTQyNDIyLC03NTUxNjgzNSwyMDM2NDI3
+NzU4LC0yMDExNDIyMDYsLTgyNDMwMTQwMyw0NjUzMjY0NzAsOT
+Q3NTQyNzI4LC0xNTc5Mzg4MDM3LDQ3NTc4ODMwLC01NjcwNjM4
+MDUsLTE3OTk4MTIyODYsMTQwNTc2NjYzMiwtNDc5MDM1OTE4LC
+00MTYxMDU5MDYsLTE0ODcxODk4MTksMjA2NjgyNjg3MywxOTk0
+MzA3ODc3XX0=
 -->
