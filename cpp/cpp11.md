@@ -899,6 +899,8 @@ See more [here](https://en.cppreference.com/w/cpp/memory).
 
 ### Extensible random number facility
 
+C++11's random number functionality is split into two parts: a generator engine that contains the random number generator's state and produces the pseudorandom numbers; and a distribution, which determines the range and [mathematical distribution](https://en.wikipedia.org/wiki/Distribution_(mathematics) "Distribution (mathematics)") of the outcome. These two are combined to form a random number generator object.
+
 ### Wrapper reference
 
 ### Polymorphic wrappers for function objects
@@ -923,11 +925,11 @@ See more [here](https://en.cppreference.com/w/cpp/memory).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgxNzg3MTUyNywtODEwMTExNzUxLDc4Mj
-EyMjMyMCwxODE3ODcxNTI3LC05NjA0NjkwMjQsLTEyODkyNTg0
-MzAsLTM0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNzU1MTY4MzUsMj
-AzNjQyNzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2
-NDcwLDk0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwtNT
-Y3MDYzODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OTAz
-NTkxOF19
+eyJoaXN0b3J5IjpbMTQyMTY5NTgxNCwxODE3ODcxNTI3LC04MT
+AxMTE3NTEsNzgyMTIyMzIwLDE4MTc4NzE1MjcsLTk2MDQ2OTAy
+NCwtMTI4OTI1ODQzMCwtMzQ3NDg3OTIyLC0xNzMwMTQyNDIyLC
+03NTUxNjgzNSwyMDM2NDI3NzU4LC0yMDExNDIyMDYsLTgyNDMw
+MTQwMyw0NjUzMjY0NzAsOTQ3NTQyNzI4LC0xNTc5Mzg4MDM3LD
+Q3NTc4ODMwLC01NjcwNjM4MDUsLTE3OTk4MTIyODYsMTQwNTc2
+NjYzMl19
 -->
