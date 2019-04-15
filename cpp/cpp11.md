@@ -897,7 +897,6 @@ In addition `std::enable_shared_from_this` must be used if trying to create shar
 ```
 See more [here](https://en.cppreference.com/w/cpp/memory).
 
-
 ### Extensible random number facility
 
 ### Wrapper reference
@@ -924,11 +923,11 @@ See more [here](https://en.cppreference.com/w/cpp/memory).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgxMDExMTc1MSw3ODIxMjIzMjAsMTgxNz
-g3MTUyNywtOTYwNDY5MDI0LC0xMjg5MjU4NDMwLC0zNDc0ODc5
-MjIsLTE3MzAxNDI0MjIsLTc1NTE2ODM1LDIwMzY0Mjc3NTgsLT
-IwMTE0MjIwNiwtODI0MzAxNDAzLDQ2NTMyNjQ3MCw5NDc1NDI3
-MjgsLTE1NzkzODgwMzcsNDc1Nzg4MzAsLTU2NzA2MzgwNSwtMT
-c5OTgxMjI4NiwxNDA1NzY2NjMyLC00NzkwMzU5MTgsLTQxNjEw
-NTkwNl19
+eyJoaXN0b3J5IjpbMTgxNzg3MTUyNywtODEwMTExNzUxLDc4Mj
+EyMjMyMCwxODE3ODcxNTI3LC05NjA0NjkwMjQsLTEyODkyNTg0
+MzAsLTM0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNzU1MTY4MzUsMj
+AzNjQyNzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2
+NDcwLDk0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwtNT
+Y3MDYzODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OTAz
+NTkxOF19
 -->
