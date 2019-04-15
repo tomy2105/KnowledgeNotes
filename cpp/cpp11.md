@@ -869,6 +869,8 @@ A `shared_ptr` is a container for a raw pointer. It maintains reference counting
 
 A `weak_ptr` is a container for a raw pointer. It is created as a copy of a `shared_ptr`. The existence or destruction of `weak_ptr` copies of a `shared_ptr` have no effect on the `shared_ptr` or its other copies. After all copies of a `shared_ptr` have been destroyed, all `weak_ptr` copies become empty.
 
+`std::make_shared` (C++17) and `std::make_unique` (C++14) can be used to completely avoid using new (delete is 
+
 ### Extensible random number facility
 
 ### Wrapper reference
@@ -895,7 +897,7 @@ A `weak_ptr` is a container for a raw pointer. It is created as a copy of a `sha
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE2Njk5NzQyMSwtMTI4OTI1ODQzMCwtMz
+eyJoaXN0b3J5IjpbMTMxODYwMzY4MiwtMTI4OTI1ODQzMCwtMz
 Q3NDg3OTIyLC0xNzMwMTQyNDIyLC03NTUxNjgzNSwyMDM2NDI3
 NzU4LC0yMDExNDIyMDYsLTgyNDMwMTQwMyw0NjUzMjY0NzAsOT
 Q3NTQyNzI4LC0xNTc5Mzg4MDM3LDQ3NTc4ODMwLC01NjcwNjM4
