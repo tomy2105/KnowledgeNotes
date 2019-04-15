@@ -861,6 +861,9 @@ std::cout << new_s << '\n';
 
 ### General-purpose smart pointers
 
+Provides `std::unique_ptr`,  `std::shared_ptr` and `std::weak_ptr`. `std::auto_ptr` is deprecated.
+
+
 ### Extensible random number facility
 
 ### Wrapper reference
@@ -887,11 +890,11 @@ std::cout << new_s << '\n';
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyODkyNTg0MzAsLTM0NzQ4NzkyMiwtMT
-czMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQyNzc1OCwtMjAxMTQy
-MjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLDk0NzU0MjcyOCwtMT
-U3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYzODA1LC0xNzk5ODEy
-Mjg2LDE0MDU3NjY2MzIsLTQ3OTAzNTkxOCwtNDE2MTA1OTA2LC
-0xNDg3MTg5ODE5LDIwNjY4MjY4NzMsMTk5NDMwNzg3NywxMjc5
-NjM1NjQ1XX0=
+eyJoaXN0b3J5IjpbLTIwMTY3MjgyNzksLTEyODkyNTg0MzAsLT
+M0NzQ4NzkyMiwtMTczMDE0MjQyMiwtNzU1MTY4MzUsMjAzNjQy
+Nzc1OCwtMjAxMTQyMjA2LC04MjQzMDE0MDMsNDY1MzI2NDcwLD
+k0NzU0MjcyOCwtMTU3OTM4ODAzNyw0NzU3ODgzMCwtNTY3MDYz
+ODA1LC0xNzk5ODEyMjg2LDE0MDU3NjY2MzIsLTQ3OTAzNTkxOC
+wtNDE2MTA1OTA2LC0xNDg3MTg5ODE5LDIwNjY4MjY4NzMsMTk5
+NDMwNzg3N119
 -->
