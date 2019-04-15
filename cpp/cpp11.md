@@ -871,7 +871,7 @@ A `weak_ptr` is a container for a raw pointer. It is created as a copy of a `sha
 
 `std::make_shared` (C++17) and `std::make_unique` (C++14) can be used to completely avoid using new (delete is never invoked directly anyway, only by implementation of smart pointers).
 
-In addition
+In addition `std::enable_shared_from_this` must be used if trying to create shared pointer from *this*.
 
 ```cpp
 	std::shared_ptr<int> p1 = std::make_shared<int>(5);
@@ -923,7 +923,7 @@ See more [here](https://en.cppreference.com/w/cpp/memory).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY1ODI3MDk4MSwtOTYwNDY5MDI0LC0xMj
+eyJoaXN0b3J5IjpbMTgxNzg3MTUyNywtOTYwNDY5MDI0LC0xMj
 g5MjU4NDMwLC0zNDc0ODc5MjIsLTE3MzAxNDI0MjIsLTc1NTE2
 ODM1LDIwMzY0Mjc3NTgsLTIwMTE0MjIwNiwtODI0MzAxNDAzLD
 Q2NTMyNjQ3MCw5NDc1NDI3MjgsLTE1NzkzODgwMzcsNDc1Nzg4
