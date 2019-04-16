@@ -961,12 +961,14 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
+- [Compiler explorer](https://godbolt.org/)
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNDM3Mjk4NDMsLTE2NzU1MDc3MTYsMT
-U4MDQ4OTU0MywxMzU1NjAyODY1LDI2NjQ0NjkyMCwtMzY0NjI3
-ODc3LC0yNzI4MzU1MTMsMTIyMDk0MjMzNCwtMTI2NjczMzc3OC
-wxNDg2MTg0NDUwLDE4MTc4NzE1MjcsLTgxMDExMTc1MSw3ODIx
-MjIzMjAsMTgxNzg3MTUyNywtOTYwNDY5MDI0LC0xMjg5MjU4ND
-MwLC0zNDc0ODc5MjIsLTE3MzAxNDI0MjIsLTc1NTE2ODM1LDIw
-MzY0Mjc3NThdfQ==
+eyJoaXN0b3J5IjpbLTE4MDMwNjM0MzIsLTExNDM3Mjk4NDMsLT
+E2NzU1MDc3MTYsMTU4MDQ4OTU0MywxMzU1NjAyODY1LDI2NjQ0
+NjkyMCwtMzY0NjI3ODc3LC0yNzI4MzU1MTMsMTIyMDk0MjMzNC
+wtMTI2NjczMzc3OCwxNDg2MTg0NDUwLDE4MTc4NzE1MjcsLTgx
+MDExMTc1MSw3ODIxMjIzMjAsMTgxNzg3MTUyNywtOTYwNDY5MD
+I0LC0xMjg5MjU4NDMwLC0zNDc0ODc5MjIsLTE3MzAxNDI0MjIs
+LTc1NTE2ODM1XX0=
 -->
