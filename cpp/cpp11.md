@@ -947,7 +947,7 @@ Template class `std::result_of` that allows one to determine and use the return 
 
 ## New C++ Algorithms
 
-New algorithms that mimic the set theory operations `all_of()`, `any_of()` and `none_of()`.
+New algorithms that mimic the set theory operations `all_of()`, `any_of()` and `none_of()`. More [here](https://en.cppreference.com/w/cpp/algorithm/all_any_none_of).
 
 A new category of `copy_n` algorithms is also available.
 
@@ -972,11 +972,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Compiler explorer](https://godbolt.org/)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzk2Mjk5MjM1LC0xODAzMDYzNDMyLC0xMT
-QzNzI5ODQzLC0xNjc1NTA3NzE2LDE1ODA0ODk1NDMsMTM1NTYw
-Mjg2NSwyNjY0NDY5MjAsLTM2NDYyNzg3NywtMjcyODM1NTEzLD
-EyMjA5NDIzMzQsLTEyNjY3MzM3NzgsMTQ4NjE4NDQ1MCwxODE3
-ODcxNTI3LC04MTAxMTE3NTEsNzgyMTIyMzIwLDE4MTc4NzE1Mj
-csLTk2MDQ2OTAyNCwtMTI4OTI1ODQzMCwtMzQ3NDg3OTIyLC0x
-NzMwMTQyNDIyXX0=
+eyJoaXN0b3J5IjpbMTE0NzczNjU3NCwzOTYyOTkyMzUsLTE4MD
+MwNjM0MzIsLTExNDM3Mjk4NDMsLTE2NzU1MDc3MTYsMTU4MDQ4
+OTU0MywxMzU1NjAyODY1LDI2NjQ0NjkyMCwtMzY0NjI3ODc3LC
+0yNzI4MzU1MTMsMTIyMDk0MjMzNCwtMTI2NjczMzc3OCwxNDg2
+MTg0NDUwLDE4MTc4NzE1MjcsLTgxMDExMTc1MSw3ODIxMjIzMj
+AsMTgxNzg3MTUyNywtOTYwNDY5MDI0LC0xMjg5MjU4NDMwLC0z
+NDc0ODc5MjJdfQ==
 -->
