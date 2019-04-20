@@ -945,6 +945,12 @@ See more [here](https://en.cppreference.com/w/cpp/header/type_traits).
 
 Template class `std::result_of` that allows one to determine and use the return type of a function object for every declaration.
 
+## New C++ Algorithms
+
+New algorithms that mimic the set theory operations `all_of()`, `any_of()` and `none_of()`.
+
+A new category of `copy_n` algorithms is also available.
+
 
 ## Features removed or deprecated
 
@@ -964,11 +970,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Compiler explorer](https://godbolt.org/)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MDMwNjM0MzIsLTExNDM3Mjk4NDMsLT
-E2NzU1MDc3MTYsMTU4MDQ4OTU0MywxMzU1NjAyODY1LDI2NjQ0
-NjkyMCwtMzY0NjI3ODc3LC0yNzI4MzU1MTMsMTIyMDk0MjMzNC
-wtMTI2NjczMzc3OCwxNDg2MTg0NDUwLDE4MTc4NzE1MjcsLTgx
-MDExMTc1MSw3ODIxMjIzMjAsMTgxNzg3MTUyNywtOTYwNDY5MD
-I0LC0xMjg5MjU4NDMwLC0zNDc0ODc5MjIsLTE3MzAxNDI0MjIs
-LTc1NTE2ODM1XX0=
+eyJoaXN0b3J5IjpbMTQxMTcyNTQyMCwtMTgwMzA2MzQzMiwtMT
+E0MzcyOTg0MywtMTY3NTUwNzcxNiwxNTgwNDg5NTQzLDEzNTU2
+MDI4NjUsMjY2NDQ2OTIwLC0zNjQ2Mjc4NzcsLTI3MjgzNTUxMy
+wxMjIwOTQyMzM0LC0xMjY2NzMzNzc4LDE0ODYxODQ0NTAsMTgx
+Nzg3MTUyNywtODEwMTExNzUxLDc4MjEyMjMyMCwxODE3ODcxNT
+I3LC05NjA0NjkwMjQsLTEyODkyNTg0MzAsLTM0NzQ4NzkyMiwt
+MTczMDE0MjQyMl19
 -->
