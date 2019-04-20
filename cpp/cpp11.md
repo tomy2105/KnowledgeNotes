@@ -951,7 +951,7 @@ New algorithms that mimic the set theory operations `all_of()`, `any_of()` and `
 
 A new category of `copy_n` algorithms is also available.
 
-he algorithm `iota()` creates a range of sequentially increasing values, as if by assigning an initial value to `*first`, then incrementing that value using prefix ++.
+The algorithm `iota()` creates a range of sequentially increasing values, as if by assigning an initial value to `*first`, then incrementing that value using prefix ++.
 
 
 ## Features removed or deprecated
@@ -972,11 +972,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Compiler explorer](https://godbolt.org/)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE0NzczNjU3NCwzOTYyOTkyMzUsLTE4MD
-MwNjM0MzIsLTExNDM3Mjk4NDMsLTE2NzU1MDc3MTYsMTU4MDQ4
-OTU0MywxMzU1NjAyODY1LDI2NjQ0NjkyMCwtMzY0NjI3ODc3LC
-0yNzI4MzU1MTMsMTIyMDk0MjMzNCwtMTI2NjczMzc3OCwxNDg2
-MTg0NDUwLDE4MTc4NzE1MjcsLTgxMDExMTc1MSw3ODIxMjIzMj
-AsMTgxNzg3MTUyNywtOTYwNDY5MDI0LC0xMjg5MjU4NDMwLC0z
-NDc0ODc5MjJdfQ==
+eyJoaXN0b3J5IjpbMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LDM5Nj
+I5OTIzNSwtMTgwMzA2MzQzMiwtMTE0MzcyOTg0MywtMTY3NTUw
+NzcxNiwxNTgwNDg5NTQzLDEzNTU2MDI4NjUsMjY2NDQ2OTIwLC
+0zNjQ2Mjc4NzcsLTI3MjgzNTUxMywxMjIwOTQyMzM0LC0xMjY2
+NzMzNzc4LDE0ODYxODQ0NTAsMTgxNzg3MTUyNywtODEwMTExNz
+UxLDc4MjEyMjMyMCwxODE3ODcxNTI3LC05NjA0NjkwMjQsLTEy
+ODkyNTg0MzBdfQ==
 -->
