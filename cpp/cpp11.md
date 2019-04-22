@@ -820,7 +820,7 @@ Relation operations as well as assignment between tuples is possible provided th
 
 `std::array` is a safe counterpart of C-style array.
 
-`std::forward_list` is single linked list (`std::forward_list` 
+`std::forward_list` is single linked list (unlike `std::list`  which is double linked).
 
 
 ### Regular expressions
@@ -977,11 +977,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Compiler explorer](https://godbolt.org/)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MjY2Nzc2OTYsLTI3OTAxMzU3OSwxNT
-AzNDUzNDE0LDExNDc3MzY1NzQsMzk2Mjk5MjM1LC0xODAzMDYz
-NDMyLC0xMTQzNzI5ODQzLC0xNjc1NTA3NzE2LDE1ODA0ODk1ND
-MsMTM1NTYwMjg2NSwyNjY0NDY5MjAsLTM2NDYyNzg3NywtMjcy
-ODM1NTEzLDEyMjA5NDIzMzQsLTEyNjY3MzM3NzgsMTQ4NjE4ND
-Q1MCwxODE3ODcxNTI3LC04MTAxMTE3NTEsNzgyMTIyMzIwLDE4
-MTc4NzE1MjddfQ==
+eyJoaXN0b3J5IjpbMTA1NTg2NDU1OCwtMjc5MDEzNTc5LDE1MD
+M0NTM0MTQsMTE0NzczNjU3NCwzOTYyOTkyMzUsLTE4MDMwNjM0
+MzIsLTExNDM3Mjk4NDMsLTE2NzU1MDc3MTYsMTU4MDQ4OTU0My
+wxMzU1NjAyODY1LDI2NjQ0NjkyMCwtMzY0NjI3ODc3LC0yNzI4
+MzU1MTMsMTIyMDk0MjMzNCwtMTI2NjczMzc3OCwxNDg2MTg0ND
+UwLDE4MTc4NzE1MjcsLTgxMDExMTc1MSw3ODIxMjIzMjAsMTgx
+Nzg3MTUyN119
 -->
