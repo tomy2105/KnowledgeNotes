@@ -814,9 +814,11 @@ Expressions are available to check a tuple’s characteristics (only during comp
 
 Relation operations as well as assignment between tuples is possible provided they have same number of elements and corresponding element types can be assigned/compared.
 
-### Hash tables
+### Containers
 
 `std::unordered_set`, `std::unordered_multiset`, `std::unordered_map` and `std::unordered_multimap` are introduced as counterparts for existing ordered containers.
+
+
 
 ### Regular expressions
 
@@ -972,11 +974,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Compiler explorer](https://godbolt.org/)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LDM5Nj
-I5OTIzNSwtMTgwMzA2MzQzMiwtMTE0MzcyOTg0MywtMTY3NTUw
-NzcxNiwxNTgwNDg5NTQzLDEzNTU2MDI4NjUsMjY2NDQ2OTIwLC
-0zNjQ2Mjc4NzcsLTI3MjgzNTUxMywxMjIwOTQyMzM0LC0xMjY2
-NzMzNzc4LDE0ODYxODQ0NTAsMTgxNzg3MTUyNywtODEwMTExNz
-UxLDc4MjEyMjMyMCwxODE3ODcxNTI3LC05NjA0NjkwMjQsLTEy
-ODkyNTg0MzBdfQ==
+eyJoaXN0b3J5IjpbLTI3OTAxMzU3OSwxNTAzNDUzNDE0LDExND
+c3MzY1NzQsMzk2Mjk5MjM1LC0xODAzMDYzNDMyLC0xMTQzNzI5
+ODQzLC0xNjc1NTA3NzE2LDE1ODA0ODk1NDMsMTM1NTYwMjg2NS
+wyNjY0NDY5MjAsLTM2NDYyNzg3NywtMjcyODM1NTEzLDEyMjA5
+NDIzMzQsLTEyNjY3MzM3NzgsMTQ4NjE4NDQ1MCwxODE3ODcxNT
+I3LC04MTAxMTE3NTEsNzgyMTIyMzIwLDE4MTc4NzE1MjcsLTk2
+MDQ2OTAyNF19
 -->
