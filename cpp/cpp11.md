@@ -822,6 +822,7 @@ Relation operations as well as assignment between tuples is possible provided th
 
 `std::forward_list` is single linked list (unlike `std::list`  which is double linked).
 
+See more [here](https://en.cppreference.com/w/cpp/container).
 
 ### Regular expressions
 
@@ -977,11 +978,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Compiler explorer](https://godbolt.org/)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA1NTg2NDU1OCwtMjc5MDEzNTc5LDE1MD
-M0NTM0MTQsMTE0NzczNjU3NCwzOTYyOTkyMzUsLTE4MDMwNjM0
-MzIsLTExNDM3Mjk4NDMsLTE2NzU1MDc3MTYsMTU4MDQ4OTU0My
-wxMzU1NjAyODY1LDI2NjQ0NjkyMCwtMzY0NjI3ODc3LC0yNzI4
-MzU1MTMsMTIyMDk0MjMzNCwtMTI2NjczMzc3OCwxNDg2MTg0ND
-UwLDE4MTc4NzE1MjcsLTgxMDExMTc1MSw3ODIxMjIzMjAsMTgx
-Nzg3MTUyN119
+eyJoaXN0b3J5IjpbLTgzMzUzMjgzOCwxMDU1ODY0NTU4LC0yNz
+kwMTM1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LDM5NjI5OTIz
+NSwtMTgwMzA2MzQzMiwtMTE0MzcyOTg0MywtMTY3NTUwNzcxNi
+wxNTgwNDg5NTQzLDEzNTU2MDI4NjUsMjY2NDQ2OTIwLC0zNjQ2
+Mjc4NzcsLTI3MjgzNTUxMywxMjIwOTQyMzM0LC0xMjY2NzMzNz
+c4LDE0ODYxODQ0NTAsMTgxNzg3MTUyNywtODEwMTExNzUxLDc4
+MjEyMjMyMF19
 -->
