@@ -641,7 +641,7 @@ More verbose explanation of user-defined literals can be found [here](https://ak
 
 ### Multithreading memory model
 
-Read more [here](https://en.cppreference.com/w/cpp/language/memory_model).
+Read more [here](https://en.cppreference.com/w/cpp/language/memory_model) and [here](http://www.modernescpp.com/index.php/c-memory-model).
 
 ### Thread-local storage
 
@@ -978,11 +978,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Compiler explorer](https://godbolt.org/)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMDE1NDg3NjUsLTgzMzUzMjgzOCwxMD
-U1ODY0NTU4LC0yNzkwMTM1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2
-NTc0LDM5NjI5OTIzNSwtMTgwMzA2MzQzMiwtMTE0MzcyOTg0My
-wtMTY3NTUwNzcxNiwxNTgwNDg5NTQzLDEzNTU2MDI4NjUsMjY2
-NDQ2OTIwLC0zNjQ2Mjc4NzcsLTI3MjgzNTUxMywxMjIwOTQyMz
-M0LC0xMjY2NzMzNzc4LDE0ODYxODQ0NTAsMTgxNzg3MTUyNywt
-ODEwMTExNzUxXX0=
+eyJoaXN0b3J5IjpbMTYwMDgxNjk3NiwtMjAwMTU0ODc2NSwtOD
+MzNTMyODM4LDEwNTU4NjQ1NTgsLTI3OTAxMzU3OSwxNTAzNDUz
+NDE0LDExNDc3MzY1NzQsMzk2Mjk5MjM1LC0xODAzMDYzNDMyLC
+0xMTQzNzI5ODQzLC0xNjc1NTA3NzE2LDE1ODA0ODk1NDMsMTM1
+NTYwMjg2NSwyNjY0NDY5MjAsLTM2NDYyNzg3NywtMjcyODM1NT
+EzLDEyMjA5NDIzMzQsLTEyNjY3MzM3NzgsMTQ4NjE4NDQ1MCwx
+ODE3ODcxNTI3XX0=
 -->
