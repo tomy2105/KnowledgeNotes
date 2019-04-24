@@ -977,14 +977,14 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 - [Compiler explorer](https://godbolt.org/)
 - [Interactive C/C++ memory model](http://svr-pes20-cppmem.cl.cam.ac.uk/cppmem/)
- 
+- [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMyMDkxNjE1OCwxNjAwODE2OTc2LC0yMD
-AxNTQ4NzY1LC04MzM1MzI4MzgsMTA1NTg2NDU1OCwtMjc5MDEz
-NTc5LDE1MDM0NTM0MTQsMTE0NzczNjU3NCwzOTYyOTkyMzUsLT
-E4MDMwNjM0MzIsLTExNDM3Mjk4NDMsLTE2NzU1MDc3MTYsMTU4
-MDQ4OTU0MywxMzU1NjAyODY1LDI2NjQ0NjkyMCwtMzY0NjI3OD
-c3LC0yNzI4MzU1MTMsMTIyMDk0MjMzNCwtMTI2NjczMzc3OCwx
-NDg2MTg0NDUwXX0=
+eyJoaXN0b3J5IjpbLTcxMzQyMjczMSwtMzIwOTE2MTU4LDE2MD
+A4MTY5NzYsLTIwMDE1NDg3NjUsLTgzMzUzMjgzOCwxMDU1ODY0
+NTU4LC0yNzkwMTM1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LD
+M5NjI5OTIzNSwtMTgwMzA2MzQzMiwtMTE0MzcyOTg0MywtMTY3
+NTUwNzcxNiwxNTgwNDg5NTQzLDEzNTU2MDI4NjUsMjY2NDQ2OT
+IwLC0zNjQ2Mjc4NzcsLTI3MjgzNTUxMywxMjIwOTQyMzM0LC0x
+MjY2NzMzNzc4XX0=
 -->
