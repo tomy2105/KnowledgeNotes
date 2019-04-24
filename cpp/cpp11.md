@@ -976,13 +976,15 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
 - [User-defined literals](https://en.cppreference.com/w/cpp/language/user_literal)
 - [Compiler explorer](https://godbolt.org/)
+- [Interactive C/C++ memory model](http://svr-pes20-cppmem.cl.cam.ac.uk/cppmem/)
+ 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYwMDgxNjk3NiwtMjAwMTU0ODc2NSwtOD
-MzNTMyODM4LDEwNTU4NjQ1NTgsLTI3OTAxMzU3OSwxNTAzNDUz
-NDE0LDExNDc3MzY1NzQsMzk2Mjk5MjM1LC0xODAzMDYzNDMyLC
-0xMTQzNzI5ODQzLC0xNjc1NTA3NzE2LDE1ODA0ODk1NDMsMTM1
-NTYwMjg2NSwyNjY0NDY5MjAsLTM2NDYyNzg3NywtMjcyODM1NT
-EzLDEyMjA5NDIzMzQsLTEyNjY3MzM3NzgsMTQ4NjE4NDQ1MCwx
-ODE3ODcxNTI3XX0=
+eyJoaXN0b3J5IjpbLTMyMDkxNjE1OCwxNjAwODE2OTc2LC0yMD
+AxNTQ4NzY1LC04MzM1MzI4MzgsMTA1NTg2NDU1OCwtMjc5MDEz
+NTc5LDE1MDM0NTM0MTQsMTE0NzczNjU3NCwzOTYyOTkyMzUsLT
+E4MDMwNjM0MzIsLTExNDM3Mjk4NDMsLTE2NzU1MDc3MTYsMTU4
+MDQ4OTU0MywxMzU1NjAyODY1LDI2NjQ0NjkyMCwtMzY0NjI3OD
+c3LC0yNzI4MzU1MTMsMTIyMDk0MjMzNCwtMTI2NjczMzc3OCwx
+NDg2MTg0NDUwXX0=
 -->
