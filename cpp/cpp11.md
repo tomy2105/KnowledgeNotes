@@ -768,7 +768,7 @@ A thread class `std::thread` is provided, which takes a function object (with op
 
 For synchronization between threads there are `std::mutex`, `std::recursive_mutex`, `std::shared_mutex` (along with "timed" versions which try locking for specified amount of time). 
 
-In addition condition variables `std::condition_variable` and `std::condition_variable_any` are available.
+In addition condition variables `std::condition_variable` and `std::condition_variable_any` are available. Although possible **don't** wait without a condition, explanation [here](http://www.modernescpp.com/index.php/c-core-guidelines-be-aware-of-the-traps-of-condition-variables).
 
 Usable either directly or via RAII locks `std::lock_guard`, `std::scoped_lock` (C++17), `std::unique_lock` and `std::shared_lock` (C++14). In addition `std::lock` and `std::try_lock` are available for locking multiple objects.
 
@@ -978,11 +978,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Compiler explorer](https://godbolt.org/)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgzMzUzMjgzOCwxMDU1ODY0NTU4LC0yNz
-kwMTM1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LDM5NjI5OTIz
-NSwtMTgwMzA2MzQzMiwtMTE0MzcyOTg0MywtMTY3NTUwNzcxNi
-wxNTgwNDg5NTQzLDEzNTU2MDI4NjUsMjY2NDQ2OTIwLC0zNjQ2
-Mjc4NzcsLTI3MjgzNTUxMywxMjIwOTQyMzM0LC0xMjY2NzMzNz
-c4LDE0ODYxODQ0NTAsMTgxNzg3MTUyNywtODEwMTExNzUxLDc4
-MjEyMjMyMF19
+eyJoaXN0b3J5IjpbLTIwMDE1NDg3NjUsLTgzMzUzMjgzOCwxMD
+U1ODY0NTU4LC0yNzkwMTM1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2
+NTc0LDM5NjI5OTIzNSwtMTgwMzA2MzQzMiwtMTE0MzcyOTg0My
+wtMTY3NTUwNzcxNiwxNTgwNDg5NTQzLDEzNTU2MDI4NjUsMjY2
+NDQ2OTIwLC0zNjQ2Mjc4NzcsLTI3MjgzNTUxMywxMjIwOTQyMz
+M0LC0xMjY2NzMzNzc4LDE0ODYxODQ0NTAsMTgxNzg3MTUyNywt
+ODEwMTExNzUxXX0=
 -->
