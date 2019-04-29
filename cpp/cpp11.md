@@ -962,8 +962,9 @@ A new category of `copy_n` and `copy_if` algorithms is also available.
 
 
 
-A new category of `move` and `move_backward` algorithms is also available.
+A new category of `move` and `move_backward` algorithms is also available for moving from/to containers.
 
+Partitioning operations `is_partitioned`, `partition_copy` and `partition_point` are adde
 
 The algorithm `iota()` creates a range of sequentially increasing values, as if by assigning an initial value to `*first`, then incrementing that value using prefix ++.
 
@@ -988,7 +989,7 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkyODYwNTc4MCwtMTAzMjIxNzY3NywtNz
+eyJoaXN0b3J5IjpbMjAyMzI0NTUzOSwtMTAzMjIxNzY3NywtNz
 EzNDIyNzMxLC0zMjA5MTYxNTgsMTYwMDgxNjk3NiwtMjAwMTU0
 ODc2NSwtODMzNTMyODM4LDEwNTU4NjQ1NTgsLTI3OTAxMzU3OS
 wxNTAzNDUzNDE0LDExNDc3MzY1NzQsMzk2Mjk5MjM1LC0xODAz
