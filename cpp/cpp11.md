@@ -985,7 +985,9 @@ More can be found [here](https://en.cppreference.com/w/cpp/algorithm).
 
 Dynamic exception specifications are deprecated (removed in C++17). Compile-time specification of non-exception-throwing functions is available with the [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept_spec) keyword (useful for optimization).
 
-Beware destructors are implicitly `noexcept(true)` which is backward incompatible, for more see [here](https://akrzemi1.wordpress.com/2013/08/20/noexcept-destructors/).
+A destructor shouldn't throw; a generated destructor is implicitly **noexcept** (independently of what code is in its body) if all of the members of its class have **noexcept** destructors which is backward incompatible, for more see [here](https://akrzemi1.wordpress.com/2013/08/20/noexcept-destructors/).
+
+It is typically a bad idea to have a move operation throw, so declare those **noexcept** wherever possible. A generated copy or move operation is implicitly **noexcept** if all of the copy or move operations it uses on members of its class have **noexcept** destructors.
 
 ## Some of the references
 
@@ -1001,11 +1003,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NjQ1ODMzMDMsLTE0MzI4MDQ3NzQsLT
-EwMzIyMTc2NzcsLTcxMzQyMjczMSwtMzIwOTE2MTU4LDE2MDA4
-MTY5NzYsLTIwMDE1NDg3NjUsLTgzMzUzMjgzOCwxMDU1ODY0NT
-U4LC0yNzkwMTM1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LDM5
-NjI5OTIzNSwtMTgwMzA2MzQzMiwtMTE0MzcyOTg0MywtMTY3NT
-UwNzcxNiwxNTgwNDg5NTQzLDEzNTU2MDI4NjUsMjY2NDQ2OTIw
-LC0zNjQ2Mjc4NzddfQ==
+eyJoaXN0b3J5IjpbMTc0MjYwMTg0NywtMTU2NDU4MzMwMywtMT
+QzMjgwNDc3NCwtMTAzMjIxNzY3NywtNzEzNDIyNzMxLC0zMjA5
+MTYxNTgsMTYwMDgxNjk3NiwtMjAwMTU0ODc2NSwtODMzNTMyOD
+M4LDEwNTU4NjQ1NTgsLTI3OTAxMzU3OSwxNTAzNDUzNDE0LDEx
+NDc3MzY1NzQsMzk2Mjk5MjM1LC0xODAzMDYzNDMyLC0xMTQzNz
+I5ODQzLC0xNjc1NTA3NzE2LDE1ODA0ODk1NDMsMTM1NTYwMjg2
+NSwyNjY0NDY5MjBdfQ==
 -->
