@@ -959,7 +959,7 @@ See more [here](https://en.cppreference.com/w/cpp/header/type_traits).
 
 Template class `std::result_of` that allows one to determine and use the return type of a function object for every declaration.
 
-## New C++ Algorithms
+### New C++ Algorithms
 
 New algorithms that mimic the set theory operations `all_of()`, `any_of()` and `none_of()`. More [here](https://en.cppreference.com/w/cpp/algorithm/all_any_none_of).
 
@@ -1003,11 +1003,11 @@ It is typically a bad idea to have a move operation throw, so declare those **no
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc0MjYwMTg0NywtMTU2NDU4MzMwMywtMT
-QzMjgwNDc3NCwtMTAzMjIxNzY3NywtNzEzNDIyNzMxLC0zMjA5
-MTYxNTgsMTYwMDgxNjk3NiwtMjAwMTU0ODc2NSwtODMzNTMyOD
-M4LDEwNTU4NjQ1NTgsLTI3OTAxMzU3OSwxNTAzNDUzNDE0LDEx
-NDc3MzY1NzQsMzk2Mjk5MjM1LC0xODAzMDYzNDMyLC0xMTQzNz
-I5ODQzLC0xNjc1NTA3NzE2LDE1ODA0ODk1NDMsMTM1NTYwMjg2
-NSwyNjY0NDY5MjBdfQ==
+eyJoaXN0b3J5IjpbMTEyODIyNjMyNCwxNzQyNjAxODQ3LC0xNT
+Y0NTgzMzAzLC0xNDMyODA0Nzc0LC0xMDMyMjE3Njc3LC03MTM0
+MjI3MzEsLTMyMDkxNjE1OCwxNjAwODE2OTc2LC0yMDAxNTQ4Nz
+Y1LC04MzM1MzI4MzgsMTA1NTg2NDU1OCwtMjc5MDEzNTc5LDE1
+MDM0NTM0MTQsMTE0NzczNjU3NCwzOTYyOTkyMzUsLTE4MDMwNj
+M0MzIsLTExNDM3Mjk4NDMsLTE2NzU1MDc3MTYsMTU4MDQ4OTU0
+MywxMzU1NjAyODY1XX0=
 -->
