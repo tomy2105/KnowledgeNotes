@@ -917,6 +917,9 @@ Random number functionality is split into two parts: a generator engine that con
 
 See more [here](https://en.cppreference.com/w/cpp/numeric/random).
 
+### Time manipulation
+
+
 ### Wrapper reference
 
 To obtain a wrapper reference from any object the function template `ref` is used (for a constant reference `cref` is used). Useful for function templates, where references to parameters rather than copies are needed:
@@ -1015,11 +1018,11 @@ It is typically a bad idea to have a move operation throw, so declare those **no
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODcyMzkxMjAsMTc0MjYwMTg0NywtMT
-U2NDU4MzMwMywtMTQzMjgwNDc3NCwtMTAzMjIxNzY3NywtNzEz
-NDIyNzMxLC0zMjA5MTYxNTgsMTYwMDgxNjk3NiwtMjAwMTU0OD
-c2NSwtODMzNTMyODM4LDEwNTU4NjQ1NTgsLTI3OTAxMzU3OSwx
-NTAzNDUzNDE0LDExNDc3MzY1NzQsMzk2Mjk5MjM1LC0xODAzMD
-YzNDMyLC0xMTQzNzI5ODQzLC0xNjc1NTA3NzE2LDE1ODA0ODk1
-NDMsMTM1NTYwMjg2NV19
+eyJoaXN0b3J5IjpbLTEzNzcxODU4MjUsLTE2ODcyMzkxMjAsMT
+c0MjYwMTg0NywtMTU2NDU4MzMwMywtMTQzMjgwNDc3NCwtMTAz
+MjIxNzY3NywtNzEzNDIyNzMxLC0zMjA5MTYxNTgsMTYwMDgxNj
+k3NiwtMjAwMTU0ODc2NSwtODMzNTMyODM4LDEwNTU4NjQ1NTgs
+LTI3OTAxMzU3OSwxNTAzNDUzNDE0LDExNDc3MzY1NzQsMzk2Mj
+k5MjM1LC0xODAzMDYzNDMyLC0xMTQzNzI5ODQzLC0xNjc1NTA3
+NzE2LDE1ODA0ODk1NDNdfQ==
 -->
