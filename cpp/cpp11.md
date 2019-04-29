@@ -919,7 +919,7 @@ See more [here](https://en.cppreference.com/w/cpp/numeric/random).
 
 ### Time manipulation
 
-Clocks (time providers), time points (how much time has passed since the start of the clock) and duration (). Type safe manipulation of time.
+Clocks (time providers), time points (how much time has passed since the start of the clock) and duration. Type safe manipulation of time.
 
 Some added in C++11, more in C++14 and C++20. See more [here](https://en.cppreference.com/w/cpp/chrono).
 
@@ -1035,11 +1035,11 @@ It is typically a bad idea to have a move operation throw, so declare those **no
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5OTU4NDkyMjUsLTg2MDY3NjQxNCw3Nj
-QyMzAyNDksMTgyOTk2ODI5NCwtMTY4NzIzOTEyMCwxNzQyNjAx
-ODQ3LC0xNTY0NTgzMzAzLC0xNDMyODA0Nzc0LC0xMDMyMjE3Nj
-c3LC03MTM0MjI3MzEsLTMyMDkxNjE1OCwxNjAwODE2OTc2LC0y
-MDAxNTQ4NzY1LC04MzM1MzI4MzgsMTA1NTg2NDU1OCwtMjc5MD
-EzNTc5LDE1MDM0NTM0MTQsMTE0NzczNjU3NCwzOTYyOTkyMzUs
-LTE4MDMwNjM0MzJdfQ==
+eyJoaXN0b3J5IjpbMTU4OTYxMDE5NiwtODYwNjc2NDE0LDc2ND
+IzMDI0OSwxODI5OTY4Mjk0LC0xNjg3MjM5MTIwLDE3NDI2MDE4
+NDcsLTE1NjQ1ODMzMDMsLTE0MzI4MDQ3NzQsLTEwMzIyMTc2Nz
+csLTcxMzQyMjczMSwtMzIwOTE2MTU4LDE2MDA4MTY5NzYsLTIw
+MDE1NDg3NjUsLTgzMzUzMjgzOCwxMDU1ODY0NTU4LC0yNzkwMT
+M1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LDM5NjI5OTIzNSwt
+MTgwMzA2MzQzMl19
 -->
