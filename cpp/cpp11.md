@@ -955,6 +955,9 @@ Template class `std::result_of` that allows one to determine and use the return 
 
 New algorithms that mimic the set theory operations `all_of()`, `any_of()` and `none_of()`. More [here](https://en.cppreference.com/w/cpp/algorithm/all_any_none_of).
 
+`find_if_not()` counterpart of `find_if()` has been added.
+
+
 A new category of `copy_n` algorithms is also available.
 
 The algorithm `iota()` creates a range of sequentially increasing values, as if by assigning an initial value to `*first`, then incrementing that value using prefix ++.
@@ -980,11 +983,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcxMzQyMjczMSwtMzIwOTE2MTU4LDE2MD
-A4MTY5NzYsLTIwMDE1NDg3NjUsLTgzMzUzMjgzOCwxMDU1ODY0
-NTU4LC0yNzkwMTM1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LD
-M5NjI5OTIzNSwtMTgwMzA2MzQzMiwtMTE0MzcyOTg0MywtMTY3
-NTUwNzcxNiwxNTgwNDg5NTQzLDEzNTU2MDI4NjUsMjY2NDQ2OT
-IwLC0zNjQ2Mjc4NzcsLTI3MjgzNTUxMywxMjIwOTQyMzM0LC0x
-MjY2NzMzNzc4XX0=
+eyJoaXN0b3J5IjpbLTE3MDc4Mzk1MTcsLTcxMzQyMjczMSwtMz
+IwOTE2MTU4LDE2MDA4MTY5NzYsLTIwMDE1NDg3NjUsLTgzMzUz
+MjgzOCwxMDU1ODY0NTU4LC0yNzkwMTM1NzksMTUwMzQ1MzQxNC
+wxMTQ3NzM2NTc0LDM5NjI5OTIzNSwtMTgwMzA2MzQzMiwtMTE0
+MzcyOTg0MywtMTY3NTUwNzcxNiwxNTgwNDg5NTQzLDEzNTU2MD
+I4NjUsMjY2NDQ2OTIwLC0zNjQ2Mjc4NzcsLTI3MjgzNTUxMywx
+MjIwOTQyMzM0XX0=
 -->
