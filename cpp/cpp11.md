@@ -981,13 +981,26 @@ The algorithm `iota()` creates a range of sequentially increasing values, as if 
 More can be found [here](https://en.cppreference.com/w/cpp/algorithm).
 
 ### std::string conversion enhancements
-/)
 
-Convert numerical value to string (function )
+- std::stoi - convert string to integer
+- std::stol - convert string to long int
+- std::stoul - convert string to unsigned integer 
+- std::stoll - convert string to long long
+- std::stoull - convert string to unsigned long long
+- stof - convert string to float 
+- stod Convert string to double (function template )
 
-[**to_wstring**](http://www.cplusplus.com/reference/string/to_wstring/)
+stold
+    Convert string to long double (function template )
 
-Convert numerical value to wide string (function )
+
+Convert to strings
+
+to_string
+    Convert numerical value to string (function )
+
+to_wstring
+    Convert numerical value to wide string (function )
 
 ## Features removed or deprecated
 
@@ -1011,7 +1024,7 @@ It is typically a bad idea to have a move operation throw, so declare those **no
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAxODg1OTA0MSwxNzQyNjAxODQ3LC0xNT
+eyJoaXN0b3J5IjpbMTg3OTg3MTU1OCwxNzQyNjAxODQ3LC0xNT
 Y0NTgzMzAzLC0xNDMyODA0Nzc0LC0xMDMyMjE3Njc3LC03MTM0
 MjI3MzEsLTMyMDkxNjE1OCwxNjAwODE2OTc2LC0yMDAxNTQ4Nz
 Y1LC04MzM1MzI4MzgsMTA1NTg2NDU1OCwtMjc5MDEzNTc5LDE1
