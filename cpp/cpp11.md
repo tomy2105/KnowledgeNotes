@@ -921,7 +921,7 @@ See more [here](https://en.cppreference.com/w/cpp/numeric/random).
 
 Clocks and time points. Type safe manipulation of time.
 
-Some added in C++11, more in C++20. See more [here](https://en.cppreference.com/w/cpp/chrono).
+Some added in C++11, more in C++14 and C++20. See more [here](https://en.cppreference.com/w/cpp/chrono).
 
 
 ### Wrapper reference
@@ -1022,11 +1022,11 @@ It is typically a bad idea to have a move operation throw, so declare those **no
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgyOTk2ODI5NCwtMTY4NzIzOTEyMCwxNz
-QyNjAxODQ3LC0xNTY0NTgzMzAzLC0xNDMyODA0Nzc0LC0xMDMy
-MjE3Njc3LC03MTM0MjI3MzEsLTMyMDkxNjE1OCwxNjAwODE2OT
-c2LC0yMDAxNTQ4NzY1LC04MzM1MzI4MzgsMTA1NTg2NDU1OCwt
-Mjc5MDEzNTc5LDE1MDM0NTM0MTQsMTE0NzczNjU3NCwzOTYyOT
-kyMzUsLTE4MDMwNjM0MzIsLTExNDM3Mjk4NDMsLTE2NzU1MDc3
-MTYsMTU4MDQ4OTU0M119
+eyJoaXN0b3J5IjpbNzY0MjMwMjQ5LDE4Mjk5NjgyOTQsLTE2OD
+cyMzkxMjAsMTc0MjYwMTg0NywtMTU2NDU4MzMwMywtMTQzMjgw
+NDc3NCwtMTAzMjIxNzY3NywtNzEzNDIyNzMxLC0zMjA5MTYxNT
+gsMTYwMDgxNjk3NiwtMjAwMTU0ODc2NSwtODMzNTMyODM4LDEw
+NTU4NjQ1NTgsLTI3OTAxMzU3OSwxNTAzNDUzNDE0LDExNDc3Mz
+Y1NzQsMzk2Mjk5MjM1LC0xODAzMDYzNDMyLC0xMTQzNzI5ODQz
+LC0xNjc1NTA3NzE2XX0=
 -->
