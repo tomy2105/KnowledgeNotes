@@ -99,7 +99,8 @@ Constructor with such parameter is treated specially during uniform initializati
 
 Class `std::initializer_list<>` can be constructed statically by the compiler using `{}`  and it's copying is cheap.
 
-**NOTE**: Initializer list assignment and constuction does not automatically narrow!
+**NOTE**: Initializer list assignment and construction does not automatically narrow!
+
 ```cpp
 int x = 7.3; // ok, standard C narrowing
 int x0{ 7.3 };	// error: narrowing
@@ -1000,11 +1001,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE5ODcxOTg1OSwtMTQzMjgwNDc3NCwtMT
-AzMjIxNzY3NywtNzEzNDIyNzMxLC0zMjA5MTYxNTgsMTYwMDgx
-Njk3NiwtMjAwMTU0ODc2NSwtODMzNTMyODM4LDEwNTU4NjQ1NT
-gsLTI3OTAxMzU3OSwxNTAzNDUzNDE0LDExNDc3MzY1NzQsMzk2
-Mjk5MjM1LC0xODAzMDYzNDMyLC0xMTQzNzI5ODQzLC0xNjc1NT
-A3NzE2LDE1ODA0ODk1NDMsMTM1NTYwMjg2NSwyNjY0NDY5MjAs
-LTM2NDYyNzg3N119
+eyJoaXN0b3J5IjpbLTE1NjQ1ODMzMDMsLTE0MzI4MDQ3NzQsLT
+EwMzIyMTc2NzcsLTcxMzQyMjczMSwtMzIwOTE2MTU4LDE2MDA4
+MTY5NzYsLTIwMDE1NDg3NjUsLTgzMzUzMjgzOCwxMDU1ODY0NT
+U4LC0yNzkwMTM1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LDM5
+NjI5OTIzNSwtMTgwMzA2MzQzMiwtMTE0MzcyOTg0MywtMTY3NT
+UwNzcxNiwxNTgwNDg5NTQzLDEzNTU2MDI4NjUsMjY2NDQ2OTIw
+LC0zNjQ2Mjc4NzddfQ==
 -->
