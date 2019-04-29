@@ -961,7 +961,6 @@ New algorithms that mimic the set theory operations `all_of()`, `any_of()` and `
 A new category of `copy_n` and `copy_if` algorithms is also available.
 
 
-
 A new category of `move` and `move_backward` algorithms is also available for moving from/to containers.
 
 Partitioning operations `is_partitioned`, `partition_copy` and `partition_point` are added.
@@ -989,11 +988,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgwODc5MzM4OSwtMTAzMjIxNzY3NywtNz
-EzNDIyNzMxLC0zMjA5MTYxNTgsMTYwMDgxNjk3NiwtMjAwMTU0
-ODc2NSwtODMzNTMyODM4LDEwNTU4NjQ1NTgsLTI3OTAxMzU3OS
-wxNTAzNDUzNDE0LDExNDc3MzY1NzQsMzk2Mjk5MjM1LC0xODAz
-MDYzNDMyLC0xMTQzNzI5ODQzLC0xNjc1NTA3NzE2LDE1ODA0OD
-k1NDMsMTM1NTYwMjg2NSwyNjY0NDY5MjAsLTM2NDYyNzg3Nywt
-MjcyODM1NTEzXX0=
+eyJoaXN0b3J5IjpbLTE4NDY4OTQ3MjEsLTEwMzIyMTc2NzcsLT
+cxMzQyMjczMSwtMzIwOTE2MTU4LDE2MDA4MTY5NzYsLTIwMDE1
+NDg3NjUsLTgzMzUzMjgzOCwxMDU1ODY0NTU4LC0yNzkwMTM1Nz
+ksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LDM5NjI5OTIzNSwtMTgw
+MzA2MzQzMiwtMTE0MzcyOTg0MywtMTY3NTUwNzcxNiwxNTgwND
+g5NTQzLDEzNTU2MDI4NjUsMjY2NDQ2OTIwLC0zNjQ2Mjc4Nzcs
+LTI3MjgzNTUxM119
 -->
