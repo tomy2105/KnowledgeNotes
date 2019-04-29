@@ -919,7 +919,8 @@ See more [here](https://en.cppreference.com/w/cpp/numeric/random).
 
 ### Time manipulation
 
-Clocks and time points.
+Clocks and time points. Type safe manipulation of time.
+
 Some added in C++11, more in C++20. See more [here](https://en.cppreference.com/w/cpp/chrono).
 
 
@@ -1021,7 +1022,7 @@ It is typically a bad idea to have a move operation throw, so declare those **no
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEyNDA3MTk3NCwtMTY4NzIzOTEyMCwxNz
+eyJoaXN0b3J5IjpbMTgyOTk2ODI5NCwtMTY4NzIzOTEyMCwxNz
 QyNjAxODQ3LC0xNTY0NTgzMzAzLC0xNDMyODA0Nzc0LC0xMDMy
 MjE3Njc3LC03MTM0MjI3MzEsLTMyMDkxNjE1OCwxNjAwODE2OT
 c2LC0yMDAxNTQ4NzY1LC04MzM1MzI4MzgsMTA1NTg2NDU1OCwt
