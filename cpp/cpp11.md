@@ -960,6 +960,11 @@ New algorithms that mimic the set theory operations `all_of()`, `any_of()` and `
 
 A new category of `copy_n` and `copy_if` algorithms is also available.
 
+
+
+A new category of `move` and `move_backward` algorithms is also available.
+
+
 The algorithm `iota()` creates a range of sequentially increasing values, as if by assigning an initial value to `*first`, then incrementing that value using prefix ++.
 
 
@@ -983,11 +988,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMzIyMTc2NzcsLTcxMzQyMjczMSwtMz
-IwOTE2MTU4LDE2MDA4MTY5NzYsLTIwMDE1NDg3NjUsLTgzMzUz
-MjgzOCwxMDU1ODY0NTU4LC0yNzkwMTM1NzksMTUwMzQ1MzQxNC
-wxMTQ3NzM2NTc0LDM5NjI5OTIzNSwtMTgwMzA2MzQzMiwtMTE0
-MzcyOTg0MywtMTY3NTUwNzcxNiwxNTgwNDg5NTQzLDEzNTU2MD
-I4NjUsMjY2NDQ2OTIwLC0zNjQ2Mjc4NzcsLTI3MjgzNTUxMywx
-MjIwOTQyMzM0XX0=
+eyJoaXN0b3J5IjpbLTkyODYwNTc4MCwtMTAzMjIxNzY3NywtNz
+EzNDIyNzMxLC0zMjA5MTYxNTgsMTYwMDgxNjk3NiwtMjAwMTU0
+ODc2NSwtODMzNTMyODM4LDEwNTU4NjQ1NTgsLTI3OTAxMzU3OS
+wxNTAzNDUzNDE0LDExNDc3MzY1NzQsMzk2Mjk5MjM1LC0xODAz
+MDYzNDMyLC0xMTQzNzI5ODQzLC0xNjc1NTA3NzE2LDE1ODA0OD
+k1NDMsMTM1NTYwMjg2NSwyNjY0NDY5MjAsLTM2NDYyNzg3Nywt
+MjcyODM1NTEzXX0=
 -->
