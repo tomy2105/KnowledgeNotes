@@ -925,9 +925,15 @@ Some added in C++11, more in C++14 and C++20. See more [here](https://en.cpprefe
 
 ### Rational arithmetics 
 
-`std::ratio` tand provides compile-time rational arithmetic support.
+`std::ratio` template and various methods that provide compile-time rational arithmetic support.
 
-
+```cpp
+    typedef std::ratio<2, 3> two_third;
+    typedef std::ratio<1, 6> one_sixth;
+ 
+    typedef std::ratio_add<two_third, one_sixth> sum;
+    std::cout << "2/3 + 1/6 = " << sum::num << '/' << sum::den << '\n';
+```
 
 More can be found [here](https://en.cppreference.com/w/cpp/numeric/ratio).
 
@@ -1029,7 +1035,7 @@ It is typically a bad idea to have a move operation throw, so declare those **no
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU1NTMyMjEwNCw3NjQyMzAyNDksMTgyOT
+eyJoaXN0b3J5IjpbLTg2MDY3NjQxNCw3NjQyMzAyNDksMTgyOT
 k2ODI5NCwtMTY4NzIzOTEyMCwxNzQyNjAxODQ3LC0xNTY0NTgz
 MzAzLC0xNDMyODA0Nzc0LC0xMDMyMjE3Njc3LC03MTM0MjI3Mz
 EsLTMyMDkxNjE1OCwxNjAwODE2OTc2LC0yMDAxNTQ4NzY1LC04
