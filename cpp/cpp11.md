@@ -987,11 +987,11 @@ More can be found [here](https://en.cppreference.com/w/cpp/algorithm).
 - `std::stoul` - convert string to unsigned integer 
 - `std::stoll` - convert string to long long
 - `std::stoull` - convert string to unsigned long long
-- `stdstof` - convert string to float 
-- stod` - convert string to double 
-- stold` - convert string to long double
-- to_string` - convert numerical value to string
-- to_wstring` - convert numerical value to wide string
+- `std::stof` - convert string to float 
+- `std::stod` - convert string to double 
+- `std::stold` - convert string to long double
+- `std::to_string` - convert numerical value to string
+- `std::to_wstring` - convert numerical value to wide string
 
 ## Features removed or deprecated
 
@@ -1015,11 +1015,11 @@ It is typically a bad idea to have a move operation throw, so declare those **no
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjg0Mjk1NDM0LDE3NDI2MDE4NDcsLTE1Nj
-Q1ODMzMDMsLTE0MzI4MDQ3NzQsLTEwMzIyMTc2NzcsLTcxMzQy
-MjczMSwtMzIwOTE2MTU4LDE2MDA4MTY5NzYsLTIwMDE1NDg3Nj
-UsLTgzMzUzMjgzOCwxMDU1ODY0NTU4LC0yNzkwMTM1NzksMTUw
-MzQ1MzQxNCwxMTQ3NzM2NTc0LDM5NjI5OTIzNSwtMTgwMzA2Mz
-QzMiwtMTE0MzcyOTg0MywtMTY3NTUwNzcxNiwxNTgwNDg5NTQz
-LDEzNTU2MDI4NjVdfQ==
+eyJoaXN0b3J5IjpbLTE2ODcyMzkxMjAsMTc0MjYwMTg0NywtMT
+U2NDU4MzMwMywtMTQzMjgwNDc3NCwtMTAzMjIxNzY3NywtNzEz
+NDIyNzMxLC0zMjA5MTYxNTgsMTYwMDgxNjk3NiwtMjAwMTU0OD
+c2NSwtODMzNTMyODM4LDEwNTU4NjQ1NTgsLTI3OTAxMzU3OSwx
+NTAzNDUzNDE0LDExNDc3MzY1NzQsMzk2Mjk5MjM1LC0xODAzMD
+YzNDMyLC0xMTQzNzI5ODQzLC0xNjc1NTA3NzE2LDE1ODA0ODk1
+NDMsMTM1NTYwMjg2NV19
 -->
