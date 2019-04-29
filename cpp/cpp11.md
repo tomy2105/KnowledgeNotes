@@ -99,6 +99,13 @@ Constructor with such parameter is treated specially during uniform initializati
 
 Class `std::initializer_list<>` can be constructed statically by the compiler using `{}`  and it's copying is cheap.
 
+**NOTE**: Initializer list assignment and constuction does not automatically narrow!
+```cpp
+int x = 7.3; // ok, standard C narrowing
+int x0{ 7.3 };	// error: narrowing
+int x1 = { 7.3 };	// error: narrowing
+```
+
 ### Uniform initialization
 Uniform type initialization works on any object (not just aggregates and PODs as before). Now it can be used to initialize simple types, invoke constructors, initialize (public) data members, etc...
 
@@ -993,11 +1000,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Modernes C++](http://www.modernescpp.com/index.php)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MzI4MDQ3NzQsLTEwMzIyMTc2NzcsLT
-cxMzQyMjczMSwtMzIwOTE2MTU4LDE2MDA4MTY5NzYsLTIwMDE1
-NDg3NjUsLTgzMzUzMjgzOCwxMDU1ODY0NTU4LC0yNzkwMTM1Nz
-ksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LDM5NjI5OTIzNSwtMTgw
-MzA2MzQzMiwtMTE0MzcyOTg0MywtMTY3NTUwNzcxNiwxNTgwND
-g5NTQzLDEzNTU2MDI4NjUsMjY2NDQ2OTIwLC0zNjQ2Mjc4Nzcs
-LTI3MjgzNTUxM119
+eyJoaXN0b3J5IjpbMTE5ODcxOTg1OSwtMTQzMjgwNDc3NCwtMT
+AzMjIxNzY3NywtNzEzNDIyNzMxLC0zMjA5MTYxNTgsMTYwMDgx
+Njk3NiwtMjAwMTU0ODc2NSwtODMzNTMyODM4LDEwNTU4NjQ1NT
+gsLTI3OTAxMzU3OSwxNTAzNDUzNDE0LDExNDc3MzY1NzQsMzk2
+Mjk5MjM1LC0xODAzMDYzNDMyLC0xMTQzNzI5ODQzLC0xNjc1NT
+A3NzE2LDE1ODA0ODk1NDMsMTM1NTYwMjg2NSwyNjY0NDY5MjAs
+LTM2NDYyNzg3N119
 -->
