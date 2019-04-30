@@ -1033,13 +1033,13 @@ It is typically a bad idea to have a move operation throw, so declare those **no
 - [Compiler explorer](https://godbolt.org/)
 - [Interactive C/C++ memory model](http://svr-pes20-cppmem.cl.cam.ac.uk/cppmem/)
 - [Modernes C++](http://www.modernescpp.com/index.php)
-
+- [GeeksforGekks  C++](https://www.geeksforgeeks.org/c-plus-plus/)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU4OTYxMDE5NiwtODYwNjc2NDE0LDc2ND
-IzMDI0OSwxODI5OTY4Mjk0LC0xNjg3MjM5MTIwLDE3NDI2MDE4
-NDcsLTE1NjQ1ODMzMDMsLTE0MzI4MDQ3NzQsLTEwMzIyMTc2Nz
-csLTcxMzQyMjczMSwtMzIwOTE2MTU4LDE2MDA4MTY5NzYsLTIw
-MDE1NDg3NjUsLTgzMzUzMjgzOCwxMDU1ODY0NTU4LC0yNzkwMT
-M1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LDM5NjI5OTIzNSwt
-MTgwMzA2MzQzMl19
+eyJoaXN0b3J5IjpbLTExODE4Nzk4NDQsMTU4OTYxMDE5NiwtOD
+YwNjc2NDE0LDc2NDIzMDI0OSwxODI5OTY4Mjk0LC0xNjg3MjM5
+MTIwLDE3NDI2MDE4NDcsLTE1NjQ1ODMzMDMsLTE0MzI4MDQ3Nz
+QsLTEwMzIyMTc2NzcsLTcxMzQyMjczMSwtMzIwOTE2MTU4LDE2
+MDA4MTY5NzYsLTIwMDE1NDg3NjUsLTgzMzUzMjgzOCwxMDU1OD
+Y0NTU4LC0yNzkwMTM1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0
+LDM5NjI5OTIzNV19
 -->
