@@ -73,7 +73,28 @@ int bar(int i) {
 
 ### Mandatory virtual destructor
 Any class that has any virtual methods, or is any other mean meant for polymorhic inheritance, **must** have virtual destructor. Otherwise it won't get cleaned up properly if destructed from base class pointer (only a base class destructor will be invoked since it is not virtual).
+
+```cpp
+class Base {
+public:
+	~Base() {
+		std::cout << this << " ~Base()\r\n";
+	}
+};
+ 
+class Child: public Base {
+public:
+	~Child() {
+		std::cout << this << " ~Child()\r\n";
+	}
+};
+ 
+int main() {
+	Base* pBase = new Child();
+	delete pBase; // only ~Base invoked here, no ~Child
+}
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MjA3NDkwMjgsLTEzMjc5MDgwOCwtMT
-M1NzI2Njk2NSwtMTYxMzU3MjAyNl19
+eyJoaXN0b3J5IjpbNzM1ODk5NzY5LC0xODIwNzQ5MDI4LC0xMz
+I3OTA4MDgsLTEzNTcyNjY5NjUsLTE2MTM1NzIwMjZdfQ==
 -->
