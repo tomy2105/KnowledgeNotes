@@ -72,8 +72,8 @@ int bar(int i) {
 `T&&` t is not an rvalue reference here. When it appears in a type-deducing context, T&& acquires a special meaning. When func is instantiated, T depends on whether the argument passed to func is an lvalue or an rvalue. If it's an lvalue of type U, T is deduced to U&. If it's an rvalue, T is deduced to U.
 
 ### Mandatory virtual destructor
-Any class that has any virtual methods, or is any other mean meant for polymorhic inheritance, **must** have virtual destructor. Otherwise it won't get cleaned up properly if destructed from base class pointer/refere
+Any class that has any virtual methods, or is any other mean meant for polymorhic inheritance, **must** have virtual destructor. Otherwise it won't get cleaned up properly if destructed from base class pointer/reference.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgwMzAxNzIxMCwtMTM1NzI2Njk2NSwtMT
+eyJoaXN0b3J5IjpbLTEzMjc5MDgwOCwtMTM1NzI2Njk2NSwtMT
 YxMzU3MjAyNl19
 -->
