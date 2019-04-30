@@ -109,9 +109,9 @@ int main() {
 	Foo::doSomething(1); // implicit conversion here (is it intended or side-effect)?
 }
 ```
-
+#
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjI0MTI5NDY5LDE0OTczOTU5MzgsLTE3NT
-AxMTcxNjMsLTE4MjA3NDkwMjgsLTEzMjc5MDgwOCwtMTM1NzI2
-Njk2NSwtMTYxMzU3MjAyNl19
+eyJoaXN0b3J5IjpbLTE1MTcwODE2MTIsNjI0MTI5NDY5LDE0OT
+czOTU5MzgsLTE3NTAxMTcxNjMsLTE4MjA3NDkwMjgsLTEzMjc5
+MDgwOCwtMTM1NzI2Njk2NSwtMTYxMzU3MjAyNl19
 -->
