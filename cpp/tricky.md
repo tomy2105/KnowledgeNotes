@@ -99,8 +99,19 @@ int main() {
 
 Single arguments constructor are used in implicit conversions. Hence one should mark them explicit unless implicit conversion usage is intended.
 
+```cpp
+struct Foo {
+	Foo(int i) {};
+	
+	static void doSomething(const Foo& foo) {};
+};
+int main() {
+	Foo::doSomething(1); // implicit conversion here (is it intended or side-effect)?
+}
+```
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ5NzM5NTkzOCwtMTc1MDExNzE2MywtMT
-gyMDc0OTAyOCwtMTMyNzkwODA4LC0xMzU3MjY2OTY1LC0xNjEz
-NTcyMDI2XX0=
+eyJoaXN0b3J5IjpbLTY3MzE2OTQ0NywxNDk3Mzk1OTM4LC0xNz
+UwMTE3MTYzLC0xODIwNzQ5MDI4LC0xMzI3OTA4MDgsLTEzNTcy
+NjY5NjUsLTE2MTM1NzIwMjZdfQ==
 -->
