@@ -116,9 +116,20 @@ Same, explicit, applies to conversion operator (C++11).
 
 Use `<iosfwd>` instead of the traditional stream headers ( `<iostream>` and friends ) so that you can avoid including the definition of the whole streaming stuff. With `<iosfwd>` you are only making a forward declaration of all the streaming stuff.
 
+### Include order
 
+Your headers should not be dependent upon other headers being included first. One way to insure this is to include your headers before any other headers (so any errors are detected by compiler and not hidden by what has been done in other headers).
+
+Include in the following order:
+
+1.  The prototype/interface header for this implementation (ie, the .h/.hh file that corresponds to this .cpp/.cc file).
+2.  Other headers from the same project, as needed.
+3.  Headers from other non-standard, non-system libraries (for example, Qt, Eigen, etc).
+4.  Headers from other "almost-standard" libraries (for example, Boost)
+5.  Standard C++ headers (for example, iostream, functional, etc.)
+6.  Standard C headers (for example, cstdint, dirent.h, etc.)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY4MDg1NDI4MywxOTM4NzQ5NDY4LDYyND
+eyJoaXN0b3J5IjpbLTU0MDMxOTMzNCwxOTM4NzQ5NDY4LDYyND
 EyOTQ2OSwxNDk3Mzk1OTM4LC0xNzUwMTE3MTYzLC0xODIwNzQ5
 MDI4LC0xMzI3OTA4MDgsLTEzNTcyNjY5NjUsLTE2MTM1NzIwMj
 ZdfQ==
