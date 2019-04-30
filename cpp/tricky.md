@@ -102,16 +102,16 @@ Single arguments constructor are used in implicit conversions. Hence one should 
 ```cpp
 struct Foo {
 	Foo(int i) {};
-	
-	static void doSomething(const Foo& foo) {};
+		static void doSomething(const Foo& foo) {};
 };
+
 int main() {
 	Foo::doSomething(1); // implicit conversion here (is it intended or side-effect)?
 }
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY3MzE2OTQ0NywxNDk3Mzk1OTM4LC0xNz
+eyJoaXN0b3J5IjpbLTE2NjEwNTQxMSwxNDk3Mzk1OTM4LC0xNz
 UwMTE3MTYzLC0xODIwNzQ5MDI4LC0xMzI3OTA4MDgsLTEzNTcy
 NjY5NjUsLTE2MTM1NzIwMjZdfQ==
 -->
