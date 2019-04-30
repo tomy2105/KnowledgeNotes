@@ -110,13 +110,16 @@ int main() {
 }
 ```
 
+Same, explicit, applies to conversion operator (C++11).
+
 ### Use iosfwd
 
 Use `<iosfwd>` instead of the traditional stream headers ( `<iostream>` and friends ) so that you can avoid including the definition of the whole streaming stuff. With `<iosfwd>` you are only making a forward declaration of all the streaming stuff.
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkzODc0OTQ2OCw2MjQxMjk0NjksMTQ5Nz
-M5NTkzOCwtMTc1MDExNzE2MywtMTgyMDc0OTAyOCwtMTMyNzkw
-ODA4LC0xMzU3MjY2OTY1LC0xNjEzNTcyMDI2XX0=
+eyJoaXN0b3J5IjpbLTY4MDg1NDI4MywxOTM4NzQ5NDY4LDYyND
+EyOTQ2OSwxNDk3Mzk1OTM4LC0xNzUwMTE3MTYzLC0xODIwNzQ5
+MDI4LC0xMzI3OTA4MDgsLTEzNTcyNjY5NjUsLTE2MTM1NzIwMj
+ZdfQ==
 -->
