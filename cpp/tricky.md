@@ -95,8 +95,12 @@ int main() {
 }
 ```
 
+### Explicit single argument constructors
+
+Single arguments constructor are used in implicit conversions. Hence one should mark them explicit unless implicit conversion usage is intended.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NTAxMTcxNjMsLTE4MjA3NDkwMjgsLT
-EzMjc5MDgwOCwtMTM1NzI2Njk2NSwtMTYxMzU3MjAyNl19
+eyJoaXN0b3J5IjpbMTQ5NzM5NTkzOCwtMTc1MDExNzE2MywtMT
+gyMDc0OTAyOCwtMTMyNzkwODA4LC0xMzU3MjY2OTY1LC0xNjEz
+NTcyMDI2XX0=
 -->
