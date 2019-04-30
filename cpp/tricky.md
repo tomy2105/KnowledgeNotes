@@ -94,7 +94,9 @@ int main() {
 	delete pBase; // only ~Base invoked here, no ~Child
 }
 ```
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzM1ODk5NzY5LC0xODIwNzQ5MDI4LC0xMz
-I3OTA4MDgsLTEzNTcyNjY5NjUsLTE2MTM1NzIwMjZdfQ==
+eyJoaXN0b3J5IjpbLTE3NTAxMTcxNjMsLTE4MjA3NDkwMjgsLT
+EzMjc5MDgwOCwtMTM1NzI2Njk2NSwtMTYxMzU3MjAyNl19
 -->
