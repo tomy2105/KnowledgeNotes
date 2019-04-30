@@ -109,9 +109,14 @@ int main() {
 	Foo::doSomething(1); // implicit conversion here (is it intended or side-effect)?
 }
 ```
-#
+
+### Use iosfwd
+
+Use `<iosfwd>` instead of the traditional stream headers ( `<iostream>` and friends ) so that you can avoid including the definition of the whole streaming stuff. With `<iosfwd>` you are only making a forward declaration of all the streaming stuff.
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MTcwODE2MTIsNjI0MTI5NDY5LDE0OT
-czOTU5MzgsLTE3NTAxMTcxNjMsLTE4MjA3NDkwMjgsLTEzMjc5
-MDgwOCwtMTM1NzI2Njk2NSwtMTYxMzU3MjAyNl19
+eyJoaXN0b3J5IjpbMTkzODc0OTQ2OCw2MjQxMjk0NjksMTQ5Nz
+M5NTkzOCwtMTc1MDExNzE2MywtMTgyMDc0OTAyOCwtMTMyNzkw
+ODA4LC0xMzU3MjY2OTY1LC0xNjEzNTcyMDI2XX0=
 -->
