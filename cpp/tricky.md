@@ -97,7 +97,7 @@ int main() {
 
 ### Explicit single argument constructors
 
-Single arguments constructor are used in implicit conversions. Hence one should mark them explicit unless implicit conversion usage is intended.
+Single arguments constructor are used in implicit conversions. Hence one should mark them **explicit** unless implicit conversion usage is intended.
 
 ```cpp
 struct Foo {
@@ -111,7 +111,7 @@ int main() {
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NjEwNTQxMSwxNDk3Mzk1OTM4LC0xNz
-UwMTE3MTYzLC0xODIwNzQ5MDI4LC0xMzI3OTA4MDgsLTEzNTcy
-NjY5NjUsLTE2MTM1NzIwMjZdfQ==
+eyJoaXN0b3J5IjpbNjI0MTI5NDY5LDE0OTczOTU5MzgsLTE3NT
+AxMTcxNjMsLTE4MjA3NDkwMjgsLTEzMjc5MDgwOCwtMTM1NzI2
+Njk2NSwtMTYxMzU3MjAyNl19
 -->
