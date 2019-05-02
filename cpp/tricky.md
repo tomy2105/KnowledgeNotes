@@ -128,9 +128,13 @@ Include in the following order:
 4.  Headers from other "almost-standard" libraries (for example, Boost)
 5.  Standard C++ headers (for example, iostream, functional, etc.)
 6.  Standard C headers (for example, cstdint, dirent.h, etc.)
+
+### Empty character
+
+There is **no** such thing!!! Although might be tempted to write `'\0'` this is not **empty** character, this is *nul* character (one character with 0 as val
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU0MDMxOTMzNCwxOTM4NzQ5NDY4LDYyND
-EyOTQ2OSwxNDk3Mzk1OTM4LC0xNzUwMTE3MTYzLC0xODIwNzQ5
-MDI4LC0xMzI3OTA4MDgsLTEzNTcyNjY5NjUsLTE2MTM1NzIwMj
-ZdfQ==
+eyJoaXN0b3J5IjpbLTIwMDc5NDA3MiwtNTQwMzE5MzM0LDE5Mz
+g3NDk0NjgsNjI0MTI5NDY5LDE0OTczOTU5MzgsLTE3NTAxMTcx
+NjMsLTE4MjA3NDkwMjgsLTEzMjc5MDgwOCwtMTM1NzI2Njk2NS
+wtMTYxMzU3MjAyNl19
 -->
