@@ -132,11 +132,11 @@ Include in the following order:
 ### Empty character
 
 There is **no** such thing!!! Although might be tempted to write `'\0'` this is not **empty** character, this is *nul* character (one character with 0 as value).
-Hence if you output `'\0'` to file you will get one byte file with 0 value in it, whereas if you output `"\0"` to file you will get empty file (`"\0"` same as `"\0"` because `"someth"`.
+Hence if you output `'\0'` to file you will get one byte file with 0 value in it, whereas if you output `"\0"` to file you will get empty file (`"\0"` same as `"\0"` because `"something"` represents zero terminated character array so zero terminating it explicitly makes no visible difference).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTQwNjY2NDgxLC01NDAzMTkzMzQsMTkzOD
-c0OTQ2OCw2MjQxMjk0NjksMTQ5NzM5NTkzOCwtMTc1MDExNzE2
-MywtMTgyMDc0OTAyOCwtMTMyNzkwODA4LC0xMzU3MjY2OTY1LC
-0xNjEzNTcyMDI2XX0=
+eyJoaXN0b3J5IjpbLTExMTgyMTI3MjksLTU0MDMxOTMzNCwxOT
+M4NzQ5NDY4LDYyNDEyOTQ2OSwxNDk3Mzk1OTM4LC0xNzUwMTE3
+MTYzLC0xODIwNzQ5MDI4LC0xMzI3OTA4MDgsLTEzNTcyNjY5Nj
+UsLTE2MTM1NzIwMjZdfQ==
 -->
