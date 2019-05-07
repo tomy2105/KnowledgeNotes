@@ -163,7 +163,7 @@ The definition of a variable with an explicit initialization can use the `auto` 
 
 Keyword `decltype` can be used to determine the type of expression at compile-time.
 
-The type denoted by `decltype` can be different from the type deduced by `auto`.
+The type denoted by `decltype` can be different from the type deduced by `auto`. `auto` always deduces a non-reference type while `auto&&` always deduces a reference type. However, `decltype` can deduce a reference or non-reference type, based on the value category of the expression and the nature of the expression.
 
 ```cpp
 #include <vector>
@@ -180,6 +180,19 @@ int main()
     decltype(0) g;        // g has type int, because 0 is an rvalue
 }
 ```
+
+
+```cpp
+int   i;
+int&& f();
+auto          x3a = i;     // decltype(x3a) is int
+decltype(i)   x3d = i;     // decltype(x3d) is int
+auto          x4a = (i);   // decltype(x4a) is int
+decltype((i)) x4d = (i);   // decltype(x4d) is int&
+auto          x5a = f();   // decltype(x5a) is int
+decltype(f()) x5d = f();   // decltype(x5d) is int&&
+```
+
 
 **Auto with initializer list**: `auto z = { 42 };` type of `z` is `std::initializer_list<int>` and not just `int`!!!
 
@@ -951,7 +964,7 @@ See more [here](https://en.cppreference.com/w/cpp/header/type_traits).
 
 Template class `std::result_of` that allows one to determine and use the return type of a function object for every declaration.
 
-## New C++ Algorithms
+### New C++ Algorithms
 
 New algorithms that mimic the set theory operations `all_of()`, `any_of()` and `none_of()`. More [here](https://en.cppreference.com/w/cpp/algorithm/all_any_none_of).
 
@@ -959,6 +972,12 @@ A new category of `copy_n` algorithms is also available.
 
 The algorithm `iota()` creates a range of sequentially increasing values, as if by assigning an initial value to `*first`, then incrementing that value using prefix ++.
 
+
+### Copying and rethrowing exceptions
+
+`exception_ptr current_exception();` and `void rethrow_exception(exception_ptr p);` can be used to copy exception and rethrow it at some other place.
+
+More [here] (https://en.cppreference.com/w/cpp/error).
 
 ## Features removed or deprecated
 
@@ -968,9 +987,11 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 
 ## Some of the references
 
--   [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11#External_links)
--  [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
--  [Move assignment](https://en.cppreference.com/w/cpp/language/move_assignment)
+- [C++ 11 Wiki](https://en.wikipedia.org/wiki/C%2B%2B11)
+- [C++ 11 Language extensions](https://isocpp.org/wiki/faq/cpp11-language)
+- [C++ 11 Library extensions](https://isocpp.org/wiki/faq/cpp11-library)
+- [Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
+- [Move assignment](https://en.cppreference.com/w/cpp/language/move_assignment)
 - [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [RValue references](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
 - [Lambda expressions](https://en.cppreference.com/w/cpp/language/lambda)
@@ -978,13 +999,5 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Compiler explorer](https://godbolt.org/)
 - [Interactive C/C++ memory model](http://svr-pes20-cppmem.cl.cam.ac.uk/cppmem/)
 - [Modernes C++](http://www.modernescpp.com/index.php)
+- [Modern C++ features] (https://github.com/AnthonyCalandra/modern-cpp-features)
 
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcxMzQyMjczMSwtMzIwOTE2MTU4LDE2MD
-A4MTY5NzYsLTIwMDE1NDg3NjUsLTgzMzUzMjgzOCwxMDU1ODY0
-NTU4LC0yNzkwMTM1NzksMTUwMzQ1MzQxNCwxMTQ3NzM2NTc0LD
-M5NjI5OTIzNSwtMTgwMzA2MzQzMiwtMTE0MzcyOTg0MywtMTY3
-NTUwNzcxNiwxNTgwNDg5NTQzLDEzNTU2MDI4NjUsMjY2NDQ2OT
-IwLC0zNjQ2Mjc4NzcsLTI3MjgzNTUxMywxMjIwOTQyMzM0LC0x
-MjY2NzMzNzc4XX0=
--->

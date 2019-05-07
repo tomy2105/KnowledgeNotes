@@ -9,8 +9,3 @@
 [C++20](cpp20.md)
 
 [Not so obvious C++](tricky.md)
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI3NTc3MDY1NSwtMjAwMjQzNDA0NiwxNj
-Q1MTg5OTM2XX0=
--->

@@ -70,7 +70,3 @@ int bar(int i) {
 }
 ```
 `T&&` t is not an rvalue reference here. When it appears in a type-deducing context, T&& acquires a special meaning. When func is instantiated, T depends on whether the argument passed to func is an lvalue or an rvalue. If it's an lvalue of type U, T is deduced to U&. If it's an rvalue, T is deduced to U.
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNTcyNjY5NjUsLTE2MTM1NzIwMjZdfQ
-==
--->
