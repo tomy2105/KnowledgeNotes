@@ -70,3 +70,70 @@ int bar(int i) {
 }
 ```
 `T&&` t is not an rvalue reference here. When it appears in a type-deducing context, T&& acquires a special meaning. When func is instantiated, T depends on whether the argument passed to func is an lvalue or an rvalue. If it's an lvalue of type U, T is deduced to U&. If it's an rvalue, T is deduced to U.
+
+
+## Mandatory virtual destructor
+Any class that has any virtual methods, or is any other mean meant for polymorhic inheritance, **must** have virtual destructor. Otherwise it won't get cleaned up properly if destructed from base class pointer (only a base class destructor will be invoked since it is not virtual).
+
+```cpp
+class Base {
+public:
+	~Base() {
+		std::cout << this << " ~Base()\r\n";
+	}
+};
+ 
+class Child: public Base {
+public:
+	~Child() {
+		std::cout << this << " ~Child()\r\n";
+	}
+};
+ 
+int main() {
+	Base* pBase = new Child();
+	delete pBase; // only ~Base invoked here, no ~Child
+}
+```
+
+## Explicit single argument constructors
+
+Single arguments constructor are used in implicit conversions. Hence one should mark them **explicit** unless implicit conversion usage is intended.
+
+```cpp
+struct Foo {
+	Foo(int i) {};
+		static void doSomething(const Foo& foo) {};
+};
+
+int main() {
+	Foo::doSomething(1); // implicit conversion here (is it intended or side-effect)?
+}
+```
+
+Same, explicit, applies to conversion operator (C++11).
+
+## Use iosfwd
+
+Use `<iosfwd>` instead of the traditional stream headers ( `<iostream>` and friends ) so that you can avoid including the definition of the whole streaming stuff. With `<iosfwd>` you are only making a forward declaration of all the streaming stuff.
+
+## Include order
+
+Your headers should not be dependent upon other headers being included first. One way to insure this is to include your headers before any other headers (so any errors are detected by compiler and not hidden by what has been done in other headers).
+
+Include in the following order:
+
+1.  The prototype/interface header for this implementation (ie, the .h/.hh file that corresponds to this .cpp/.cc file).
+2.  Other headers from the same project, as needed.
+3.  Headers from other non-standard, non-system libraries (for example, Qt, Eigen, etc).
+4.  Headers from other "almost-standard" libraries (for example, Boost)
+5.  Standard C++ headers (for example, iostream, functional, etc.)
+6.  Standard C headers (for example, cstdint, dirent.h, etc.)
+
+## Empty character
+
+There is **no** such thing!!! Although might be tempted to write `'\0'` this is not **empty** character, this is *nul* character (one character with 0 as value).
+
+Hence if you output `'\0'` to file you will get one byte file with 0 value in it, whereas if you output `"\0"` to file you will get empty file (`"\0"` same as `"\0"` because `"something"` represents zero terminated character array so zero terminating it explicitly makes no visible difference).
+
+

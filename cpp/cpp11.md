@@ -99,6 +99,14 @@ Constructor with such parameter is treated specially during uniform initializati
 
 Class `std::initializer_list<>` can be constructed statically by the compiler using `{}`  and it's copying is cheap.
 
+**NOTE**: Initializer list assignment and construction does not automatically narrow!
+
+```cpp
+int x = 7.3; // ok, standard C narrowing
+int x0{ 7.3 };	// error: narrowing
+int x1 = { 7.3 };	// error: narrowing
+```
+
 ### Uniform initialization
 Uniform type initialization works on any object (not just aggregates and PODs as before). Now it can be used to initialize simple types, invoke constructors, initialize (public) data members, etc...
 
@@ -922,6 +930,26 @@ Random number functionality is split into two parts: a generator engine that con
 
 See more [here](https://en.cppreference.com/w/cpp/numeric/random).
 
+### Time manipulation
+
+Clocks (time providers), time points (how much time has passed since the start of the clock) and duration. Type safe manipulation of time.
+
+Some added in C++11, more in C++14 and C++20. See more [here](https://en.cppreference.com/w/cpp/chrono).
+
+### Rational arithmetics 
+
+`std::ratio` template and various methods that provide compile-time rational arithmetic support.
+
+```cpp
+    typedef std::ratio<2, 3> two_third;
+    typedef std::ratio<1, 6> one_sixth;
+ 
+    typedef std::ratio_add<two_third, one_sixth> sum;
+    std::cout << "2/3 + 1/6 = " << sum::num << '/' << sum::den << '\n';
+```
+
+More can be found [here](https://en.cppreference.com/w/cpp/numeric/ratio).
+
 ### Wrapper reference
 
 To obtain a wrapper reference from any object the function template `ref` is used (for a constant reference `cref` is used). Useful for function templates, where references to parameters rather than copies are needed:
@@ -968,10 +996,35 @@ Template class `std::result_of` that allows one to determine and use the return 
 
 New algorithms that mimic the set theory operations `all_of()`, `any_of()` and `none_of()`. More [here](https://en.cppreference.com/w/cpp/algorithm/all_any_none_of).
 
-A new category of `copy_n` algorithms is also available.
+`find_if_not()` counterpart of `find_if()` has been added.
+
+
+A new category of `copy_n` and `copy_if` algorithms is also available.
+
+A new category of `move` and `move_backward` algorithms is also available for moving from/to containers.
+
+Partitioning operations `is_partitioned`, `partition_copy` and `partition_point` are added.
+
+Sorting operations `is_sorted` and  `is_sorted_until` are added as well as heap ones `is_heap` and  `is_heap_until`, in addition to `is_permutation`.
+
+`minmax` and `minmax_element` are introduced.
 
 The algorithm `iota()` creates a range of sequentially increasing values, as if by assigning an initial value to `*first`, then incrementing that value using prefix ++.
 
+More can be found [here](https://en.cppreference.com/w/cpp/algorithm).
+
+### std::string conversion enhancements
+
+- `std::stoi` - convert string to integer
+- `std::stol` - convert string to long int
+- `std::stoul` - convert string to unsigned integer 
+- `std::stoll` - convert string to long long
+- `std::stoull` - convert string to unsigned long long
+- `std::stof` - convert string to float 
+- `std::stod` - convert string to double 
+- `std::stold` - convert string to long double
+- `std::to_string` - convert numerical value to string
+- `std::to_wstring` - convert numerical value to wide string
 
 ### Copying and rethrowing exceptions
 
@@ -983,7 +1036,9 @@ More [here] (https://en.cppreference.com/w/cpp/error).
 
 Dynamic exception specifications are deprecated (removed in C++17). Compile-time specification of non-exception-throwing functions is available with the [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept_spec) keyword (useful for optimization).
 
-Beware destructors are implicitly `noexcept(true)` which is backward incompatible, for more see [here](https://akrzemi1.wordpress.com/2013/08/20/noexcept-destructors/).
+A destructor shouldn't throw; a generated destructor is implicitly **noexcept** (independently of what code is in its body) if all of the members of its class have **noexcept** destructors which is backward incompatible, for more see [here](https://akrzemi1.wordpress.com/2013/08/20/noexcept-destructors/).
+
+It is typically a bad idea to have a move operation throw, so declare those **noexcept** wherever possible. A generated copy or move operation is implicitly **noexcept** if all of the copy or move operations it uses on members of its class have **noexcept** destructors.
 
 ## Some of the references
 
@@ -1000,4 +1055,3 @@ Beware destructors are implicitly `noexcept(true)` which is backward incompatibl
 - [Interactive C/C++ memory model](http://svr-pes20-cppmem.cl.cam.ac.uk/cppmem/)
 - [Modernes C++](http://www.modernescpp.com/index.php)
 - [Modern C++ features] (https://github.com/AnthonyCalandra/modern-cpp-features)
-
