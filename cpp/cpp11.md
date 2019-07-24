@@ -1054,4 +1054,4 @@ It is typically a bad idea to have a move operation throw, so declare those **no
 - [Compiler explorer](https://godbolt.org/)
 - [Interactive C/C++ memory model](http://svr-pes20-cppmem.cl.cam.ac.uk/cppmem/)
 - [Modernes C++](http://www.modernescpp.com/index.php)
-- [Modern C++ features] (https://github.com/AnthonyCalandra/modern-cpp-features)
+- [Modern C++ features](https://github.com/AnthonyCalandra/modern-cpp-features)

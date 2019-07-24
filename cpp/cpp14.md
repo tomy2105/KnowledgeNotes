@@ -190,7 +190,7 @@ In addition to `std::begin`/`std::end`, following were added for constant/revers
 ## Some of the references
 
 - [C++ 14 Wiki](https://en.wikipedia.org/wiki/C%2B%2B14)
-- [C++ 14 Language Extensions] (https://isocpp.org/wiki/faq/cpp14-language)
-- [C++ 14 Library Extensions] (https://isocpp.org/wiki/faq/cpp14-library)
-- [Modern C++ features] (https://github.com/AnthonyCalandra/modern-cpp-features)
+- [C++ 14 Language Extensions](https://isocpp.org/wiki/faq/cpp14-language)
+- [C++ 14 Library Extensions](https://isocpp.org/wiki/faq/cpp14-library)
+- [Modern C++ features](https://github.com/AnthonyCalandra/modern-cpp-features)
 

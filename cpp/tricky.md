@@ -137,3 +137,16 @@ There is **no** such thing!!! Although might be tempted to write `'\0'` this is 
 Hence if you output `'\0'` to file you will get one byte file with 0 value in it, whereas if you output `"\0"` to file you will get empty file (`"\0"` same as `"\0"` because `"something"` represents zero terminated character array so zero terminating it explicitly makes no visible difference).
 
 
+## Exception objects must be nothrow copy constructible
+
+When an exception is thrown, the exception object operand of the throw expression is **copied** into a temporary object that is used to initialize the handler. 
+If the copy constructor for the exception object type throws during the copy initialization, std::terminate() is called, which can result in undefined behavior.
+
+## Invoking virtual functions from base class constructor/destructor
+
+Base type must be constructed previous to the Derived type. Problem is what does it mean to call a virtual method from the constructor of the Base type. 
+C++ calls a method at the Base level, unlike Java which calls method on Derived level while Derived object is still not fully constructed.
+
+Same issue is with destructors. To avoid calling virtual method on partially destructed object (Derived destructor is executed before Base one) C++ calls a method at the Base level.
+
+_In other words, during the base classes constructor/destructor execution, the object is not of the derived type and thus the base type's implementation of the virtual function is invoked._
