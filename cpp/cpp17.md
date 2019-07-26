@@ -33,19 +33,26 @@ There are four variations base if default value is present and if evaluated from
 
 Unary fold with empty parameter pack can be used only with operators that have default value specified and those are *&&*, *||* and *,*.
 
-### constexpr if
-
-Enables to conditionally compile source code.
-
 ```cpp
-template <typename T>
-auto get_value(T t) {
-    if constexpr (std::is_pointer_v<T>)
-        return *t; 
-    else
-        return t;
+template<typename ...Args>
+void FoldPrint(Args&&... args) {
+	(cout << ... << forward<Args>(args)) << '\n';
+}
+
+template<typename T, typename... Args>
+void push_back_vec(std::vector<T>& v, Args&&... args)
+{
+	(v.push_back(args), ...);
 }
 ```
+
+Template Metaprogramming version of the and operator:
+
+```cpp
+template<bool... B>
+struct fold_and : std::integral_constant<bool, (B && ...)> {};
+```
+
 
 ### Initializers in if and switch statements
 
@@ -79,10 +86,14 @@ int main()
 
 ### Structured binding declarations
 
-Allows binding std::tuple, std::pair, array or a non-static data member directly to variables. 
+Allows binding:
+- arrays
+- anything that supports `std::tuple_size<>` and provides `get<N>()` function (`std::tuple`, `std::pair`)
+- type that contains only non static, public members (like plain struct)
 
 ```cpp
 #include <set>
+#include <map>
 #include <string>
 #include <iostream>
 
@@ -97,6 +108,11 @@ int main() {
 		std::cout << "insert is successful. The value is " << *iter << '\n';
 	else
 		std::cout << "The value " << *iter << " already exists in the set\n";
+
+	std::map<int, std::string> myMap = { {0, "zero"}, {1, "one"}, {2, "two"} };
+	for (const auto &[k, v] : myMap) {
+		std::cout << k << " "<< v << '\n';
+	}
 }
 ```
 
@@ -124,11 +140,41 @@ int main() {
 }
 ```
 
+Don't need functions like `std::make_pair<T>` to do automatic deduction no longer, can invoke `std::pair` constructor directly.
+
+User defined deduction can be written, more info [here](https://arne-mertz.de/2017/06/class-template-argument-deduction/#User-defined_deduction_guides). Example for `std::pair` below.
+
+```cpp
+namespace std {
+  // ...
+
+  template<class T1, class T2>
+  pair(T1 const&, T2 const&) -> pair<T1, T2>;
+}
+```
+
 ### Copy elision
 
 Optional before C++17, now gauranteed.
 
 Applies to return values, (named) return value optimization, passing temporary by value and throwing and catching exceptions by value.
+
+Following would not compile under C++14.....
+
+```cpp
+struct NonMoveable {
+	NonMoveable(int);
+	// no copy or move constructor:
+	NonMoveable(const NonMoveable&) = delete;
+	NonMoveable(NonMoveable&&) = delete;
+	std::array<int, 1024> arr;
+};
+
+NonMoveable make() {
+	return NonMoveable(42);
+} 
+auto largeNonMovableObj = make();
+```
 
 More info [here](https://jonasdevlieghere.com/guaranteed-copy-elision/).
 
@@ -138,8 +184,29 @@ You can declare global variables and static variables inline.
 The same rules that are applied to inline functions are applied to inline variables.
 
 - There can be more than one definitions of an inline variable.
--  The definition of an inline variable must be present in the translation unit, in which it is used.
--  A global inline variable (non-static inline variable) must be declared inline in every translation unit and has the same address in every translation unit.
+- The definition of an inline variable must be present in the translation unit, in which it is used.
+- A global inline variable (non-static inline variable) must be declared inline in every translation unit and has the same address in every translation unit.
+
+```cpp
+// header file
+struct MyClass
+{
+	inline static const int sValue = 777;
+};
+```
+
+instead of
+
+```cpp
+// header file
+struct MyClass
+{
+	static const int sValue;
+};
+
+// cpp file
+int const MyClass::sValue = 777;
+```
 
 ### Automatic type deduction of non-type template parameters
 
@@ -163,6 +230,12 @@ MyClass<2017>  myClass1;   // Partial specialisation for int
 
 Type is no longer always `std::initializer_list`.
 
+Auto deduction with copy initialization (assigning) with a {} deduces a std::initializer_list. 
+
+Auto deduction using direct initialization with single entry in initializer_list will deduce type from that single entry.
+
+Auto deduction using direct initialization with more than one entry in initializer_list is ill formed.
+
 ```cpp
 auto initA{1};          // int
 auto initB= {2};        // std::initializer_list<int>
@@ -170,7 +243,7 @@ auto initC{1, 2};       // error, no single element
 auto initD= {1, 2};     // std::initializer_list<int>
 ```
 
-Assigning with a {} returns a std::initializer_list. Copy construction only works for a single value.
+
   
 ### Nested namespaces
 
@@ -186,9 +259,9 @@ namespace A::B::C {
 - `[[nodiscard]]` can be used in a function declaration, enumeration declaration, or class declaration. If you discard the return value from a function declared as nodiscard, the compiler should issue a warning. 
 - `[[maybe_unused]]` can be used in the declaration of a class, a typedef­, a variable, a non­-static data member, a function, an enumeration, or an enumerator. Thanks to maybe_unused, the compiler suppresses a warning on an unused entity. 
 
-### Compile time if
+### constexpr if (compile time if)
 
-Discard branches of an if statement at compile-time based on a constant expression condition
+Enables to conditionally compile source code, discard branches of an if statement at compile-time based on a constant expression condition.
 
 ```cpp
 template<int N>
@@ -198,6 +271,16 @@ constexpr int fibonacci()
         return fibonacci<N-1>() + fibonacci<N-2>();
     else
         return N;
+}
+```
+
+```cpp
+template <typename T>
+auto get_value(T t) {
+    if constexpr (std::is_pointer_v<T>)
+        return *t; 
+    else
+        return t;
 }
 ```
 
@@ -234,6 +317,47 @@ int main()
 }
 ```
 
+### Evaluation order rules
+
+In `f(a, b, c)` - the order of evaluation of a, b, c is still unspecified, but any parameter is fully evaluated before the next one is started. This fixes problems `f(a(d), b, c)` that c could be evaluated after d but before a.
+
+Chaining of functions is evaluated from left to right: a(expA).b(expB).c(expC) is evaluated from left to right and expA is evaluated before calling b.
+
+Operator overloading order of evaluation is determined by the order associated with the corresponding built-in operator `std::cout << a() << b() << c()` is evaluated as a, b, c.
+
+Postfix expressions are evaluated from left to right. This includes functions calls and member selection expressions.
+
+Assignment expressions are evaluated from right to left. This includes compound assignments.
+
+Operands to shift operators are evaluated from left to right. In summary, the following expressions are evaluated in the order a, then b, then c, then d:
+- `a.b`
+- `a->b`
+- `a->*b`
+- `a(b1, b2, b3)`
+- `b @= a`
+- `a[b]`
+- `a << b`
+- `a >> b`
+
+
+### Aggregate initialization of classes with base classes
+
+Possible to initialize when base class present.
+
+```cpp
+struct base { int a1, a2; };
+struct derived : base { int b1; };
+
+derived d1{{1, 2}, 3};      // full explicit initialization
+derived d1{{}, 1};          // the base is value initialized
+```
+
+An aggregate is an array or a class with:
+- no user-provided constructors (including those inherited from a base class)
+- no private or protected non-static data members
+- no virtual functions
+- no virtual, private or protected base classes
+
 ### Other smaller enhancements
 
 - text message for static_assert optional
@@ -245,18 +369,24 @@ int main()
 - removal of auto_ptr and trigraphs
 - removal of ++ operator on bool
 - dynamic exception specification has been removed, `throw()` remains as alias for `noexcept()`
-- end expression for ranged foor loop no longer needs to be an iterator (of same type as begin), now only comparison is required
+- end expression for ranged foor loop no longer needs to be same type as begin, now only comparison is required
 - evaluation order rules changed a bit "the function arguments must be fully evaluated before all other arguments" so chaining works as expected
-- some additional memory allocation functions that uses align parameter
-- exception specification is part of the type system
+- some additional memory allocation functions that uses align parameter, new is automatically aware of `alignas` specifications
+- exception specification is part of the type system (can have same function, and overloading, which differ in exception specification only, cannot assign throwing function to no throwing and vice versa)
 - attributes on namespaces and enumerators, omitting unknown attributes
+- constexpr lambdas
+- new specification for inheriting constructors
+- direct-list-initialization of enumerations 
+- pack expansions in using-declarations
 
 ## Standard Library enhancements
 
 ### basic_string_view
 
 A **non-owning** reference to a sequence of characters (std::string, or C-string).
-Cheap to copy, mainly readonly with two, fast, modfiy methods: `remove_prefix` and `remove_suffix`.
+Cheap to copy, mainly readonly with two, fast, modfiy methods: `remove_prefix` and `remove_suffix`, as well as fast `substr`.
+
+In theory `string_view` is a natural replacement for most of `const std::string&`.
 
 ```cpp
 #include <iostream>
@@ -293,7 +423,7 @@ Template specialization for all underlaying character types exist (`string_view`
 
 ### Parallel algorithms
 
-Algorithms of the STL available in a sequential, parallel and parallel and vectorized (Single Instruction, Multiple Data, SIMD, extensions used) versions.
+Algorithms of the STL available in a sequential, parallel and parallel and vectorized (Single Instruction, Multiple Data, SIMD, extensions used) versions. List of already existing algorithms [here](https://en.cppreference.com/w/cpp/experimental/parallelism/existing).
 
 Version is determined by first argument to the algorithm specifying [execution policy](https://en.cppreference.com/w/cpp/algorithm/execution_policy_tag_t).
 
@@ -331,14 +461,14 @@ Operating system support SIMD instructions and/or compiler glags and the optimis
 
 ### New algortihms and functions
 
-Several new algorithms have been introduced:
+Several new algorithms have been introduced (with support for parallelism):
 
 - `std::for_each_n` - for each for first n elements
 - `std::exclusive_scan` - an exclusive prefix sum operation on a range using binary operator
 - `std::inclusive_scan` - an inclusive prefix sum operation on a range  using binary operator
 - `std::transform_exclusive_scan` - combination of transform and exclusive_scan
 - `std::transform_inclusive_scan` - combination of transform and inclusive_scan
-- `std::reduce` - reduces range using binary operator (similar to accumulate)
+- `std::reduce` - reduces range using binary operator (similar to accumulate but doesn't gaurantee left to right order)
 - `std::transform_reduce` - combination of transform and reduce
 - `std::clamp` - value between two boundaries
 - `std::gcd`, `std::lcm` - common denominator and multiplier
@@ -348,12 +478,110 @@ Several new algorithms have been introduced:
 
 Based on boost::filesystem. based on the three concepts file, file name and path. Files can be directories, hard links, symbolic links or regular files. Paths can be absolute or relative.
 
+Haae three/four core parts:
+- The path object
+- directory_entry
+- Directory iterators
+- Plus many supportive functions:
+	- getting information about the path
+	- files manipulation: copy, move, create, symlinks
+	- last write time
+	- permissions
+	- space/filesize
+	- work on symbolic links, hard links
+	- check and set file flags
+	- disk space usage, stats
+	
+```cpp
+#include <filesystem>
+#include <iostream>
+
+namespace fs = std::filesystem;
+
+void DisplayDirectoryTree(const fs::path& pathToShow, int level)
+{
+	if (fs::exists(pathToShow) && fs::is_directory(pathToShow))
+	{
+		auto lead = std::string(level * 3, ' ');
+		for (const auto& entry : fs::directory_iterator(pathToShow))
+		{
+			auto filename = entry.path().filename();
+			if (entry.is_directory())
+			{
+				std::cout << lead << "[+] " << filename << "\n";
+				DisplayDirectoryTree(entry, level + 1);
+			} else if (entry.is_regular_file())
+				std::cout << lead << "[-] " << filename << "\n";
+			else
+				std::cout << lead << " [?]" << filename << "\n";
+		}
+	}
+}
+
+void DisplayDirectoryTree(const fs::path& pathToShow)
+{
+	DisplayDirectoryTree(pathToShow, 0);
+}
+
+
+int main() {
+	fs::path somePath("D:/ShareRW/Bugs/../VolumeChange.txt");
+
+	std::cout << "exists() = " << fs::exists(somePath) << "\n"
+		<< "string() = " << somePath.string() << "\n"
+		<< "generic_string() = " << somePath.generic_string() << "\n"
+		<< "lexically_normal() = " << somePath.lexically_normal() << "\n"
+		<< "lexically_relative(\"D:/ShareRW\") = " << somePath.lexically_relative("D:/ShareRW") << "\n"
+		<< "root_name() = " << somePath.root_name() << "\n"
+		<< "root directory() " << somePath.root_directory() << '\n'
+		<< "root_path() = " << somePath.root_path() << "\n"
+		<< "relative_path() = " << somePath.relative_path() << "\n"
+		<< "parent_path() = " << somePath.parent_path() << "\n"
+		<< "filename() = " << somePath.filename() << "\n"
+		<< "stem() = " << somePath.stem() << "\n"
+		<< "extension() = " << somePath.extension() << "\n";
+
+	std::wcout << "native() = " << somePath.native() << "\n";
+
+	for (auto elem : somePath) {
+		std::cout << elem << "\n";
+	}
+
+	if (fs::exists(somePath) &&
+		fs::is_regular_file(somePath))
+	{
+		auto err = std::error_code{};
+		auto filesize = fs::file_size(somePath, err);
+		if (filesize != static_cast<uintmax_t>(-1))
+			std::cout << filesize << "\n";
+		else
+			std::cout << err.message() << "\n";
+	}
+
+	fs::path p = fs::current_path();
+	p = p / "Test.log"; // concatenates paths with directory separator
+	p += ".txt"; // appends path without directory separator
+
+	std::cout << "Test.txt.log in current path " << p << " decomposes into:\n"
+		<< "root name " << p.root_name() << '\n'
+		<< "root directory " << p.root_directory() << '\n'
+		<< "relative path " << p.relative_path() << '\n';
+
+	DisplayDirectoryTree(fs::current_path());
+}
+```
+
+Most of the functions have two versions:
+- one that throws: filesystem_error
+- another with error_code (system specific)	
+
 More info [here](https://en.cppreference.com/w/cpp/filesystem) and [here](https://www.bfilipek.com/2017/08/cpp17-details-filesystem.html).
 
 
 ### Any
 A type-safe container for single values of any type (must be copyable). 
 Number of `any_cast` functions provide type-safe access to the contained object and throws `bad_any_cast` if access is not allowed.
+Does not attempt conversions (e.g. cannot fetch int as float).
 
 ```cpp
 #include <any>
@@ -452,7 +680,12 @@ Represents a type-safe union.
 
 An instance of std::variant at any given time either holds a value of one of its alternative types, or in the case of error - no value.
 
-Not permitted to hold references, arrays, or the type void. 
+Restrictions:
+- Variant is not allowed to allocate additional (dynamic) memory.
+- A variant is not permitted to hold references, arrays, or the type void.
+- The first alternative must always be default constructible
+- A variant is default initialized with the value of its first alternative.
+- If the first alternative type is not default constructible, then the variant must use `std::monostate` as the first alternative
 
 `std::get` or `get_if` used to access values, compile time error or throws `bad_variant_access` in case of wrong value type.
 
@@ -703,18 +936,28 @@ int main() {
 
 More info [here](https://en.cppreference.com/w/cpp/memory).
 
+### std::search improvements
+
+In addition to the execution policy, `std::search` now can choose between three searchers:
+- `default_searcher`
+- `boyer_moore_searcher`
+- `boyer_moore_horspool_searcher`
+
+
 ### Other smaller enhancements
 
 - `std::uncaught_exceptions`, as a replacement of `std::uncaught_exception` in exception handling
 - new insertion functions `try_emplace` and `insert_or_assign` for `std::map` and `std::unordered_map`
 - uniform container access: `std::size`, `std::empty` and `std::data`
 - logical operator traits: `std::conjunction`, `std::disjunction` and `std::negation`
-- improved `std::search` with searchers
 - `std::void_t` - metafunction that maps a sequence of any types to the type void, more [here](https://en.cppreference.com/w/cpp/types/void_t)
 - bunch of special mathematical functions, more [here](https://en.cppreference.com/w/cpp/numeric/special_math)
 - `std::is_aggregate` - type traits checking if aggregate type
 - `std::to_chars` and `std::from_chars` - for simple integer/float to char sequence conversions
 - `std::as_const`
+- `shared_ptr` with array
+- moving map/set nodes from one to another without overhead
+
 
 ## Some of the references
 
@@ -722,3 +965,5 @@ More info [here](https://en.cppreference.com/w/cpp/memory).
 - [Changes between C++14 and C++17](https://isocpp.org/files/papers/p0636r0.html)
 - [C++17 Features all in one](https://github.com/tvaneerd/cpp17_in_TTs/blob/master/ALL_IN_ONE.md)
 - [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support)
+- [Simplify C++](https://arne-mertz.de/)
+- [Bartek's coding blog](https://www.bfilipek.com/2017/01/cpp17features.html)
