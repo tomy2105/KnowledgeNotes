@@ -286,7 +286,8 @@ auto get_value(T t) {
 
 ### Lambda capture of this by value(copy)
 
-`*this` in caputre list denotes capturing enclosing object by value.
+`*this` in caputre list denotes capturing enclosing object by value, as opposed to `this` (C++11) which captures by reference.
+
 
 ```cpp
 #include <string>
@@ -358,6 +359,21 @@ An aggregate is an array or a class with:
 - no virtual functions
 - no virtual, private or protected base classes
 
+### constexpr lambdas
+
+Compile time expressions using lambda functions are possible.
+
+```cpp
+	constexpr auto add = [](int x, int y) {
+		auto L = [=] { return x; };
+		auto R = [=] { return y; };
+		return [=] { return L() + R(); };
+	};
+
+	static_assert(add(1, 2)() == 3);
+```
+
+
 ### Other smaller enhancements
 
 - text message for static_assert optional
@@ -374,7 +390,6 @@ An aggregate is an array or a class with:
 - some additional memory allocation functions that uses align parameter, new is automatically aware of `alignas` specifications
 - exception specification is part of the type system (can have same function, and overloading, which differ in exception specification only, cannot assign throwing function to no throwing and vice versa)
 - attributes on namespaces and enumerators, omitting unknown attributes
-- constexpr lambdas
 - new specification for inheriting constructors
 - direct-list-initialization of enumerations 
 - pack expansions in using-declarations
@@ -943,11 +958,50 @@ In addition to the execution policy, `std::search` now can choose between three 
 - `boyer_moore_searcher`
 - `boyer_moore_horspool_searcher`
 
+### Improvements to maps and sets
+
+Moving map/set nodes from one to another without overhead of expensive copies, moves, or heap allocations/deallocations is possible using new `extract` and `merge` methods.
+
+```cpp
+	std::map<int, std::string> src{ {1, "one"}, {2, "two"}, {3, "thirty-tree"} };
+	std::map<int, std::string> dst{ {3, "three"} };
+	dst.insert(src.extract(src.find(1))); // Cheap remove and insert of { 1, "one" } from `src` to `dst`.
+	dst.insert(src.extract(2)); // Cheap remove and insert of { 2, "two" } from `src` to `dst`.
+	// dst == { { 1, "one" }, { 2, "two" }, { 3, "three" } };
+```
+
+```cpp
+	std::set<int> src{ 1, 3, 5 };
+	std::set<int> dst{ 2, 4, 5 };
+	dst.merge(src);
+	// src == { 5 }
+	// dst == { 1, 2, 3, 4, 5 }
+```
+
+Changing the key of a map element:
+
+```cpp
+	std::map<int, string> m {{1, "one"}, {2, "two"}, {3, "three"}};
+	auto e = m.extract(2);
+	e.key() = 4;
+	m.insert(std::move(e));
+	// m == { { 1, "one" }, { 3, "three" }, { 4, "two" } }
+```
+
+New insertion functions `try_emplace` and `insert_or_assign` added for maps.
+
+```cpp
+	std::map<std::string, std::string> m;
+
+	m.try_emplace("b", "abcd");
+	m.try_emplace("c", 10, 'c');
+	m.try_emplace("c", "Won't be inserted");
+```
+
 
 ### Other smaller enhancements
 
 - `std::uncaught_exceptions`, as a replacement of `std::uncaught_exception` in exception handling
-- new insertion functions `try_emplace` and `insert_or_assign` for `std::map` and `std::unordered_map`
 - uniform container access: `std::size`, `std::empty` and `std::data`
 - logical operator traits: `std::conjunction`, `std::disjunction` and `std::negation`
 - `std::void_t` - metafunction that maps a sequence of any types to the type void, more [here](https://en.cppreference.com/w/cpp/types/void_t)
@@ -955,8 +1009,8 @@ In addition to the execution policy, `std::search` now can choose between three 
 - `std::is_aggregate` - type traits checking if aggregate type
 - `std::to_chars` and `std::from_chars` - for simple integer/float to char sequence conversions
 - `std::as_const`
-- `shared_ptr` with array
-- moving map/set nodes from one to another without overhead
+- `std::shared_ptr` with array
+
 
 
 ## Some of the references
@@ -967,3 +1021,4 @@ In addition to the execution policy, `std::search` now can choose between three 
 - [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support)
 - [Simplify C++](https://arne-mertz.de/)
 - [Bartek's coding blog](https://www.bfilipek.com/2017/01/cpp17features.html)
+- [Anthony Calandra - Modern CPP Features](https://github.com/AnthonyCalandra/modern-cpp-features)
