@@ -1,5 +1,44 @@
 # CPP 17
 
+<!-- toc -->
+
+- [Core language features](#core-language-features)
+  * [Fold expressions](#fold-expressions)
+  * [Initializers in if and switch statements](#initializers-in-if-and-switch-statements)
+  * [Structured binding declarations](#structured-binding-declarations)
+  * [Template deduction of constructors](#template-deduction-of-constructors)
+  * [Copy elision](#copy-elision)
+  * [Inline variables](#inline-variables)
+  * [Automatic type deduction of non-type template parameters](#automatic-type-deduction-of-non-type-template-parameters)
+  * [auto in combination with an {}-Initialisation](#auto-in-combination-with-an--initialisation)
+  * [Nested namespaces](#nested-namespaces)
+  * [New attributesfallthrough, nodiscard, and maybe_unused](#new-attributesfallthrough-nodiscard-and-maybe_unused)
+  * [constexpr if (compile time if)](#constexpr-if-compile-time-if)
+  * [Lambda capture of this by value(copy)](#lambda-capture-of-this-by-valuecopy)
+  * [Evaluation order rules](#evaluation-order-rules)
+  * [Aggregate initialization of classes with base classes](#aggregate-initialization-of-classes-with-base-classes)
+  * [constexpr lambdas](#constexpr-lambdas)
+  * [Other smaller enhancements](#other-smaller-enhancements)
+- [Standard Library enhancements](#standard-library-enhancements)
+  * [basic_string_view](#basic_string_view)
+  * [Parallel algorithms](#parallel-algorithms)
+  * [New algortihms and functions](#new-algortihms-and-functions)
+  * [The filesystem library](#the-filesystem-library)
+  * [Any](#any)
+  * [Optional](#optional)
+  * [Variant](#variant)
+  * [Byte](#byte)
+  * [Invoke and apply](#invoke-and-apply)
+  * [Shared mutex](#shared-mutex)
+  * [Scoped lock](#scoped-lock)
+  * [Memory allocation and polymorphic allocator](#memory-allocation-and-polymorphic-allocator)
+  * [std::search improvements](#stdsearch-improvements)
+  * [Improvements to maps and sets](#improvements-to-maps-and-sets)
+  * [Other smaller enhancements](#other-smaller-enhancements-1)
+- [Some of the references](#some-of-the-references)
+
+<!-- tocstop -->
+
 ## Core language features
 
 ### Fold expressions
@@ -598,6 +637,8 @@ A type-safe container for single values of any type (must be copyable).
 Number of `any_cast` functions provide type-safe access to the contained object and throws `bad_any_cast` if access is not allowed.
 Does not attempt conversions (e.g. cannot fetch int as float).
 
+`std::in_place_type` or `std::make_any` can be used for in place construction of optional with a value.
+
 ```cpp
 #include <any>
 #include <iostream>
@@ -618,15 +659,20 @@ int main()
 	std::cout << a.type().name() << ": " << std::any_cast<bool>(a) << '\n';
 	a = Foo{ 1,2 };
 	std::cout << a.type().name() << ": " << std::any_cast<Foo>(a).a << " " << std::any_cast<PeFooro>(a).b << '\n';
+	
+	std::any a{UserName{"hello"}}; // temporay here
+	std::any a{std::in_place_type<UserName>,"hello"};	// no temporary
 }
 ```
 
 More info [here](https://en.cppreference.com/w/cpp/utility/any).
 
 ### Optional
-Can have a value or no value (), common use case a return value of a function that can fail.
+Can have a value or no value (indicated when returning with `{}` or `std::nullopt`) , common use case a return value of a function that can fail.
 
 Can be converted to bool, indicating if value is present. Contained value is accessed via `value` or `value_or` methods or `->` or `*` operators.
+
+`std::in_place` or `std::make_optional` can be used for in place construction of optional with a value.
 
 ```cpp
 #include <string>
@@ -649,8 +695,7 @@ auto create2(bool b) {
 // std::reference_wrapper may be used to return a reference
 auto create_ref(bool b) {
 	static std::string value = "Godzilla";
-	return b ? std::optional<std::reference_wrapper<std::string>>{value}
-	: std::nullopt;
+	return b ? std::optional<std::reference_wrapper<std::string>>{value} : std::nullopt;
 }
 
 int main()
@@ -704,6 +749,9 @@ Restrictions:
 
 `std::get` or `get_if` used to access values, compile time error or throws `bad_variant_access` in case of wrong value type.
 
+`std::in_place_type` or `std::in_place_index` can be used for in place construction of variant.
+
+
 ```cpp
 #include <variant>
 #include <string>
@@ -747,6 +795,10 @@ int main()
 			[](const std::string& arg) { std::cout << "String: " << arg << ' '; },
 		}, v);
 	}
+
+	// std::variant<int, float> intFloat1{ 10.5 }; // compiler error due to ambiguity 
+	std::variant<int, float> intFloat2{ std::in_place_index<0>, 10.5 };
+	std::variant<int, float> intFloat3{ std::in_place_type<int>, 10.5 };
 }
 ```
 

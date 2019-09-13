@@ -1,5 +1,68 @@
 # CPP 11
 
+<!-- toc -->
+
+- [Extensions to the C++ core language](#extensions-to-the-c-core-language)
+  * [Rvalue references](#rvalue-references)
+  * [Reference qualifier](#reference-qualifier)
+  * [Move constructors](#move-constructors)
+  * [Move assignment](#move-assignment)
+  * [std::move](#stdmove)
+  * [std::forward](#stdforward)
+  * [Generalized constant expressions](#generalized-constant-expressions)
+  * [Modification to the definition of plain old data](#modification-to-the-definition-of-plain-old-data)
+  * [Extern template](#extern-template)
+  * [Initializer lists](#initializer-lists)
+  * [Uniform initialization](#uniform-initialization)
+  * [Type inference](#type-inference)
+  * [Range-based for loop](#range-based-for-loop)
+  * [Alternative function syntax](#alternative-function-syntax)
+  * [Lambda functions and expressions](#lambda-functions-and-expressions)
+  * [Object construction improvement](#object-construction-improvement)
+  * [Explicit overrides and final](#explicit-overrides-and-final)
+  * [Null pointer constant](#null-pointer-constant)
+  * [Strongly typed enumerations](#strongly-typed-enumerations)
+  * [Right angle bracket](#right-angle-bracket)
+  * [Explicit conversion operators](#explicit-conversion-operators)
+  * [Template aliases](#template-aliases)
+  * [Unrestricted unions](#unrestricted-unions)
+  * [Variadic templates](#variadic-templates)
+  * [New string literals](#new-string-literals)
+  * [User-defined literals](#user-defined-literals)
+  * [Multithreading memory model](#multithreading-memory-model)
+  * [Thread-local storage](#thread-local-storage)
+  * [Explicitly defaulted and deleted special member functions](#explicitly-defaulted-and-deleted-special-member-functions)
+  * [Type long long int](#type-long-long-int)
+  * [Static assertions](#static-assertions)
+  * [Allow sizeof to work on members of classes without an explicit object](#allow-sizeof-to-work-on-members-of-classes-without-an-explicit-object)
+  * [Control and query object alignment](#control-and-query-object-alignment)
+  * [Allow garbage collected implementations](#allow-garbage-collected-implementations)
+  * [Attributes](#attributes)
+- [C++ standard library changes](#c-standard-library-changes)
+  * [Threading facilities](#threading-facilities)
+    + [Thread class](#thread-class)
+    + [Mutexes, locks and condition variables](#mutexes-locks-and-condition-variables)
+    + [Futures and promises](#futures-and-promises)
+    + [Atomic variables](#atomic-variables)
+  * [Tuple types](#tuple-types)
+  * [Containers](#containers)
+  * [Regular expressions](#regular-expressions)
+  * [General-purpose smart pointers](#general-purpose-smart-pointers)
+  * [Extensible random number facility](#extensible-random-number-facility)
+  * [Time manipulation](#time-manipulation)
+  * [Rational arithmetics](#rational-arithmetics)
+  * [Wrapper reference](#wrapper-reference)
+  * [Polymorphic wrappers for function objects](#polymorphic-wrappers-for-function-objects)
+  * [Type traits for metaprogramming](#type-traits-for-metaprogramming)
+  * [Uniform method for computing the return type of function objects](#uniform-method-for-computing-the-return-type-of-function-objects)
+  * [New C++ Algorithms](#new-c-algorithms)
+  * [std::string conversion enhancements](#stdstring-conversion-enhancements)
+  * [Copying and rethrowing exceptions](#copying-and-rethrowing-exceptions)
+- [Features removed or deprecated](#features-removed-or-deprecated)
+- [Some of the references](#some-of-the-references)
+
+<!-- tocstop -->
+
 ## Extensions to the C++ core language
 
 ### Rvalue references
@@ -8,6 +71,31 @@ A new non-const reference type called an rvalue reference, identified by `T&&` i
 For safety reasons, some restrictions are imposed. A named variable will never be considered to be an rvalue even if it is declared as such. To get an rvalue, the function template [`std::move()`](https://en.cppreference.com/w/cpp/utility/move) should be used. Rvalue references can also be modified only under certain circumstances, being intended to be used primarily with move constructors.
 
 More info about various value categories (including newer C++ standard ones) can be found [here](https://en.cppreference.com/w/cpp/language/value_category) and [here](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
+
+
+### Reference qualifier 
+
+Reference qualifier in method signature plays part in resolution which method gets invoked.
+
+```cpp
+class A {
+public:
+	void method() & { // invoked only when *this is an lvalue
+		std::cout << "lvalue" << std::endl;
+	}
+	void method() && { // invoked only when *this is an rvalue
+		std::cout << "rvalue" << std::endl;
+	}
+};
+
+int main()
+{
+	A a;
+	a.method(); // lvalue version invoked
+	A().method(); // rvalue version invoked
+}
+```
+
 
 ### Move constructors
 
@@ -35,6 +123,8 @@ Typically "steals" the resources held by the argument rather than make copies of
 
 More info can be found [here](https://en.cppreference.com/w/cpp/language/move_constructor).
 
+**Note:** If possible make move constructor `noexcept` because it allows optimizations as well as some STL code behaves more optimal (`std::vector` for example).
+
 ### Move assignment
 
 ``class_name& class_name::operator= ( [const and/or volatile] class_name&& other)``
@@ -44,6 +134,48 @@ Identical in usage and restrictions to move constructor (apart from need to prot
 More info can be found [here](https://en.cppreference.com/w/cpp/language/move_assignment).
 
 Sample code with move assignment and move constructor can be found in [Move.cpp](Move.cpp)
+
+
+### std::move
+
+Simple cast to rvalue reference (no code generated). Called move because it is usually used in move operations.
+
+**Note:** if called on const it won't actually move (call move constructor/assignment) but copy (construct/assignment).
+
+Why, `std::move(const T)` will produce `const T&&` which argument resolution cannot bind to `T&&` (argument for move operations). However it can bind it to `const T&` (argument for copy operations).
+
+```cpp
+#include <iostream>
+
+struct A {
+	A() { std::cout << "Default constructor" << std::endl;  }
+	A(const A&) { std::cout << "Copy constructor" << std::endl; }
+	A(A&&) { std::cout << "Move constructor" << std::endl; }
+};
+
+A myMove(const A& a) {
+	return std::move(a); // actually makes a copy
+}
+
+A myOtherMove(A& a) {
+	return std::move(a); // actually moves
+}
+
+int main() {
+	A a;
+	A b = myMove(a);
+	A c = myOtherMove(a);
+}
+```
+
+This is good for backward compatibility because objects without move constructor will simply copy and continue to work.
+
+**Note:** `std::move_if_noexcept` also exists (which does move even if not noexcpet in cases where there is no copy constructor :)).
+
+
+### std::forward
+
+Conditional cast to rvalue reference, return rvalue only if original value of param (which might be lvalue because it has a name) is rvalue, otherwise it returns lvalue.
 
 ### Generalized constant expressions
 
@@ -63,6 +195,26 @@ In addition constant expressions need not be of integral or enumeration type any
 `constexpr double earth_gravitational_acceleration = 9.8;`
 
 `constexpr double moon_gravitational_acceleration = earth_gravitational_acceleration / 6.0;`
+
+**Note:** constexpr functions will be evaluated at compile time when all its arguments are constant expressions and 
+the result is used in a constant expression as well, otherwise it can be executed at run time.
+
+```cpp
+#include <iostream>
+
+constexpr int justReturn(int value) {
+	return value;
+}
+
+int main() {
+	int a[justReturn(10)]; // compile time execution
+
+	int i;
+	std::cout << "Please enter a number" << std::endl;
+	std::cin >> i;
+	std::cout << std::endl << "You entered " << justReturn(i) << std::endl; // run time execution
+}
+```
 
 ### Modification to the definition of plain old data
 
@@ -99,12 +251,15 @@ Constructor with such parameter is treated specially during uniform initializati
 
 Class `std::initializer_list<>` can be constructed statically by the compiler using `{}`  and it's copying is cheap.
 
-**NOTE**: Initializer list assignment and construction does not automatically narrow!
+**NOTE**: Initializer list assignment and construction does not automatically narrow! Widening is performed!
 
 ```cpp
 int x = 7.3; // ok, standard C narrowing
 int x0{ 7.3 };	// error: narrowing
 int x1 = { 7.3 };	// error: narrowing
+double y = 7; // ok
+double y0{ 7 };	// ok: widening
+double y1 = { 7 };	// ok: widening
 ```
 
 ### Uniform initialization
@@ -157,17 +312,26 @@ BasicClass var3 = GetBasicClass();
 InitializerClass var4{ 5, "foobar" }; // call initializer list constructor
 ```
 
-If a class has an initializer list constructor, then it takes priority over other forms of construction
-
+**If a class has an initializer list constructor, then it takes priority over other forms of construction, care needed when adding such constructor to a class!**
 
 ```cpp
 std::vector<int> the_vec{4}; // vector with one integer { 4 }
 std::vector<int> the_vec2(4); // vector with four integers { 0, 0, 0, 0 }
+std::vector<int> the_vec{4, 4}; // vector with two integers { 4, 4}
+std::vector<int> the_vec2(4, 4); // vector with four integers having value of 4 { 4, 4, 4, 4 }
 ```
+
+**Empty braces, `{}`, mean default constructor, not empty initializer list.**
 
 ### Type inference
 
 The definition of a variable with an explicit initialization can use the `auto` keyword. This creates a variable of the specific type of the initializer.
+
+
+**auto cannot be used to qualify arrays, functions arguments (except lambdas in C++14) or struct/class instance variables, or used as a cast type.**
+
+**Auto with initializer list**: `auto z = { 42 };` type of `z` is `std::initializer_list<int>` and not just `int`!!! (**C++ 17 makes some changes!**)
+
 
 Keyword `decltype` can be used to determine the type of expression at compile-time.
 
@@ -183,6 +347,7 @@ int main()
                           //   std::vector<int>::operator[](size_type) const
     auto c = 0;           // c has type int
     auto d = c;           // d has type int
+	auto* e = new auto(2105) // e has type int*
     decltype(c) e;        // e has type int, the type of the entity named by c
     decltype((c)) f = c;  // f has type int&, because (c) is an lvalue
     decltype(0) g;        // g has type int, because 0 is an rvalue
@@ -199,10 +364,50 @@ auto          x4a = (i);   // decltype(x4a) is int
 decltype((i)) x4d = (i);   // decltype(x4d) is int&
 auto          x5a = f();   // decltype(x5a) is int
 decltype(f()) x5d = f();   // decltype(x5d) is int&&
-```
+```
 
 
-**Auto with initializer list**: `auto z = { 42 };` type of `z` is `std::initializer_list<int>` and not just `int`!!!
+**Some say using auto is nice way of not forgetting to initialize variable since compiler errors on auto without initialization.**
+
+**As well as avoid unintentional implicit conversions when programmer explicitly uses wrong type.**
+
+```cpp
+std::vector v = {1, 2, 3};
+unsigned size = v.size();    // on 64 bit system this would lead to narrowing implicit conversion from 64bit unsigned int to 32bit unsigned int
+auto size2 = v.size(); // no implicit conversion
+
+std::map<std::string, std::string> m = { {"foo", "bar"}, {"jane", "doe"} };
+
+for (const std::pair<std::string, std::string>& p : m) // conversion from std::pair<const std::string, std::string> to std::pair<std::string, std::string>, p is a temporary
+{
+	std::cout << &p << std::endl;
+}
+for (const auto& p : m) // no conversion, p is "directly" from map 
+{
+	std::cout << &p << std::endl;
+}
+
+auto* n = new auto(2105) // deduces int*
+```
+
+
+**auto does not play well with "invisible proxy" classes!**
+
+```cpp
+std::vector<int> vi = { 1, 2, 3, 4 };
+std::vector<bool> vb = { true, false, true, false };
+
+auto second_int = vi[2]; // type is int
+std::cout << typeid(second_int).name() << std::endl;
+
+auto second_bool = vb[2]; // type is std::vector<bool>::reference!!!!!!
+std::cout << typeid(second_bool).name() << std::endl;
+
+auto second_bool_true = static_cast<bool>(vb[2]); // type is bool
+std::cout << typeid(second_bool_true).name() << std::endl;
+```
+
+
 
 ### Range-based for loop
 
@@ -217,6 +422,10 @@ for (int& x : my_array)
 ```
 
 “Range-based for” will work for C-style arrays, initializer lists, and any type that has `begin()` and `end()` functions.
+
+If range object is non-const with copy-on-write semantics, the range-based for loop may trigger changes to it by (implicitly) calling the non-const begin().
+To avoid that , if loop is not actually modifying the object, `std::as_const` can be used.
+
 
 ### Alternative function syntax
 "Traditional" function syntax doesn't allow "guessing" of function return type based function parameters.
@@ -269,7 +478,7 @@ The capture of `this` is special. It can only be captured by value, not by refer
 
 Class members cannot be captured explicitly by a capture (only **variables**), using them requires explicit or implicit capture of _this_. 
 
-**Caution** when a lambda captures a member using implicit by-copy capture, it does not make a copy of that member variable (it captures _this_ and access memeber by reference using _this_).
+**Caution** when a lambda captures a member using implicit by-copy capture, it does not make a copy of that member variable (it captures _this_ and access memeber by reference using _this_). Capture by value has been added in later standard.
 
 For example see [Lambda.cpp](Lambda.cpp), lines 31 through 47.
 
@@ -299,7 +508,7 @@ Sample code with lambda can be found in [Lambda.cpp](Lambda.cpp)
 
 ### Object construction improvement
 
-Constructors are allowed to call other peer constructors:
+Constructors are allowed to call other peer constructors (constructor delegation):
 ```cpp
 class SomeType
 {
@@ -310,7 +519,9 @@ public:
 };
 ```
 
-**Warning**:  An object is constructed once _any_ constructor finishes execution. This means that delegating constructor will be executing on a fully constructed object. 
+**Warning**:  An object is constructed once _any_ constructor finishes execution. This means that:
+- when other constructor is invoked one cannot initialize other members anymore (since they were already initialized by other constructor)
+- delegating constructor will be executing on a fully constructed object. 
 
 A class is allowed to specify that base class constructors will be inherited. Compiler will automatically generate code needed. This is an all-or-nothing feature: either all base class's constructors are forwarded or none.
 
@@ -392,6 +603,7 @@ enum class Gender : unsigned short {
 ```
 Type can be omitted and defaults to `int`.
 
+**Note:** since type of enum is known in advance they can be used in forward declarations (unlike "ordinary" enums).
 
 ### Right angle bracket
 
@@ -658,6 +870,28 @@ OutputType  some_variable  =  L"1234"_ssuffix;  // Uses the 'const wchar_t *' ov
 OutputType  some_variable  =  u"1234"_ssuffix;  // Uses the 'const char16_t *' overload.  
 OutputType  some_variable  =  U"1234"_ssuffix;  // Uses the 'const char32_t *' overload.
 ```
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <string>
+
+unsigned long long operator "" _x4(unsigned long long value) {
+	return value * 4;
+};
+
+std::string operator "" _upper(const char* value, size_t) {
+	std::string str = value;
+	for (auto& c : str) c = toupper(c);
+	return str;
+}
+
+int main() {
+	std::cout << 10_x4 << std::endl; // outputs 40
+	std::cout << "Hello World"_upper << std::endl; // outputs HELLO WORLD
+}
+```
+
 More verbose explanation of user-defined literals can be found [here](https://akrzemi1.wordpress.com/2012/08/12/user-defined-literals-part-i/),  [here](https://akrzemi1.wordpress.com/2012/10/23/user-defined-literals-part-ii/) and  [here](https://akrzemi1.wordpress.com/2012/10/29/user-defined-literals-part-iii/).
 
 ### Multithreading memory model
@@ -711,24 +945,38 @@ struct NonCopyable
 };
 ```
 
-The `= delete` specifier can be used to prohibit calling any function. For example:
+The `= delete` specifier can be used to prohibit calling any function (**Non member functions can also be deleted!**). For example:
 
 ```cpp
 
+#include <iostream>
+
 struct NoInt
 {
-    void f(double i);
-    void f(int) = delete;
+	void f(double i) {};
+	void f(int) = delete;
 };
 
-struct OnlyDouble
+struct OnlyInt
 {
-    void ff(double d);
-    template<class T> void ff(T) = delete;
+	void ff(int d) {};
+	template<class T> void ff(T) = delete;
 };
+
+int main() {
+	NoInt noInt;
+	noInt.f(1.0);
+	noInt.f(1); // error here, would not be if f(int) wasn't deleted due to implicit conversion to double
+
+	OnlyInt onlyInt;
+	onlyInt.ff(1);
+	onlyInt.ff(1.0); // error here, would not be if ff(T) wasn't deleted due to implicit conversion to int (with warning)
+}
 ```
 
-An attempt to call `f()` with an `int` will be rejected by the compiler, instead of performing a silent conversion to `double`. 
+**Usually best to make deleted functions public because it will make compiler emit better error message.** If private compiler would error because inaccessible method is invoked and not mention it is actually deleted.
+
+**Deleted functions are taken into account during overload resoultion.**
 
 ###  Type long long int
 
@@ -785,7 +1033,35 @@ More, including standard attributes can be found [here](https://en.cppreference.
 
 ### Threading facilities
 
+A lot of info with examples [here](https://en.cppreference.com/w/cpp/thread).
+
+#### Thread class
+
 A thread class `std::thread` is provided, which takes a function object (with optional arguments) to run in the new thread. 
+
+**Note:** `std::thread` must be joined or detached before the destructor, otherwise `std::terminate` is invoked. ()
+
+```cpp
+#include <iostream>
+#include <thread>
+#include <chrono>
+
+void f1()
+{
+	std::cout << "Thread\n";
+	std::this_thread::sleep_for(std::chrono::milliseconds(rand() % 100));
+}
+
+int main() {
+	std::thread t1(f1);  // starts a new thread on f1 function
+	std::cout << "Main\n";
+	std::this_thread::sleep_for(std::chrono::milliseconds(rand() % 100));
+	t1.join();   // without this call, thread destructor will std::terminate
+	std::cout << "All done\n";
+}
+```
+
+#### Mutexes, locks and condition variables
 
 For synchronization between threads there are `std::mutex`, `std::recursive_mutex`, `std::shared_mutex` (along with "timed" versions which try locking for specified amount of time). 
 
@@ -795,15 +1071,63 @@ Usable either directly or via RAII locks `std::lock_guard`, `std::scoped_lock` (
 
 There is also `std::call_once` helper for invoking function only once.
 
-Futures and promises for passing asynchronous results between threads, and `std::packaged_task` for wrapping up a function call that can generate such an asynchronous result is also introduced. `std::async` facility provides a convenient method of running tasks and tying them to a `std::future`.
+One code example is in [Philosophers.cpp](Philosophers.cpp).
 
-More info with examples [here](https://en.cppreference.com/w/cpp/thread).
+#### Futures and promises
 
-Some info and problems about `std::async` [here](https://eli.thegreenplace.net/2016/the-promises-and-challenges-of-stdasync-task-based-parallelism-in-c11/).
+Future (`std::future`, `std::shared_future`) and promise (`std::promis`) for passing asynchronous results between threads, and `std::packaged_task` for wrapping up a function call that can generate such an asynchronous result is also introduced. 
+
+`std::async` facility provides a convenient method of running tasks and tying them to a `std::future`. Some info and problems about `std::async` [here](https://eli.thegreenplace.net/2016/the-promises-and-challenges-of-stdasync-task-based-parallelism-in-c11/).
+
+```cpp
+#include <iostream>
+#include <future>
+#include <thread>
+#include <chrono>
+
+int main() {
+	// future from a packaged_task
+	std::packaged_task<int(int)> task([] (int arg) { 
+		std::this_thread::sleep_for(std::chrono::seconds(10));
+		return arg;
+	}); // wrap the function
+	std::future<int> f1 = task.get_future();  // get a future
+	std::thread t(std::move(task), 10); // launch on a thread
+
+	std::cout << "Waiting..." << std::flush;
+	f1.wait(); // if we skip waiting here f1.get() will wait
+	std::cout << "Done!\nResult is: " << f1.get() << '\n';
+
+	t.join();
+
+	// future from an async()
+	std::future<int> f2 = std::async(std::launch::async, [] (int arg) { 
+		std::this_thread::sleep_for(std::chrono::seconds(5));
+		return arg;
+	}, 20);
+	std::cout << "Waiting..." << std::flush;
+	f2.wait();// if we skip waiting here f2.get() will wait
+	std::cout << "Done!\nResult is: " << f2.get() << '\n';
+
+	// future from a promise
+	std::promise<int> p;
+	std::future<int> f3 = p.get_future();
+	std::thread([&p] { 
+		std::this_thread::sleep_for(std::chrono::seconds(7));
+		p.set_value_at_thread_exit(30);
+	}).detach(); // no need for join here
+
+	std::cout << "Waiting..." << std::flush;
+	f3.wait();// if we skip waiting here f3.get() will wait
+	std::cout << "Done!\nResults is: " << f3.get() << '\n';
+}
+
+```
+
+#### Atomic variables
 
 For programming without locks one can use  [atomic operations](https://en.cppreference.com/w/cpp/atomic), especially using `std::atomic` variables.
 
-One more code example is in [Philosophers.cpp](Philosophers.cpp).
 
 
 ### Tuple types
@@ -841,7 +1165,7 @@ Relation operations as well as assignment between tuples is possible provided th
 
 `std::array` is a safe counterpart of C-style array.
 
-`std::forward_list` is single linked list (unlike `std::list`  which is double linked).
+`std::forward_list` is single linked list (unlike `std::list` which is double linked).
 
 See more [here](https://en.cppreference.com/w/cpp/container).
 
@@ -923,6 +1247,8 @@ In addition `std::enable_shared_from_this` must be used if trying to create shar
 	}
 ```
 See more [here](https://en.cppreference.com/w/cpp/memory).
+
+And [here](https://www.modernescpp.com/index.php/atomic-smart-pointers) if you are concerned about thread safety.
 
 ### Extensible random number facility
 
@@ -1036,9 +1362,47 @@ More [here] (https://en.cppreference.com/w/cpp/error).
 
 Dynamic exception specifications are deprecated (removed in C++17). Compile-time specification of non-exception-throwing functions is available with the [`noexcept`](https://en.cppreference.com/w/cpp/language/noexcept_spec) keyword (useful for optimization).
 
-A destructor shouldn't throw; a generated destructor is implicitly **noexcept** (independently of what code is in its body) if all of the members of its class have **noexcept** destructors which is backward incompatible, for more see [here](https://akrzemi1.wordpress.com/2013/08/20/noexcept-destructors/).
+**A destructor shouldn't throw**, [reason here](https://www.acodersjourney.com/top-15-c-exception-handling-mistakes-avoid/) , and compilers make destructors by default `noexcept(true)`!!! That means it will std::terminate if some code invoked inside destructor throws.
 
-It is typically a bad idea to have a move operation throw, so declare those **noexcept** wherever possible. A generated copy or move operation is implicitly **noexcept** if all of the copy or move operations it uses on members of its class have **noexcept** destructors.
+Compiler will make destructors implicitely `noexcept(false)` only if:
+- destructor code directly invokes another function that is noexcept(false)
+- directly invokes `throw`
+- has member that has `noexcept(false)` destructor
+
+In all other cases (throw hidden somewhere deep inside function without noexcept specification) programmer needs to explicitly 
+make destructor `noexcept(false)` (or handle the exception and not let it propagate).
+
+```cpp
+#include <iostream>
+
+class A {
+public:
+	~A() {
+		justThrow();
+	};
+private:
+	void justThrow() {
+		throw 1;
+	};
+};
+
+int main() {
+	try {
+		A a; // following crashes using std::terminate due to exception in destructor
+	}
+	catch (...) {
+		std::cout << "Exception caught" << std::endl;
+	}
+}
+```
+**This behavior is backward incompatible**, for more see [here](https://akrzemi1.wordpress.com/2013/08/20/noexcept-destructors/).
+
+It is typically a bad idea to have a move operation throw, so declare those **noexcept** wherever possible. A generated copy or move operation 
+is implicitly **noexcept** if all of the copy or move operations it uses on members of its class have **noexcept** destructors.
+
+Various STL algorithms behave better (more optimized) if your class has **noexcept** move constructor.
+
+**Note:** always use **noexcept** if it makes sense because it allows compiler to kick in more optimizations.
 
 ## Some of the references
 

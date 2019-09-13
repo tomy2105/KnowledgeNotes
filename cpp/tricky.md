@@ -1,5 +1,21 @@
 # Not so obvious C++
 
+<!-- toc -->
+
+- [Type of int[] function parameter](#type-of-int-function-parameter)
+- [Reference collapsing rule](#reference-collapsing-rule)
+- [Type deduction rules for rvalue references](#type-deduction-rules-for-rvalue-references)
+- [Mandatory virtual destructor](#mandatory-virtual-destructor)
+- [Explicit single argument constructors](#explicit-single-argument-constructors)
+- [Use iosfwd](#use-iosfwd)
+- [Include order](#include-order)
+- [Empty character](#empty-character)
+- [Exception objects must be nothrow copy constructible](#exception-objects-must-be-nothrow-copy-constructible)
+- [Invoking virtual functions from base class constructor/destructor](#invoking-virtual-functions-from-base-class-constructordestructor)
+- [Creation of default special functions](#creation-of-default-special-functions)
+
+<!-- tocstop -->
+
 ## Type of int[] function parameter
 
 Having `int a[100]`, with or without size specified, as a function parameter is identical to having `int* a` due to ancient history C compatibility.
@@ -150,3 +166,13 @@ C++ calls a method at the Base level, unlike Java which calls method on Derived 
 Same issue is with destructors. To avoid calling virtual method on partially destructed object (Derived destructor is executed before Base one) C++ calls a method at the Base level.
 
 _In other words, during the base classes constructor/destructor execution, the object is not of the derived type and thus the base type's implementation of the virtual function is invoked._
+
+## Creation of default special functions
+
+- **Default constructor** - generated if class has no other constructors and has base class and/or members (calls base class constructor, member default constructors, ...)
+- **Destructor** - generated if have base class and/or members (calls base class destructor, member destructors, ...), virtual if base class destructor is virtual
+- **Copy constructor** - generated if class lacks user defined copy constructor, deleted if move operation is declared, deprecated automatic generation if there is user copy assigment or user destructor 
+- **Copy assignment operator** - generated if class lacks user defined copy assignment, deleted if move operation is declared, deprecated automatic generation if there is user copy constructor or user destructor 
+- **Move constructor or move assignment operator** - generated only if no user copy and/or move operations and/or destructor
+
+Although more verbose, it is sometimes better to explicitly create default versions (`= default`) so they stay defined even when class is changed in a way that would prevent implicit creation of those (e.g. adding user defined destructor is added for logging purposes).

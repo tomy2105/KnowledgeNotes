@@ -1,5 +1,27 @@
 # CPP 14
 
+<!-- toc -->
+
+- [New language features](#new-language-features)
+  * [Function return type deduction](#function-return-type-deduction)
+  * [Alternate type deduction on declaration](#alternate-type-deduction-on-declaration)
+  * [Relaxed constexpr restrictions](#relaxed-constexpr-restrictions)
+  * [Variable templates](#variable-templates)
+  * [Binary literals](#binary-literals)
+  * [Digit separators](#digit-separators)
+  * [Generic lambdas](#generic-lambdas)
+  * [Lambda capture expressions](#lambda-capture-expressions)
+  * [The attribute [[deprecated]]](#the-attribute-deprecated)
+- [New standard library features](#new-standard-library-features)
+  * [Shared mutexes and locking](#shared-mutexes-and-locking)
+  * [Heterogeneous lookup in associative containers](#heterogeneous-lookup-in-associative-containers)
+  * [Standard user-defined literals](#standard-user-defined-literals)
+  * [Tuple addressing via type](#tuple-addressing-via-type)
+  * [Smaller library features](#smaller-library-features)
+- [Some of the references](#some-of-the-references)
+
+<!-- tocstop -->
+
 ## New language features
 
 ### Function return type deduction
@@ -38,6 +60,34 @@ Constexpr functions may now contain the following:
 - Expressions which change the value of an object if the lifetime of that object began within the constant expression function. 
 - goto statements are forbidden in C++14 relaxed constexpr-declared functions. 
 
+```cpp
+#include <iostream>
+
+constexpr long fibonacci(int n) {
+	if (n < 2)
+		return 1;
+	else
+		return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+constexpr long factorial(int n) {
+	long start = 1;
+	for (auto j = 2; j < n; ++j)
+		start *= j;
+	return start;
+}
+
+int main()
+{
+	int b[fibonacci(6)];
+	int c[factorial(6)];
+
+	int i;
+	std::cout << "Please enter a number: ";
+	std::cin >> i;
+	std::cout << std::endl << fibonacci(i) << " " << factorial(i) << std::endl;
+}
+```
 
 ### Variable templates
 
@@ -59,11 +109,11 @@ constexpr const char* pi<const char*> = "pi";
 
 ### Binary literals
 
-Numeric literals  be specified in binary form, syntax uses the prefixes 0b or 0B. 
+Numeric literals  be specified in binary form, syntax uses the prefixes 0b or 0B, e.g. `0b10101`. 
 
 ### Digit separators
 
-Single-quote character may be used arbitrarily as a digit separator in numeric literals, both integer literals and floating point literals.
+Single-quote character may be used arbitrarily as a digit separator in numeric literals, both integer literals and floating point literals, e.g. `10'300'000.00`.
 
 ### Generic lambdas
 
@@ -193,4 +243,3 @@ In addition to `std::begin`/`std::end`, following were added for constant/revers
 - [C++ 14 Language Extensions](https://isocpp.org/wiki/faq/cpp14-language)
 - [C++ 14 Library Extensions](https://isocpp.org/wiki/faq/cpp14-library)
 - [Modern C++ features](https://github.com/AnthonyCalandra/modern-cpp-features)
-
