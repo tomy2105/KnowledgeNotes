@@ -3,8 +3,6 @@
 <!-- toc -->
 
 - [Type of int[] function parameter](#type-of-int-function-parameter)
-- [Reference collapsing rule](#reference-collapsing-rule)
-- [Type deduction rules for rvalue references](#type-deduction-rules-for-rvalue-references)
 - [Mandatory virtual destructor](#mandatory-virtual-destructor)
 - [Explicit single argument constructors](#explicit-single-argument-constructors)
 - [Use iosfwd](#use-iosfwd)
@@ -13,6 +11,14 @@
 - [Exception objects must be nothrow copy constructible](#exception-objects-must-be-nothrow-copy-constructible)
 - [Invoking virtual functions from base class constructor/destructor](#invoking-virtual-functions-from-base-class-constructordestructor)
 - [Creation of default special functions](#creation-of-default-special-functions)
+- [Reference collapsing rule](#reference-collapsing-rule)
+- [Type deduction rules for rvalue references](#type-deduction-rules-for-rvalue-references)
+- [Template type deduction](#template-type-deduction)
+  * [`ParamType` is a pointer or reference type, but not a forwarding/universal reference](#paramtype-is-a-pointer-or-reference-type-but-not-a-forwardinguniversal-reference)
+  * [`ParamType` is a forwarding/universal reference](#paramtype-is-a-forwardinguniversal-reference)
+  * [`ParamType` is neither a pointer nor a reference](#paramtype-is-neither-a-pointer-nor-a-reference)
+- [auto type deduction](#auto-type-deduction)
+- [Some of the references](#some-of-the-references)
 
 <!-- tocstop -->
 
@@ -50,43 +56,6 @@ int main()
 	return 0;
 }
 ```
-
-## Reference collapsing rule
-
-What is the type ok `k`? What does `int & &` colapse to?
-```cpp
-template <typename T>
-void baz(T t) {
-  T& k = t;
-}
-int ii = 4;
-baz<int&>(ii);
-baz<int&&>(ii);
-```
-
-The _reference collapsing_ rule. `&` always wins. So `& &` is `&`, and so are `&& &` and `& &&`. The only case where `&&` emerges from collapsing is `&& &&`.
-
-## Type deduction rules for rvalue references
-
-```cpp
-template <class T>
-void func(T&& t) {
-}
-
-func(4);            // 4 is an rvalue: T deduced to int
-
-double d = 3.14;
-func(d);            // d is an lvalue; T deduced to double&
-
-float f() {...}
-func(f());          // f() is an rvalue; T deduced to float
-
-int bar(int i) {
-  func(i);          // i is an lvalue; T deduced to int&
-}
-```
-`T&&` t is not an rvalue reference here. When it appears in a type-deducing context, T&& acquires a special meaning. When func is instantiated, T depends on whether the argument passed to func is an lvalue or an rvalue. If it's an lvalue of type U, T is deduced to U&. If it's an rvalue, T is deduced to U.
-
 
 ## Mandatory virtual destructor
 Any class that has any virtual methods, or is any other mean meant for polymorhic inheritance, **must** have virtual destructor. Otherwise it won't get cleaned up properly if destructed from base class pointer (only a base class destructor will be invoked since it is not virtual).
@@ -176,3 +145,310 @@ _In other words, during the base classes constructor/destructor execution, the o
 - **Move constructor or move assignment operator** - generated only if no user copy and/or move operations and/or destructor
 
 Although more verbose, it is sometimes better to explicitly create default versions (`= default`) so they stay defined even when class is changed in a way that would prevent implicit creation of those (e.g. adding user defined destructor is added for logging purposes).
+
+## Reference collapsing rule
+
+What is the type of `k`? What does `int & &` colapse to?
+```cpp
+template <typename T>
+void baz(T t) {
+  T& k = t;
+}
+int ii = 4;
+baz<int&>(ii);
+baz<int&&>(ii);
+```
+
+The _reference collapsing_ rule. `&` always wins. So `& &` is `&`, and so are `&& &` and `& &&`. The only case where `&&` emerges from collapsing is `&& &&`.
+
+## Type deduction rules for rvalue references
+
+```cpp
+template <class T>
+void func(T&& t) {
+}
+
+func(4);            // 4 is an rvalue: T deduced to int
+
+double d = 3.14;
+func(d);            // d is an lvalue; T deduced to double&
+
+float f() {...}
+func(f());          // f() is an rvalue; T deduced to float
+
+int bar(int i) {
+  func(i);          // i is an lvalue; T deduced to int&
+}
+```
+
+`T&&` t is not an rvalue reference here. When it appears in a type-deducing context (T must be function template type, not class template type), T&& acquires a special meaning. 
+When `func` is instantiated, T depends on whether the argument passed to func is an lvalue or an rvalue. 
+If it's an lvalue of type U, T is deduced to U&. If it's an rvalue, T is deduced to U. This is often called forwarding and/or universal reference.
+
+## Template type deduction
+
+Short story, during template type deduction:
+
+- arguments that are references are treated as non-references
+- lvalue arguments get special treatment when deducing type of forwarding/universal reference parameters
+- for by-value parameters, const and/or volatile arguments are treated as non-const and non-volatile
+- arguments that are array or function names decay to pointers, unless they’re used to initialize references
+
+```cpp
+template<typename T>
+void f(ParamType param);
+
+f(expr);
+```
+
+How actuall type of `ParamType` and `T` are determined falls into three cathegories:
+- `ParamType` is a pointer or reference type, but not a forwarding/universal reference (not `T&&`).
+- `ParamType` is a forwarding/universal reference (`T&&`)
+- `ParamType` is neither a pointer nor a reference
+
+
+### `ParamType` is a pointer or reference type, but not a forwarding/universal reference
+
+If expr’s type is a reference, ignore the reference part. Then pattern-match expr’s type against ParamType to determine type of T and of parameter.
+
+**Note:** that in case when `ParamType` contains const then T is not deduced to be const! (having const const T& param is kind of avoided!)
+
+**Note:** that array decay to pointers as expected but when ParamType is T& some surprises happen!!! There is a similar, obscure, thing with function types decaying to function pointers.
+
+
+```cpp
+#include <iostream>
+
+template<typename T> struct Error;
+
+template<typename T>
+void ordinaryRef(T& param) // param is a reference
+{
+	Error<T> error1;
+	Error<decltype(param)> error2;
+}
+
+template<typename T>
+void constOrdinaryRef(const T& param) // param is a reference
+{
+	Error<T> error3;
+	Error<decltype(param)> error4;
+}
+
+template<typename T>
+void ordinaryPointer(T* param) // param is a reference
+{
+	Error<T> error5;
+	Error<decltype(param)> error6;
+}
+
+template<typename T>
+void constOrdinaryPointer(const T* param) // param is a reference
+{
+	Error<T> error7;
+	Error<decltype(param)> error8;
+}
+
+int main()
+{
+	int x = 27; // x is an int
+	const int cx = x; // cx is a const int
+	const int& rx = x; // rx is a reference to x as a const int
+
+	ordinaryRef(x); // T is int, param's type is int&
+	ordinaryRef(cx); // T is const int, param's type is const int&
+	ordinaryRef(rx); // T is const int, param's type is const int&
+
+	constOrdinaryRef(x); // T is int, param's type is const int&
+	constOrdinaryRef(cx); // T is int, param's type is const int&
+	constOrdinaryRef(rx); // T is int, param's type is const int&
+
+	int* px = &x;
+	const int* cpx = &x;
+	ordinaryPointer(px); // T is int, param's type is int*
+	ordinaryPointer(cpx); // T is const int, param's type is const int*
+
+	constOrdinaryPointer(px); // T is int, param's type is const int*
+	constOrdinaryPointer(cpx); // T is int, param's type is const int*
+
+
+	int arr[] = { 1, 2, 3, 4, 5, 6, 7 };
+	ordinaryPointer(arr); // T is int, param's type is int*, as expected array "decays" to pointer
+	ordinaryRef(arr); // T is int[7], param's type is int (&)[7] (a reference to an array)!!!!
+
+	const char carr[] = "C++ type deduction pitfalls";
+	ordinaryPointer(carr); // T is const char, param's type is const char*, as expected array "decays" to pointer
+	ordinaryRef(carr); // T is const char[28], param's type is const char(&)[28]!!!!!!
+}
+```
+
+### `ParamType` is a forwarding/universal reference
+
+If expr is an lvalue, both T and ParamType are deduced to be lvalue references. If expr is an rvalue, the rules (above) from the case for "normal" reference apply.
+
+```cpp
+#include <iostream>
+
+template<typename T> struct Error;
+
+template<typename T>
+void forwardingRef(T&& param) // param is a reference
+{
+	Error<T> error1;
+	Error<decltype(param)> error2;
+}
+
+int main()
+{
+	int x = 27; // x is an int
+	const int cx = x; // cx is a const int
+	const int& rx = x; // rx is a reference to x as a const int
+
+	forwardingRef(x); // x is lvalue, so T is int&, param's type is also int&
+	forwardingRef(cx); // cx is lvalue, so T is const int&, param's type is also const int&
+	forwardingRef(rx); // rx is lvalue, so T is const int&, param's type is also const int&
+	forwardingRef(27); // 27 is rvalue, so T is int, param's type is int&&
+	forwardingRef(std::move(cx)); // move of const int is rvalue, so T is const int, param's type is const int&&
+	forwardingRef(std::move(rx)); // move of const int& is rvalue, so T is const int, param's type is const int&&
+}
+```
+
+### `ParamType` is neither a pointer nor a reference
+
+Case where pass by value (copy) happens.
+
+If expr’s type is a reference, ignore the reference part. If, after reference-ness, expr is const or volatile, ignore that, too.
+
+```cpp
+#include <iostream>
+
+template<typename T> struct Error; 
+
+template<typename T>
+void copyValue(T param) // param is a reference
+{
+	Error<T> error1;
+	Error<decltype(param)> error2;
+}
+
+int main()
+{
+	int x = 27; // x is an int
+	const int cx = x; // cx is a const int
+	const int& rx = x; // rx is a reference to x as a const int
+
+	copyValue(x); // T is int, param's type is also int
+	copyValue(cx); // T is int, param's type is also int
+	copyValue(rx); // T is int, param's type is also int
+
+	const char* const ptr = "Fun with pointers"; // ptr is const pointer to const object const char* const
+	copyValue(ptr); // T is const char*, param's type is also const char *, modifiable pointer to const object
+}
+```
+
+## auto type deduction
+With one exception (initializer list handling), auto type deduction is identical to template type deduction.
+
+Conceptually speaking:
+
+`auto x = 27` uses same rules as
+```cpp
+template<typename T> 
+void func_for_x(T param); 
+
+func_for_x(27);
+```
+
+`auto& x = a` uses same rules as
+```cpp
+template<typename T> 
+void func_for_x(T& param); 
+
+func_for_x(a);
+```
+
+`const auto x = y` uses same rules as
+```cpp
+template<typename T> 
+void func_for_x(const T param); 
+
+func_for_x(y);
+```
+
+`const auto& x = z` uses same rules as
+```cpp
+template<typename T> 
+void func_for_x(const T& param); 
+
+func_for_x(z);
+```
+
+`auto&& x = g` uses same rules as
+```cpp
+template<typename T> 
+void func_for_x(T&& param); 
+
+func_for_x(g);
+```
+
+Identical rules and "caveats" regarding arrays and function pointers apply for `auto` too.
+
+*The only difference is `std::initializer_list` handling!!!*
+
+*However*, `auto` as return type or lambda argument type does "strict" template type deduction (no special handling for initializer list)!
+
+```
+#include <iostream>
+
+template<typename T> struct Error;
+
+int main()
+{
+	auto x = 27;  // not pointer, not reference, so x is int
+	auto& rx = x; // reference but not forwarding/universal, so x is int&
+	const auto cx = x;//  not pointer, not reference, so x is const int
+	const auto& crx = x;  // reference but not forwarding/universal, so x is const int&
+	auto&& uref1 = x; // x is int and lvalue so uref1 is int&
+	auto&& uref2 = cx; // cx is const int and lvalue so uref2 is const int&
+	auto&& uref3 = rx; // rx is int& and lvalue so uref3 is int&
+	auto&& uref4 = crx; // crx is const int& and lvalue so uref4 is const int&
+	auto&& uref5 = 27; // 27 is int and rvalue so uref5 is int&&
+	auto&& uref6 = std::move(cx); // move of cx const int and rvalue so uref6 is const int&&
+
+	const char carr[] = "Fun with pointers";
+	auto carr1 = carr; // carr1 is const char * since array decays to pointer
+	auto& carr2 = carr; // carr2 is const char (&)[18] due to reference to array being created
+
+	auto x1 = 27; // int
+	auto x2(27); // int
+	auto x3 = { 27 }; // initializer list!!!!
+	auto x4{ 27 }; // int (initializer list!!!! before C++17)
+	auto x5{ 27, 30 }; // error (no auto with more than one item in direct init list)
+	auto x6 = { 27, 30 }; // initializer list!!!!
+
+	Error<decltype(x)> ex;
+	Error<decltype(rx)> erx;
+	Error<decltype(cx)> ecx;
+	Error<decltype(crx)> ecrx;
+	Error<decltype(uref1)> euref1;
+	Error<decltype(uref2)> euref2;
+	Error<decltype(uref3)> euref3;
+	Error<decltype(uref4)> euref4;
+	Error<decltype(uref5)> euref5;
+	Error<decltype(uref6)> euref6;
+	Error<decltype(carr1)> ecarr1;
+	Error<decltype(carr2)> ecarr2;
+	Error<decltype(x1)> ex1;
+	Error<decltype(x2)> ex2;
+	Error<decltype(x3)> ex3;
+	Error<decltype(x4)> ex4;
+	Error<decltype(x6)> ex6;
+}
+```
+
+
+## Some of the references
+
+- [Effective Modern C++](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/)
+- [Universal reference](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers)
+

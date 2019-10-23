@@ -44,6 +44,7 @@
     + [Mutexes, locks and condition variables](#mutexes-locks-and-condition-variables)
     + [Futures and promises](#futures-and-promises)
     + [Atomic variables](#atomic-variables)
+    + [Memory orders/barriers](#memory-ordersbarriers)
   * [Tuple types](#tuple-types)
   * [Containers](#containers)
   * [Regular expressions](#regular-expressions)
@@ -71,6 +72,9 @@ A new non-const reference type called an rvalue reference, identified by `T&&` i
 For safety reasons, some restrictions are imposed. A named variable will never be considered to be an rvalue even if it is declared as such. To get an rvalue, the function template [`std::move()`](https://en.cppreference.com/w/cpp/utility/move) should be used. Rvalue references can also be modified only under certain circumstances, being intended to be used primarily with move constructors.
 
 More info about various value categories (including newer C++ standard ones) can be found [here](https://en.cppreference.com/w/cpp/language/value_category) and [here](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp?view=vs-2019).
+
+There is a special meaning when rvalue reference is used in template type deduction, for more info see [Type deduction rules for rvalue references](tricky.md#type-deduction-rules-for-rvalue-references) and
+[Template type deduction](tricky.md#template-type-deduction).
 
 
 ### Reference qualifier 
@@ -138,9 +142,12 @@ Sample code with move assignment and move constructor can be found in [Move.cpp]
 
 ### std::move
 
-Simple cast to rvalue reference (no code generated). Called move because it is usually used in move operations.
+Called move because it is usually used in move operations.
 
-**Note:** if called on const it won't actually move (call move constructor/assignment) but copy (construct/assignment).
+Simple cast to rvalue reference (no code generated). The actually "work" is done by argument overload resolution (which chooses between copy and move operations, assignment and/or constructor or other). 
+std::move does a simple cast which tells compiler to choose move operation programmer wants instead of one that would be chosen by default, copy.
+
+**Note:** if called on const it won't actually move (call move constructor/assignment) but copy (construct/assignment). 
 
 Why, `std::move(const T)` will produce `const T&&` which argument resolution cannot bind to `T&&` (argument for move operations). However it can bind it to `const T&` (argument for copy operations).
 
@@ -326,7 +333,7 @@ std::vector<int> the_vec2(4, 4); // vector with four integers having value of 4 
 ### Type inference
 
 The definition of a variable with an explicit initialization can use the `auto` keyword. This creates a variable of the specific type of the initializer.
-
+For more info about type deduction see [auto type deduction](tricky.md#auto-type-deduction).
 
 **auto cannot be used to qualify arrays, functions arguments (except lambdas in C++14) or struct/class instance variables, or used as a cast type.**
 
@@ -1126,9 +1133,115 @@ int main() {
 
 #### Atomic variables
 
-For programming without locks one can use  [atomic operations](https://en.cppreference.com/w/cpp/atomic), especially using `std::atomic` variables.
+For programming without locks one can use `std::atomic` variables. 
 
+Any trivally copiable type can be used as `std::atomic` and provides following:
+- Assignment and copy (read and write) for all types (built-in and user-defined)
+- Increment and decrement for raw pointers
+- Addition, subtraction, and bitwise logic operations for integers (++, +=, –, -=, |=, &=, ^=), **no multiplication**
+  - `std::atomic<bool>` is valid, no special operations!!!
+  - `std::atomic<double>` is valid, no special operations!!! **No atomic increment for floating-point numbers!!!!**
+- `atomic_store` and `atomic_store_explicit` provide atomic store, latter with memory order specified
+- `atomic_load` and `atomic_load_explicit` provide atomic load, latter with memory order specified
+- `atomic_fetch_*` operations (add, sub, and, or, xor) (e.g `atomic_fetch_add`) provide operation on an atomic object (with non atomic argument) 
+and return previous value, explicit variations (e.g `atomic_fetch_add_explicit`) with memory order specified
+- `atomic_exchange`  and `atomic_exchange_explicit`  operation on an atomic object (with non atomic argument) and return previous value, explicit 
+variations (e.g `atomic_fetch_add_explicit`) with memory order specified
+- `atomic_compare_exchange_strong` and `atomic_compare_exchange_weak` atomically compares the object with expected value and if equal sets it 
+to desired value, if not equal loads current value into desired, explicit variations with memory order specified (2 of them one for store, other for load!!!), weak forms is allowed to fail 
+spuriously (act as if desired and expected are not equal even when they are equal)
 
+**Note:** C++20 adds `std::atomic_ref` for atomic operations on non atomic types.
+
+```cpp
+// atomic multiply with compare_and_exchange, atomic increment for floats could be done in similar fashion
+std::atomic<int> x{0};
+int x0 = x;
+while ( !x.compare_exchange_strong(x0, x0*2) ) {}
+```
+
+See more examples of lock free operations using atomic variables [here](https://en.cppreference.com/w/cpp/atomic).
+
+**Note:** Expressions with atomics are not computed atomically, `x = x + 1` is not atomic, on the level of the whole operation, although x is atomic! `x++` is same as `x += 1` but not the same as `x = x + 1` when x is atomic!
+
+```cpp
+	std::atomic<int> x(0);
+	{
+		auto inc = [&x]() {
+			for (int i = 0; i < 1000000; ++i)
+				x = x + 1;  // atomic read followed by atomic write, no atomicity of whole operation!!!!
+		};
+		std::thread thr1(inc);
+		std::thread thr2(inc);
+		thr1.join();
+		thr2.join();
+		std::cout << x << std::endl; // probably outputs something less than 2000000
+	}
+
+	x = 0;
+
+	{
+		auto inc = [&x]() {
+			for (int i = 0; i < 1000000; ++i) {
+				x += 1; // true atomic increment
+			}
+		};
+		std::thread thr1(inc);
+		std::thread thr2(inc);
+		thr1.join();
+		thr2.join();
+		std::cout << x << std::endl; // outputs 2000000
+	}
+```
+
+**Note:** to avoid such errors that can happen with usage of overloaded operators, and make atomic operations more explicit,it is advised to use atomic member functions directly (a bit more verbose)
+
+**Note:** using `std::atomic` isn't always lock free, use `std::atomic::is_lock_free()` to check. Lock free can also depend on alignment and padding :(!!!
+
+**Note:** atomic operations might wait on each other due to need to wait for memory cache, in high performance system need to carefully align data accessed!!!
+
+#### Memory orders/barriers
+
+Control how changes to variables/memory done in one thread become visible to other threads (control what can processor reorder in order to optimize code). 
+Implemented by hardware and closely related to memory order (they ensure memory order).
+
+`std::memory_order`:
+- `memory_order_relaxed` - no synchronization or ordering constraints, only atomicity guaranteed
+- `memory_order_consume` - reads and writes of same variable cannot be reordered in any direction
+- `memory_order_acquire` - all reads and writes cannot be reordered from after to before the barrier
+- `memory_order_release` - all reads and writes cannot be reordered from before to after the barrier
+- `memory_order_acq_rel` - combination of `memory_order_acquire` and `memory_order_release`, no reordering in any direction
+- `memory_order_seq_cst` - all of above plus a single total order exists in which **all threads** observe all modifications in the same order (default!!!)
+
+**Note:** `memory_order_acquire` and `memory_order_release` are usually used together. Thread that sets(prepares) data uses `memory_order_release` and thread that reads(uses) data uses `memory_order_acquire`.
+
+```cpp
+class AtomicLock {
+public:
+	void lock() {
+		while (true) {
+			bool expected = UNLOCKED; // we exchange only if unlocked
+			if (atomicLock.compare_exchange_weak(expected, LOCKED, lockOrder))
+				break;
+		}
+	}
+
+	void unlock() {
+		atomicLock.store(0, std::memory_order_release);
+	}
+
+	bool try_lock() {
+		bool expected = UNLOCKED; // we exchange only if unlocked
+		return atomicLock.compare_exchange_strong(expected, LOCKED, lockOrder);
+	}
+private:
+	const static bool UNLOCKED = false;
+	const static bool LOCKED = true;
+
+	std::atomic<bool> atomicLock = UNLOCKED;
+};
+```
+ 
 
 ### Tuple types
 
@@ -1419,3 +1532,5 @@ Various STL algorithms behave better (more optimized) if your class has **noexce
 - [Interactive C/C++ memory model](http://svr-pes20-cppmem.cl.cam.ac.uk/cppmem/)
 - [Modernes C++](http://www.modernescpp.com/index.php)
 - [Modern C++ features](https://github.com/AnthonyCalandra/modern-cpp-features)
+- [IDE One](http://www.ideone.com/)
+- [C++ Atomics, From Basic to Advanced by Fedor Pikus](https://github.com/CppCon/CppCon2017/tree/master/Presentations/C%2B%2B%20Atomics%2C%20From%20Basic%20to%20Advanced)
