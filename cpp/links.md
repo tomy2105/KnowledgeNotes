@@ -9,5 +9,8 @@
 - [C++ Core Guidelines](https://github.com/isocpp/CppCoreGuidelines)
 - [C++ Links by MatPD](https://github.com/MattPD/cpplinks)
 - [Awesome Lock-Free](https://github.com/rigtorp/awesome-lockfree)
-
+- [The Definitive C++ Book Guide and List](https://stackoverflow.com/questions/388242/the-definitive-c-book-guide-and-list)
+- [Welcome Back to C++](https://docs.microsoft.com/en-us/cpp/cpp/welcome-back-to-cpp-modern-cpp?view=vs-2019)
+- [C++ Standards Support in GCC](https://gcc.gnu.org/projects/cxx-status.html)
+- [C++ Support in Clang](http://clang.llvm.org/cxx_status.html)
 
