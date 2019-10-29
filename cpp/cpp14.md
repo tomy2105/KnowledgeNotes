@@ -47,6 +47,7 @@ The decltype(auto) syntax allows auto declarations to use the decltype rules on 
 
 The decltype(auto) syntax can also be used with return type deduction, by using decltype(auto) syntax instead of auto for the function's return type deduction.
 
+However, beware of how you write return statement, for more info see [decltype type](tricky.md#decltype-type).
 
 ### Relaxed constexpr restrictions
 
@@ -234,6 +235,10 @@ In addition to `std::begin`/`std::end`, following were added for constant/revers
 `std::quoted` for inserting and extracting strings with embedded spaces, by placing delimiters output and stripping them on input, and escaping any embedded delimiters. 
 
 `std::exchange` algorithm has been added to set new value and return old.
+
+Type traits aliases, e.g `std::remove_const_t<T>` as alias for `std::remove_const<T>::type`.
+
+
 
 
 

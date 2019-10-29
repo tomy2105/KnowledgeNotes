@@ -197,6 +197,8 @@ Keyword `constexpr` is introduced specifying that a function or object construct
 - may contain only declarations, null statements and a single return statement
 - return statement produces a constant expression (after argument substitution)
 
+**Note**: [Relaxed constexpr restrictions in C++14](cpp14.md#relaxed-constexpr-restrictions).
+
 In addition constant expressions need not be of integral or enumeration type anymore.
 
 `constexpr double earth_gravitational_acceleration = 9.8;`
@@ -272,6 +274,8 @@ double y1 = { 7 };	// ok: widening
 ### Uniform initialization
 Uniform type initialization works on any object (not just aggregates and PODs as before). Now it can be used to initialize simple types, invoke constructors, initialize (public) data members, etc...
 
+Also sometimes called **braced initialization**.
+
 
 ```cpp
 struct BasicStruct
@@ -330,6 +334,36 @@ std::vector<int> the_vec2(4, 4); // vector with four integers having value of 4 
 
 **Empty braces, `{}`, mean default constructor, not empty initializer list.**
 
+
+**Uniform initialization with empty parameter list, `{}`, avoids "most vexing parse" rule.**
+
+Rule says anything that could be a declaration must be treated as declaration, meaning you could not call default constructor without parameters using `MyClass a()` 
+syntax because it could be and will be treated as function declaration.
+
+```cpp
+#include <iostream>
+
+struct MyStruct
+{
+	MyStruct(int a = 0) : b(a) {};
+	int b;
+};
+
+MyStruct a1;
+MyStruct a2();     // function declaration
+MyStruct a3(10);
+MyStruct a4{};
+MyStruct a5{10};
+
+int main() {
+	std::cout << a1.b << std::endl;
+	std::cout << a2.b << std::endl;  // error here, because a2 is treated as a2 function 
+	std::cout << a3.b << std::endl;
+	std::cout << a4.b << std::endl;
+	std::cout << a5.b << std::endl;
+}
+```
+
 ### Type inference
 
 The definition of a variable with an explicit initialization can use the `auto` keyword. This creates a variable of the specific type of the initializer.
@@ -342,7 +376,11 @@ For more info about type deduction see [auto type deduction](tricky.md#auto-type
 
 Keyword `decltype` can be used to determine the type of expression at compile-time.
 
-The type denoted by `decltype` can be different from the type deduced by `auto`. `auto` always deduces a non-reference type while `auto&&` always deduces a reference type. However, `decltype` can deduce a reference or non-reference type, based on the value category of the expression and the nature of the expression.
+The type denoted by `decltype` can be different from the type deduced by `auto`. `auto` always deduces a non-reference type while `auto&&` always deduces a reference type. 
+However, `decltype` can deduce a reference or non-reference type, based on the value category of the expression and the nature of the expression.
+For more info see [decltype type](tricky.md#decltype-type).
+
+**Note:** to combine automatic type deduction and decltype rules you can use `decltype(auto)` (C++14).
 
 ```cpp
 #include <vector>
@@ -358,6 +396,11 @@ int main()
     decltype(c) e;        // e has type int, the type of the entity named by c
     decltype((c)) f = c;  // f has type int&, because (c) is an lvalue
     decltype(0) g;        // g has type int, because 0 is an rvalue
+	
+	int i = 1;
+	const int& ri = i;
+	auto ai = ri;                    // type of ai is int
+	decltype(auto) dai = ri;         // type of dai is int&
 }
 ```
 
@@ -599,7 +642,7 @@ It is of type `nullptr_t`, which is implicitly convertible and comparable to any
 
 ### Strongly typed enumerations
 
-Enumeration that are type-safe, are not introduced into enclosing scope and cannot be implicitly converted to integers are defined as:
+Enumeration that are **type-safe**, **are not** introduced into enclosing scope and **cannot** be implicitly converted to integers are defined as:
 
 ```cpp
 enum class Gender : unsigned short {
@@ -608,9 +651,11 @@ enum class Gender : unsigned short {
 	Neutral
 };
 ```
-Type can be omitted and defaults to `int`.
+Type can be omitted and defaults to `int`. Old style enums can also specify underlying type.
 
-**Note:** since type of enum is known in advance they can be used in forward declarations (unlike "ordinary" enums).
+**Note:** since type of enum is known in advance they can be used in forward declarations (unlike "ordinary" enums prior to C++11, now they can be if their type is specified in forward declaration).
+
+**Note:** due to difference in scope rules between new and old enums, old are often called **unscoped enum** and new **scoped enum** or **enum class**.
 
 ### Right angle bracket
 
@@ -658,7 +703,7 @@ int main()
 
 ### Template aliases
 
-It is now possible to create a typedef template as well as use `using` as type aliasing, like:
+It is now possible to create a `typedef` with template parameters as well as use `using` as type aliasing, like:
 
 ```cpp
 template <typename First, typename Second, int Third> class SomeType;
@@ -1327,15 +1372,35 @@ std::cout << new_s << '\n';
 
 Provides `std::unique_ptr`,  `std::shared_ptr` and `std::weak_ptr`. `std::auto_ptr` is deprecated.
 
-A `unique_ptr` is a container for a raw pointer, which the `unique_ptr` is said to own. A `unique_ptr` cannot be copied because its copy constructor and assignment operators are explicitly deleted.
+A `unique_ptr` is a container for a raw pointer, which the `unique_ptr` is said to own. A `unique_ptr` cannot be copied because its copy constructor and 
+assignment operators are explicitly deleted. Hence it is used in cases of "exclusive ownership". Unless complex deleter functions are used its size is equal to size of raw pointer.
 
-A `shared_ptr` is a container for a raw pointer. It maintains reference counting ownership of its contained pointer in cooperation with all copies of the `shared_ptr`. An object referenced by the contained raw pointer will be destroyed when and only when all copies of the `shared_ptr` have been destroyed.
+**Note:** there is `unique_ptr<T[]>` for arrays (doesn't have `*` and `->` operators but has `[]`), however should not be used, use `std::array` or `std::vector` instead.
 
-A `weak_ptr` is a container for a raw pointer. It is created as a copy of a `shared_ptr`. The existence or destruction of `weak_ptr` copies of a `shared_ptr` have no effect on the `shared_ptr` or its other copies. After all copies of a `shared_ptr` have been destroyed, all `weak_ptr` copies become empty.
+A `shared_ptr` is a container for a raw pointer. It maintains reference counting ownership of its contained pointer in cooperation with all copies of the `shared_ptr`. 
+An object referenced by the contained raw pointer will be destroyed when and only when all copies of the `shared_ptr` have been destroyed. Hence it is used in cases of "shared ownership".
 
-`std::make_shared` (C++17) and `std::make_unique` (C++14) can be used to completely avoid using new (delete is never invoked directly anyway, only by implementation of smart pointers).
+**Note:** Due to functionality they provide (and reference counting they use) shared pointers have both space (use more memory than raw pointers) and 
+performance (atomic counter increase/decrease) impact! Since moving doesn't change reference count, moving shared pointer does not incur performance impact copying does!
 
-In addition `std::enable_shared_from_this` must be used if trying to create shared pointer from *this*.
+**Note:** `unique_ptr` can be converted to `shared_ptr`, so if you don't know how others will use the pointer you return, feel free to return unique ones and caller can convert to shared if needed!
+
+**Note:** to avoid possibility of having single memory "handled" by two or more shared pointers, avoid creating shared pointer from raw pointer variable!
+
+A `weak_ptr` is a container for a raw pointer. It is created as a copy of a `shared_ptr`. The existence or destruction of `weak_ptr` copies of a 
+`shared_ptr` have no effect on the `shared_ptr` or its other copies. After all copies of a `shared_ptr` have been destroyed, all `weak_ptr` copies become empty.
+It is like a `shared_ptr` that can dangle (safely).
+
+`std::make_shared` (C++17) and `std::make_unique` (C++14) can be used to create smart pointers and should be preferred to using new directly as argument to smart pointer constructor 
+(exception safety, more efficient code (single memory allocation instead of two), .....). 
+Some edge cases exist when using them is not preferred or possible (custom memory management, large objects, weak pointers that outlive shared ones), refer to numerous 
+internet resources for more info, including Item 21 of Effective Modern C++.
+
+**Note:** `std::make_shared` and `std::make_unique` use direct-initializing but not direct-list-initializing, 
+meaning constructor is invoked using parenths and not braces (for difference see [Uniform initialization](cpp11.md#uniform-initialization)).
+
+In addition `std::enable_shared_from_this` must be used if trying to create shared pointer from *this*. **Note:** in order for this to work there must be existing shared pointer, so usually done
+by making constructors private and having factory function returning shared pointer(s)!
 
 ```cpp
 	std::shared_ptr<int> p1 = std::make_shared<int>(5);
@@ -1362,6 +1427,8 @@ In addition `std::enable_shared_from_this` must be used if trying to create shar
 See more [here](https://en.cppreference.com/w/cpp/memory).
 
 And [here](https://www.modernescpp.com/index.php/atomic-smart-pointers) if you are concerned about thread safety.
+
+**Note:** by default `delete` (or `delete[]`) is used to free memory pointed to by smart pointers but for advanced usages this can be overriden by custom deleter (lambda) functions.
 
 ### Extensible random number facility
 
@@ -1426,6 +1493,8 @@ _Type traits_ can identify the category of an object and all the characteristics
 For example determining, at compile time, if type is and array, class or if it is scalar, or object.
 
 See more [here](https://en.cppreference.com/w/cpp/header/type_traits).
+
+
 
 ### Uniform method for computing the return type of function objects
 
@@ -1534,3 +1603,4 @@ Various STL algorithms behave better (more optimized) if your class has **noexce
 - [Modern C++ features](https://github.com/AnthonyCalandra/modern-cpp-features)
 - [IDE One](http://www.ideone.com/)
 - [C++ Atomics, From Basic to Advanced by Fedor Pikus](https://github.com/CppCon/CppCon2017/tree/master/Presentations/C%2B%2B%20Atomics%2C%20From%20Basic%20to%20Advanced)
+- [Effective Modern C++](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/)

@@ -446,6 +446,69 @@ int main()
 }
 ```
 
+## decltype type
+
+Applying decltype to a name yields the declared type for that name. However, if an lvalue expression other than a name has type T, decltype reports that type as T&.
+
+**Note:** when using `decltype(auto)` for automatic deduction of return value be careful how you write return statements!!!
+
+```cpp
+int x = 0;
+
+decltype(x) a;         // a is int
+decltype((x)) b;       // b is int& because (x) is an expression
+
+
+decltype(auto) simple_x() 
+{
+    int x = 0;
+	return x;          // returns int
+}
+
+decltype(auto) x_with_parentheses() 
+{
+    int x = 0;
+	return (x);          // returns int& !!!!!!! reference to local!!!!!!
+}
+```
+
+## type diagnostics
+
+One cannot rely on typeid or std::type_index to find out type (removes constness and referenceness, output might not be human readable).
+
+Can force compiler to output exact type in error log using simple template trick.
+
+```cpp
+#include <iostream>
+
+template<typename T> // declaration only for "Type Displayer"
+class TD;
+
+int main() {
+	const int theAnswer = 42;
+	auto x = theAnswer;
+	auto y = &theAnswer;
+
+	TD<decltype(x)> xType; // elicit errors containing
+	TD<decltype(y)> yType; // x's and y's types}
+}
+```
+
+Or use Boost.TypeIndex library.
+
+
+## When is dectructor not invoked?
+
+Automatic cleanup, often, relies on the fact that (local) object dectructor will be invoked at the end of the scope irrespective of how scope ends (exception, return statement, break statement, etc....).
+
+However there are few exceptions which happen during "abnormal" termination. In those cases local variables might not be destroyed:
+
+- exception propagated out of program's initial thread (main)
+- violation of `noexcept`
+- any exit function is invoked like `std::exit` or `std::abort`
+
+  
+
 
 ## Some of the references
 

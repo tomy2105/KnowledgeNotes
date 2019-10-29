@@ -637,7 +637,9 @@ A type-safe container for single values of any type (must be copyable).
 Number of `any_cast` functions provide type-safe access to the contained object and throws `bad_any_cast` if access is not allowed.
 Does not attempt conversions (e.g. cannot fetch int as float).
 
-`std::in_place_type` or `std::make_any` can be used for in place construction of optional with a value.
+`std::in_place_type` or `std::make_any` can be used for in place construction of any with a value. **Note:** uses direct-initializing but not direct-list-initializing, 
+meaning constructor is invoked using parenths and not braces (for difference see [Uniform initialization](cpp11.md#uniform-initialization)).
+
 
 ```cpp
 #include <any>
@@ -672,7 +674,8 @@ Can have a value or no value (indicated when returning with `{}` or `std::nullop
 
 Can be converted to bool, indicating if value is present. Contained value is accessed via `value` or `value_or` methods or `->` or `*` operators.
 
-`std::in_place` or `std::make_optional` can be used for in place construction of optional with a value.
+`std::in_place` or `std::make_optional` can be used for in place construction of optional with a value. **Note:** uses direct-initializing but not direct-list-initializing, 
+meaning constructor is invoked using parenths and not braces (for difference see [Uniform initialization](cpp11.md#uniform-initialization)).
 
 ```cpp
 #include <string>
@@ -749,7 +752,8 @@ Restrictions:
 
 `std::get` or `get_if` used to access values, compile time error or throws `bad_variant_access` in case of wrong value type.
 
-`std::in_place_type` or `std::in_place_index` can be used for in place construction of variant.
+`std::in_place_type` or `std::in_place_index` can be used for in place construction of variant. **Note:** uses direct-initializing but not direct-list-initializing, 
+meaning constructor is invoked using parenths and not braces (for difference see [Uniform initialization](cpp11.md#uniform-initialization)).
 
 
 ```cpp
