@@ -476,6 +476,8 @@ for (int& x : my_array)
 If range object is non-const with copy-on-write semantics, the range-based for loop may trigger changes to it by (implicitly) calling the non-const begin().
 To avoid that , if loop is not actually modifying the object, `std::as_const` can be used.
 
+**Note**: Beware of temporaries in range expression, see [here](https://en.cppreference.com/w/cpp/language/range-for) or [C++20 improvement with initializers](cpp20.md#initializer-in-range-based-for-loop).
+
 
 ### Alternative function syntax
 "Traditional" function syntax doesn't allow "guessing" of function return type based function parameters.

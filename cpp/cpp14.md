@@ -14,7 +14,7 @@
   * [The attribute [[deprecated]]](#the-attribute-deprecated)
 - [New standard library features](#new-standard-library-features)
   * [Shared mutexes and locking](#shared-mutexes-and-locking)
-  * [Heterogeneous lookup in associative containers](#heterogeneous-lookup-in-associative-containers)
+  * [Heterogeneous lookup in ordered associative containers](#heterogeneous-lookup-in-ordered-associative-containers)
   * [Standard user-defined literals](#standard-user-defined-literals)
   * [Tuple addressing via type](#tuple-addressing-via-type)
   * [Smaller library features](#smaller-library-features)
@@ -185,12 +185,24 @@ In contrast to other mutex types which facilitate exclusive access, a shared_tim
 
 More info with examples [here](https://en.cppreference.com/w/cpp/thread).
 
-### Heterogeneous lookup in associative containers
+### Heterogeneous lookup in ordered associative containers
 
 For ordered associative containers (`map`, `multimap`, `set` and `multiset`) you are no longer required to pass the exact same object type as the key or element in member functions such as `find()` and `lower_bound()`, you can pass any type for which an overloaded `operator<` is defined.
 
-**Note**: Feature us is enabled on an opt-in basis when you specify the std::less<> or std::greater<> "diamond functor" comparator when declaring the container variable, if you use the default comparator, then the container behaves as it did in earlier specification.
+**Note**: Feature is enabled on an opt-in basis when you specify the std::less<> or std::greater<> "diamond functor" comparator when declaring the container variable, if you use the default comparator, then the container behaves as it did in earlier specification.
 
+```cpp
+    std::map<std::string, int> ordinaryMap{};
+    std::map<std::string, int, std::less<>> transparentMap{};
+
+    std::cout << "Lookup in intMap with by const char*:\n";
+	// temporary string is created and allocated here because comparator is less<string>
+    std::cout << (ordinaryMap.find("This is my long string") != ordinaryMap.end()) << '\n';
+
+    std::cout << "Lookup in trIntMap by const char*: \n";
+	// no temporary string is created and allocated here because comparator is less<>
+    std::cout << (transparentMap.find("This is my long string") != transparentMap.end()) << '\n';
+```
 
 ### Standard user-defined literals
 

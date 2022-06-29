@@ -8,6 +8,14 @@
 #include <condition_variable>
 #include <vector>
 
+#ifdef __cpp_lib_syncbuf
+#include <syncstream>
+class osyncstream : public std::osyncstream
+{
+public:
+	osyncstream() : std::osyncstream(std::cout) {}
+};
+#else
 class osyncstream : public std::stringstream
 {
 public:
@@ -17,6 +25,7 @@ public:
 		std::cout << std::stringstream::str();
 	}
 };
+#endif
 
 template <class User>
 class Fork : public std::mutex {
@@ -163,7 +172,11 @@ int main()
 	const unsigned NUM_BITES = 10;
 	const unsigned BITE_DURATION = 1;
 	std::vector<Philosopher> philosophers;
+#ifdef __cpp_lib_jthread
+	std::vector<std::jthread> philosopherThreadObjects;
+#else
 	std::vector<std::thread> philosopherThreadObjects;
+#endif
 	std::array<Fork<Philosopher>, NUM_PHILOSOPHERS> forks;
 
 	for (unsigned i = 0; i < NUM_PHILOSOPHERS; i++) {
@@ -173,10 +186,12 @@ int main()
 	std::this_thread::sleep_for(std::chrono::seconds(BITE_DURATION));
 	Philosopher::signalStart();
 
+#ifndef __cpp_lib_jthread
 	for (auto& th : philosopherThreadObjects) {
 		th.join();
 	}
-
+#endif
+	// jthread automatically joins when jthread object is destroyed during clearing of the vector
 	philosopherThreadObjects.clear();
 	philosophers.clear();
 
@@ -187,7 +202,10 @@ int main()
 	std::this_thread::sleep_for(std::chrono::seconds(BITE_DURATION));
 	Philosopher::signalStart();
 
+#ifndef __cpp_lib_jthread
 	for (auto& th : philosopherThreadObjects) {
 		th.join();
 	}
+#endif
+	// jthread automatically joins when jthread object is destroyed during destroying of the vector
 }

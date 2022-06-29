@@ -128,7 +128,8 @@ int main()
 Allows binding:
 - arrays
 - anything that supports `std::tuple_size<>` and provides `get<N>()` function (`std::tuple`, `std::pair`)
-- type that contains only non static, public members (like plain struct)
+    - C++20 adds check that member fuction must be template and its first template parameter is a non-type template parameter (otherwise some other `get` methods were mistakenly used)
+- type that contains only non static, public (relaxed in C++20) members (like plain struct)
 
 ```cpp
 #include <set>
@@ -158,6 +159,10 @@ int main() {
 Similar functionality was available prior to C++17 with `std::tie`.
 
 More info and verbose explanation can be found [here](https://en.cppreference.com/w/cpp/language/structured_binding).
+
+**Note**: Structured binding variables cannot be captured in lambda capture (resolved in C++20)!
+
+**Note**: Structured binding variables cannot have storage class specifiers like static or thread_local (resolved in C++20)!
 
 ### Template deduction of constructors
 

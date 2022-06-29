@@ -18,6 +18,9 @@
   * [`ParamType` is a forwarding/universal reference](#paramtype-is-a-forwardinguniversal-reference)
   * [`ParamType` is neither a pointer nor a reference](#paramtype-is-neither-a-pointer-nor-a-reference)
 - [auto type deduction](#auto-type-deduction)
+- [decltype type](#decltype-type)
+- [type diagnostics](#type-diagnostics)
+- [When is dectructor not invoked?](#when-is-dectructor-not-invoked)
 - [Some of the references](#some-of-the-references)
 
 <!-- tocstop -->
@@ -514,4 +517,3 @@ However there are few exceptions which happen during "abnormal" termination. In 
 
 - [Effective Modern C++](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/)
 - [Universal reference](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers)
-
