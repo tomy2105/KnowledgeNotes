@@ -35,6 +35,18 @@ constexpr bool is_runtime_evaluated() noexcept {
 
 ## New library features
 
+### Ranges improvements
+
+- `std::ranges::starts_with` and `std::ranges::ends_with` is added
+- `std::ranges::shift_left` and `std::ranges::shift_right` is added
+- `std::ranges::iota` is added
+- `std::ranges::views::zip` is added
+- `std::ranges::views::zip_transform` is added
+- `std::ranges::views::adjacent` is added
+- `std::ranges::views::adjacent_transform` is added
+- `std::ranges::views::join_with` is added
+
+
 ### Other improvements
 - access currently executing [stack trace](https://en.cppreference.com/w/cpp/utility/basic_stacktrace) has been added
 - `bind_back` added for wrapping a function with last parameters specified 
@@ -45,4 +57,4 @@ constexpr bool is_runtime_evaluated() noexcept {
 
 ## Some of the references
 - [CPP Reference](https://en.cppreference.com/)
-- [C++ Stories](https://www.cppstories.com/tags/cpp20/)
+

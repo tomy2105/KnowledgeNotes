@@ -948,6 +948,8 @@ int main() {
 
 More verbose explanation of user-defined literals can be found [here](https://akrzemi1.wordpress.com/2012/08/12/user-defined-literals-part-i/),  [here](https://akrzemi1.wordpress.com/2012/10/23/user-defined-literals-part-ii/) and  [here](https://akrzemi1.wordpress.com/2012/10/29/user-defined-literals-part-iii/).
 
+One nice example of user defined roman number literals can be found (here)[https://github.com/tcbrindle/numeris_romanis].
+
 ### Multithreading memory model
 
 Read more [here](https://en.cppreference.com/w/cpp/language/memory_model) and [here](http://www.modernescpp.com/index.php/c-memory-model).

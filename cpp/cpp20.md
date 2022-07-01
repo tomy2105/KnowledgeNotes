@@ -524,7 +524,146 @@ int main(int argc, const char* [])
 
 ### Ranges
 
-TODO
+Ranges are generalization of iterators and can be abstraction on top of:
+
+- iterator pairs, e.g. ranges made by implicit conversion from containers
+- counted sequences (with start and size)
+- conditionally-terminated sequences (with start and predicate)
+- unbounded sequences (only start and goes forever)
+
+There are different types/refinemenst of ranges (depeding on what they can do) like input, output, forward, random, ....  [list here](https://en.cppreference.com/w/cpp/ranges).
+
+All algorithms that existed for various containers are also available for ranges, [see list](https://en.cppreference.com/w/cpp/algorithm/ranges). Unlike their "standard" counterparts, some ranges algorithms can accept projections, e.g. sort.
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <ranges>
+#include <vector>
+
+
+using namespace std;
+
+struct Person {
+    string name;
+    string surname;
+};
+
+ostream& operator<< (ostream& out, const Person& person)
+{
+    out << person.name << " " << person.surname;
+    return out;
+}
+
+int main() {
+    // had to mix names and surnames to achieve sorting difference by name and surname :)
+    const vector<Person> people{
+        { "Herb", "Alexandrescu"}, 
+        { "Andrei", "Stroustrup" }, 
+        { "Bjarne", "Sutter"}
+    };
+
+    ranges::copy(people, std::ostream_iterator<Person>(cout, "\n"));
+
+    // the standard version
+    vector<Person> copy = people;
+    sort(begin(copy), end(copy), [](const Person& a, const Person& b)
+        { return a.name < b.name; }
+    );
+
+    cout << "after sorting by name" << "\n";
+    ranges::copy(copy, std::ostream_iterator<Person>(cout, "\n"));
+
+    // the ranges version
+    copy = people;
+	// can just use projection on name here
+    ranges::sort(copy, {}, &Person::name);
+    cout << "after sorting by name" << "\n";
+    ranges::copy(copy, std::ostream_iterator<Person>(cout, "\n"));
+	// can just use projection on surname here
+    std::ranges::sort(copy, {}, &Person::surname);
+    cout << "after sorting by surname" << "\n";
+    ranges::copy(copy, std::ostream_iterator<Person>(cout, "\n"));
+}
+```
+
+In addition ranges algorithms (**if used with ranges**) offer size checking and compile time protection from dangling references (can be turned of for types that don't need it):
+
+```cpp
+int source[5] = { 1, 2, 3, 4, 5 };
+int destination[4];
+
+//ok, only 4 copied
+std::ranges::copy(source, destination);
+// stack corruption here
+std::copy(std::begin(source), std::end(source), std::begin(destination));
+
+auto vectorFactory = []() { return std::vector{ 1, 2, 3, 4, 5 }; };
+
+std::vector v{ 1, 2, 3, 4, 5 };
+
+auto min = std::ranges::min_element(v);
+std::cout << *min << std::endl;
+
+auto min2 = std::ranges::min_element(vectorFactory());
+// COMPILER ERROR here protecting us from dangling reference since min_element 
+// operates on a temporary
+std::cout << *min2 << std::endl;
+// can be turned off (for types whose references support such usage) by specifying
+// template<> inline constexpr bool std::ranges::enable_borrowed_range<std::vector<int>> = true;
+```
+
+Range version of numeric algoritms are not available in C\++20 (hopefully coming in C++23) in the meantime there is an implementation (here)[https://github.com/tcbrindle/numeric_ranges] (also a nice source on how to write your own ranges algorithms).
+
+Views are lightweight objects that indirectly represent iterable sequences. A view does not own data and it's time to copy, move, assignment is constant. It can "change" what it "contains" from underlying range and can be composed into pipelines. **Note:** view adaptors are applied lazily, so their actions take place as the view is iterated. There is a number of predefined adaptors for transforming, filtering, splitting, joining, reversing, etc... See the full [list of adaptors](https://en.cppreference.com/w/cpp/ranges#Range_adaptors).
+
+**View pipelining, is a sort of algorithm composition, an is a key advantage of using ranges in the first place!**
+
+```cpp
+using std::cout;
+using std::endl;
+using namespace std::views;
+using namespace std::ranges;
+
+auto a10DoubleEvens = 
+	// create unbound view of numbers, actually iota is C++23 but let's keep it here
+	iota(1) |										
+	// filter evens
+	filter([](int i) { cout << "Filter " << i << endl;  return i % 2 == 0; }) |      
+	// multiply by 2
+	transform([](int i) { cout << "Transform " << i << endl;  return i * 2; }) |        
+	// take 10
+	take(10);                                       
+
+for (auto i : a10DoubleEvens) {
+	// see that couts from filter and transform are
+	// interweave with this one (applied lazily)
+	cout << i << endl;
+}
+
+auto const allNums = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+// same as above but using functional syntax and odd numbers 
+// and array as source and drop_wile with predicate instead of take
+auto someOdds = drop_while(
+	transform(
+		filter(
+			allNums,
+			[](int i) { return i % 2 == 1; }
+		),
+		[](int i) { return i * 2 - 1; }
+	),
+	[](int i) { return i < 9; }
+);
+
+copy(someOdds, std::ostream_iterator<int>(cout, " "));
+cout << '\n';
+
+
+```
+
+More info about ranges can be found in [proposal here](https://ericniebler.github.io/range-v3/).
+
+
 
 ### Threading facilities
 
