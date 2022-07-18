@@ -141,7 +141,113 @@ TODO
 
 ### Modules
 
-TODO
+Modules are new way of organizing code which solves problems associated with usage of header files. Advantages are:
+
+- explicitly state what should be exported
+- separate interface from implementation (but not mandatory)
+- structured via submodules and partitions
+- no include gaurds
+- same name in multiple modules won't clash
+- compiler processes a module only once resulting in faster build times
+- preprocessor macros outside of module don't affect code inside
+- preprocessor macros inside of module don't affect code outside 
+- hence, order of imports is not important
+
+
+Each file that either defines interface or implements needs to have `module` with module name (and optional partition - part of name after `:`) define visibility to consumers by:
+
+- `export` in front of each type, function, class or namespace (everything inside namespace is exported, but only that occurence of `namespace` keyword!)
+- everything that is not exported is available to module only
+- `module :private;` marks section visible to that **file only**.
+- `export import` makes an imported module or module partition visible
+-  global module fragment (the region between `module;` and `export module ...`) is used for includes
+
+A dummy example just to enumerate all important parts.....
+
+My.Module.ixx
+```cpp
+export module My.Module;
+export import :partition;
+
+export void ExportedFunction();
+
+export class ExportedClass {
+public:
+	void doSomething();
+};
+
+export namespace MyNamespace {
+	void NamespaceExportedFunction();
+	class NamespaceExportedClass {
+	public:
+		void doSomething();
+	};
+}
+```
+
+My.Module.cpp
+```cpp
+module;
+
+// place includes here, imports go below module name
+#include <iostream>
+
+module My.Module;
+
+void ExportedFunction() { std::cout << "ExportedFunction" << std::endl; }
+void ExportedClass::doSomething()  { std::cout << "ExportedClass::doSomething" << std::endl; };
+
+namespace MyNamespace {
+	void NamespaceExportedFunction() { std::cout << "NamespaceExportedFunction" << std::endl; }
+	void NamespaceExportedClass::doSomething() { std::cout << "NamespaceExportedClass::doSomething" << std::endl; }
+}
+
+```
+
+My.Module-Partition.ixx
+```cpp
+export module My.Module:partition;
+
+export void ExportedPartitionFunction();
+```
+
+My.Module-Partition.cpp
+```cpp
+module;
+
+#include <iostream>
+
+module My.Module:partition;
+
+void ExportedPartitionFunction() { std::cout << "ExportedPartitionFunction" << std::endl; }
+```
+
+main.cpp
+```cpp
+#include <iostream>
+import My.Module;
+
+int main() {
+	ExportedFunction();
+	ExportedPartitionFunction();
+	ExportedClass a;
+	a.doSomething();
+	MyNamespace::NamespaceExportedClass b;
+	b.doSomething();
+}
+```
+
+More detailed example from can be found [here](https://docs.microsoft.com/en-us/cpp/cpp/tutorial-named-modules-cpp) and [here](https://en.cppreference.com/w/cpp/language/modules).
+
+**Still experimental depending on compiler**, all standard library headers can be imported (`import <iostream>` instead of `#include <iostream>`) which can result in faster build acting as kind of precompiled headers (this exports everything in the header including macros!!!).
+
+
+There are 2 important changes regarding inline:
+
+- member functions defined within the module class definition are not implicitly inline 
+- inline functions in a module can use only names that are visible to a client
+
+
 
 ### 3-way comparison operator <=> and operator==() = default
 
@@ -180,7 +286,7 @@ See [Comparison.cpp](Comparison.cpp) for simple comparioson operator implementat
 
 Designated initialization allows initialization of members by their name using "dot syntax".
 
-Initialization must be done in same order as members are declared, missing members are default initialized.
+Initialization must be done in same order as members are declared (**unlike C99**), missing members are default initialized.
 
 ```cpp
     struct MyStructBase {
@@ -201,7 +307,7 @@ Initialization must be done in same order as members are declared, missing membe
     cout << myVar.base.secondDouble << std::endl; // -200.2
 ```
 
-**Note**: designated and non-designated initialization **cannot** be mixed.
+**Note**: designated and non-designated initialization **cannot** be mixed, doesn't work with arrays and C99 nesting syntax is not supported.
 
 For more info and differences compared to C programming language see [here](https://en.cppreference.com/w/cpp/language/aggregate_initialization#Designated_initializers).
 
@@ -237,6 +343,12 @@ This improvement allows usage aggregates with factory functions like `std::make_
 ```
 
 **Note**: Arrays can also be initialized this way like `int arr1[](1, 2, 3);`.
+
+**Important note**: as a consequence parenthesis and curly initialization `obj(args)` and `obj{args}` do the same thing with just 2 execeptions:
+
+- `(args)` does not invoke initializer list constructors
+- `{args}` does not allow narrowing conversions
+
 
 ### New and changed standard attributes
 
@@ -522,6 +634,8 @@ int main(int argc, const char* [])
 }
 ```
 
+**Note:** if read-only span, that cannot modify underlying data, it should read `span<const T>` **NOT** `const span<T>`.
+
 ### Ranges
 
 Ranges are generalization of iterators and can be abstraction on top of:
@@ -615,7 +729,9 @@ std::cout << *min2 << std::endl;
 
 Range version of numeric algoritms are not available in C\++20 (hopefully coming in C++23) in the meantime there is an implementation (here)[https://github.com/tcbrindle/numeric_ranges] (also a nice source on how to write your own ranges algorithms).
 
-Views are lightweight objects that indirectly represent iterable sequences. A view does not own data and it's time to copy, move, assignment is constant. It can "change" what it "contains" from underlying range and can be composed into pipelines. **Note:** view adaptors are applied lazily, so their actions take place as the view is iterated. There is a number of predefined adaptors for transforming, filtering, splitting, joining, reversing, etc... See the full [list of adaptors](https://en.cppreference.com/w/cpp/ranges#Range_adaptors).
+Views are lightweight objects that indirectly represent iterable sequences. A view does not own data and it's time to copy, move, assignment is constant. It can "change" what it "contains" from underlying range and can be composed into pipelines. **Note:** view adaptors are applied lazily, so their actions take place as the view is iterated. In addition views cannot mutate underlying range!
+
+There is a number of predefined adaptors for transforming, filtering, splitting, joining, reversing, etc... See the full [list of adaptors](https://en.cppreference.com/w/cpp/ranges#Range_adaptors).
 
 **View pipelining, is a sort of algorithm composition, an is a key advantage of using ranges in the first place!**
 
@@ -626,7 +742,7 @@ using namespace std::views;
 using namespace std::ranges;
 
 auto a10DoubleEvens = 
-	// create unbound view of numbers, actually iota is C++23 but let's keep it here
+	// create unbound view of numbers, actually iota seems to be C++23 but let's keep it here
 	iota(1) |										
 	// filter evens
 	filter([](int i) { cout << "Filter " << i << endl;  return i % 2 == 0; }) |      
@@ -663,7 +779,33 @@ cout << '\n';
 
 More info about ranges can be found in [proposal here](https://ericniebler.github.io/range-v3/).
 
+At the end some prime number fun with ranges...
 
+```cpp
+#include <iostream>
+#include <vector>
+#include <ranges>
+#include <algorithm>
+#include <format>
+
+int main() {
+	std::ranges::copy(
+		std::ranges::views::iota(2) |
+		std::ranges::views::filter([primes = std::vector<int>()](int i) mutable {
+			auto isPrime = !std::ranges::any_of(
+				primes | std::ranges::views::take_while([end = sqrt(i)](int prime) { return prime <= end; }),
+				[i](int prime) { return i % prime == 0; }
+			);
+			if (isPrime)
+				primes.push_back(i);
+			return isPrime;
+		}) |
+		std::ranges::views::transform([](int prime) { return std::format("{: 9d}", prime); }) |
+		std::ranges::views::take(50'000'000),
+		std::ostream_iterator<std::string>(std::cout, "\n")
+	);
+}
+```
 
 ### Threading facilities
 
