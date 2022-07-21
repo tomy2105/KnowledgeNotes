@@ -125,7 +125,7 @@ concept C = requires(T x) { requires std::same_as<sizeof(x), size_t>;};
 ```
 **Note:** parameter list in a requires expression is optional.
 
-**Note:** `requires` clause and expression can be on the same line leading to "Eko Eko" effect :)
+**Note:** `requires` clause and expression can be on the same line leading to "Eko Eko" effect :) (probably better to introduce a separate concept here...)
 ```cpp
 template <typename T> requires requires (T x) { x + x; }
     T add(T a, T b) {
@@ -136,8 +136,137 @@ template <typename T> requires requires (T x) { x + x; }
 
 ### Coroutines
 
-TODO
+Coroutine is a function that can suspend execution to be resumed later by storing function state on heap (can be optimized and put on stack if coroutine usage is local). Their aim is for asynchronously executing sequential code, lazy-computed algorithms, infinite sequences, etc... 
 
+Three new keywords/**operators** are used (and any function that uses them is a coroutine):
+
+- `co_await` - suspend execution until something other (an other coroutine or something else) returns result and then resume
+- `co_yield` - suspend execution returning a value (equivalent to `co_await promise.yield_value(expr)`)
+- `co_return` - complete execution returning a value 
+
+More detailed info [on how co_commands work](https://en.cppreference.com/w/cpp/language/coroutines).
+
+Each coroutine has:
+
+- "promise" - coroutine submits its result or exception through this object
+- "handle" - used to resume execution of the coroutine or to destroy the coroutine
+- internal "state" that contains 
+    - "promise", 
+	- parameters (by-value parameters moved or copied, by-reference parameters remain references - **can be dangling!!!** if coroutine is resumed after the lifetime of referenced object ends), 
+	- current suspension point (so it knows where to continue)
+	- local variables and temporaries (whose lifetime spans the current suspension point)
+
+Internal state is managed internally :grinning: but we need to code "promise" and "handle" manually :( for the time being and in many cases "awaiter". Hopefully C++23 will have standard library additions to help in doing this more easily. In the meantime there is [cppcoro library](https://github.com/lewissbaker/cppcoro) for some usages.
+
+Following is a small and "simplified" example of "promise" and "handle" needed is below, more info [here](https://en.cppreference.com/w/cpp/language/coroutines).
+
+```cpp
+#include <coroutine>
+#include <exception>
+#include <iostream>
+#include <source_location>
+
+namespace {
+    void output_function_name(const std::string_view message = "", const std::source_location location = std::source_location::current())
+    {
+        if (message.length() != 0)  std::cout << message << " ";
+        std::cout << location.function_name() << '\n';
+    }
+}
+
+struct CoroutineReturn {
+    struct promise_type;
+    using handle_type = std::coroutine_handle<promise_type>;
+
+    struct promise_type { // required
+        struct promise_type_awaiter {
+            std::string name;
+
+            // returning true here means coroutine won't be suspended at all (await_suspend won't be invoked)
+            [[nodiscard]] bool await_ready() const noexcept { output_function_name(name); return false; }
+
+            // various actions occur depending on return value of this method, see documentation!!!!!
+            void await_suspend(handle_type h) const noexcept { output_function_name(name); }
+
+            // actual value returned by co_await
+            void await_resume() const noexcept { output_function_name(name); }
+        };
+
+        int value_;
+        std::exception_ptr exception_;
+
+        CoroutineReturn get_return_object() { output_function_name(); return CoroutineReturn(handle_type::from_promise(*this)); }
+
+        // typically would return std::suspend_always or std::suspend_never
+        promise_type_awaiter initial_suspend() { output_function_name(); return { .name = "initial_suspend" }; }
+
+        // typically would return std::suspend_always or std::suspend_never
+        promise_type_awaiter final_suspend() noexcept { output_function_name(); return { .name = "final_suspend" }; }
+
+        auto await_transform(auto awaiter) { output_function_name(); return awaiter; }
+
+        void unhandled_exception() { output_function_name(); exception_ = std::current_exception(); }
+
+        // typically would return std::suspend_always or std::suspend_never
+        promise_type_awaiter yield_value(int value) { output_function_name(); value_ = value; return { .name = "yield_value" }; }
+
+        // void return_void() { output_function_name(); } // needed if void is returned, otherwise return_value used
+        void return_value(int value) { output_function_name(); value_ = value; }
+    };
+
+    CoroutineReturn(handle_type h) : h_(h) {}
+    ~CoroutineReturn() { h_.destroy(); }
+    explicit operator bool() {
+        return !h_.done();
+    }
+    int operator()() {
+        h_();
+        if (h_.promise().exception_)
+            std::rethrow_exception(h_.promise().exception_); // propagate coroutine exception
+        return h_.promise().value_;
+    }
+private:
+    handle_type h_;
+};
+
+CoroutineReturn some_ints(int n)
+{
+    std::cout << "some_ints will yield 1" << "\n";
+    co_yield 1;
+    std::cout << "some_ints will yield 2" << "\n";
+    co_yield 2;
+    std::cout << "some_ints will return " << n << "\n";
+    co_return n;
+}
+
+CoroutineReturn throw_me(int n)
+{
+    std::cout << "throw_me will throw up" << "\n";
+    if(n % 2 == 0) throw std::exception("An error is here");
+    co_return n; // must be here otherwise it is not coroutine
+}
+
+int main()
+{
+    try {
+        auto gen = some_ints(10);
+
+        for (int j = 0; gen; j++)
+            std::cout << gen() << '\n';
+
+        auto gen2 = throw_me(10);
+        std::cout << gen2() << '\n';
+    }
+    catch (const std::exception& ex)
+    {
+        std::cerr << "Exception: " << ex.what() << '\n';
+    }
+    catch (...)
+    {
+        std::cerr << "Unknown exception.\n";
+    }
+}
+```
 
 ### Modules
 
@@ -734,6 +863,8 @@ Views are lightweight objects that indirectly represent iterable sequences. A vi
 There is a number of predefined adaptors for transforming, filtering, splitting, joining, reversing, etc... See the full [list of adaptors](https://en.cppreference.com/w/cpp/ranges#Range_adaptors).
 
 **View pipelining, is a sort of algorithm composition, an is a key advantage of using ranges in the first place!**
+
+**Note** custom/user views cannot be pipelined per standard at C++20 moment, hopefully in C++23.
 
 ```cpp
 using std::cout;

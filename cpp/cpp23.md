@@ -35,10 +35,24 @@ constexpr bool is_runtime_evaluated() noexcept {
 
 ## New library features
 
+### monadic optional
+
+Optional has 3 methods add to enable functional style programming:
+
+- and_then
+- or_else
+- transform
+
+### expected
+
+Error handling type similar to optional.
+
+
 ### Ranges improvements
 
 - `std::ranges::starts_with` and `std::ranges::ends_with` is added
 - `std::ranges::shift_left` and `std::ranges::shift_right` is added
+- `std::ranges::fold_left` and `std::ranges::fold_right` is added
 - `std::ranges::iota` is added
 - `std::ranges::views::zip` is added
 - `std::ranges::views::zip_transform` is added
@@ -53,6 +67,8 @@ constexpr bool is_runtime_evaluated() noexcept {
 - compatibility macro _Atomic provided such that `_Atomic(T)` is identical to `atomic<T>`
 - more functions (`erase`, `extract`, `insert`, `insert_or_assign`, `operator[]`, `bucket`) aware of transparent/heterogenous searching
 - garabage collector related basics introduced in [C++11](cpp11.md#allow-garbage-collected-implementations) are removed
+- `string` and `string_view` have `contains` method added
+- 
 
 
 ## Some of the references
