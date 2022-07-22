@@ -1,7 +1,0 @@
-# C# basics
-
-<!-- toc -->
-
-<!-- tocstop -->
-
-
