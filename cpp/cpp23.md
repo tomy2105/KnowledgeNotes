@@ -6,6 +6,9 @@
   * [if with consteval](#if-with-consteval)
   * [Misc improvements](#misc-improvements)
 - [New library features](#new-library-features)
+  * [monadic optional](#monadic-optional)
+  * [expected](#expected)
+  * [Ranges improvements](#ranges-improvements)
   * [Other improvements](#other-improvements)
 - [Some of the references](#some-of-the-references)
 
@@ -73,4 +76,3 @@ Error handling type similar to optional.
 
 ## Some of the references
 - [CPP Reference](https://en.cppreference.com/)
-

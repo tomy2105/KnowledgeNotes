@@ -7,6 +7,7 @@ Bits and pieces of, mostly, computer programming related knowledge I've collecte
 	- [C++11](cpp/cpp11.md)
 	- [C++14](cpp/cpp14.md)
 	- [C++17](cpp/cpp17.md)
+	- [Real life move to C++17](cpp/realcpp17.md)
 	- [C++20](cpp/cpp20.md)
 	- [C++23](cpp/cpp23.md) **under construction**
 	- [Not so obvious C++](cpp/tricky.md)
