@@ -21,6 +21,7 @@
 - [decltype type](#decltype-type)
 - [type diagnostics](#type-diagnostics)
 - [When is dectructor not invoked?](#when-is-dectructor-not-invoked)
+- [public deleted functions](#public-deleted-functions)
 - [Some of the references](#some-of-the-references)
 
 <!-- tocstop -->
@@ -511,6 +512,45 @@ However there are few exceptions which happen during "abnormal" termination. In 
 - any exit function is invoked like `std::exit` or `std::abort`
 
   
+## public deleted functions
+
+As mentioned in Effective Modern C++ making deleted functions public produces better error messages because **some** compilers tend to report accessibility related errors before deleted status.
+
+
+```cpp
+class privateSingleton
+{
+private:
+	privateSingleton() = default;
+	privateSingleton(privateSingleton const&) = delete;
+	void operator=(privateSingleton const&) = delete;
+public:
+	static privateSingleton& Instance() {
+		static privateSingleton instance;
+		return instance;
+	}
+};
+
+class singleton
+{
+private:
+	singleton() = default;
+public:
+	singleton(singleton const&) = delete;
+	void operator=(singleton const&) = delete;
+public:
+	static singleton& Instance() {
+		static singleton instance;
+		return instance;
+	}
+};
+
+int main()
+{
+	privateSingleton s1 = privateSingleton::Instance(); // compiler error: is inaccessible
+	singleton s2 = singleton::Instance(); // compiler error: attempting to reference a deleted function
+}
+```
 
 
 ## Some of the references
