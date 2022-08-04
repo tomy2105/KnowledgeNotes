@@ -22,6 +22,7 @@
 - [type diagnostics](#type-diagnostics)
 - [When is dectructor not invoked?](#when-is-dectructor-not-invoked)
 - [public deleted functions](#public-deleted-functions)
+- [Invoking base class method if base class is template](#invoking-base-class-method-if-base-class-is-template)
 - [Some of the references](#some-of-the-references)
 
 <!-- tocstop -->
@@ -550,6 +551,36 @@ int main()
 	privateSingleton s1 = privateSingleton::Instance(); // compiler error: is inaccessible
 	singleton s2 = singleton::Instance(); // compiler error: attempting to reference a deleted function
 }
+```
+
+## Invoking base class method if base class is template
+
+Invoking base class method might not work as expected if base class is template. See example below.
+
+The "problem" is in [Two Phase Lookup](https://stackoverflow.com/questions/7767626/two-phase-lookup-explanation-needed), more [info here](http://blog.llvm.org/2009/12/dreaded-two-phase-name-lookup.html), where non-dependant names are resolved in phase one and dependant in phase two.
+
+```cpp
+template <typename T>
+class Base {
+public:
+    void baseFunction() {}
+};
+
+template <typename T> 
+class Derived : public Base<T> {
+public:
+    // without this just invoking baseFunction() results in compiler error
+    using Base<T>::baseFunction;             
+    void derivedFunction() {
+        // following line results in compiler error identifier not found
+        // unless using above is used
+        baseFunction();                      
+
+        // other ways to invoke without using above
+        this->baseFunction();
+        Base<T>::baseFunction();
+    }
+};
 ```
 
 

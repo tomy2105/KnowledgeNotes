@@ -766,6 +766,15 @@ template<typename Value1, typename Value2, ..., typename Valuen> class tuple    
 }
 ```
 
+You can find out number of variadic parameters in a pack using `sizeof...` operator.
+
+```cpp
+template <typename ... Args>
+void printSize(Args&& ... args){
+    std::cout << sizeof...(Args) << ' ' << sizeof...(args) << std::end;
+}
+```
+
 The variadic parameters themselves are not readily available to the implementation of a function or class. To make use of them either recursion or a dummy function/struct must be used.
 
 Recursive case:

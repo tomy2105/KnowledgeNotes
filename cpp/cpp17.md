@@ -92,6 +92,7 @@ template<bool... B>
 struct fold_and : std::integral_constant<bool, (B && ...)> {};
 ```
 
+Some more nice usages of folde expressions [here](https://www.foonathan.net/2020/05/fold-tricks/) and [here](https://www.modernescpp.com/index.php/smart-tricks-with-fold-expressions).
 
 ### Initializers in if and switch statements
 

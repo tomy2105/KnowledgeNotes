@@ -1377,6 +1377,7 @@ For unordered associative containers (`unordered_map`, `unordered_multimap`, `un
 - `to_address` added to obtain raw pointer from "fancy pointers"
 - `to_midpoint` added to calculate mid point between numeric types or pointers without overflow
 - `lerp` added to calculate linear interpolation/extrapolation (a + t(b-a)) with exactness and without overflow
+- `cmp_equal`, `cmp_not_equal`, `cmp_less`, `cmp_less_equal`, `cmp_greater` and `cmp_greater_equal` added for safe signed/unsigned comparison
 - free standing `erase` and `erase_if` added to simplify uniform element erasure for most standard containers
 - `is_bounded_array` and `is_unbounded_array` added for checks against the type of array
 - `bind_front` added for wrapping a function with first parameters specified (`bind_back` comes in [C++ 23](cpp23.md#other-improvements)

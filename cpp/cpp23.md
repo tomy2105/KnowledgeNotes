@@ -57,11 +57,20 @@ Error handling type similar to optional.
 - `std::ranges::shift_left` and `std::ranges::shift_right` is added
 - `std::ranges::fold_left` and `std::ranges::fold_right` is added
 - `std::ranges::iota` is added
+- `std::ranges::to` is added
 - `std::ranges::views::zip` is added
 - `std::ranges::views::zip_transform` is added
 - `std::ranges::views::adjacent` is added
 - `std::ranges::views::adjacent_transform` is added
 - `std::ranges::views::join_with` is added
+- `std::ranges::views::slide` is added
+- `std::ranges::views::chunk` is added
+- `std::ranges::views::chunk_by` is added
+- `std::ranges::views::repeat` is added
+- `std::ranges::views::cartesian_product` is added
+- `std::ranges::views::as_const` is added
+- `std::ranges::views::as_rvalue` is added
+- `std::ranges::views::stride` is added
 
 
 ### Other improvements
