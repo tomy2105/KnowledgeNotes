@@ -584,6 +584,85 @@ public:
 ```
 
 
+## function level try/catch block
+
+Function level try/catch block introduces handler around the whole body of a function (including memeber constructors and destructors in case of a constructor or destructor!).
+
+This construct is mainly to be used on constructors and destructors (although destructors should not throw!!!) and there are two special rules that apply to constructors/destructors:
+
+- if the function level catch handler for constructor/destructor reaches the end, the current exception is automatically rethrown
+- function level catch handler for constructor cannot return (must implicitly or explicitly (re)throw), destructor can return
+
+
+```cpp
+#include <iostream>
+#include <stdexcept>
+
+struct Member {
+    Member(int a) : num(a) { if (a == 1) throw std::runtime_error("Member Constructor Error"); }
+    ~Member() noexcept(false) { throw std::runtime_error("Member Destructor Error"); }
+    int num;
+};
+class Class {
+    Member member;
+public:
+    Class(int a)
+    try    // A constructor try block.
+        : member(a) // Can throw std::exception
+    {
+        // ... constructor body ...
+    }
+    catch (std::exception const& e)
+    {
+        std::cout << "Member threw: " << e.what() << std::endl;
+        //throw; // rethrown implicitly here!!! cannot just return
+    }
+
+    ~Class() noexcept(false)
+    try    // A destructor try block.
+    {
+        // ... destructor body ...
+    }
+    catch (std::exception const& e)
+    {
+        std::cout << "Member threw: " << e.what() << std::endl;
+        if (member.num != 2)
+            return;
+        //throw; // rethrown implicitly here unless there is a return before
+    }
+};
+
+int main(void)
+{
+    try {
+        Class a(1);
+    }
+    catch (std::exception const& e) {
+        // here because constructor throws
+        std::cout << "Caught: " << e.what() << std::endl;
+    }
+
+    try {
+        Class a(2);
+    }
+    catch (std::exception const& e) {
+        // here because destructor throws
+        std::cout << "Caught: " << e.what() << std::endl;
+    }
+
+    try {
+        Class a(3);
+    }
+    catch (std::exception const& e) {
+        // not here because destructor's catch returns
+        std::cout << "Caught: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
+```
+
+
 ## Some of the references
 
 - [Effective Modern C++](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/)
