@@ -1,7 +1,7 @@
 
-# Knowledge
+# Knowledge Notes
 
-Bits and pieces of, mostly, computer programming related knowledge I've collected while learning and programming. Some are fresh, some are years old (converted from my text file notes).
+Bits and pieces of, mostly, computer programming and development related knowledge I've collected while learning and programming. Some are fresh, some are years old (converted from my text file notes).
 
 **Disclaimer:** All of these are compiled from number of sources and cannot be considered my original work (except few example programs). I've tried to enumerate mayor sources at the end of each note, please correct me if I missed something!
 
