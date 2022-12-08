@@ -3,15 +3,19 @@
 
 Bits and pieces of, mostly, computer programming related knowledge I've collected while learning and programming. Some are fresh, some are years old (converted from my text file notes).
 
+**Disclaimer:** All of these are compiled from number of sources and cannot be considered my original work (except few example programs). I've tried to enumerate mayor sources at the end of each note, please correct me if I missed something!
+
 - C++
 	- [C++11](cpp/cpp11.md)
 	- [C++14](cpp/cpp14.md)
 	- [C++17](cpp/cpp17.md)
 	- [Real life move to C++17](cpp/realcpp17.md)
 	- [C++20](cpp/cpp20.md)
-	- [C++23](cpp/cpp23.md) **under construction**
+	- [C++23](cpp/cpp23.md)
 	- [Not so obvious C++](cpp/tricky.md)
 	- [Some more links](cpp/links.md)
+- .NET
+    - [C#](csharp_basics.md)
 - Frontend & Hybrid
 	- [HTML & CSS](html_css_js/html5.md)
 	- [Bootstrap](html_css_js/bootstrap.md)
@@ -20,4 +24,7 @@ Bits and pieces of, mostly, computer programming related knowledge I've collecte
 	- [Cordova](html_css_js/cordova.md)
 - [Python](python/python.md) 
 - [Swift](swift/swift.md) 
+- Cloud
+    - [Microservices, Docker, Kubernetes](cloud/docker_k8s.md)
+    - [Google Cloud](cloud/google.md)
 - [Windows tips](other/windows.md) 
