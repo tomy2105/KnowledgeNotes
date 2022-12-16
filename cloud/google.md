@@ -165,6 +165,13 @@ There are also **global resources** that can be used by any resource withing Goo
 - Instance templates
 - Cloud Interconnects
 
+**Note**: the fact that something is global (can be **used** by any resource) does not mean that it is not actually **stored** in some zone, e.g. persisten disk snapshot can be accessed and used from any zone but is actually stored in a specific region or multi-region location in addition (from that  perspective):
+- CloudSQL databases (can have read-only replicas in other zone)
+- BigTable (clusters are in a zone but can be replicated across regions and zones)
+- BigQuery (can be region or multi-region)
+- Cloud Spanner (can be region or multi-region)
+- Firestore (can be region or multi-region)
+
 
 For up to date info go [here](https://cloud.google.com/compute/docs/regions-zones/global-regional-zonal-resources).
 
@@ -174,14 +181,14 @@ When choosing a region or zone, it's important to think about:
 
 ### Resource hierarchy
 
-Resources in Google Clodu are organized hierarchicaly:
+Resources in Google Cloud are organized hierarchicaly:
 - **organization** - is the root node in this hierarchy
-- **folders** - the children of the organization, a kind of sub-organizations within the organization used to model different entities likedepartments, and teams within a company
-- **projects** - the children of tge folders, and individual resources are the children of the projects
+- **folders** - the children of the organization, a kind of sub-organizations within the organization used to model different entities like departments, and teams within a company
+- **projects** - the children of the folders, and individual resources are the children of the projects
 
 For more info about hierarchy click [here](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy).
 
-**Note:** Each resource has exactly one parent and [Cloud IAM](#cloud-iam) roles granted to parent are inherited by all children! For more info related to resouce security [see Cloud IAM](#cloud-iam).
+**Note:** Each resource has exactly one parent and [Cloud IAM](#cloud-iam) roles granted to parent are inherited by all children! For more info related to resource security [see Cloud IAM](#cloud-iam).
 
 **Labels** are key value pairs that can be attached to a resources and are utility for organizing resources providing more granularity than projects and folders. Can also be used in scripts to help analyze costs or for run bulk operations on multiple resources.
 
@@ -209,7 +216,7 @@ Google Cloud resources and services can be divided into several groups like:
 - [Application Integration](#application-integration), [Developer Tools](#developer-tools) and [DevOps CI/CD](#devops-cicd) - services and tools that developers can use to enhance their applications or help developers manage deployments and application build pipelines
 - [AI and ML](#ai-and-ml) - a suite of APIs/Services that run specific artificial intelligence and machine learning tasks on Google Cloud
 - [Identity and Security](#identity-and-security) - a suite of services related to identity and access management applied to all Google Cloud resources
-- lots of others.....
+- Lots of others.....
 
 For [list go here](https://cloud.google.com/products).
 
@@ -221,7 +228,7 @@ Google Cloud contains a range of compute services:
 - [Compute Engine](#compute-engine) - run virtual machines on-demand in the Cloud, Infrastructure as a Service solution, often base for other services
 - [Google Kubernetes Engine (GKE)](#google-kubernetes-engine-gke) - run containerized applications on a Cloud environment in a cluster user manages
 - [App Engine](#app-engine) - fully managed platform as a service framework, run code in the Cloud without worrying about infrastructure, just focus on code 
-- [Cloud Run](#cloud-run) - a serverless Google managed cluster that lets you run **stateless** containers invoked via web requests or Pub/Sub events 
+- [Cloud Run](#cloud-run) - a serverless Google managed K8s cluster that lets you run **stateless** containers invoked via web requests or Pub/Sub events 
 - [Cloud Functions](#cloud-functions) - completely serverless execution environment or Functions as a Service, executes code in response to events
 - [Bare Metal Solution](#bare-metal-solution) - run on bare metal
 - [VMware Engine](#vmware-engine) - managed VMware platform
@@ -236,15 +243,17 @@ Choosing computer service:
 - if load is event driven choose [Cloud Functions](#cloud-functions)
 - if not choose [App Engine](#app-engine)
 
-For some more help how to choose compute service see [Visual Note](https://thecloudgirl.dev/gcpcompute.html).
+For some more help how to choose compute service see [sketchnote](https://thecloudgirl.dev/gcpcompute.html).
 
 #### Compute Engine
 
 Create and run VMs, GPUs, TPUs on Google infrastructure. Machines are divided into cathegories called [machine types](https://cloud.google.com/compute/docs/machine-types):
-- General-purpose (E, N1, N2, T2D) - typicaly 8GB mem/vCPU
-- Compute-optimized (C) - typicaly 4GB mem/vCPU
+- General-purpose (E, N1, N2, T2D) - typicaly 4GB (8GB highmem and 1GB highcpu) mem/vCPU
+- Compute-optimized (C) - typicaly 4GB (8GB highmem and 2GB highcpu) mem/vCPU
 - Memory-optimized (M) - typicaly 14 - 24GB mem/vCPU
 - Accelerator-optimized (A)
+
+**Note:** memory sizes listed here are typical
 
 When choosing a machine type the general purpose machine type family typically offers the best price-performance ratio for a variety of workloads. The general purpose machine types consist of the N-series and E2-series. In general, E2s have similar performance to N1s but, usually, utilizing the E2 machine type alone can help save on costs.
 
@@ -427,7 +436,11 @@ More info [here](https://cloud.google.com/run/docs/) and [sketchnote](https://th
 
 #### Cloud Functions
 
-Serverless execution environment for building and connecting cloud services. Can write simple, single-purpose functions that are attached to events. Cloud Function is [triggered](https://cloud.google.com/functions/docs/calling) when an event being watched is fired. 
+Serverless execution environment for building and connecting cloud services. Can write simple, single-purpose functions that are attached to events. Cloud Function is [triggered](https://cloud.google.com/functions/docs/calling) when an event being watched is fired, event can be:
+- HTTP triggers
+- Pub/Sub triggers
+- Cloud Storage triggers
+- Generalized Eventarc triggers
 
 Code executes in a fully managed environment with no need to provision any infrastructure or worry about managing any servers. Cloud Functions have access to the Google Service Account credential and are thus seamlessly authenticated with the majority of Google Cloud services.
 
@@ -444,7 +457,7 @@ More info [here](https://cloud.google.com/functions/docs/) and [sketchnote](http
 
 Dedicated hardware for specialized workloads that cannot be virtualized like Oracle database.
 
-More info [here](https://cloud.google.com/bare-metal/docs) and [sketchnote]( and [sketchnote](https://thecloudgirl.dev/CloudFunctions.html).
+More info [here](https://cloud.google.com/bare-metal/docs) and [sketchnote](https://thecloudgirl.dev/BareMetal.html).
 
 #### VMware Engine
 
@@ -455,7 +468,7 @@ More info [here](https://cloud.google.com/vmware-engine/docs) and [sketchnote](h
 
 ### Storage
   
-By default, Compute Engine **encrypts ** all data **at rest** without any additional configuration required. For more control user can use either Cloud Key Management Service to create and manage key encryption keys or create and manage your encryption keys on its own.
+By default, Compute Engine **encrypts** all data **at rest** without any additional configuration required. For more control user can use either Cloud Key Management Service to create and manage key encryption keys or create and manage your encryption keys on its own.
 
 A data encryption key or DEK using AES 256 symmetric key is used and the key itself is encrypted by Google using a key encryption key, KEK. This is so that the DEK can be stored local to the encrypted data for fast decryption with no visible performance impact to the user.  KEKs are stored in Cloud KMS, all keys are rotated periodically and automatically.
 
@@ -502,9 +515,11 @@ To access the data you can use the gsutil command or either JSON or XML APIs.
 
 Data put into buckets are objects that inherit the storage class of the bucket (unless you specify a storage class for each of the objects). Four storage [classes](https://cloud.google.com/storage/docs/storage-classes):
 - **standard** - data that is frequently accessed and stored for brief period of time (most expensive, no miminum storage duration, no retrieval cost)
-- **nearline** - infrequently accessed data accessed less than once per 30 days, like data backup, long tailed multimedia content, and data archiving (slightly lower availability, minimum storage duration, and costs for data access, lowered storage costs)
+- **nearline** - infrequently accessed data accessed less than once per 30 days, like data backup, long tailed multimedia content, and data archiving (slightly lower availability, 30 days minimum storage duration, and costs for data access, lowered storage costs)
 - **coldline** - infrequently accessed data accessed less than once per 90 days (slightly lower availability, a 90 day minimum storage duration and higher costs for data access, lowered storage costs)
 - **archive** - data archiving, online backup and disaster recovery accessed less than once a year (no availability SLA, higher costs for data access, 365 day minimum storage duration)
+
+**Note:** even if file is deleted before minimum storage duration has passed you are charged for the whole minimum storage duration!
 
 Three location types:
 - **multi region** - contains two or more geographic places
@@ -515,7 +530,7 @@ IAM is used to control which individual users or service account can operate on 
 - **Uniform** (recommended) - use IAM alone to manage permissions, also allows you to use features that are not available when working with ACLs, such as IAM Conditions and Cloud Audit Logs.
 - **Fine-grained** - use IAM and Access Control Lists (ACLs) together to manage permissions, ACLs specify access and apply permissions at both the bucket level and per individual object, maximum number of ACL entries you can create for a bucket or object is 100.
 
-Signed URL provide a cryptographic key that gives time limited access to a bucket or object. 
+**Signed URL** provide a cryptographic key that gives time limited access to a bucket or object. 
 
 Other features:
 - **customer supplied encrytion key (CSEK)** - instead of Google managed ones
@@ -538,6 +553,12 @@ Features:
 - hundreds of terabytes of capacity
 - file locking 
 
+Service tiers:
+- Basic HDD
+- Basic SSD
+- High Scale SSD
+- Enterprise (regional availability)
+
 More info [here](https://cloud.google.com/filestore/docs/).
 
 #### Persistent Disk
@@ -546,11 +567,13 @@ Block storage for VMs (usually network attached so it can be persisted regardles
 - Zonal persistent disk: Efficient, reliable block storage
 - Regional persistent disk: Regional block storage replicated in two zones
 
-**Note**: The boot disk defaults to being deleted automatically when the instance is deleted. Meed to disable Delete boot disk when instance is deleted to enable creating an image from the boot disk!!!
+**Note**: The boot disk defaults to being deleted automatically when the instance is deleted. Need to disable *Delete boot disk when instance is deleted* to enable creating an image from the boot disk!!!
 
-For shared-core machine type, you can attach up to 16 disks. For the standard, high-memory, high-CUP, memory-optimized and compute-optimized machine types, you can attach up to 128 disks.
+For shared-core machine type, you can attach up to 16 disks. For the standard, high-memory, high-CPU, memory-optimized and compute-optimized machine types, you can attach up to 128 disks.
 
 More info [here](https://cloud.google.com/compute/docs/disks/) and [sketchnote](https://thecloudgirl.dev/PD.html).
+
+**Note**: Persisten disks in **read-only** mode can be mounted to number of VMs giving possibility to avoid using fileserver/filestore (provided data doesn't need to be modified).
 
 ##### Snapshots
 
@@ -577,7 +600,7 @@ More info [here](https://cloud.google.com/compute/docs/disks/local-ssd).
 ### Database and Data Analytics 
 
 For structured data choose:
-- if workload is analtics:
+- if workload is analytics:
   - choose **Cloud Bigtable** if need updates or low latency
   - or **BigQuery** otherwise
 - if not analytics then:
@@ -641,17 +664,6 @@ If connecting from outside there are 3 options:
 
 More info [here](https://cloud.google.com/sql/docs/) and [sketchnote](https://thecloudgirl.dev/gcpsketchnote3.html).
 
-#### BigQuery
-
-A fully-managed petabyte-scale data warehouse for large amounts of relational structured data optimized for large-scale, ad-hoc SQL-based analysis and reporting. Aimed at data analysts and data scientists, can quickly query and filter large datasets, aggregate results, and perform complex operations (supports a standard SQL dialect that is ANSI-compliant). 
-
-Can use [partitioned tables](https://cloud.google.com/bigquery/docs/partitioned-tables) to improve query performance, and you can control costs by reducing the number of bytes read by a query.
-
-More info [here](https://cloud.google.com/bigquery/docs/) and [sketchnote](https://thecloudgirl.dev/bigquery.html).
-
-Also contains some prebuild public data sets that can be used, more info [here](https://cloud.google.com/public-datasets).
-
-
 #### Database Migration Service
 
 Provides options for one-time and continuous jobs to migrate data to Cloud SQL.
@@ -668,6 +680,17 @@ To migrate PostgreSQL you need to:
 
 More info [here](https://cloud.google.com/database-migration/docs) and [here](https://cloud.google.com/blog/products/databases/tips-for-migrating-across-compatible-database-engines).
 
+#### BigQuery
+
+A fully-managed petabyte-scale data warehouse for large amounts of relational structured data optimized for large-scale, ad-hoc SQL-based analysis and reporting. Aimed at data analysts and data scientists, can quickly query and filter large datasets, aggregate results, and perform complex operations (supports a standard SQL dialect that is ANSI-compliant). 
+
+Can use [partitioned tables](https://cloud.google.com/bigquery/docs/partitioned-tables) to improve query performance, and you can control costs by reducing the number of bytes read by a query.
+
+More info [here](https://cloud.google.com/bigquery/docs/) and [sketchnote](https://thecloudgirl.dev/bigquery.html).
+
+Also contains some prebuild public data sets that can be used, more info [here](https://cloud.google.com/public-datasets).
+
+
 #### Dataflow
 
 Fully managed service for transforming and enriching data, stream and batch modes based on **Apache Beam**.
@@ -676,7 +699,21 @@ Supports fast, simplified pipeline development via expressive SQL, Java and Pyth
 
 Also tightly coupled with other GCP services, can set up priority alerts and notifications to monitor our pipeline and the quality of data coming in (Pub/Sub, Datastore, Apache Avro, Apache Kafka) and out (BigQuery, AI platform, Bigtable).
 
+Charged per second job takes to complete.
+
 More info [here](https://cloud.google.com/dataflow/docs/) and [sketchnote](https://thecloudgirl.dev/dataflow.html).
+
+#### Datastream
+
+Serverless and easy-to-use change data capture and replication service. 
+
+Allows seamless replication of data from relational database sources such as Oracle, MySQL, and PostgreSQL directly into BigQuery or Cloud Storage or into Cloud SQL or Cloud Spanner (for database synchronization), reliably, and with minimal latency and downtime.
+
+Charged per amount of data processed.
+
+In some cases used in conjunction with Dataflow.
+
+More info [here](https://cloud.google.com/datastream/docs) and [sketchnote](https://thecloudgirl.dev/datastream.html).
 
 #### Dataprep
 
@@ -691,14 +728,6 @@ Fully managed cloud service for running **Apache Spark** and **Apache Hadoop** c
 Without it, it can take from 5 to 30 minutes to create Spark and Hadoop clusters. With Cloud Dataproc clusters are quick to start, scale and shut down, with each of these operations taking 90 seconds or less on average.
 
 More info [here](https://cloud.google.com/dataproc/docs/) and [sketchnote](https://thecloudgirl.dev/Dataproc.html).
-
-#### Datastream
-
-Serverless and easy-to-use change data capture and replication service. 
-
-Allows seamless replication of data from relational database sources such as Oracle, MySQL, and PostgreSQL directly into BigQuery or Cloud Storage or into Cloud SQL or Cloud Spanner (for database synchronization), reliably, and with minimal latency and downtime.
-
-More info [here](https://cloud.google.com/datastream/docs) and [sketchnote](https://thecloudgirl.dev/datastream.html).
 
 #### Pub/Sub
 
@@ -804,14 +833,14 @@ VPC network peering does not incur the network latency, security and cost drawba
 
 Managed network address translation service, so that resources without public IP addresses can access the internet while hosts outside their VPC network cannot directly access any of the private resources behind the Cloud NAT gateway.
 
-Private Google access to allow resources that only have internal IP addresses to reach the external IP addresses of Google APIs and services. This is enabled on a subnet by subnet basis!
+**Private Google access** to allow resources that only have internal IP addresses to reach the external IP addresses of Google APIs and services. This is enabled on a subnet by subnet basis!
 
 More info [here](https://cloud.google.com/nat/docs/overview/) and [sketchnote](https://thecloudgirl.dev/cloudnat.html).
 
 #### Cloud Armor
 
 Google provides Infrastructure DDoS support through global load balancers at level 3 and level 4 traffic.
-If you have enabled CDN, this will also protect backend resources because a DDOS results in a cache hit instead of hitting your resources as shown on the right. 
+If you have enabled CDN, this will also protect backend resources because a DDOS results in a cache hit instead of hitting your resources. 
 
 For additional features over the built-in DDoS protection, can use Cloud Armor to create network security policies with allow lists that allow known/required addresses through and deny lists to block known attackers. 
 
@@ -825,11 +854,11 @@ More info [here](https://cloud.google.com/armor/docs/) and [sketchnote](https://
 
 More info [here](https://cloud.google.com/compute/docs/vpn/overview) and [sketchnote](https://thecloudgirl.dev/networkconnectivity.html).
 
-##### Clasic VPN
+##### Classic VPN
 
 Securely connects on-premises network to Google Cloud VPC network through an IPsec VPN tunnel and is **useful for low-volume data connections**. 
 
-**Note: Doesn't support use cases where client computers need to “dial in” to a VPN using client VPN software.****
+**Note: Doesn't support use cases where client computers need to “dial in” to a VPN using client VPN software.**
 
 SLA of 99.9% service availability and supports site-to-site VPN, static and dynamic routes, and IKEv1 and IKEv2 ciphers. Ordinary IPsec VPN tunnel is 1.5-3 Gbps per tunnel.
 
@@ -910,7 +939,7 @@ More info [here](https://cloud.google.com/interconnect/docs/how-to/carrier-peeri
 
 Fully distributed, software-defined managed service for load distribution/balancing. Different types of load balancers that can be divided into two categories: global and regional. 
 
-Global load balancers Sit in Google's point of presence and are distributed globally, they are:
+Global load balancers sit in Google's point of presence and are distributed globally, they are:
 - HTTP(S) load balancer - used for external HTTP(S) traffic
 - SSL proxy load balancers - used for external TCP traffic when using SSL offload
 - TCP proxy load balancers - used for external TCP traffic without SSL offload (need global or IPv6 but don't need to preserve client IPs)
@@ -1016,7 +1045,7 @@ More info [here](https://cloud.google.com/cdn/docs/) and [sketchnote](https://th
 
 #### VPC Service Controls
 
-Improves ability to mitigate the risk of data exfiltration from Google Cloud servicesby creating perimeters that protect the resources and data of services that are explicitly specified.
+Improves ability to mitigate the risk of data exfiltration from Google Cloud services by creating perimeters that protect the resources and data of services that are explicitly specified.
 
 Provides an extra layer of security defense for Google Cloud services that is independent of Identity and Access Management (IAM). While IAM enables granular identity-based access control, VPC Service Controls enables broader context-based perimeter security, including controlling data egress across the perimeter.
 
@@ -1134,7 +1163,7 @@ More info [here](https://cloud.google.com/debugger/docs/).
 
 Web-based management console, the one and the greates, first thing used when dealing with Google Cloud :100:
 
-There is also a [Google Cloud](https://cloud.google.com/app) which iOS/Android Google Cloud manager mobile application.
+There is also an iOS/Android Google Cloud manager mobile application [Google Cloud](https://cloud.google.com/app).
 
 #### VM Manager
 
@@ -1245,6 +1274,11 @@ IDE support for the full development cycle of Kubernetes and Cloud Run applicati
 
 More info [here](https://cloud.google.com/code/docs/) and [here](https://github.com/GoogleCloudPlatform/app-gradle-plugin).
 
+#### Emulators
+
+Emulators can be used for local development of applications that use some of the Google Cloud services. Available for Cloud Bigtable, Datastore, Spanner, Pub/Sub, Firestore, ...
+
+See more [here](https://cloud.google.com/sdk/gcloud/reference/beta/emulators).
 
 ### DevOps CI/CD
 
@@ -1333,6 +1367,11 @@ See [sketchnote](https://thecloudgirl.dev/datatransfer.html) on various options 
 
 To see some other migration paths for whole workloads see [Migration Center](https://cloud.google.com/solutions/migration-center) and [Migration to Google Cloud: Getting started](https://cloud.google.com/architecture/migration-to-gcp-getting-started).
 
+In short, there are three major types of migrations:
+- Lift and shift - move without (or with minor) improvement, e.g. on site Kubernetes to GKE
+- Improve and move - modernize (take advantage of cloud-native capabilities) the workload while migrating, e.g. (on-site) Kubernetes to Cloud Rub 
+- Remove and replace (sometimes called rip and replace) - ompletely redesign and rewrite whole application or some of its parts as a cloud-native app
+
 #### Cloud Data Transfer
 
 Can transfer data to cloud using `gsutil` command line utility. In particular `gsutil rsync` for synchronization. Recommended for transfers with less than 1TB data.
@@ -1389,7 +1428,7 @@ A **role** is a list of permissions defined by IAM and can be one of the three t
 - **predefined** roles - specific to each service, provides granular access to specific resources, these roles are a collection of permissions, because to do any meaningful operations, one usually needs more than one permission
 - **custom** roles - the least privileged model in which each person in organization is given the minimal privileges needed to do their job
 
-**Note:** It's consifered better to use predefined roles over custom roles. Google has predefined roles for a reason, and it should be an exceptional use case that requires custom roles (e.g. production environment required very limited permissions).
+**Note:** It's considered better to use predefined roles over custom roles. Google has predefined roles for a reason, and it should be an exceptional use case that requires custom roles (e.g. production environment required very limited permissions).
 
 **Note:** Custom roles can only be applied at orgs or projects, not folders!
 
@@ -1401,11 +1440,11 @@ Basic roles:
 
 Some example predefined roles:
 - **Google Workspace or Cloud Identity superadmin** - assign organization admin role (point of contact in case of - disaster recovery)
-- **Organization admin** - access to administer all resources belonging to his organization, following the- principle  of least privilege, this role, by default, does not include the permission to perform other actions
+- **Organization admin** - access to administer all resources belonging to his organization, following the principle of least privilege, this role, by default, does not include the permission to perform other actions
 - **Organization viewer** - view access to all resources
-- **Folder admin** - full controlo over folders
+- **Folder admin** - full control over folders
 - **Folder creator** - browse folder hierarchy and create folders
-- **Folder viewer** - view foldersd and projects below folder
+- **Folder viewer** - view folders and projects below folder
 - **Project creator** - create and migrate projects (automatically set to owner) within her organization
 - **Project deleter** - delete projects
 - **Compute Admin** - full control of all Compute Engine resources.
@@ -1523,8 +1562,7 @@ Important security standards and compliance:
 - [Security Command Center](https://cloud.google.com/security-command-center/docs/) - security management and data risk platform
 - [Managed Service for Microsoft Active Directory](https://cloud.google.com/managed-microsoft-ad/docs/) - managed Microsoft Active Directory
 - [Secret Manager](https://cloud.google.com/secret-manager/docs/) - store and manage secrets
-- [Titan Security Key]https://cloud.google.com/titan-security-key/) - two-factor authentication (2FA) device
-- [VPC Service Controls](https://cloud.google.com/vpc-service-controls/docs/) - VPC data constraints
+- [Titan Security Key](https://cloud.google.com/titan-security-key/) - two-factor authentication (2FA) device
 - [Chronicle](https://chronicle.security/products/platform) - find threats from security telemetry
 - [VirusTotal](https://chronicle.security/products/virustotal/) - research/hunt for malware 
 - [Risk Manager](https://cloud.google.com/risk-manager/docs) - evaluate organization's security posture 
@@ -1611,6 +1649,7 @@ See [sketchnote](https://thecloudgirl.dev/datascience.html) about data science i
 - [Google Cloud Products in 4 words or less](https://github.com/priyankavergadia/google-cloud-4-words)
 - [The Google Cloud Developer's Visual Notes](https://github.com/priyankavergadia/GCPSketchnote) or [The Cloud Girl](https://thecloudgirl.dev/)
 - [Google Cloud Skills Boost](https://www.cloudskillsboost.google/)
+- [Google Cloud Architecture Center](https://cloud.google.com/architecture/filers-on-compute-engine)
 
   
 ## Additional Resources

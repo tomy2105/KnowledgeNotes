@@ -82,18 +82,18 @@ Help decouple components of the application, so that each component can be deplo
 - application should be able to scale out by starting new processes and scale back in as needed to meet demand and load
 - applications should be written to be more reliable than the underlying infrastructure which means they should be able to handle temporary failures in the underlying infrastructure and gracefully shut down and restart quickly (acquiring and releasing resources as needed)
 - aim should be to have the same environments used in development and test/staging as are used in production, infrastructure as code and Docker containers make this easier
-- decouple the collection, processing, and analysis of logs from the core logic of your apps, logging should be to the standard output and aggregating into a single source
+- decouple the collection, processing, and analysis of logs from the core logic of apps, logging should be to the standard output and aggregating into a single source
 - admin processes, usually one-off processes that should be decoupled from the application, should be automated and repeatable, not manual, processes
 
 ## Docker / Containers in general
 
 Docker is free platform (with paid additions) used to build and run containers.
 
-Containers are isolated user spaces (all the code that resides above the kernel, includes the applications and their dependencies) for running application code. They are lightweight because they don't carry a full operating system, and can be created and shut down very quickly because you're just starting and stopping the processes that make up the application and not booting up an entire VM and initializing an operating system for each application.
+Containers are isolated user spaces (all the code that resides above the kernel, includes the applications and their dependencies) for running application code. They are lightweight because they don't carry a full operating system, and can be created and shut down very quickly because they re just starting and stopping the processes that make up the application and not booting up an entire VM and initializing an operating system for each application.
 
 A container image is structured in layers, each instruction in the Dockerfile specifies a layer inside the container image, and are read only. 
 
-When a container runs, it also hasa writable ephemeral topmost layer, all changes made to the running container are written to this thin writable container layer which is lost **forever** when the container is deleted.
+When a container runs, it also has a writable ephemeral topmost layer, all changes made to the running container are written to this thin writable container layer which is lost **forever** when the container is deleted.
 
 Containers use Linux cgroups to control what an application can use, its maximum consumption of CPU time, memory, IO bandwidth, and other resources.
 
@@ -138,7 +138,7 @@ Not everything belongs to a namespace. For example, nodes, persistent volumes, a
 
 Kubernetes represents applications as Pods, which are units that represent a container (*or group of tightly-coupled containers*). The Pod is the smallest deployable unit in Kubernetes. 
 
-Pods provide a shared namespace for their contents which means that the two containers inside of our example pod can communicate with each other, and they also share:
+Pods provide a shared namespace for their contents which means that containers inside of a single pod can communicate with each other, and they also share:
 - attached volumes
 - network namespace - there is one IP address per pod
 
@@ -159,7 +159,7 @@ Nodes network namespace is connected to the node's primary NIC and is able to fo
 
 ### Pod Storage
 
-Kubernetes provides through **Volumes** and **PersistentVolumes** resources.
+Kubernetes provides storage through **Volumes** and **PersistentVolumes** resources.
 
 A **Volume** is a directory which is accessible to all of the containers in a Pod (attached to a Pod and not a container), some are are ephemeral (last only as long as the Pod) and others are persistent (can outlive a Pod).
 
@@ -201,7 +201,7 @@ The level of access a service provides to a set of pods depends on the Service's
 
 **StatefulSet** is similar to a Deployment, however, Pods created using StatefulSet have unique persistent identities, stable network identity and persistent disk storage.
 
-**DaemonSet** ensures that a specific Pod is always running on all or some subset of the nodes (Pods belonging to Deamon set will be set up automatically when new node is added). For example, might be usedto ensure that a logging agent like fluentd is running on all nodes.
+**DaemonSet** ensures that a specific Pod is always running on all or some subset of the nodes (Pods belonging to Deamon set will be set up automatically when new node is added). For example, might be used to ensure that a logging agent like *fluentd* is running on all nodes.
 
 **Job** creates one or more Pods required to run a task, when completed, Job will then terminate all those Pods. A related controller is **CronJob**, which runs Pods on a time-based schedule.
 
@@ -278,7 +278,7 @@ When this update strategy is used might need to set **sessionAffinity** field to
 
 A/B testing is used to measure the effectiveness of functionality in an application unlike deployment patterns above which focus on releasing new software safely and rolling back predictably. 
 
-A/B testing is used to make business decisions (not only predictions) based on the results derived from data. In an A/B test, you route a subset of users to new functionality based on some routing rules which include factors such as browser version, user agent, geolocation and operating system. 
+A/B testing is used to make business decisions (not only predictions) based on the results derived from data. In an A/B test, a subset of users is routed to new functionality based on some routing rules which include factors such as browser version, user agent, geolocation and operating system. 
 
 Afterwards measure and compare data between the versions and update the production environment with the version that yielded better results (abtained by monitoring any statistically significant differences in the user behavior).
 
