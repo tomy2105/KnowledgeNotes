@@ -21,6 +21,7 @@
     + [Vertical Pod Autoscaler](#vertical-pod-autoscaler)
     + [Cluster Autoscaler](#cluster-autoscaler)
   * [Kubernetes' built-in role-based access control (RBAC)](#kubernetes-built-in-role-based-access-control-rbac)
+  * [Best practices](#best-practices)
 - [Deployments and testing](#deployments-and-testing)
   * [Blue-green deployments](#blue-green-deployments)
   * [Canary deployments](#canary-deployments)
@@ -255,6 +256,22 @@ Within a cluster, access to any resource type (pods, services, deployments, etc)
 
 To create a role in the current namespace, specify the resource type as well as the verbs (update, create, delete, get, watch, list) that will indicate what type of action that will be allowed.
 
+### Best practices
+
+- Native logging mechanisms
+  - Log aggregator sidecar pattern - for apps that cannot log to stdout/stderr
+  - JSON logs
+- Containers are stateless and immutable
+- Avoid privileged containers
+- Application easy to monitor
+  - Metrics HTTP endpoint
+  - Sidecar pattern for monitoring - for apps that cannot be instrumented to export metrics
+- Expose the health of your application (using liveness and readiness probe)
+- Avoid running as root
+- Don't use latest tag in image version (hard to track)
+
+More info [here](https://cloud.google.com/architecture/best-practices-for-operating-containers).
+
 
 ## Deployments and testing
 
@@ -295,4 +312,4 @@ Shadow testing has many key benefits. Since the traffic is duplicated, any bugs 
 - [Google Cloud Skills Boost](https://www.cloudskillsboost.google/)
 - [Docker Documentation](https://docs.docker.com/)
 - [Kubernetes Documentation](https://kubernetes.io/docs/home/)
-- 
+-

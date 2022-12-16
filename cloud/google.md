@@ -41,12 +41,12 @@
     + [Cloud Memorystore](#cloud-memorystore)
     + [Cloud Spanner](#cloud-spanner)
     + [Cloud SQL](#cloud-sql)
-    + [BigQuery](#bigquery)
     + [Database Migration Service](#database-migration-service)
+    + [BigQuery](#bigquery)
     + [Dataflow](#dataflow)
+    + [Datastream](#datastream)
     + [Dataprep](#dataprep)
     + [Dataproc](#dataproc)
-    + [Datastream](#datastream)
     + [Pub/Sub](#pubsub)
     + [Rest](#rest)
   * [Networking](#networking)
@@ -58,7 +58,7 @@
     + [Cloud NAT](#cloud-nat)
     + [Cloud Armor](#cloud-armor)
     + [Cloud VPN](#cloud-vpn)
-      - [Clasic VPN](#clasic-vpn)
+      - [Classic VPN](#classic-vpn)
       - [HA VPN](#ha-vpn)
     + [Cloud Interconnect and Peering](#cloud-interconnect-and-peering)
       - [Dedicated Interconnect](#dedicated-interconnect)
@@ -101,6 +101,7 @@
     + [Cloud SDK](#cloud-sdk)
     + [Cloud Shell](#cloud-shell)
     + [Cloud Code](#cloud-code)
+    + [Emulators](#emulators)
   * [DevOps CI/CD](#devops-cicd)
     + [Cloud Source Repositories](#cloud-source-repositories)
     + [Container Registry](#container-registry)
@@ -407,7 +408,6 @@ In addition to more efficient routing, container-native load balancing results i
 In order to take advantage of container-native load balancing, the VPC-native setting must be enabled on the cluster. This is done via `--enable-ip-alias flag` in order to enable the use of alias IPs for pods which is required for container-native load balancing through an **Ingress**.
 
 When the **Ingress** is created, an HTTP(S) load balancer is created along with an NEG (Network Endpoint Group) in each zone in which the cluster runs. 
-
 
 #### App Engine
 
