@@ -506,12 +506,14 @@ Used for range of scenarios including serving website content, storing data for 
 
 Scalable to exabytes of data, time to first byte is in milliseconds,  very high availability and a single API across storage classes. 
 
-Not a reall file system, collection of buckets that you place objects into (directory is just another object). Buckets are required to have a globally unique name and cannot be nested.
+Not a real file system, collection of buckets that you place objects into (directory is just another object). Buckets are required to have a globally unique name and cannot be nested.
 
-No minimum size to those objects, and scale as much as wanted, as long as quota allows it. 
+No minimum size to those objects, and scale as much as wanted, as long as quota allows it. However there is some [quotas](https://cloud.google.com/storage/quotas), most important:
+- one second update limit per bucket
+- 5 TiB limit on individual object size
+- one second write limit on the same object
 
 To access the data you can use the gsutil command or either JSON or XML APIs. 
-
 
 Data put into buckets are objects that inherit the storage class of the bucket (unless you specify a storage class for each of the objects). Four storage [classes](https://cloud.google.com/storage/docs/storage-classes):
 - **standard** - data that is frequently accessed and stored for brief period of time (most expensive, no miminum storage duration, no retrieval cost)
