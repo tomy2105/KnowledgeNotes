@@ -23,6 +23,7 @@
       - [Node Auto Provisioning](#node-auto-provisioning)
       - [Migrate for Anthos](#migrate-for-anthos)
       - [Container-native load balancing](#container-native-load-balancing)
+      - [Workload Identity](#workload-identity)
     + [App Engine](#app-engine)
     + [Cloud Run](#cloud-run)
     + [Cloud Functions](#cloud-functions)
@@ -48,6 +49,7 @@
     + [Dataprep](#dataprep)
     + [Dataproc](#dataproc)
     + [Pub/Sub](#pubsub)
+    + [Cloud Composer](#cloud-composer)
     + [Rest](#rest)
   * [Networking](#networking)
     + [Network Service Tiers](#network-service-tiers)
@@ -72,9 +74,11 @@
       - [Network Load Balancer](#network-load-balancer)
       - [Internal load balancing](#internal-load-balancing)
       - [Internal HTTPS load balancing](#internal-https-load-balancing)
+    + [Network endpoint group](#network-endpoint-group)
     + [Cloud CDN](#cloud-cdn)
     + [VPC Service Controls](#vpc-service-controls)
     + [Network Intelligence Center](#network-intelligence-center)
+    + [Traffinc Director](#traffinc-director)
     + [Rest](#rest-1)
   * [Operations & Monitoring](#operations--monitoring)
     + [Cloud Monitoring](#cloud-monitoring)
@@ -87,10 +91,12 @@
   * [Management Tools](#management-tools)
     + [Cloud Console](#cloud-console)
     + [VM Manager](#vm-manager)
+    + [Cloud Deployment Manager](#cloud-deployment-manager)
     + [Rest](#rest-2)
   * [Application Integration](#application-integration)
     + [Cloud Scheduler](#cloud-scheduler)
     + [Cloud Tasks](#cloud-tasks)
+    + [App Engine Cron Service](#app-engine-cron-service)
     + [Rest](#rest-3)
   * [API Related](#api-related)
     + [Cloud Endpoints](#cloud-endpoints)
@@ -309,7 +315,7 @@ See [comparison of images, snapshots and templates](https://cloud.google.com/com
 
 An instance group is a collection of virtual machine (VM) instances that managed as a single entity, two kinds of VM instance groups:
 - **managed** - operate apps on multiple identical VMs with advantage of automated MIG services: autoscaling, autohealing, regional (multiple zone) deployment, and automatic updating
-- **unmanaged** - fleet of VMs that user manages himself
+- **unmanaged** - fleet of VMs that user manages himself (use cases like loadbalancing heterogenous instances, active/standby scenarios on instances that don't support horizontal scaling, etc...)
 
 **Note**: In order to create a managed instance group, am instance template needs to be created first. It defines machine type, boot disk image, labels, startup script, and other instance properties. 
 
@@ -321,6 +327,10 @@ Managed instance groups can work with load balancing services to distributor net
 
 **Note**: Regional managed instance groups are generally recommended over zonal managed instance groups!
 
+Updating applications/templates served by instance group is done using rolling update which can be (see [here](https://cloud.google.com/compute/docs/instance-groups/rolling-out-updates-to-managed-instance-groups)):
+- Automatic, or proactive - select this for automatic updates
+- Selective, or opportunistic - applied only when manually initiate the update on selected instances or when new instances are created.
+
 More info [here](https://cloud.google.com/compute/docs/instance-groups)
 
 ##### Scheduled start/stop 
@@ -328,6 +338,11 @@ More info [here](https://cloud.google.com/compute/docs/instance-groups)
 Instance schedules enable starting and stopping virtual machine instances automatically in order to optimize costs and manage VM instances more efficiently. 
 
 More info [here](https://cloud.google.com/compute/docs/instances/schedule-instance-start-stop).
+
+
+##### Live migration
+
+Moving of **running** VMs to different physical servers **without** interrupting the state of the VM.
 
 #### Google Kubernetes Engine (GKE)
 
@@ -409,10 +424,16 @@ In order to take advantage of container-native load balancing, the VPC-native se
 
 When the **Ingress** is created, an HTTP(S) load balancer is created along with an NEG (Network Endpoint Group) in each zone in which the cluster runs. 
 
+##### Workload Identity
+
+The recommended way for workloads running on Google Kubernetes Engine (GKE) to access Google Cloud services in a secure and manageable way. It allows workloads in GKE clusters to impersonate Identity and Access Management (IAM) service accounts to access Google Cloud services.
+
 #### App Engine
 
 Fully managed serverless application platform supporting the building and deploying of applications.
 Code can be in Go, Java, Node.js, PHP, Python, Ruby ([App engine standard](https://cloud.google.com/appengine/docs/standard)) and .NET and other custom runtimes ([App engine flexible](https://cloud.google.com/appengine/docs/flexible)).
+
+App Engine Standard employs language-specific runtimes, while App Engine Flexible uses containers that can be used to customize the runtime environment. There are also additional services likeApp Engine Cron Service and Task Queues.
 
 Applications can be scaled seamlessly from zero upward without having to worry about managing the underlying infrastructure. 
 
@@ -442,7 +463,7 @@ Serverless execution environment for building and connecting cloud services. Can
 - Cloud Storage triggers
 - Generalized Eventarc triggers
 
-Code executes in a fully managed environment with no need to provision any infrastructure or worry about managing any servers. Cloud Functions have access to the Google Service Account credential and are thus seamlessly authenticated with the majority of Google Cloud services.
+Code executes in a fully managed environment with no need to provision any infrastructure or worry about managing any servers. Cloud Functions have access to the Google Service Account credential and are thus seamlessly authenticated with the majority of Google Cloud services. Using this you can configure function to require authorization so only other authorized endpoints can trigger it (for example another function executing under proper user account and acquiring proper token and sending to invoked function, see more [here](https://cloud.google.com/functions/docs/securing/authenticating)).
 
 Use Cases:
 - Data Processing / ETL - Listen and respond to Cloud Storage events such as when a file is created, changed, or removed, e.g. process images, perform video transcoding, validate and transform data, etc...
@@ -513,7 +534,7 @@ No minimum size to those objects, and scale as much as wanted, as long as quota 
 - 5 TiB limit on individual object size
 - one second write limit on the same object
 
-To access the data you can use the gsutil command or either JSON or XML APIs. 
+To access the data you can use the gsutil command or either JSON or XML APIs. Cloud Storage streaming service is able to acquire the streaming data without having to archive the file first, used when you need to upload data from a process or on-the-fly.
 
 Data put into buckets are objects that inherit the storage class of the bucket (unless you specify a storage class for each of the objects). Four storage [classes](https://cloud.google.com/storage/docs/storage-classes):
 - **standard** - data that is frequently accessed and stored for brief period of time (most expensive, no miminum storage duration, no retrieval cost)
@@ -524,9 +545,9 @@ Data put into buckets are objects that inherit the storage class of the bucket (
 **Note:** even if file is deleted before minimum storage duration has passed you are charged for the whole minimum storage duration!
 
 Three location types:
-- **multi region** - contains two or more geographic places
-- **dual region** - specific pair of regions
-- a **region**
+- **multi region** - contains two or more geographic places (cross-geography access, highst availability) e.g. for content serving
+- **dual region** - specific pair of regions (optimize latency/bandwidth, cross-zone redundacy) e.g. for analytics, backup/archive and disaster recovery
+- a **region** - (optimize latency/bandwidth, lowest cost, cross-zone redundacy) e.g. for analytics and backup/archive
 
 IAM is used to control which individual users or service account can operate on a bucket, roles are inherited from project to bucket to object. There are two access control ways:
 - **Uniform** (recommended) - use IAM alone to manage permissions, also allows you to use features that are not available when working with ACLs, such as IAM Conditions and Cloud Audit Logs.
@@ -537,11 +558,22 @@ IAM is used to control which individual users or service account can operate on 
 Other features:
 - **customer supplied encrytion key (CSEK)** - instead of Google managed ones
 - **Object Versioning** - maintain multiple versions of objects (object is archived, with ID, before changed), turned on/off on bucket at any time
-- **Object Lifecycle Management** - automatically delete (keep specific number of versions) or archive objects (downgrade storage class)
+- **Object Lifecycle Management** - automatically delete (keep specific number of versions) or archive objects (downgrade storage class) - see info [here](https://cloud.google.com/storage/docs/lifecycle), can irreversibly lock retention policy and prevent premature deletion, see [here](https://cloud.google.com/storage/docs/bucket-lock)
 - **Directory Synchronizato**n - syncs VM directory with a bucket
 - **Object change notification** - notify application when object changes (at the moment webhook or Pub/Sub)
 - **Data import** - [Cloud Data Transfer](#cloud-data-transfer), [Storage Transfer Service](#storage-transfer-service), [Google Transfer Appliance](#google-transfer-appliance)
 - **Strong consistency** - all changes are immediately visible
+
+Typical usage:
+- Stream videos
+- Image and web asset libraries
+- Data lakes
+- Backups
+- Media archives
+- Long-tail content
+- Meet regulation or compliance requirements
+
+**Note:** [Cloud Storage FUSE] can be used to mount Cloud Storage as a filesystem on Linux/macOS (can even be run on-premise) but it has *significant* performance considerations and is not POSIX.
 
 More info [here](https://cloud.google.com/storage/docs/) and [sketchnote](https://thecloudgirl.dev/CloudStorage.html).
 
@@ -561,6 +593,12 @@ Service tiers:
 - High Scale SSD
 - Enterprise (regional availability)
 
+Typical usage:
+- Data analytics
+- Rendering and media processing
+- Application migrations
+- Web content management
+
 More info [here](https://cloud.google.com/filestore/docs/).
 
 #### Persistent Disk
@@ -573,9 +611,17 @@ Block storage for VMs (usually network attached so it can be persisted regardles
 
 For shared-core machine type, you can attach up to 16 disks. For the standard, high-memory, high-CPU, memory-optimized and compute-optimized machine types, you can attach up to 128 disks.
 
-More info [here](https://cloud.google.com/compute/docs/disks/) and [sketchnote](https://thecloudgirl.dev/PD.html).
+Typical usage:
+- Disks for virtual machines
+- Sharing read-only data across multiple virtual machines
+- Rapid, durable backups of running virtual machines
+- Storage for databases
 
-**Note**: Persisten disks in **read-only** mode can be mounted to number of VMs giving possibility to avoid using fileserver/filestore (provided data doesn't need to be modified).
+**Note**: Persistent disks in **read-only** mode can be mounted to number of VMs giving possibility to avoid using fileserver/filestore (provided data doesn't need to be modified).
+
+**Note**: Performance is based on the total persistent disk capacity attached to an instance and the number of vCPUs that the instance has, incrementing the persistent disk capacity will increment its throughput and IOPS.
+
+More info [here](https://cloud.google.com/compute/docs/disks/) and [sketchnote](https://thecloudgirl.dev/PD.html).
 
 ##### Snapshots
 
@@ -587,7 +633,7 @@ See [comparison of images, snapshots and templates](https://cloud.google.com/com
 
 Custom images are created from source disks, images or snapshots and can be used to create virtual machine (VM) instances (similar purpose as machine images).
 
-**Virtual disk import tool** can be used to import boot disk images from existing systems to Compute Engine.
+**Virtual disk import tool** can be used to import boot disk images from existing systems to Compute Engine (upload the resulting *.tar.gz file to Cloud Storage and register it as an image in Compute Engine).
 
 See [comparison of images, snapshots and templates](https://cloud.google.com/compute/docs/machine-images#when-to-use).
 
@@ -597,12 +643,17 @@ Local SSDs, unlike persistent disks, are physically attached to the virtual mach
 
 Cannot stop a VM with a local SSD via the gcloud CLI or the console, can shut down a VM from inside the guest operating system (OS), **but data is lost**!!!
 
+Typical usage:
+- Flash-optimized databases
+- Hot caching layer for analytics
+- Application scratch disk
+
 More info [here](https://cloud.google.com/compute/docs/disks/local-ssd).
   
 ### Database and Data Analytics 
 
 For structured data choose:
-- if workload is analytics:
+- if workload is analytical:
   - choose **Cloud Bigtable** if need updates or low latency
   - or **BigQuery** otherwise
 - if not analytics then:
@@ -613,7 +664,12 @@ See [sketchnote](https://thecloudgirl.dev/dboptions.html) on how to choose datab
 
 #### Cloud Bigtable
 
-Fully managed NoSQL database with petabytes-scale high read/high write volume and low latency **strongly** consistent in a **single** cluster (SLA of 99.5%) while replication adds **eventual** consistency across **two** clusters (SLA to 99.99%). 
+Fully managed NoSQL database with petabytes-scale high read/high write volume and low latency with native time series support (see more [here](https://cloud.google.com/bigtable/docs/schema-design)) and is **strongly** consistent in a **single** cluster (SLA of 99.5%) while replication adds **eventual** consistency across **two** clusters (SLA to 99.99%). 
+
+When replicated, **routing policies** inside app profile control which clusters handle incoming requests from applications:
+- **Single-cluster** - sends all requests to a single cluster that you specify
+- **Multi-cluster** - sends requests to the nearest available cluster in the instance
+- **Cluster group** - sends requests to the nearest available cluster within a cluster group that you specify in the app profile settings
 
 It is a key-value store that is designed as a sparsely populated table and can scale to billions of rows and thousands of columns. Scales for throughput (by adding/removing node - each node provides up to 10,000 queries per second -read and write) and learns to adjust to specific access patterns.
 
@@ -621,13 +677,33 @@ Supports the open-source industry standard HBase API, which makes it easy to get
 
 Choose when need to store more than one terabyte of structured data, have very high volumes of writes, need read/write latency of less than 10 milliseconds (such as IoT, AdTech, FinTech,...) or need a storage service that is compatible with the HBase API. If high throughput and low latency at scale are not priorities, then another NoSQL database like Firestore might be a better fit.
 
+Typical usage:
+- IoT, finance, adtech
+- Personalization, recommendations
+- Monitoring
+- Geospatial datasets
+- Graphs
+
 More info [here](https://cloud.google.com/bigtable/docs/) and [sketchnote](https://thecloudgirl.dev/Bigtable.html).
 
 #### Cloud Firestore
 
 Fast, fully managed, serverless, cloud native, NoSQL, document database with max. document size of 1 MB good for heavy read/write events. Supports ACID transactions, automatic multi region replication and **strong consistency**.
 
+Each document contains a set of key-value pairs and Firestore is optimized for storing large collections of small documents. All documents are stored in collections and can contain subcollections and nested objects, both of which can include primitive fields (e.g. strings) or complex objects (e.g. lists). Collections and documents are created implicitly, if either the collection or document does not exist, Cloud Firestore creates it.See more [here](https://firebase.google.com/docs/firestore/data-model).
+
+Typical usage:
+- Semi-structured application data
+- Hierarchical data
+- Durable key-value data
+- Common workloads:
+- User profiles
+- Product catalogs
+- Game state
+
 More info [here](https://cloud.google.com/firestore/docs/) and [sketchnote](https://thecloudgirl.dev/cloudnat.html).
+
+**Note:** previous generation has been called **Datastore**!
 
 #### Cloud Memorystore
 
@@ -647,13 +723,19 @@ A Cloud Spanner instance replicates data in end cloud zones which can be within 
 
 The replication of data is synchronized across zones using Google's global fiber network and usage of atomic clocks ensures atomicity when updating data. 
 
+**Note**: Traditional SQL databases usually use numerical primary keys in a sequence. Distributed databases do not use progressive keys, because the tables are split among the nodes in primary key order and therefore all the inserts would take place only at one point, degrading performance (**hotspotting**).
+
 More info [here](https://cloud.google.com/spanner/docs/) and [sketchnote](https://thecloudgirl.dev/spanner.html).
 
 #### Cloud SQL
 
 Fully managed service of either MySQL, PostgreSQL, or Microsoft SQL Server databases with high performance and scalability with up to 64 TB of storage capacity, 60,000 IOPS, and 624 GB of RAM per instance. Can easily scale up to 96 processor cores and scale out with **read** replicas.
 
+**Note:** there used to be something called **failover** replica but now that is deprecated and considered legacy.
+
 HA configuration is made up of a primary instance and a standby instance, through synchronous replication to each zones persistent disk, all writes made to the primary instance are replicated to disks in both zones before a transaction is reported as committed. In the event of an instance or zone failure, the persistent disk is attached to the standby instance, and it becomes the new primary instance.
+
+**Note:** failover **takes some time**, [3 minutes is stated in](https://cloud.google.com/sql/docs/mysql/high-availability) for client reconnection!!!
 
 Automated and on-demand backups with point-in-time recovery are provided.
 
@@ -686,7 +768,20 @@ More info [here](https://cloud.google.com/database-migration/docs) and [here](ht
 
 A fully-managed petabyte-scale data warehouse for large amounts of relational structured data optimized for large-scale, ad-hoc SQL-based analysis and reporting. Aimed at data analysts and data scientists, can quickly query and filter large datasets, aggregate results, and perform complex operations (supports a standard SQL dialect that is ANSI-compliant). 
 
-Can use [partitioned tables](https://cloud.google.com/bigquery/docs/partitioned-tables) to improve query performance, and you can control costs by reducing the number of bytes read by a query.
+Can use [partitioned tables](https://cloud.google.com/bigquery/docs/partitioned-tables) to improve query performance, and you can control costs by reducing the number of bytes read by a query as well as delete data after some time. Ppartitioning can be by:
+- time-unit column
+- ingestion time
+- integer range
+
+Some usefull predefined IAM roles when dealing with BigQuery:
+- **admin** - manage everything, view data, cancel other jobs
+- **user** - ability to run jobs, enumerate datasets within a project, allows the creation of new datasets within the project
+- **jobUser** - run jobs within the project
+- **dataViewer** - read data
+- **dataEditor** - read/update data, delete tables/views/datasets
+- **dataOwner** - read/update/share data, delete tables/views/datasets
+
+In addition IAM roles can be assigned on usual organization/folder/project level but also on **dataset** level and on **table or view** level.
 
 More info [here](https://cloud.google.com/bigquery/docs/) and [sketchnote](https://thecloudgirl.dev/bigquery.html).
 
@@ -695,15 +790,16 @@ Also contains some prebuild public data sets that can be used, more info [here](
 
 #### Dataflow
 
-Fully managed service for transforming and enriching data, stream and batch modes based on **Apache Beam**.
+Fully managed service for reliable, **exactly-once**, **low-latency** transforming and enriching of data before it is loaded into a data warehouse, stream and batch modes based on **Apache Beam**.
 
 Supports fast, simplified pipeline development via expressive SQL, Java and Python APIs in the Apache Beam SDK, provides a rich set of windowing and session analysis primitives, as well as an ecosystem of source and sync connectors.
 
 Also tightly coupled with other GCP services, can set up priority alerts and notifications to monitor our pipeline and the quality of data coming in (Pub/Sub, Datastore, Apache Avro, Apache Kafka) and out (BigQuery, AI platform, Bigtable).
 
-Charged per second job takes to complete.
+Can do both batch and live (real-time) processing and is charged per second job takes to complete.
 
 More info [here](https://cloud.google.com/dataflow/docs/) and [sketchnote](https://thecloudgirl.dev/dataflow.html).
+
 
 #### Datastream
 
@@ -719,7 +815,7 @@ More info [here](https://cloud.google.com/datastream/docs) and [sketchnote](http
 
 #### Dataprep
 
-Data service for visually exploring, cleaning and preparing structured and unstructured data for analysis reporting and machine learning (integrated partner service operated by **Trifacta/Trifacta Wrangler**). Serverless and works at any scale, there's no infrastructure to deploy or manage. 
+Data service for visually exploring, **cleaning** and **preparing** structured and unstructured data for analysis reporting and machine learning (integrated partner service operated by **Trifacta/Trifacta Wrangler**). Serverless and works at any scale, there's no infrastructure to deploy or manage. 
 
 More info [here](https://cloud.google.com/dataprep/docs/) and [sketchnote](https://thecloudgirl.dev/dataprep.html).
 
@@ -733,7 +829,8 @@ More info [here](https://cloud.google.com/dataproc/docs/) and [sketchnote](https
 
 #### Pub/Sub
 
-Asynchronous global messaging service. 
+Asynchronous, global, [at-least once](https://cloud.google.com/pubsub/docs/subscriber#default-properties), [ordered delivery (optional, by ordering key and same region)](https://cloud.google.com/pubsub/docs/ordering) messaging service. Can be [exactly-once](https://cloud.google.com/pubsub/docs/exactly-once-delivery) within region and with pull subscription(s) only!
+
 
 A **topic** is a shared string that allows applications to connect with one another through a common thread.
 
@@ -749,6 +846,14 @@ More info [here](https://cloud.google.com/pubsub/docs/) and [sketchnote](https:/
 
 There is also a Pub/Sub Lite which is cheaper zonal Pub/Sub, more info [here](https://cloud.google.com/pubsub/lite/docs/) and [sketchnote](https://thecloudgirl.dev/gcpsketchnote4.html).
 
+#### Cloud Composer
+
+Fully managed workflow service that can author, schedule, and monitor pipelines that span across clouds and on-premises data centers, based on **Apache Airflow**.
+
+A Cloud Composer task, when started with automated commands, uses Cloud Identity-Aware Proxy for security, controls processing, and manage storage with Cloud Storage bucket.
+
+More info [here](https://cloud.google.com/composer/docs/) and [sketchnote](https://thecloudgirl.dev/Composer.html)
+
 #### Rest
 
 - [Cloud SQL Insights](https://cloud.google.com/sql/docs/postgres/using-insights) - SQL insights
@@ -757,7 +862,6 @@ There is also a Pub/Sub Lite which is cheaper zonal Pub/Sub, more info [here](ht
 - [BigQuery GIS](https://cloud.google.com/bigquery/docs/gis) - geospatial functions/support
 - [BigQuery Data Transfer Service](https://cloud.google.com/bigquery-transfer/docs) - automated data ingestion service.
 - [Connected Sheets](https://cloud.google.com/bigquery/docs/connected-sheets) - spreadsheet interface for (big)data
-- [Cloud Composer](https://cloud.google.com/composer/docs/) - workflow orchestration based on **Apache Airflow** and [sketchnote](https://thecloudgirl.dev/Composer.html)
 - [Cloud Data Fusion](https://cloud.google.com/data-fusion/docs/) - graphically manage data pipelines
 - [Data Catalog](https://cloud.google.com/data-catalog/docs/) - metadata management service
 - [Google Data Studio](https://datastudio.google.com/overviewdocs/) - collaborative data exploration/dashboarding
@@ -839,6 +943,8 @@ Managed network address translation service, so that resources without public IP
 
 More info [here](https://cloud.google.com/nat/docs/overview/) and [sketchnote](https://thecloudgirl.dev/cloudnat.html).
 
+**Note**: to entirely restrict ability to have external address use [organization policy (constraints/compute.vmExternalIpAccess)](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#disableexternalip).
+
 #### Cloud Armor
 
 Google provides Infrastructure DDoS support through global load balancers at level 3 and level 4 traffic.
@@ -896,6 +1002,8 @@ There are different Cloud Interconnect and peering services available to connect
 - Dedicated Interconnect - Dedicated Layer 2
 - Partner Interconnect - Shared Layer 2
 
+Direct peering allows customers to connect their networks to a Google network point of access and exchange Border Gateway Protocol (BGP) routes, which define paths for transmitting data between networks. 
+
 [Sketchnote](https://thecloudgirl.dev/networkconnectivity.html) about network connectivity options.
 
 ##### Dedicated Interconnect
@@ -907,6 +1015,12 @@ Enables transfer of large amounts of data between networks, which can be more co
 In order to use Dedicated Interconnect, need to provision a cross connect between the Google network and own router in a common colocation facility.
 
 Dedicated Interconnect can be configured to offer a 99.9% or a 99.99% uptime SLA with 10 Gbps per link (100 Gbps in beta).
+
+Main benefits:
+- Traffic between on-premises network and your VPC network doesn't traverse the public Internet, meaning fewer hops and less points of failure
+- VPC network's internal (RFC 1918) IP addresses are directly accessible from on-premises network, no need to use a NAT device or VPN tunnel
+- You can scale your connection, delivered over one or more 10 Gbps Ethernet connections, with a maximum of eight connections (80 Gbps total).
+- Cost of egress traffic from VPC network to on-premises network is reduced, dedicated connection is generally the least expensive method if you have a high-volume of traffic
 
 More info [here](https://cloud.google.com/interconnect/docs/details/dedicated).
 
@@ -947,6 +1061,8 @@ Global load balancers sit in Google's point of presence and are distributed glob
 - TCP proxy load balancers - used for external TCP traffic without SSL offload (need global or IPv6 but don't need to preserve client IPs)
 
 Want to use a global load balancer when users and instances are globally distributed and want to provide access using a single anycast IP address.
+
+**Note:** All global load balancers require the Premium Tier network, which routes all data over the Google global network and not the public Internet. 
 
 The regional load balancers are: 
 - internal load balancer (**Andromeda** - GCP's software-defined network virtualization stack) - used for internal TCP/UDP traffic
@@ -1034,16 +1150,37 @@ Proxy-based regional Layer 7 load balancer that also enables running and scalein
 
 Internal HTTPS load balancing is a managed service based on the open source **Envoy** proxy and enables rich traffic control capabilities based on HTTPS parameters. 
 
+#### Network endpoint group
+
+A configuration object that specifies a group of backend endpoints or services. Resources that represent collections of either IP addresses or IP address/port combinations for Google Cloud resources
+
+NEGs are useful because they allow you to create logical groupings of IP addresses and ports representing software services instead of entire VMs. In addition the enable designing serverless backend endpoints for external HTTP(S) Load Balancing.
+
+Can be:
+- Zonal NEG
+- Internet NEG
+- Serverless NEG
+- Hybrid connectivity NEG
+- Private Service Connect NEG
+
+
+
+More info [here](https://cloud.google.com/load-balancing/docs/negs).
+
 #### Cloud CDN
 
 Content Delivery Network uses Google's globally distributed edge points of presence to cache HTTP(S) load-balanced content close to users. Can be enabled with a simple checkbox when setting up the backend service of HTTP(S) load balancer. 
+
+It can even serve content from external backends (on-premise/another cloud) also called custom origins, the content URL is masked and the origin must be accessible only by the CDN service not the end user.
 
 Cache modes control the factors that determine whether or not Cloud CDN caches content:
 - **USE_ORIGIN_HEADERS** - requires origin responses to set valid cache directives and valid caching headers
 - **CACHE_ALL_STATIC** - in addition to responses that set valid caching directives, it automatically caches static content that doesn't have the no-store, private, or no-cache directive
 - **FORCE_CACHE_ALL** - unconditionally caches responses, overriding any cache directives (dangerous if dynamic content is produced by the origin)
 
-More info [here](https://cloud.google.com/cdn/docs/) and [sketchnote](https://thecloudgirl.dev/CDN.html).
+By default, Cloud CDN includes all components of the request URI in cache keys but this behaviour can be customized (e.g. remove protocol from cache keys).
+
+More info [here](https://cloud.google.com/cdn/docs/) and [sketchnote](https://thecloudgirl.dev/CDN.html) and [best practices](https://cloud.google.com/cdn/docs/best-practices).
 
 #### VPC Service Controls
 
@@ -1055,16 +1192,30 @@ More info [here](https://cloud.google.com/vpc-service-controls/).
 
 #### Network Intelligence Center
 
-Google Cloud service that can be used to visualize your VPC network's topology and test network connectivity.
+Google Cloud service that can be used to visualize your VPC network's topology and test network connectivity as well as monitor and troubleshoot, divided into modules:
+- **Network Topology** - Visualize the topology of your Virtual Private Cloud (VPC) networks and their associated metrics 
+- **Connectivity Tests** - Test network connectivity to and from your VPC network
+- **Performance Dashboard** - View packet loss and latency between zones where you have VMs
+- **Firewall Insights** - View usage for your VPC firewall rules and optimize their configuration (metrics available only if Firewall Rules Logging is enabled)
+- **Network Analyzer** - View network and service issues, insights, and best practice recommendations from automatic discoveries
+
 
 More info [here](https://cloud.google.com/network-intelligence-center/docs/) and [sketchnote](https://thecloudgirl.dev/nic.html).
+
+
+
+
+#### Traffinc Director 
+
+Fully managed traffic control plane for service mesh. Can easily deploy global load balancing across clusters and VM instances in multiple regions, offload health checking from service proxies, and configure sophisticated traffic control policies. It uses open xDS APIs to communicate with the service proxies in the data plane, thus avoiding locking down into proprietary interface.
+
+More info [here ](https://cloud.google.com/traffic-director/docs/) and [sketchnote](https://thecloudgirl.dev/trafficdirector.html)
 
 #### Rest
 
 - [Cloud DNS](https://cloud.google.com/dns/docs/) - programmable DNS serving and [sketchnote](https://thecloudgirl.dev/CloudDNS.html)
 - [Cloud Router](https://cloud.google.com/router/docs/) - VPC/on-prem network route exchange (BGP)
 - [Network Telemetry](https://cloud.google.com/vpc/docs/using-flow-logs/) - network telemetry service
-- [Traffic Director](https://cloud.google.com/traffic-director/docs/) - service mesh traffic management and [sketchnote](https://thecloudgirl.dev/trafficdirector.html)
 - [Cloud Domains](https://cloud.google.com/domains/docs/) - register, transfer, manager domains
 - [Service Directory](https://cloud.google.com/service-directory/docs) - centrally publish/discover/connect services and [sketchnote](https://thecloudgirl.dev/servicedirectory.html)
 - [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) - privately connect services across VPCs
@@ -1176,11 +1327,17 @@ A suite of tools that can be used to manage operating systems for large VM group
 
 More info [here](https://cloud.google.com/compute/docs/vm-manager).
 
+#### Cloud Deployment Manager
+
+Infrastructure deployment service that automates the creation and management of Google Cloud resources using flexible template and configuration files to create deployments that have a variety of Google Cloud services.
+
+More info [here](https://cloud.google.com/deployment-manager/docs/).
+
 #### Rest 
 
 - [Cloud APIs](https://cloud.google.com/apis/docs/) - APIs for cloud services
 - [Cloud Billing and it API](https://cloud.google.com/billing/docs/) - (programmatically) manage Google Cloud billing and cost
-- [Cloud Deployment Manager](https://cloud.google.com/deployment-manager/docs/) - templated infrastructure deployment
+deployment
 - [Private Catalog](https://cloud.google.com/private-catalog/docs/) - internal solutions catalog.
 - [Carbon Footprint](https://cloud.google.com/carbon-footprint/docs) - Report and reduce carbon emissions.
 
@@ -1201,6 +1358,12 @@ Execution, dispatch and delivery of a large number of distributed tasks that wor
 
 More info [here](https://cloud.google.com/tasks/docs/).
 
+#### App Engine Cron Service
+
+Configure regularly scheduled tasks that operate at defined times or regular intervals, e.g. send out a report email on a daily basis, or update some cached data every 10 minutes, etc. A cron job will invoke a URL, using an HTTP GET request that is subject to the same limits as other HTTP requests.
+
+More info [here](https://cloud.google.com/appengine/docs/flexible/scheduling-jobs-with-cron-yaml).
+
 #### Rest
 
 - [Eventarc](https://cloud.google.com/eventarc/docs/) - event-driven Cloud Run services
@@ -1213,7 +1376,7 @@ See [sketchnote](https://thecloudgirl.dev/apimanagement.html) about API manageme
 
 #### Cloud Endpoints
 
-An API management gateway that helps develop, deploy, and manage APIs (OpenAPI or gRPC) on any Google Cloud backend. Provides functionality to protect and monitor public APIs, control who has access, using, for example, Auth0 and validate every call with a JSON Web Token signed with the service account private key.
+An API management gateway that helps develop, deploy, and manage APIs (OpenAPI or gRPC) on any Google Cloud backend (*no external/on-premise endpoints*). Provides functionality to protect and monitor public APIs, control who has access, using, for example, Auth0 and validate every call with a JSON Web Token signed with the service account private key.
 
 Backend can be:
 - App Engine
@@ -1225,12 +1388,14 @@ Backend can be:
 
 In addition can transcode RESTful JSON over HTTP into gRPC requests.
 
+Unlike Apigee, doesn't support monetization and hybrid.
+
 More info [here](https://cloud.google.com/endpoints/docs).
 
 #### Apigee API Platform
 
 Native API management to operate APIs with enhanced scale, security, and automation that can:
-- build APIs with backends from any app, system, or service (including ones not hosted on Google Cloud with Apigee Hybrid)
+- build APIs with backends from any app, system, or service (including ones *not* hosted on Google Cloud with Apigee Hybrid)
 - secure every API transaction 
 - monitor and analyze traffic
 - create API products to generate new revenue streams
@@ -1243,7 +1408,9 @@ Also can enable inteligent protection against bot attacks and similar using [Api
 
 Fully managed API Gateway 
 
-Provides secure access to backend services through a well-defined REST API that is consistent regardless of the service implementation. 
+Provides secure access to backend services through a well-defined REST API that is consistent regardless of the service implementation. Meant to be for for serverless back ends only,
+
+Unlike Apigee, doesn't support monetization and hybrid.
 
 More info [here](https://cloud.google.com/api-gateway/docs).
 
@@ -1264,9 +1431,21 @@ More info [here](https://cloud.google.com/sdk/docs/) and [cheatsheet](https://cl
 
 And [gcloud command line cheatsheet](cheatsheets.md#gcloud), [gsutil command line cheatsheet](cheatsheets.md#gsutil) and [bq command line cheatsheet](cheatsheets.md#bq).
 
+`gsutil` has `.boto` configuration file that is usually configured for:
+- setting up gsutil to work through a proxy
+- using customer-managed or customer-supplied encryption keys
+- performing specialized customization of global gsutil behavior
+
+**Note**: there seems to be parts of the CLI that are not available in UI like e.g. [recommender](https://cloud.google.com/sdk/gcloud/reference/recommender/recommendations/list) which for example can be used to list idle VMs.
+
+**Note**: In some use cases, e.g. Cloud Storage lifecycle management, `gsutil` accepts only JSON input while both XML and JSON can be used for similar functionality when Cloud APIs are used.
+
+
 #### Cloud Shell
 
 Cloud Shell is an interactive shell environment for Google Cloud executed on a VM instance accessed via web browser. It has Google Cloud CLI and other utilities pre-installed and comes with a built-in code editor allowing one to develop, build, debug, and deploy cloud-based apps entirely in the cloud.
+
+It provisions 5 GB of persistent disk storage mounted as $HOME directory on the instance so files stored in your home directory (including scripts and user configuration files like .bashrc and .vimrc) persist between sessions.
 
 More info [here](https://cloud.google.com/shell/docs/).
 
@@ -1373,6 +1552,12 @@ In short, there are three major types of migrations:
 - Lift and shift - move without (or with minor) improvement, e.g. on site Kubernetes to GKE
 - Improve and move - modernize (take advantage of cloud-native capabilities) the workload while migrating, e.g. (on-site) Kubernetes to Cloud Rub 
 - Remove and replace (sometimes called rip and replace) - ompletely redesign and rewrite whole application or some of its parts as a cloud-native app
+
+To migrate VM(s) it is recommend to:
+- **Assess** - assess your source environment, assess the workloads and assess which VMs support each workload
+- **Plan** - create the basic infrastructure such as provisioning the resource hierarchy and setting up network access
+- **Deploy** - migrate the VMs from the source environment to Compute Engine
+- **Optimize** - begin to take advantage of the cloud technologies and capabilities
 
 #### Cloud Data Transfer
 
@@ -1496,13 +1681,27 @@ To minimize the potential risk caused by unmanaged keys, use **Cloud Key Managem
 
 Access scopes are a legacy method of specifying permissions for a VM, before the existence of IAM roles. It is now prederred to use IAM roles for user created service accounts. Scopes are used to determine whether an authenticated identity is authorized. Scopes can be customized when creating an instance using the default service account (Storage, BigQuery, etc...).
 
+**Activity Analyzer** can be use to see when service accounts and keys were last used to call a Google API. 
+
+**Service account insights** can be used to find service accounts that have not been used for the past 90 days.
+
+Cloud Monitoring can provide usage metrics for service accounts and service account keys.
+
+**Note**: service account can also be used from services external to Google Cloud, download a service account key when creating the service account and then use that key from the external process to call the Cloud Platform APIs.
+
 More info about service accounts [here](https://cloud.google.com/iam/docs/understanding-service-accounts).
+
+#### Cloud Audit Logs
+
+Place where majority of [Google Cloud services](https://cloud.google.com/logging/docs/audit/services) write audit logs that record administrative activities and accesses within Google Cloud resources. Logs can help answer "who did what, where, and when?". They help security, auditing, and monitoring for possible vulnerabilities or external data misuse and it is recommended for them to be enabled.
+
+More info [here](https://cloud.google.com/logging/docs/audit/).
 
 #### Cloud Identity
 
 Managed Identity as a Service (IDaaS). An administrator can use Cloud Identity to manage users, apps, and devices from a central location.
 
-**Cloud Directory Sync** synchronizes (one way, origin is never modified) users and groups from existing active directory or LDAP system with users and groups in Cloud Identity domain. 
+**Cloud Directory Sync** can synchronize (one way, origin is never modified) users and groups from existing active directory or LDAP system with users and groups in Cloud Identity domain. 
 
 Can continue using existing system and processes with SSO configured. When authentication is required, Google will redirect to existing system. If the user is authenticated in existing system, access to Google Cloud is given. Otherwise, the user is prompted to sign in. If existing authentication system supports SAML 2 SSO, configuration is as simple as three links and a certificate.
 
@@ -1544,11 +1743,13 @@ More info [here](https://cloud.google.com/binary-authorization/docs/).
 
 #### Security standards
 
-Important security standards and compliance: 
-- [PCI DSS](https://cloud.google.com/security/compliance/pci-dss)
-- [HIPAA](https://cloud.google.com/security/compliance/hipaa)
+Important security standards and compliance (Google complies with standards but meed to make sure application meets them too): 
+- [PCI DSS](https://cloud.google.com/security/compliance/pci-dss) and some more info [here](https://www.sans.org/reading-room/whitepapers/compliance/ways-reduce-pci-dss-audit-scope-tokenizing-cardholder-data-33194 ) about tokenizing data to reduce compliance scope
+- [HIPAA](https://cloud.google.com/security/compliance/hipaa) - covering Google Cloud's **entire** infrastructure, at the **same** pricing (other public clouds charge more money for their HIPAA cloud), HIPAA and HITECH apply to protected healthcare data
 - [COPPA](https://cloud.google.com/security/compliance/coppa)
-- [GDPR](https://cloud.google.com/privacy/gdpr)
+- [GDPR](https://cloud.google.com/privacy/gdpr) - private data protection in Europe
+- COPPA - collect personal information of children under 13 in the United States
+- SOX - financial data
 
 #### Rest
 
@@ -1556,7 +1757,6 @@ Important security standards and compliance:
 - [Assured Workloads](https://cloud.google.com/assured-workloads/docs) - workload compliance controls
 - [Certificate Authority Service](https://cloud.google.com/certificate-authority-service/docs) - managed private CAs
 - [Cloud Asset Inventory](https://cloud.google.com/asset-inventory/docs/overview) - all assets, one place
-- [Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/) - audit trails for Google Cloud
 - [Cloud HSM](https://cloud.google.com/kms/docs/hsm/) - hardware security module service
 - [Cloud External Key Manager (EKM)](https://cloud.google.com/kms/docs/ekm/) - controlling external keys
 - [Cloud Key Management Service](https://cloud.google.com/kms/docs/) - hosted key management service
@@ -1572,7 +1772,7 @@ Important security standards and compliance:
 - [BeyondCorp Enterprise](https://cloud.google.com/beyondcorp-enterprise/docs) - zero trust secure access and [sketchnote](https://thecloudgirl.dev/zerotrustbeyondcorp.html).
 - [Access Context Manager](https://cloud.google.com/iap/docs/cloud-iap-context-aware-access-howto/) - end-user attribute-based access control
 - [Access Context Manager](https://cloud.google.com/access-context-manager/docs) - fine-grained, attribute based access-control
-- [Web Security Scanner](https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview) - identifies web-app security vulnerabilities
+- [Web Security Scanner](https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview) - identifies web-app security vulnerabilities (scans for OWASP, CIS GCP Foundation, PCI-DSS (and more) published findings)
 - [Web Security Scanner](https://cloud.google.com/security-scanner/docs/) - app engine security scanner
 
 
@@ -1587,6 +1787,8 @@ Important security standards and compliance:
 - [Migrate for Anthos and GKE](https://cloud.google.com/migrate/anthos/docs/getting-started) - migrate VMs to GKE
 - [Traffic Director](https://cloud.google.com/traffic-director/docs/) - service mesh traffic management
 
+
+See [Hybrid and multi-cloud network topologies](https://cloud.google.com/architecture/hybrid-and-multi-cloud-network-topologies) too.
 
 ### AI and ML
 
@@ -1618,7 +1820,7 @@ See [sketchnote](https://thecloudgirl.dev/datascience.html) about data science i
 - [Document AI](https://cloud.google.com/document-understanding/docs/) - analyze, classify, search documents
 - [Recommendations AI](https://cloud.google.com/recommendations-ai/docs/) - create custom recommendations
 - [Talent Solutions](https://cloud.google.com/job-discovery/docs/) - job search with ML
-- [Cloud Video Intelligence API](https://cloud.google.com/video-intelligence/docs/) - scene-level video annotation
+- [Cloud Video Intelligence API](https://cloud.google.com/video-intelligence/docs/) - scene-level video annotation (pre-trained model for the recognition of items,  places, and actions)
 - [Cloud Vision](https://cloud.google.com/vision/docs/) - image recognition and classification
 - [Vision Product Search](https://cloud.google.com/vision/product-search/docs/) - visual search for products
 

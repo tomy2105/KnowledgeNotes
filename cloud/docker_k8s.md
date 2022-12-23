@@ -98,6 +98,14 @@ When a container runs, it also has a writable ephemeral topmost layer, all chang
 
 Containers use Linux cgroups to control what an application can use, its maximum consumption of CPU time, memory, IO bandwidth, and other resources.
 
+### Container deployment speed
+
+The speed of deployment can be changed by limiting the size of the uploaded container, limiting the complexity of the build necessary in the Dockerfile (which influnces structure and number of layers), if present, and by ensuring a fast and reliable internet connection.
+
+Thus using "smaller" base image like Alpine Linux instead of full blown Ubuntu or Debian can help.
+
+In addition placing application code files generation **after** installing dependencies in Dockerfile helps too because application’s dependencies change less frequently than the application code which will help to reuse the cached layer of dependency and only add new layer for application code changes.
+
 See [docker command line cheatsheet](cheatsheets.md#docker).
 
 
@@ -210,6 +218,8 @@ The level of access a service provides to a set of pods depends on the Service's
 
 **Pod Disruption Budgets (PDB)** define how to handle disruptions like upgrades, pod removals, running out of resources, etc.... Specify the max-unavailable and/or the min-available number of pods a deployment should have.
 
+**Ingress** encapsulates a collection of rules and configurations for routing external HTTP(S) traffic to internal services.
+
 ### Affinities
 
 **Pod Anti Affinity** ensures that the pod is not scheduled on the same node as some other pod.
@@ -312,4 +322,4 @@ Shadow testing has many key benefits. Since the traffic is duplicated, any bugs 
 - [Google Cloud Skills Boost](https://www.cloudskillsboost.google/)
 - [Docker Documentation](https://docs.docker.com/)
 - [Kubernetes Documentation](https://kubernetes.io/docs/home/)
--
+- [Patterns for scalable and resilient apps](https://cloud.google.com/architecture/scalable-and-resilient-apps)
