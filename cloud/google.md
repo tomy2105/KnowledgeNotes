@@ -197,6 +197,8 @@ For more info about hierarchy click [here](https://cloud.google.com/resource-man
 
 **Note:** Each resource has exactly one parent and [Cloud IAM](#cloud-iam) roles granted to parent are inherited by all children! For more info related to resource security [see Cloud IAM](#cloud-iam).
 
+**Note:** Folders are allowed to be stacked ten high.
+
 **Labels** are key value pairs that can be attached to a resources and are utility for organizing resources providing more granularity than projects and folders. Can also be used in scripts to help analyze costs or for run bulk operations on multiple resources.
 
 ### Billing
@@ -283,11 +285,15 @@ All vCPUs, GPUs, and GB of memory are charged a minimum of 1 minute. After 1 min
 
 More info [here](https://cloud.google.com/compute/docs/) and [sketchnote](https://thecloudgirl.dev/gcpsketchnote2.html).
 
+##### OS Login
+
+A mechanism to simplify SSH access management by linking SSH users in Linux to their respective Google identities in Cloud Identity.
+
 ##### Preemptible and Spot VMs
 
 Preemptible and Spot VMs are virtual machine instances that use excess CPU capacity and **significant (60-90%) discounts**, but they might be stopped or deleted preemptively when capacity needs to be reclaimed. Should be used to reduce costs for fault-tolerant workloads that can tolerate being prematurely stopped.
 
-If the instance does not stop after **30 seconds**, compute engine sends an ACPI G3 Mechanical Off signal to the operating system!!!
+If the instance does not stop after **30 seconds**, compute engine sends an ACPI G3 Mechanical Off signal to the operating system!!! To ensure graceful shutdowns, it’ s recommended to leverage shutdown scripts.
 
 More info [here](https://cloud.google.com/compute/docs/instances/preemptible) and [here](https://cloud.google.com/compute/docs/instances/spot)
 
@@ -723,6 +729,9 @@ A Cloud Spanner instance replicates data in end cloud zones which can be within 
 
 The replication of data is synchronized across zones using Google's global fiber network and usage of atomic clocks ensures atomicity when updating data. 
 
+The ability to add nodes is what makes Cloud Spanner horizontally scalable, each node supports up to 4TB (used to be 2TB) of storage, and its performance is based on the instance configuration, schema design, and dataset characteristics. As an estimate, each Cloud Spanner node can provide up to 7000 (+3500 with read replicas) read queries per second and 1800/1000 write queries per second (depends on regions). 
+
+
 **Note**: Traditional SQL databases usually use numerical primary keys in a sequence. Distributed databases do not use progressive keys, because the tables are split among the nodes in primary key order and therefore all the inserts would take place only at one point, degrading performance (**hotspotting**).
 
 More info [here](https://cloud.google.com/spanner/docs/) and [sketchnote](https://thecloudgirl.dev/spanner.html).
@@ -1062,7 +1071,7 @@ Global load balancers sit in Google's point of presence and are distributed glob
 
 Want to use a global load balancer when users and instances are globally distributed and want to provide access using a single anycast IP address.
 
-**Note:** All global load balancers require the Premium Tier network, which routes all data over the Google global network and not the public Internet. 
+**Note:** All global load balancers require the Premium Tier network, which routes all data over the Google global network and not the public Internet. With Standard Tier network only regional ones.
 
 The regional load balancers are: 
 - internal load balancer (**Andromeda** - GCP's software-defined network virtualization stack) - used for internal TCP/UDP traffic
@@ -1272,13 +1281,43 @@ Four golden signals in metrics:
 
 Centralized logging service allows to store, search, analyze, monitor, and alert on log data and events from GCP an AWS. It includes storage for logs, a user interface called the log viewer, and an API to manage logs programmatically.
 
-Logs are only retained for 30 days, but can be exported to Cloud Storage buckets, BigQuery datasets and Cloud Pub/Sub topics.
+Logs are stored, by default, with 30-day (400-day) retention period based on the log type, some are customizable up to a 3650-days. Preferred way is to store logs in Cloud Storage for long-term retention and use BigQuery for analysis and/or Cloud Pub/Sub topics.
 
 To visualize logs connect BigQuery tables to Data Studio, it transforms raw data into the metrics and dimensions that can be used to create easy to understand reports and dashboards.
 
 Similar to monitoring agent, it's a best practice to install the logging agent on all of VM instances.
 
 More info [here](https://cloud.google.com/logging/docs/).
+
+#### Admin Activity Audit Logs
+
+Audit logs come Cloud Identity that contain administrative activity and user activity in the Cloud Identity platform and include things like
+account creation, deletion, authentication, configuration modifications to your identity provider (IdP), password changes, and so on.
+
+##### Cloud Audit Logs
+
+Consist of:
+- **Administrative activity audit** logs - contain log entries for API calls or any other user administrative modifications to configurations or
+resource metadata
+- **Data access audit** logs - contain log entries for API calls that read resource configurations, metadata, or read/write user-based API
+calls (disabled by default, do not log publicly shared resources)
+- **System event audit** logs - contain log entries for administrative activity that modifies resource configurations based on activity generated
+by Google systems and not user-based activity
+
+##### Network Logs
+
+Consist of: 
+- **VPC flow** logs - provide visibility into VPC traffic and capture TCP and UDP traffic to and from internal traffic, network attachments,
+servers to Internet endpoints, and servers to Google APIs
+- **DNS** logs - record every DNS query received from VM instances and inbound forwarding flows within your networks
+- **Cloud NAT** logs - provide context into NAT connections and errors
+- **Firewall** logs - provide connection records for TCP and UDP traffic only, contain things like source and destination IPs, protocols, ports, times, and so on
+
+##### Access Transparency Logs
+
+Provide insight behind the scenes when a Google Cloud Support engineer had accessed parts of your infrastructure and for what purpose. Give organizations the ability to know what exactly is going on behind the scenes of their Cloud Platform and having an audit trail to do so.
+
+More info [here](https://cloud.google.com/logging/docs/audit/access-transparency-overview/).
 
 #### Error Reporting
 
@@ -1309,6 +1348,10 @@ More info [here](https://cloud.google.com/profiler/docs/).
 Debugger is a live production debugging service that can inspect the state of a running application in real time without stopping it. The debugger adds less than 10 milliseconds to the request latency when the application state is captured and supports multiple languages, including Java, Python, Go, Node.js, and Ruby.
 
 More info [here](https://cloud.google.com/debugger/docs/).
+
+#### Uptime Checks
+
+Uptime checks are pings that are sent to a resource to see if they respond. Leverage uptime checks to monitor the availability of VM instances, App Engine services, public websites, and even AWS load balancers. 
 
 ### Management Tools
 
@@ -1751,17 +1794,46 @@ Important security standards and compliance (Google complies with standards but 
 - COPPA - collect personal information of children under 13 in the United States
 - SOX - financial data
 
+### Cloud Asset Inventory
+
+Metadata inventory service that enables users to keep track of all of their assets in Google Cloud. 
+It is incredibly important for doing governance because it provides visibility of entire infrastructure enabling easier management and deployment of changes across the entire infrastructure. 
+Can be leveraged to scan infrastructure for changes, to deploy certain policies across the stack, or to audit for compliance.
+
+More info [here](https://cloud.google.com/asset-inventory/docs/overview).
+
+### Security Command Center
+
+Security and risk management platform that provides visibility into various security elements. It does this by being connected directly to the Cloud Asset Inventory service and continuously analyzing for changes by various tools.
+
+More info [here](https://cloud.google.com/security-command-center/docs/).
+
+#### Cloud Threat Detection
+
+Provides automated detection of certain threats in GCP through a few of
+its subtools:
+- Event Threat Detection (ETD) - focuses on log-based threats
+- Container Threat Detection (KTD) - focuses on threats in the container runtime
+
+#### Security Health Analytics
+
+Tool focused on vulnerabilities within GCP, will scan the CAI every 12 hours looking for things like open firewall rules or open GCS buckets. 
+Based on a system of scanners to detect certain vulnerabilities. 
+
+#### Web Security Scanner
+
+Scanning public GCP endpoints for web-based vulnerabilities looking for things like XSS vulnerabilities or cleartext password fields, based on the OWASP Top Ten Web Application Security Lists.
+
+More info [here](https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview) and [here](https://cloud.google.com/security-scanner/docs/).
+
 #### Rest
 
-- [Access Transparency](https://cloud.google.com/logging/docs/audit/access-transparency-overview/) - audit cloud provider access
 - [Assured Workloads](https://cloud.google.com/assured-workloads/docs) - workload compliance controls
 - [Certificate Authority Service](https://cloud.google.com/certificate-authority-service/docs) - managed private CAs
-- [Cloud Asset Inventory](https://cloud.google.com/asset-inventory/docs/overview) - all assets, one place
 - [Cloud HSM](https://cloud.google.com/kms/docs/hsm/) - hardware security module service
 - [Cloud External Key Manager (EKM)](https://cloud.google.com/kms/docs/ekm/) - controlling external keys
 - [Cloud Key Management Service](https://cloud.google.com/kms/docs/) - hosted key management service
 - [Resource Manager](https://cloud.google.com/resource-manager/docs/) - project metadata management
-- [Security Command Center](https://cloud.google.com/security-command-center/docs/) - security management and data risk platform
 - [Managed Service for Microsoft Active Directory](https://cloud.google.com/managed-microsoft-ad/docs/) - managed Microsoft Active Directory
 - [Secret Manager](https://cloud.google.com/secret-manager/docs/) - store and manage secrets
 - [Titan Security Key](https://cloud.google.com/titan-security-key/) - two-factor authentication (2FA) device
@@ -1772,8 +1844,6 @@ Important security standards and compliance (Google complies with standards but 
 - [BeyondCorp Enterprise](https://cloud.google.com/beyondcorp-enterprise/docs) - zero trust secure access and [sketchnote](https://thecloudgirl.dev/zerotrustbeyondcorp.html).
 - [Access Context Manager](https://cloud.google.com/iap/docs/cloud-iap-context-aware-access-howto/) - end-user attribute-based access control
 - [Access Context Manager](https://cloud.google.com/access-context-manager/docs) - fine-grained, attribute based access-control
-- [Web Security Scanner](https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview) - identifies web-app security vulnerabilities (scans for OWASP, CIS GCP Foundation, PCI-DSS (and more) published findings)
-- [Web Security Scanner](https://cloud.google.com/security-scanner/docs/) - app engine security scanner
 
 
 ### Hybrid and multi-cloud
