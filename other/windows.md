@@ -44,7 +44,7 @@ Click on the Shortcut tab, and change the Target so it reads: `c:\windows\EXPLOR
 | Shortcut    | What it does |
 |-------------|------------|
 | ALT + Enter | Properties |
-| CTRL + SHIFT + ESC | Task manager |
+| Ctrl + Shift + Esc    |   Open Task Manager |
 | Win + Pause | System Properties |
 | Win + D | Desktop |
 | Win + M | Minimize All |
@@ -55,18 +55,22 @@ Click on the Shortcut tab, and change the Target so it reads: `c:\windows\EXPLOR
 | Win + D | Display and hide the desktop |
 | Win + Alt + D | Display and hide the date and time on the desktop |
 | Win + I | Settings |
-| Win + V | Cycle through notifications (+Shift = Reverse order) |
-| Windows					| 	Show the Windows 10 Start Menu |
-| Windows + Alt + D			| 	Display and hide the date and time on the desktop |
-| Windows + H				| 	Share content (if supported by current app) |
-| Windows + K				| 	Connect to wireless displays and audio devices |
-| Windows + X				| 	Open Start button context menu |
-| Windows + G				| 	Opens the Windows 10 Game Bar to take game screenshots and record gaming videos of Windows 10 games (works in any game app, e.g. Microsoft Solitaire Collection) |
-| Windows + I				| 	Open Windows 10 settings |
-| Windows + A				| 	Open Windows 10 Action Center (e.g. to display notifications and customizable quick actions) |
-| Windows + Pause			| 	System Properties |
-| Windows + P				| 	Project a screen |
-| Windows + Space			| 	Switch keyboard input language (if you have added at least a second one) |
+| Win + V | Clipboard history |
+| Win + . | Emoji picker |
+| Win + Ctrl + V | Cycle through notifications (+Shift = Reverse order) |
+| Win					| 	Show the Windows 10 Start Menu |
+| Ctrl + Arrow keys     |   Change Start menu size |
+| Win + Alt + D			| 	Display and hide the date and time on the desktop |
+| Win + H				| 	activate Windows Voice Typing |
+| Win + H				| 	Share content (if supported by current app) |
+| Win + K				| 	Connect to wireless displays and audio devices |
+| Win + X				| 	Open Start button context menu |
+| Win + G				| 	Opens the Windows 10 Game Bar to take game screenshots and record gaming videos of Windows 10 games (works in any game app, e.g. Microsoft Solitaire Collection) |
+| Win + I				| 	Open Windows 10 settings |
+| Win + A				| 	Open Windows 10 Action Center (e.g. to display notifications and customizable quick actions) |
+| Win + Pause			| 	System Properties |
+| Win + P				| 	Project a screen |
+| Win + Space			| 	Switch keyboard input language (if you have added at least a second one) |
 |  |  |
 | Win + Tab | Open Task view |
 | Win + Ctrl + D | Add a virtual desktop |
@@ -76,8 +80,8 @@ Click on the Shortcut tab, and change the Target so it reads: `c:\windows\EXPLOR
 | Alt + Tab					|   Switch to previous window |
 | Alt + Space				| 	Restore, move, size, minimize, maximize or close current window. Also works like a charm for Windows 10 modern apps. |
 | Alt + F4					|   Close current window, If you’re on your Windows 10 desktop, open Power dialogue to shut down or restart Windows, put your device in sleep mode, sign out or switch the current user  |
-| Windows + Shift + Left/Right arrow		|	Move current Window from one monitor to another (when using a multiple monitor setup) |
-| Windows + Left/Right/Up/Down arrow	|	Position windows on your screen |
+| Win + Shift + Left/Right arrow		|	Move current Window from one monitor to another (when using a multiple monitor setup) |
+| Win + Left/Right/Up/Down arrow	|	Position windows on your screen |
 |  |  |
 | Win + number | open pinned app (+Shift - new instance, +Ctrl, +Alt, +Ctrl+Shift - new instance as admin) |
 | Shift + click a taskbar button | Open an app or quickly open another instance of an app |
@@ -86,8 +90,8 @@ Click on the Shortcut tab, and change the Target so it reads: `c:\windows\EXPLOR
 | Shift + right-click a grouped taskbar button | Show the window menu for the group |
 | Ctrl + click a grouped taskbar button | Cycle through the windows of the group |
 |  |  |
-| Windows + C	|				Search the web and Windows with Cortana (speech) |
-| Windows + S	|				Search the web and Windows with Cortana (keyboard input) |
+| Win + C	|				Search the web and Windows with Cortana (speech) |
+| Win + S	|				Search the web and Windows with Cortana (keyboard input) |
 
 More [here](win-8-shortcuts.png).
 

@@ -14,17 +14,19 @@ Bits and pieces of, mostly, computer programming and development related knowled
 	- [C++23](cpp/cpp23.md)
 	- [Not so obvious C++](cpp/tricky.md)
 	- [Some more links](cpp/links.md)
-- .NET
-    - [C#](csharp_basics.md)
 - Frontend & Hybrid
 	- [HTML & CSS](html_css_js/html5.md)
 	- [Bootstrap](html_css_js/bootstrap.md)
 	- [Javascript](html_css_js/javascript.md)
 	- [AngularJS](html_css_js/angularjs.md)
 	- [Cordova](html_css_js/cordova.md)
-- [Python](python/python.md) 
-- [Swift](swift/swift.md) 
 - Cloud
     - [Microservices, Docker, Kubernetes](cloud/docker_k8s.md)
     - [Google Cloud](cloud/google.md)
-- [Windows tips](other/windows.md) 
+- .NET
+    - [C#](csharp_basics.md)
+- Other
+    - [Python](python/python.md) 
+    - [SQL Server](other/sqlserver.md) 
+    - [Swift](swift/swift.md) 
+    - [Windows tips](other/windows.md) 
