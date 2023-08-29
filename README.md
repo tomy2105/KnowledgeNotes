@@ -30,3 +30,4 @@ Bits and pieces of, mostly, computer programming and development related knowled
     - [SQL Server](other/sqlserver.md) 
     - [Swift](swift/swift.md) 
     - [Windows tips](other/windows.md) 
+	- [Simple GIT commands](other/git.md)
