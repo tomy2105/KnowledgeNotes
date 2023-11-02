@@ -13,11 +13,17 @@
   * [Enable long path support under Windows](#enable-long-path-support-under-windows)
   * [Set Notepad++ as core editor](#set-notepad-as-core-editor)
   * [Rebase instead of merge](#rebase-instead-of-merge)
+  * [Rebase instruction format](#rebase-instruction-format)
   * [Automatically recurse submodules](#automatically-recurse-submodules)
   * [Include/Exclude LFS](#includeexclude-lfs)
 - [Clone](#clone)
   * [Single branch](#single-branch)
   * [Shallow](#shallow)
+- [Worktrees](#worktrees)
+  * [Add worktree](#add-worktree)
+  * [List worktrees](#list-worktrees)
+  * [Remove worktree](#remove-worktree)
+  * [Limitations](#limitations)
 - [Commit](#commit)
   * [Commit all](#commit-all)
   * [Author and date](#author-and-date)
@@ -26,6 +32,7 @@
 - [Pull](#pull)
   * [Merge](#merge)
   * [Rebase](#rebase)
+  * [Pull source](#pull-source)
   * [Pull with submodules](#pull-with-submodules)
   * [Merge via pull](#merge-via-pull)
   * [Shallow](#shallow-1)
@@ -51,6 +58,8 @@
   * [Prune](#prune)
 - [Misc](#misc)
   * [Git commands with bash autocomplete](#git-commands-with-bash-autocomplete)
+  * [See the size of git repository](#see-the-size-of-git-repository)
+  * [List the contents of a git tree](#list-the-contents-of-a-git-tree)
 
 <!-- tocstop -->
 
@@ -136,6 +145,14 @@ Make pull commands rebase instead of merge.
 git config [--system/--global] pull.rebase true
 ```
 
+### Rebase instruction format
+
+Format of lines showing hashes in interactive rebase (format string same as for git log).
+
+```
+git config --add rebase.instructionFormat "(%an <%ae>) %s" 
+```
+
 
 ### Automatically recurse submodules
 
@@ -210,6 +227,51 @@ If want to fetch all branches afterwards:
 git fetch --unshallow
 ```
 
+## Worktrees
+
+By default one local repository clone = one working tree. Cannot simultaneously work on multiple branches (have to switch).
+
+However, multiple clones, in order to work simultaneously, are waste of bandwidth and disk space.
+
+Linked worktrees can be added to main one (having only just .git file and not whole clone folder).
+
+### Add worktree
+
+From existing local branch:
+```
+git worktree add ../some_folder some_branch
+```
+
+From remote branch by creating new local branch:
+```
+git worktree add –b some_branch ../some_folder remotes/origin/some_branch
+```
+
+### List worktrees
+```
+git worktree list
+```
+
+### Remove worktree
+```
+git worktree remove ../some_folder
+```
+
+### Limitations
+
+- One branch = one working tree
+- Action needed to rename/move either main or linked worktrees (path)
+  - Use `git worktree repair` inside main worktree if main was moved
+  - Use `git worktree move` to move linked worktree 
+  - or `git worktree repair` inside linked worktree if linked was already moved
+- Problems with submodules
+  - Submodule cloned repository is still multiplied inside .git
+  - Need to be initialized manually (as if cloned without `–-recursive`)
+  - Worktree cannot be removed if submodules are initialized
+    - `git submodule deinit --all` first
+
+
+
 ## Commit
 
 Create a new commit containing the current contents of the change index (if no specific items are specified).
@@ -231,12 +293,17 @@ git commit --message "Message" --author "tomy2105 <t.petrovic@inet.hr" --date "s
 
 ## Push
 
-Push local changes to the remote. If target is not specified pushes pushes to (simplified, red the help!!!) origin and the corresponding remote branch.
+Push local changes to the remote. If target is not specified pushes pushes to (simplified, read the help!!!) origin and the corresponding remote branch.
+
+```
+git push targetRepository targetBranch
+```
 
 -`--all` - pushes all branches
 -`--prune` - deletes remote branches that don't have local counterparts
 -`--delete` - deletes remote branch
 -`--tags` - pushes all tags
+
 
 ### Submodules
 
@@ -289,6 +356,15 @@ git pull --rebase
 
 F' - commit F replayed on top of C
 G' - commit G replayed on top of F'
+```
+
+### Pull source
+
+One can pull other repositories (like upstram ones) and/or branches into current local one.
+
+```
+git pull origin myBrandNewBranch
+git pull upstream feature/somethingNew
 ```
 
 
@@ -366,6 +442,7 @@ Set with `--pretty` or `--format`, some are:
 
 For descriptions of all formats see [here](https://www.git-scm.com/docs/git-log/#_pretty_formats).
 
+
 ### Show graph
 
 Graph is best combined with some oneline output (otherwise IMHO unreadable).
@@ -412,7 +489,7 @@ git branch -a
 
 And switch to it.
 ```
-git checkout -b newBranchName existingBranchName
+git checkout --track -b newBranchName existingBranchName
 ```
 
 **Note:** using `-B` instead of `-b` overrides (read destroys) local branch `newBranchName` if it exists (along with all its unpushed/unmerged commits).
@@ -442,8 +519,6 @@ To delete remote branch
 ```
 git push -d remoteName branchName
 ```
-
-
 
 ## Large File Storage
 
@@ -541,3 +616,19 @@ git lfs prune
 ```
 apt-get install git-core bash-completion
 ```
+
+### See the size of git repository
+
+```
+git count-objects -vH
+```
+
+### List the contents of a git tree
+
+```
+git ls-tree  -r --name-only HEAD <path>
+```
+
+- `-r` - recursive list, otherwise only current folder
+- `--name-only` - shows only names without hashes
+- `--object-only` - shows only hashes
