@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <tuple>
 
 #define LENGTH 10
 
@@ -14,18 +15,18 @@
 class Dummy
 {
 public:
-    Dummy() 
+    Dummy()
     {
         std::cout << "In Dummy(). this = " << (void*)this << std::endl;
     }
 
-    Dummy(const Dummy& other) 
+    Dummy(const Dummy& other)
     {
         std::cout << "In Dummy(const Dummy&). this = " << (void*)this << std::endl;
     }
 
 #ifdef WITH_MOVE
-    Dummy(const Dummy&& other) 
+    Dummy(const Dummy&& other)
     {
         std::cout << "In Dummy(const Dummy&&). this = " << (void*)this << std::endl;
     }
@@ -62,12 +63,12 @@ public:
         , _dummy("Test")
     {
         std::cout << "Created resource " << (void*)_data << std::endl;
-        std::cout << "In MemoryMoveBlock(). this = " << (void*)this << " data = " << (void*) _data << "." << std::endl;
+        std::cout << "In MemoryMoveBlock(). this = " << (void*)this << " data = " << (void*)_data << "." << std::endl;
     }
 
     ~MemoryMoveBlock()
     {
-        std::cout << "In ~MemoryMoveBlock(). this = " << (void*)this << " data = " << (void*) _data << "." << std::endl;
+        std::cout << "In ~MemoryMoveBlock(). this = " << (void*)this << " data = " << (void*)_data << "." << std::endl;
 
         if (_data != nullptr)
         {
@@ -81,7 +82,7 @@ public:
         , _dummy(other._dummy)
     {
         std::cout << "Created resource " << (void*)_data << std::endl;
-        std::cout << "In MemoryMoveBlock(const MemoryMoveBlock&). this = " << (void*)this << " data = " << (void*) _data << ". Copying resource." << std::endl;
+        std::cout << "In MemoryMoveBlock(const MemoryMoveBlock&). this = " << (void*)this << " data = " << (void*)_data << ". Copying resource." << std::endl;
 
         std::copy(other._data, other._data + LENGTH, _data);
     }
@@ -91,14 +92,14 @@ public:
         : _data(std::exchange(other._data, nullptr))              // explicit move of a member of non class type (note that std::exchange is c++14)
         , _dummy(std::move(other._dummy))              // explicit move of a member of class type
     {
-        std::cout << "In MemoryBlock(MemoryBlock&&). this = " << (void*)this << " data = " << (void*) _data << ". Moved resource." << std::endl;
-        std::cout << "After MemoryBlock(MemoryBlock&&). other = " << (void*)&other << " data = " << (void*)other._data <<  std::endl;
+        std::cout << "In MemoryBlock(MemoryBlock&&). this = " << (void*)this << " data = " << (void*)_data << ". Moved resource." << std::endl;
+        std::cout << "After MemoryBlock(MemoryBlock&&). other = " << (void*)&other << " data = " << (void*)other._data << std::endl;
     }
 
     MemoryMoveBlock& operator=(MemoryMoveBlock&& other)
     {
-        std::cout << "In operator=(MemoryMoveBlock&&). this = " << (void*)this << " data = " << (void*) _data << ". Moving resource." << std::endl;
-        std::cout << "In operator=(MemoryMoveBlock&&). other = " << (void*)&other << " data = " << (void*)other._data <<  std::endl;
+        std::cout << "In operator=(MemoryMoveBlock&&). this = " << (void*)this << " data = " << (void*)_data << ". Moving resource." << std::endl;
+        std::cout << "In operator=(MemoryMoveBlock&&). other = " << (void*)&other << " data = " << (void*)other._data << std::endl;
 
         if (this != &other) {
             std::cout << "Deleting  resource " << (void*)_data << std::endl;
@@ -108,15 +109,15 @@ public:
             _dummy = std::move(other._dummy);
         }
 
-        std::cout << "After operator=(MemoryMoveBlock&&). this = " << (void*)this << " data = " << (void*) _data << std::endl;
-        std::cout << "After operator=(MemoryMoveBlock&&). other = " << (void*)&other << " data = " << (void*)other._data <<  std::endl;
+        std::cout << "After operator=(MemoryMoveBlock&&). this = " << (void*)this << " data = " << (void*)_data << std::endl;
+        std::cout << "After operator=(MemoryMoveBlock&&). other = " << (void*)&other << " data = " << (void*)other._data << std::endl;
         return *this;
     }
 #endif
 
     MemoryMoveBlock& operator=(const MemoryMoveBlock& other)
     {
-        std::cout << "In operator=(const MemoryMoveBlock&). this = " << (void*)this << " data = " << (void*) _data << ". Copying resource." << std::endl;
+        std::cout << "In operator=(const MemoryMoveBlock&). this = " << (void*)this << " data = " << (void*)_data << ". Copying resource." << std::endl;
 
         if (this != &other)
         {
@@ -130,6 +131,8 @@ public:
         }
         return *this;
     }
+
+    const std::string& getDummy() { return _dummy; }
 
 private:
     int* _data; // The non class resource.
@@ -172,6 +175,17 @@ int main()
         std::cout << std::endl << "Ending" << std::endl;
     }
 
+    {
+        auto blocksInTuple = std::make_tuple(MemoryMoveBlock(), MemoryMoveBlock());
+        auto newBlockCopy = std::get<0>(blocksInTuple); // copy constructor here
+        auto newBlockMoved = std::get<0>(std::move(blocksInTuple)); // move constructor here, but only for first member of tuple, second is not touched
+        std::cout << std::endl << std::get<0>(blocksInTuple).getDummy() << std::endl; // prints empty string (has been moved to newBlockMoved)
+        std::cout << std::endl << newBlockMoved.getDummy() << std::endl; // prints Test (has been moved from first member of tuple)
+        std::cout << std::endl << std::get<1>(blocksInTuple).getDummy() << std::endl; // prints Test (second member of tuple not touched)
+        auto newBlockMoved2 = std::move(std::get<1>(blocksInTuple)); // also move constructor here for member of tuple, a bit more obvious move is applied to second only
+        std::cout << std::endl << std::get<1>(blocksInTuple).getDummy() << std::endl; // prints empty string (has been moved to newBlockMoved)
+        std::cout << std::endl << newBlockMoved2.getDummy() << std::endl; // prints Test (has been moved from first member of tuple)
+    }
     return 0;
 }
 

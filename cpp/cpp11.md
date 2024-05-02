@@ -179,6 +179,8 @@ This is good for backward compatibility because objects without move constructor
 
 **Note:** `std::move_if_noexcept` also exists (which does move even if not noexcpet in cases where there is no copy constructor :)).
 
+**Note:** `auto tuple = std::make_tuple(SomeObj(), SomeObj()); auto newObjMoved = std::get<0>(std::move(blocksInTuple))` moves out of tuple (only a single tuple member will be moved although `std::move` is invoked on whole tuple). This `auto newObjMoved = std::move(std::get<0>(blocksInTuple))` notation does the same but makes it more obvious it is done on single tuple member only.
+
 
 ### std::forward
 
