@@ -44,6 +44,7 @@
   * [Show graph](#show-graph)
   * [Ref names in log](#ref-names-in-log)
   * [Other](#other)
+    + [Why do we need --follow?](#why-do-we-need---follow)
 - [Branch](#branch)
   * [List all branches](#list-all-branches)
   * [Create new branch](#create-new-branch)
@@ -58,6 +59,7 @@
   * [Prune](#prune)
 - [Misc](#misc)
   * [Git commands with bash autocomplete](#git-commands-with-bash-autocomplete)
+  * [Git commands with powershell autocomplete](#git-commands-with-powershell-autocomplete)
   * [See the size of git repository](#see-the-size-of-git-repository)
   * [List the contents of a git tree](#list-the-contents-of-a-git-tree)
 
@@ -476,6 +478,18 @@ There is also `log.decorate` config value to override the default `auto`.
 
 And many [others](https://www.git-scm.com/docs/git-log/).
 
+#### Why do we need --follow?
+
+Git does not store rename metadata. If you rename a file and then commit the change, git will store and show the 
+old file being deleted and the new file being added. 
+
+The `--follow` option turns of heuristic which based on file hashes and file content tries to determine if file was renamed.
+
+**Note:** because of the way heuristics work, `--follow` can be slow on large repositories and may not work in all cases.
+For more info when and exactly how it works see short description [here](https://archive.kernel.org/oldwiki/git.wiki.kernel.org/index.php/GitFaq.html#Why_does_Git_not_.22track.22_renames.3F) 
+and a much longer in depth one [here](https://community.dynamics.com/blogs/post/?postid=24c0d875-2cc4-45d1-996a-a56a753eaca2).
+
+
 ## Branch
 
 ### List all branches
@@ -616,6 +630,15 @@ git lfs prune
 ```
 apt-get install git-core bash-completion
 ```
+
+### Git commands with powershell autocomplete
+
+```
+Install-Module posh-git -Scope CurrentUser
+Import-Module posh-git
+```
+
+Last command should be added to the Powershell profile so it loads automatically every time, or use `Add-PoshGitToProfile` command.
 
 ### See the size of git repository
 
