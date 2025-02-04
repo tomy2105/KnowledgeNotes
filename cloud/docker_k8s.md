@@ -98,6 +98,19 @@ When a container runs, it also has a writable ephemeral topmost layer, all chang
 
 Containers use Linux cgroups to control what an application can use, its maximum consumption of CPU time, memory, IO bandwidth, and other resources.
 
+### Benefits
+
+Consistency across development, testing and production.
+
+Eapid availability (boots up under a second + application startup time).
+
+Loose coupling between application and operating systems.
+
+Simplified workflow migration between on-prem and cloud.
+
+Agile development and operations.
+
+
 ### Container deployment speed
 
 The speed of deployment can be changed by limiting the size of the uploaded container, limiting the complexity of the build necessary in the Dockerfile (which influnces structure and number of layers), if present, and by ensuring a fast and reliable internet connection.
@@ -107,6 +120,58 @@ Thus using "smaller" base image like Alpine Linux instead of full blown Ubuntu o
 In addition placing application code files generation **after** installing dependencies in Dockerfile helps too because application’s dependencies change less frequently than the application code which will help to reuse the cached layer of dependency and only add new layer for application code changes.
 
 See [docker command line cheatsheet](cheatsheets.md#docker).
+
+### Docker file commands
+
+- FROM - downloads a base image from a registry and puts that on the stage to be modified by later instructions
+- COPY - pulls in source code or application binaries
+- RUN - run a program from the image on the image (installing system packages, downloading library dependencies, compiling source code into binaries
+- ENTRYPOINT - points to the program file to start
+- ENV - used to set environment variables
+- WORKDIR - sets the working directory of the program 
+- USER - sets the user to use when starting the program (defaults to the system administrator, so this is a setting you don't want to miss)
+
+### Multi-stage build
+
+Building involving two steps bz downloading a new, base, image after completed initial 
+build and copying all application files, assets and library dependencies from build image to this new production image.
+
+New, production/execution image requires a lot less packages installed on it so the image size is 
+smaller and there are fewer possible security issues because of reduced package number.
+
+### Security
+
+#### Improver permission
+
+Should be avoided:
+- running as root
+- priviledged containers `--priviledged` flag, if needed use specific capabilities only with `--cap-add` and `--cap-drop` (`--cap-drop ALL`)
+- writable filesystems
+
+To run as non-root:
+```
+# Create a group and user
+RUN groupadd -r myuser && useradd -r -g myuser myuser
+
+# Use the created user to run the application
+USER myuser
+
+# Set user's homedir as working dir
+WORKDIR /home/myuser
+```
+
+**Note:** some base docker images (.NET 8 ones for example) have such user already created.
+
+#### Use minimal base image
+
+To reduce number of packages installed, hence reducing possibility that vulnerable package exists.
+
+#### resources
+
+Always limit resources:
+- `--memory`
+- `--memory-reservation`
+- `--cpu`
 
 
 ## Kubernetes
@@ -323,3 +388,9 @@ Shadow testing has many key benefits. Since the traffic is duplicated, any bugs 
 - [Docker Documentation](https://docs.docker.com/)
 - [Kubernetes Documentation](https://kubernetes.io/docs/home/)
 - [Patterns for scalable and resilient apps](https://cloud.google.com/architecture/scalable-and-resilient-apps)
+- [OWASP Docker Top 10 - D01: Secure User Mapping](https://github.com/OWASP/Docker-Security/blob/main/D01%20-%20Secure%20User%20Mapping.md)
+- [OWASP Cheat Sheet Series - Docker Security](https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html)
+- [Docker Security](https://docs.docker.com/engine/security/)
+- [OWASP Kubernetes Top 10 2022 - K01: Insecure Workload Configurations](https://owasp.org/www-project-kubernetes-top-ten/2022/en/src/K01-insecure-workload-configurations)
+- [OWASP Cheat Sheet Series - Kubernetes Security](https://cheatsheetseries.owasp.org/cheatsheets/Kubernetes_Security_Cheat_Sheet.html)
+- [Kubernetes Security](https://kubernetes.io/docs/concepts/security/)

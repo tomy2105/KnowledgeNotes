@@ -126,6 +126,7 @@ To install on Linux: `curl https://sdk.cloud.google.com | bash`.
 - `gcloud app browse` - open current App Engine application in a browser (or display url if browser is not detected)
 - `gcloud app logs tail -s default` - tail logs from App Engine application
 - `gcloud sql connect  myproject-demo --user=root` - connect to Cloud SQL Instance
+- `gcloud sql instances describe poll-database --format='value(connectionName)'` - describe Cloud SQL database Instance and get connection name
 - `gcloud iam service-accounts keys list --iam-account user@email.com` - list keys associated with service account
 - `gcloud iam roles list` - list available roles
 - `gcloud iam roles describe roles/compute.instanceAdmin` - describe (list permissions included) some role
@@ -156,7 +157,25 @@ To install on Linux: `curl https://sdk.cloud.google.com | bash`.
 - `gcloud run deploy demo --image us-central1-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/demo/demo:1.0.0 --region us-central1 [ --concurrency 100]` - deploy a container to Cloud Run
 - `gcloud run services list` - list services deployed in Cloud Run
 - `gcloud run services describe demo  --platform managed --region us-central1` - describe service deployed in Cloud Run
+- `gcloud spanner instances create my-instance --config=regional-us-central1 --description="My first instance" --nodes=1` - create Cloud Spanner instance
+- `gcloud spanner databases create ,y-database --instance my-instance --ddl "CREATE TABLE MyTable ( email STRING(100) NOT NULL, data STRING(MAX), score FLOAT64, timestamp INT64 ) PRIMARY KEY (email);"` - create database inside Cloud Spanner instance
+- `gcloud iam service-accounts list` - list service accounts
+- `gcloud iam service-accounts create quiz-account --display-name "My Service Account"` - create a service account
+- `gcloud iam service-accounts keys create key.json --iam-account=my-service-account@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com` - create and download the key file for the service account
+- `export GOOGLE_APPLICATION_CREDENTIALS=key.json` - export the environment variable
+- `gcloud projects get-iam-policy $DEVSHELL_PROJECT_ID --format json > iam.json` - export current permission
+- `gcloud projects set-iam-policy $DEVSHELL_PROJECT_ID iam_modified.json` - set new modified permissions
 
+
+
+Create Cloud NAT by combining router and static IP address:
+```
+gcloud compute routers nats create nat-name \
+  --router=router-name \
+  --region=$LOCATION \
+  --nat-custom-subnet-ip-ranges=subnet-name \
+  --nat-external-ip-pool=ip-address-name
+```
 
 Create VPN tunnel:
 ```
@@ -429,6 +448,48 @@ More [info and reference](https://docs.docker.com/engine/reference/run/).
 - `docker logs [-f]` - see logs of the container (console logs, -f = follow/tail logs)
 - `docker exec -it [container_id] bash` - interactive bash shell on container instance
 - `docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [container_id]` - see container instance metadata with formatting
+
+Node.js multi-stage build file:
+```
+FROM node:10.15.2-alpine AS appbuild
+WORKDIR /usr/src/app
+COPY package.json ./
+RUN npm install
+COPY ./src ./src
+RUN npm run build
+
+FROM node:10.15.2-alpine
+WORKDIR /usr/src/app
+COPY package.json ./
+RUN npm install
+COPY --from=appbuild /usr/src/app/dist ./dist
+EXPOSE 4002
+CMD npm start
+```
+
+C# one:
+```
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["WebApplication3/WebApplication3.csproj", "WebApplication3/"]
+RUN dotnet restore "WebApplication3/WebApplication3.csproj"
+COPY . .
+WORKDIR "/src/WebApplication3"
+RUN dotnet build "WebApplication3.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "WebApplication3.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "WebApplication3.dll"]
+```
 
 ## Terraform
 
