@@ -8,6 +8,7 @@
 - [Keyboard and mouse shortcuts](#keyboard-and-mouse-shortcuts)
 - [Command prompt keyboard shortcuts](#command-prompt-keyboard-shortcuts)
 - [God mode](#god-mode)
+- [Using Windows 10 File Explorer menu in Windows 11](#using-windows-10-file-explorer-menu-in-windows-11)
 
 <!-- tocstop -->
 
@@ -137,3 +138,16 @@ More [here](win-8-shortcuts.png).
 ## God mode
 
 Create a folder and give it a name: `GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}`. Look inside to see many system related shortcuts.....
+
+## Using Windows 10 File Explorer menu in Windows 11
+
+Avoids having to click on **Show more options** all the times.
+
+Run following registry change:
+```
+Windows Registry Editor Version 5.00
+[HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
+@=""
+```
+
+After change open Task Manager, the Details pane and restart explorer.exe process(es).
