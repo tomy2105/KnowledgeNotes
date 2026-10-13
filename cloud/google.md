@@ -143,6 +143,15 @@
 
 ## General
 
+### Cloud in general
+
+According to NIST cloud has following properties:
+- computing resources that are on-demand and self-serviced through a web interface
+- access to those resources over the internet
+- cloud provider has a big pool of those resources and allocates them to users out of that pool
+- resources are elastic – if need more resources can get more, and quickly, if they need less, can scale back
+- pay only for what is used, or reserved
+
 ### Regions and zones 
 
 Google Cloud resources, are hosted in multiple locations worldwide. These locations are composed of regions and zones. See [regions and network map](https://cloud.google.com/about/locations) here.
@@ -371,20 +380,31 @@ More info [here](https://cloud.google.com/kubernetes-engine/docs/) and [sketchno
 
 ##### GKE specifics
 
-**LoadBalancers** give you access to a regional Network Load Balancing configuration by default, to use a global HTTP(S) Load Balancing configuration, you can use an **Ingress** object.
+Kubernetes **LoadBalancers** resources give access to a regional Network Load Balancing configuration by default, 
+to use a global HTTP(S) Load Balancing configuration, one can use an Kubernetes **Ingress** resources.
 
 The nodes will get the Pod IP addresses from address ranges assigned to your Virtual Private Cloud.
 
-A PersistentVolume is typically backed by a persistent disk, can also use other storage solutions like NFS.
+A **PersistentVolume** is typically backed by a Google Cloud persistent disks that is automatically provisioned by default when 
+Kubernetes persistent volume is created to provide storage for stateful applications, can also use other storage solutions like NFS.
+
+Auto-repair can automatically repair unhealthy nodes. It performs periodic health checks on each node of the cluster.
+If a node is determined to be unhealthy and requires repair, it will drain the node (thus allowing workloads to gracefully exit). 
+It will then recreate the node. 
+
 
 ##### Operation modes
 
-Following modes of operation for clusters are available:
-- **Autopilot mode** (recommended) - GKE manages the underlying infrastructure such as node configuration, autoscaling, auto-upgrades, baseline security configurations, and baseline networking configuration
-- **Standard mode** - User manages the underlying infrastructure, including configuring the individual nodes
+In **standard mode** Google manages the control plane, scaling of pods, node patching and upgrades, and the monitoring, availability, and reliability of the cluster. 
+By default, user manages the underlying nodes and node pools, including provisioning, maintenance, and lifecycle management. 
+He is also responsible for selecting the security and networking configuration for the cluster. 
+
+In **Autopilot mode** (recommended) mode entire cluster's infrastructure is managed by Google, including control plane, node pools, and nodes. 
+This helps reduce operational and maintenance costs while improving resource utilization. Autopilot is a fully 
+managed Kubernetes experience that lets user focus on your workloads instead of the management of the cluster's infrastructure.
+Autopilot automatically implements GKE hardening guidelines and security and networking best practices and blocks less safe practices.
 
 Can't convert a cluster from Standard to Autopilot after cluster creation. For differences see [here](https://cloud.google.com/kubernetes-engine/docs/resources/autopilot-standard-feature-comparison).
-
 
 ##### Cluster types
 
@@ -439,9 +459,12 @@ The recommended way for workloads running on Google Kubernetes Engine (GKE) to a
 Fully managed serverless application platform supporting the building and deploying of applications.
 Code can be in Go, Java, Node.js, PHP, Python, Ruby ([App engine standard](https://cloud.google.com/appengine/docs/standard)) and .NET and other custom runtimes ([App engine flexible](https://cloud.google.com/appengine/docs/flexible)).
 
-App Engine Standard employs language-specific runtimes, while App Engine Flexible uses containers that can be used to customize the runtime environment. There are also additional services likeApp Engine Cron Service and Task Queues.
+App Engine Standard runs code in a sandbox and employs language-specific runtimes, while App Engine Flexible uses containers that can be used to customize the runtime environment. 
+There are also additional services like App Engine Cron Service and Task Queues.
 
-Applications can be scaled seamlessly from zero upward without having to worry about managing the underlying infrastructure. 
+The standard environment responds well to spikes in traffic by scaling up within seconds and scaling down to zero after 15 minutes of inactivity 
+and is a reasonable choice for non-containerized applications with spikes in traffic.
+The flexible environment is better for applications that have sustained traffic, because it scales up and down much slower than the standard environment does, and cannot scale to zero. 
 
 Each Google Cloud project can contain one App Engine application, and an application has one or more services. Each service can have one or more versions, and each version has one or more instances. 
 
@@ -463,13 +486,24 @@ More info [here](https://cloud.google.com/run/docs/) and [sketchnote](https://th
 
 #### Cloud Functions
 
-Serverless execution environment for building and connecting cloud services. Can write simple, single-purpose functions that are attached to events. Cloud Function is [triggered](https://cloud.google.com/functions/docs/calling) when an event being watched is fired, event can be:
+Serverless execution environment for building and connecting cloud services. Can write simple, single-purpose functions that are attached to events. 
+Cloud Function is [triggered](https://cloud.google.com/functions/docs/calling) when an event being watched is fired, event can be:
 - HTTP triggers
 - Pub/Sub triggers
 - Cloud Storage triggers
-- Generalized Eventarc triggers
+- Generalized Eventarc triggers (2nd gen functions only)
+- various Firestore related triggers (1st gen functions only)
 
-Code executes in a fully managed environment with no need to provision any infrastructure or worry about managing any servers. Cloud Functions have access to the Google Service Account credential and are thus seamlessly authenticated with the majority of Google Cloud services. Using this you can configure function to require authorization so only other authorized endpoints can trigger it (for example another function executing under proper user account and acquiring proper token and sending to invoked function, see more [here](https://cloud.google.com/functions/docs/securing/authenticating)).
+Cloud Functions currently supports Node.js, Python, Go, Java, .NET, Ruby, and PHP. Code can be edited inside the Google Cloud UI, 
+uploaded in a ZIP file,  obtained from ZIP file stored on Cloud Storage or stored in Cloud Source repository.
+
+Code executes in a fully managed environment with no need to provision any infrastructure or worry about managing any servers. 
+Cloud Functions have access to the Google Service Account credential and are thus seamlessly authenticated with the majority of Google Cloud services. 
+Using this you can configure function to require authorization so only other authorized endpoints can trigger it (for example another function executing under 
+proper user account and acquiring proper token and sending to invoked function, see more [here](https://cloud.google.com/functions/docs/securing/authenticating)).
+
+Cloud Functions have a default timeout value of 60 seconds and provides access to a local disk mount point `/temp` that can be used for temporary file processing.
+Writing to the `/temp` location uses the memory that has been allocated to the function thus developer should make sure to clean up any temporary files.
 
 Use Cases:
 - Data Processing / ETL - Listen and respond to Cloud Storage events such as when a file is created, changed, or removed, e.g. process images, perform video transcoding, validate and transform data, etc...
@@ -531,7 +565,7 @@ Object storage service, worldwide storage and retrieval of any amount of data at
 
 Used for range of scenarios including serving website content, storing data for archival and disaster recovery, or distributing large data objects to user via direct download. 
 
-Scalable to exabytes of data, time to first byte is in milliseconds,  very high availability and a single API across storage classes. 
+Scalable to exabytes of data, time to first byte is in milliseconds, very high availability and a single API across storage classes. 
 
 Not a real file system, collection of buckets that you place objects into (directory is just another object). Buckets are required to have a globally unique name and cannot be nested.
 
@@ -541,6 +575,27 @@ No minimum size to those objects, and scale as much as wanted, as long as quota 
 - one second write limit on the same object
 
 To access the data you can use the gsutil command or either JSON or XML APIs. Cloud Storage streaming service is able to acquire the streaming data without having to archive the file first, used when you need to upload data from a process or on-the-fly.
+
+Cloud Storage objects are accessed via HTTP requests including ranged gets to retrieve portions of the data. The only key is the object name. There's object metadata, but the object itself 
+is treated as just bytes with no structure. Storage buckets can have CORS configuration done by using appropriate config file (`gsutil cors`) which is useful in some situations when bucket is accessed directly by some web page hosted somewhere else.
+
+Parallel uploads, can divide an object into multiple pieces, upload the pieces to a temporary location simultaneously, and compose the original object from 
+these temporary pieces (`gsutil compose`). Used to fully use available bandwidth by dividing data into chunks and uploading separately. Or to copy many files in parallel with a single command in big data scenarios.
+
+**Note:** [Cloud Storage FUSE] can be used to mount Cloud Storage as a filesystem on Linux/macOS (can even be run on-premise) but it has *significant* performance considerations and is not POSIX.
+
+Typical usage:
+- Stream videos
+- Image and web asset libraries
+- Data lakes
+- Backups
+- Media archives
+- Long-tail content
+- Meet regulation or compliance requirements
+
+More info [here](https://cloud.google.com/storage/docs/) and [sketchnote](https://thecloudgirl.dev/CloudStorage.html).
+
+##### Storage classes and location types
 
 Data put into buckets are objects that inherit the storage class of the bucket (unless you specify a storage class for each of the objects). Four storage [classes](https://cloud.google.com/storage/docs/storage-classes):
 - **standard** - data that is frequently accessed and stored for brief period of time (most expensive, no miminum storage duration, no retrieval cost)
@@ -555,33 +610,89 @@ Three location types:
 - **dual region** - specific pair of regions (optimize latency/bandwidth, cross-zone redundacy) e.g. for analytics, backup/archive and disaster recovery
 - a **region** - (optimize latency/bandwidth, lowest cost, cross-zone redundacy) e.g. for analytics and backup/archive
 
+
+##### Access control
+
 IAM is used to control which individual users or service account can operate on a bucket, roles are inherited from project to bucket to object. There are two access control ways:
 - **Uniform** (recommended) - use IAM alone to manage permissions, also allows you to use features that are not available when working with ACLs, such as IAM Conditions and Cloud Audit Logs.
 - **Fine-grained** - use IAM and Access Control Lists (ACLs) together to manage permissions, ACLs specify access and apply permissions at both the bucket level and per individual object, maximum number of ACL entries you can create for a bucket or object is 100.
 
 **Signed URL** provide a cryptographic key that gives time limited access to a bucket or object. 
 
+**Signed Policy Documents** allow specifying what can be uploaded to a bucket and allow greater control over size,
+content type and other upload characteristics than using signed URLs. Used by website owners to allow visitors to 
+upload files to Cloud Storage.
+
+**Firebase Security rules** provide granular attribute-based access control to mobile and web applications, using the Firebase SDKs for Cloud Storage.
+
+##### Consistency
+
+The following operations in Google Cloud Storage are strongly consistent: 
+- read-after-write
+- read-after-metadata update
+- read-after-delete
+- bucket listing
+- object listing
+- granting access to resources
+
+The following operations are eventually consistent:
+- revoking access from objects, can take up to a minute for changes to take effect
+- accessing publicly readable cached objects, the operation doesn't take effect until object's cache lifetime expires
+
+##### API access
+
+XML API endpoints: `storage.googleapis.com/<bucket>/<object>` or `<bucket>.storage.googleapis.com/<object>`.
+
+JSON API endpoint: `www.googleapis.com/download/storage/v1/b/<bucket>/o/<object-encoded-as
+-URL-path-segment>?alt=media`.
+
+CNAME redirect: `c.storage.googleapis.com`.
+
+Authenticated browser downloads: `https://storage.cloud.google.com/<bucket>/<object>`.
+
+Exponential backoff should be used to handle all 5xx and 429 error response codes from Storage.
+
+If request rate is less than 1,000 write requests per second, or 5,000 read requests per second, then no ramp-up is needed. 
+Otherwise, should start with below or near the thresholds, d then double, no faster than every 20 minutes.
+
+##### Best practices
+
+Best security practices:
+- always use HTTPS and verify server certificates
+- securely store credentials and revoke credentials for applications that are no longer used
+- prefer usage of groups instead of users (large number of them)
+- avoid publicly readable/writable buckets if possible
+
+Best practices when uploading data:
+- set reasonably long timeouts and don't close and reopen connection if stalled
+- or resumable uploads, the resumable session should stay in the region in which it was created (reduces cross-region traffic reading and writing the session state)
+- avoid breaking a transfer into smaller chunks if possible (removes fixed latency costs, improves throughput)
+- can use automatic decompressing a file for the requester (storing the file in gzip format and setting the associated meta data to content-encoding gzip) but avoid combining with compressed content-type
+- validate data either by supplying MD5 or CRC32c hash with upload request or by downloading metadata of newly created object and comparing hashes (and delete object if not matching)
+
+##### Object Lifecycle Management
+
+Automatically delete (keep specific number of versions) or archive objects (downgrade storage class) - see info [here](https://cloud.google.com/storage/docs/lifecycle), 
+can irreversibly lock retention policy and prevent premature deletion, see [here](https://cloud.google.com/storage/docs/bucket-lock)
+
+**Retention policy** specifies retention period for a bucket:
+- if a bucket does not have a retention policy, can delete and replace objects in the bucket at any time
+- if the bucket has a retention policy, objects in the bucket can only be deleted or replaced once their age is greater than the retention period
+- retroactively applies to existing objects in the bucket, as well as new objects added to the bucket
+
+**Bucket lock feature** allows locking of retention policy:
+- once done, you cannot remove it or reduce the retention period it has
+- cannot delete a bucket with a locked retention policy unless every object in the bucket has met the retention period
+- can increase the retention period of a locked retention policy
+
+##### Other 
+
 Other features:
 - **customer supplied encrytion key (CSEK)** - instead of Google managed ones
 - **Object Versioning** - maintain multiple versions of objects (object is archived, with ID, before changed), turned on/off on bucket at any time
-- **Object Lifecycle Management** - automatically delete (keep specific number of versions) or archive objects (downgrade storage class) - see info [here](https://cloud.google.com/storage/docs/lifecycle), can irreversibly lock retention policy and prevent premature deletion, see [here](https://cloud.google.com/storage/docs/bucket-lock)
 - **Directory Synchronizato**n - syncs VM directory with a bucket
 - **Object change notification** - notify application when object changes (at the moment webhook or Pub/Sub)
 - **Data import** - [Cloud Data Transfer](#cloud-data-transfer), [Storage Transfer Service](#storage-transfer-service), [Google Transfer Appliance](#google-transfer-appliance)
-- **Strong consistency** - all changes are immediately visible
-
-Typical usage:
-- Stream videos
-- Image and web asset libraries
-- Data lakes
-- Backups
-- Media archives
-- Long-tail content
-- Meet regulation or compliance requirements
-
-**Note:** [Cloud Storage FUSE] can be used to mount Cloud Storage as a filesystem on Linux/macOS (can even be run on-premise) but it has *significant* performance considerations and is not POSIX.
-
-More info [here](https://cloud.google.com/storage/docs/) and [sketchnote](https://thecloudgirl.dev/CloudStorage.html).
 
 #### Cloud Filestore
 
@@ -694,9 +805,13 @@ More info [here](https://cloud.google.com/bigtable/docs/) and [sketchnote](https
 
 #### Cloud Firestore
 
-Fast, fully managed, serverless, cloud native, NoSQL, document database with max. document size of 1 MB good for heavy read/write events. Supports ACID transactions, automatic multi region replication and **strong consistency**.
+Fast, fully managed, serverless, cloud native, NoSQL, document database with max. document size of 1 MB good for heavy read/write events. 
+Supports ACID transactions, automatic multi region replication and **strong consistency**.
 
-Each document contains a set of key-value pairs and Firestore is optimized for storing large collections of small documents. All documents are stored in collections and can contain subcollections and nested objects, both of which can include primitive fields (e.g. strings) or complex objects (e.g. lists). Collections and documents are created implicitly, if either the collection or document does not exist, Cloud Firestore creates it.See more [here](https://firebase.google.com/docs/firestore/data-model).
+Each document contains a set of key-value pairs and Firestore is optimized for storing large collections of small documents. 
+All documents are stored in collections and can contain subcollections and nested objects, both of which can include primitive fields (e.g. strings) 
+or complex objects (e.g. lists). Collections and documents are created implicitly, if either the collection or document does not exist, Cloud Firestore creates it.
+See more [here](https://firebase.google.com/docs/firestore/data-model).
 
 Typical usage:
 - Semi-structured application data
@@ -707,9 +822,29 @@ Typical usage:
 - Product catalogs
 - Game state
 
-More info [here](https://cloud.google.com/firestore/docs/) and [sketchnote](https://thecloudgirl.dev/cloudnat.html).
+More info [here](https://cloud.google.com/firestore/docs/) and [sketchnote](https://thecloudgirl.dev/firestore.html).
 
-**Note:** previous generation has been called **Datastore**!
+Has two modes of operations: native and datastore mode. Both modes are high performing with strong consistency, but they look different and are optimized for different use cases.
+Datastore mode should typically be used for server applications and puts an emphasis on high throughput (lots of reads and writes).
+Native mode should be used for new mobile and Web apps or when requiring real-time and offline features, it is good for letting lots of users access the same data at the same time 
+(plus, it has features like real-time updates and direct connection between database and a web/mobile client). For info regarding two modes see [here](https://cloud.google.com/datastore/docs/firestore-or-datastore
+).
+
+Native mode:
+- Enable all of Cloud Firestore's features, with offline support and real-time synchronization
+- Firestore API
+- Automatically scales to millions of concurrent clients
+- Max writes per second: 10,000
+- Real-time updates
+- Mobile/web client libraries with offline data persistence
+ 
+Datastore mode:
+- Leverage Cloud Datastore's system behavior on top of Cloud Firestore's powerful storage layer
+- Datastore API
+- Automatically scales to millions of writes per second
+- Max writes per second: No limit
+
+
 
 #### Cloud Memorystore
 
@@ -718,6 +853,8 @@ Fully managed in-memory, highly scalable, available, secure Redis/Memcached serv
 High availability instances are replicated across two zones and provide a 99.9% availability SLA (**eventual consistency** when replicas are used). 
 
 Can easily achieve the sub-millisecond latency and throughput. Support instances up to 300 GB and network throughput of 12 gigabits per second.
+
+**Note**: Memorystore instances are available in the VPC on an internal IP address, thus serverless apps need Serverless VPC connector!
 
 More info [here](https://cloud.google.com/memorystore/docs/) and [sketchnote](https://thecloudgirl.dev/memorystore.html).
 
@@ -731,8 +868,12 @@ The replication of data is synchronized across zones using Google's global fiber
 
 The ability to add nodes is what makes Cloud Spanner horizontally scalable, each node supports up to 4TB (used to be 2TB) of storage, and its performance is based on the instance configuration, schema design, and dataset characteristics. As an estimate, each Cloud Spanner node can provide up to 7000 (+3500 with read replicas) read queries per second and 1800/1000 write queries per second (depends on regions). 
 
+Spanner also supports interleaf tables where child rows are inserted into the table adjacent to the parent row. This improves the query performance when joins are done between parent and child.
 
 **Note**: Traditional SQL databases usually use numerical primary keys in a sequence. Distributed databases do not use progressive keys, because the tables are split among the nodes in primary key order and therefore all the inserts would take place only at one point, degrading performance (**hotspotting**).
+
+Cloud Spanner offers horizontal scalability with up to three 9s of availability and has zero scheduled downtime. 
+Cloud SQL has 99.5% availability and does not count downtime of less than a minute with maintenance for patching. 
 
 More info [here](https://cloud.google.com/spanner/docs/) and [sketchnote](https://thecloudgirl.dev/spanner.html).
 
@@ -756,6 +897,13 @@ If connecting from outside there are 3 options:
 - an unencrypted connection by authorizing a specific IP address to connect 
 
 More info [here](https://cloud.google.com/sql/docs/) and [sketchnote](https://thecloudgirl.dev/gcpsketchnote3.html).
+
+##### Cloud SQL Proxy
+
+Works by having a local client, proxy, running in the local environment. Application communicates with the proxy with the standard database protocol used by the database. 
+The proxy uses a secure tunnel to communicate with its companion process running on the server and provides secure access to Cloud SQL second-generation instances without 
+having to allow IP addresses or configure SSL. Proxy uses the Cloud SQL API to authenticate with Google Cloud, in order to function, API must be enabled and proxy provided 
+with a valid user account. 
 
 #### Database Migration Service
 
@@ -1270,6 +1418,8 @@ Four golden signals in metrics:
 - Saturation (% memory, % thread pools, % cache, % disk, % CPU, Disk quota, Memory Quota)
 - Errors (# 400/500 codes, # failed requests, # exceptions, # stack traces, # dropped connections, # liveness checks failed)
 
+**Note**: Make sure to distinguish between the latency of successful and unsuccessful requests, otherwise one might get misleading metrics.
+
 **SLI** - Service level indicator is a quantitative measure of some aspect of the level of service being provided. 
 
 **SLO** - Service level objective is an agreed-upon target or range of values for a service level that is measured by an SLI. An example of an SLO is that at average latency of HTTP requests for our service should be less than 100 milliseconds. 
@@ -1281,7 +1431,7 @@ Four golden signals in metrics:
 
 Centralized logging service allows to store, search, analyze, monitor, and alert on log data and events from GCP an AWS. It includes storage for logs, a user interface called the log viewer, and an API to manage logs programmatically.
 
-Logs are stored, by default, with 30-day (400-day) retention period based on the log type, some are customizable up to a 3650-days. Preferred way is to store logs in Cloud Storage for long-term retention and use BigQuery for analysis and/or Cloud Pub/Sub topics.
+Data access logs are retained by default for 30 days, but this is configurable up to a maximum of 3,650 days. Admin logs are stored by default for 400 days. Preferred way is to store logs in Cloud Storage for long-term retention and use BigQuery for analysis and/or Cloud Pub/Sub topics.
 
 To visualize logs connect BigQuery tables to Data Studio, it transforms raw data into the metrics and dimensions that can be used to create easy to understand reports and dashboards.
 
@@ -1331,23 +1481,76 @@ More info [here](https://cloud.google.com/error-reporting/docs/).
 
 Distributed tracing system that collects latency data from applications/services and displays it in the GCP console. It can track how request propagate through application and receive detailed near real time performance insights. 
 
-Generates latency reports that show performance degradations from traces captured from App Engine, HTTPS load balancers, and applications instrumented with the Stackdriver Trace API. 
+Cloud Trace's language-specific SDKs can analyze projects running on VMs, even those not running in Google Cloud.
+The Trace SDK is currently available for Java, Node.js (`npm install --save @google-cloud/trace-agent`), Ruby and Go. And the Trace API can be used to submit and retrieve trace data from any source. 
+
+A Zipkin collector is also available, which allows Zipkin tracers to submit data to Cloud Trace. 
+Traces are automatically captured for projects running on App Engine and HTTP/s load balancers as well as applications instrumented with the Cloud (Stackdriver) Trace API.
 
 More info [here](https://cloud.google.com/trace/docs/).  
 
+
 #### Cloud Profiler
 
-Statistical, low-overhead service that continuously gathers CPU usage and memory-allocation information from production applications and attributes that information to the application's source code, helping identifying the parts of the application consuming the most resources.
+Statistical, extremely low-overhead service that continuously gathers CPU usage and memory-allocation information from 
+production applications and attributes that information to the application's source code, helping painting a complete picture 
+of an application's performance and identifying the parts of the application consuming the most resources without slowing it down. 
 
-Profiler is able to profile Go, Java, Node.js, or Pythony.
+Allows developers to analyze applications running anywhere, including Google Cloud, other cloud platforms 
+or on-premises with support for Java, Go, Node.js and Python. 
+
+In order to use it, a a profiling agent must be installed on the virtual machines where application runs.
+The agent typically comes as a library that is attached to application when it is executed. 
+
+The agent collects profiling data as the app runs but is not always active. 
+It creates a single profile by collecting profiling data, usually for 10 seconds once a minute for a single instance of the 
+configured service  in a single Compute Engine zone. 
+After each instance of the agent starts, it notifies the profiler back end that it's ready to capture data, and then the agent 
+idles until it  receives a reply from the back end specifying the type of profile it captured. 
+
+For 10 instances of a service running in the same deployment, 10 profiling agents must be created. 
+However, these agents are idle most of the time. Over a 10-minute period, one can expect 10 profiles. 
+
+The overhead of the CPU and heap allocation profiling at the time of the data collection is less than 5 percent. 
+Amortized over the execution time and across multiple replicas of a service, the overhead is commonly less than 0.5 percent, 
+making it an affordable option for always-on profiling in production systems.
 
 More info [here](https://cloud.google.com/profiler/docs/).
 
+
 #### Cloud Debugger
 
-Debugger is a live production debugging service that can inspect the state of a running application in real time without stopping it. The debugger adds less than 10 milliseconds to the request latency when the application state is captured and supports multiple languages, including Java, Python, Go, Node.js, and Ruby.
+Debugger is a live production debugging service that can inspect the state of a running application in real 
+time without stopping it. The debugger adds less than 10 milliseconds to the request latency when the application 
+state is captured and supports multiple languages, including Java, Python, Go, Node.js, and Ruby.
+
+Debugger automatically creates a debug snapshot on the line that has the error. 
+When the application hits the code again, Cloud Debugger creates a snapshot of the application state 
+including values of local variables.
+It can also manually select other lines of code where debug snapshots would be helpful. 
+
+No restart is needed to generate new debug snapshots.
+
+**Note**: Source context file needs to be created to allow Cloud Debugger to display the correct source code in the Cloud Console Debug window.
+
+Cloud Debugger was deprecated on May 16, 2022 and the service was shut down on May 31, 2023. 
+It can be replaced with open source CLI tool, [Snapshot Debugger](https://github.com/GoogleCloudPlatform/snapshot-debugger).
 
 More info [here](https://cloud.google.com/debugger/docs/).
+
+
+#### Cloud Error Reporting 
+
+Error reporting displays errors that have occurred inside the applications. 
+Can view the stack trace to determine where the error occurred. Clicking the source code file in the stack trace takes 
+to [Cloud Debugger](#cloud-debugger) and the line of code that has the problem.
+
+Application can send errors directly to Cloud Logging with proper formatting or by calling an Error Reporting API endpoint. 
+The setup process depends on the [platform used](https://cloud.google.com/error-reporting/docs/setup).
+
+Client libraries in Go, Java, .NET, Node.js, Python, PHP and Ruby are available.
+
+More info [here](https://cloud.google.com/error-reporting/docs/).
 
 #### Uptime Checks
 
@@ -1378,7 +1581,6 @@ More info [here](https://cloud.google.com/deployment-manager/docs/).
 
 #### Rest 
 
-- [Cloud APIs](https://cloud.google.com/apis/docs/) - APIs for cloud services
 - [Cloud Billing and it API](https://cloud.google.com/billing/docs/) - (programmatically) manage Google Cloud billing and cost
 deployment
 - [Private Catalog](https://cloud.google.com/private-catalog/docs/) - internal solutions catalog.
@@ -1397,7 +1599,15 @@ More info [here](https://cloud.google.com/scheduler/docs/).
 
 #### Cloud Tasks
 
-Execution, dispatch and delivery of a large number of distributed tasks that work asynchronously outside of a user request or service to service request. Tasks can be executed on App Engine or any arbitrary HTTP endpoint.
+Execution, dispatch and delivery of a large number of distributed tasks that work asynchronously outside of a 
+user request or service to service request. Tasks can be executed on App Engine or any arbitrary HTTP endpoint.
+
+Choose if one of the following is needed: 
+- explicit rate controls - useful if sending messages to an external end point that requires not to exceed a certain request rate 
+  - Cloud Pub/Sub adjusts the rate request based on error rates, but doesn't offer guarantees
+- longer timeouts to respond to a message
+  - Cloud Pub/Sub only supports a request timeout of up to 10 seconds
+  - Cloud Tasks supports timeouts of up to 30 minutes - useful if you want to complete a longer-running task that can't be split up into multiple smaller tasks
 
 More info [here](https://cloud.google.com/tasks/docs/).
 
@@ -1415,7 +1625,9 @@ More info [here](https://cloud.google.com/appengine/docs/flexible/scheduling-job
 
 ### API Related
 
-See [sketchnote](https://thecloudgirl.dev/apimanagement.html) about API management
+See [sketchnote](https://thecloudgirl.dev/apimanagement.html) about API management.
+
+See [Google API design guide](https://cloud.google.com/apis/design).
 
 #### Cloud Endpoints
 
@@ -1445,13 +1657,33 @@ Native API management to operate APIs with enhanced scale, security, and automat
 
 More info [here](https://cloud.google.com/apigee/docs).
 
+Positives:
+- fully featured API managemet platform
+- proxy APIs anywhere
+- broad feature set
+
+Negatives:
+- more expensive
+- not appropriate for simplest API use cases
+
 Also can enable inteligent protection against bot attacks and similar using [Apigee Sense](https://cloud.google.com/apigee/sense).
 
 #### API Gateway
 
-Fully managed API Gateway 
+Fully managed API Gateway which provides secure access to backend services through a well-defined REST API 
+that is consistent regardless of the service implementation.
 
-Provides secure access to backend services through a well-defined REST API that is consistent regardless of the service implementation. Meant to be for for serverless back ends only,
+Positives:
+- fully managed
+- scalable and flexible deployment options
+- relatively inexpensive
+- can use gRPC
+
+Negatives:
+- less control than [Cloud Endpoints](#cloud-endpoints)
+- service proxy required for services outside of Google Cloud
+
+Often a better solution when using serverless app platforms like Cloud Functions, Cloud Run and App Engine.
 
 Unlike Apigee, doesn't support monetization and hybrid.
 
@@ -1466,9 +1698,22 @@ More info [here](https://cloud.google.com/appsheet).
 
 ### Developer Tools  
 
-#### Cloud SDK
+The Google Cloud SDK is used to interact with Google Cloud products and services and consists of command line-tools and language-specific Cloud Client Libraries which use Cloud APIs to communicate with Google Cloud.
 
-Set of command line tools used to manage resources and applications hosted on Google Cloud, include `gcloud`, `gsutil` and `bq`.
+#### Cloud APIs
+
+Cloud APIs provide programmatic interfaces to Google Cloud Services, one can use any resource or service in an application by calling a corresponding Cloud API. APIs can be called either using HTTP requests with JSON payloads or gRPC requests. 
+
+Caller must supply application credentials that are validated to ensure that an application is allowed to access Google Cloud project and resources.
+
+More info [here](https://cloud.google.com/apis/docs/).
+
+#### Cloud SDK command line tools
+
+Tools that provide the functionality of the Cloud APIs in an easy-to-use command-line interface which automates the process of sending credentials in the Cloud API calls and combine multiple Cloud API calls when required. Includes three primary command-line tools: 
+- `gcloud` - perform most common tasks on Google Cloud, including creating and managing resources for many services
+- `gsutil` - used to manage Cloud Storage, create and manage storage buckets and upload, download, and delete objects, move, copy and rename objects and manage access to stored objects
+- `bq` - is a command-line tool for BigQuery, used to manage datasets, tables, and other BigQuery entities, but its primary purpose is running queries
 
 More info [here](https://cloud.google.com/sdk/docs/) and [cheatsheet](https://cloud.google.com/sdk/docs/cheatsheet).
 
@@ -1483,18 +1728,21 @@ And [gcloud command line cheatsheet](cheatsheets.md#gcloud), [gsutil command lin
 
 **Note**: In some use cases, e.g. Cloud Storage lifecycle management, `gsutil` accepts only JSON input while both XML and JSON can be used for similar functionality when Cloud APIs are used.
 
+#### Cloud Client Libraries 
 
-#### Cloud Shell
+Set of libraries that enable access to Google Cloud resources from an applications in a manner easier than making direct API calls (by handling low-level communication with the server, including authentication and also provide retry logic for transient network failures). Also give performance benefits by automatically calling the gRPC Cloud APIs.
 
-Cloud Shell is an interactive shell environment for Google Cloud executed on a VM instance accessed via web browser. It has Google Cloud CLI and other utilities pre-installed and comes with a built-in code editor allowing one to develop, build, debug, and deploy cloud-based apps entirely in the cloud.
-
-It provisions 5 GB of persistent disk storage mounted as $HOME directory on the instance so files stored in your home directory (including scripts and user configuration files like .bashrc and .vimrc) persist between sessions.
-
-More info [here](https://cloud.google.com/shell/docs/).
+Cloud Client Libraries are available for many of the most popular programming languages like Python, Node.js, Java, Go, PHP, Ruby, C++ and the .NET languages including C#, for list and examples see [here](https://cloud.google.com/apis/docs/cloud-client-libraries).
 
 #### Cloud Code
 
 IDE support for the full development cycle of Kubernetes and Cloud Run applications. Contains run-ready samples, out-of-the-box configuration snippets, and a tailored debugging experience. Also provides a streamlined experience for creation of clusters hosted on Google Cloud and better integration with Google Cloud services like Cloud Source Repositories, Cloud Storage and Cloud Client Libraries. Can be used with Visual Studio, Visual Studio Code, IntelliJ, or Eclipse and Gradle/Maven.
+
+It also can integrate with Secret Manager as well as manage browse the available Cloud APIs and see Cloud Client Library documentation specific to your programming language.
+
+Kubernetes support enables runnig and debugging applications in a local cluster or on Google Kubernetes Engine (GKE) and Kubernetes Explorer provides with an easy way to visualize and manage Kubernetes resources within the IDE. In addition it simplifies the process of creating and editing YAML configuration files by providing autocomplete and inline documentation. 
+
+Also can be used to develop Cloud Run service and then use the Cloud Run Emulator to run and debug it locally as well as deploy it from the IDE. Cloud Run Explorer can also be used to manage Cloud Run services from the IDE.
 
 More info [here](https://cloud.google.com/code/docs/) and [here](https://github.com/GoogleCloudPlatform/app-gradle-plugin).
 
@@ -1502,7 +1750,17 @@ More info [here](https://cloud.google.com/code/docs/) and [here](https://github.
 
 Emulators can be used for local development of applications that use some of the Google Cloud services. Available for Cloud Bigtable, Datastore, Spanner, Pub/Sub, Firestore, ...
 
+Use the `gcloud beta emulators` commands to install and manage emulators.
+
 See more [here](https://cloud.google.com/sdk/gcloud/reference/beta/emulators).
+
+#### Cloud Shell
+
+Cloud Shell is an interactive shell environment for Google Cloud executed on a VM instance accessed via web browser. It is Debian based and has Google Cloud CLI and other utilities pre-installed (with built-in authorization). It also comes with a built-in code editor, based on [Theia](https://theia-ide.org/), allowing one to develop, build, debug, and deploy cloud-based apps entirely in the cloud (can use to browse file directories and view and edit files within Cloud Shell VM).
+
+Cloud Shell instances are provisioned on a per-user, per-session basis and and terminated after an hour of inactivity. They provisions 5 GB of persistent disk storage mounted as $HOME directory on the instance so files stored in home directory (including scripts and user configuration files like .bashrc and .vimrc) persist between sessions. For other limits see [here](https://cloud.google.com/shell/docs/quotas-limits).
+
+More info [here](https://cloud.google.com/shell/docs/).
 
 ### DevOps CI/CD
 
@@ -1526,14 +1784,51 @@ More info [here](https://cloud.google.com/artifact-registry/docs/).
 
 #### Cloud Build
 
-Executes builds on Google Cloud infrastructure:
+An unopinionated continuous automation platform the executes artifact build process on Google Cloud infrastructure:
+- triggered from Git repositories, storage buckets or Pub/Sub notifications or executed manually
 - import source code from Cloud Storage, Cloud Source Repositories, GitHub, or Bitbucket
-- execute a build per specifications (runs in a Docker container, can do anything that can be done from a container, irrespective of the environment)
-- produce artifacts such as Docker containers or Java archives
+- execute a build per specification defined in configuration file, which by default is named `cloudbuild.yaml` (can be JSON too or named differently)
+  - build steps can occur sequentially or in parallel
+  - each step and occurs in a serverless, automated fashion and is executed in a Docker container, hence, can do anything that can be done from a container, irrespective of the environment
+  - mounts source code into the `/workspace` directory of the Docker container associated with the build step
+  - artifacts produced by each build step are persisted in the `/workspace` folder, and can be used by the following build step
+- produce artifacts such as Docker containers, binaries (e.g Java), other files or VM images
+- can be also used for running unit and integration tests and deploying applications (for example using gcloud deploy) as well as running infrastructure as code solutions such as Terraform and Helm
+- (optionally) publishes Build status notifications to Pub Sub.
 
-Can configure the [trigger](https://cloud.google.com/build/docs/triggers) to build on any changes to the source repository or only changes that match certain criteria:
+Can configure the [trigger](https://cloud.google.com/build/docs/triggers) to build on any changes to the source repository or only changes that match certain criteria.
 
-**Note**: In some cases (for example building manually from command line) tarbals of sources are stored in Cloud Storage bucket which is created automatically
+**Note**: In some cases (for example building manually from command line) tarbals of sources are stored in Cloud Storage bucket which is created automatically!
+
+A list of predefined containers that build, test, and deploy can be found [here](https://cloud.google.com/build/docs/cloud-builders).
+Additionally, any custom container can be used as a build container in Cloud Build. 
+
+Sample cloud build configurations can be found in [sample Github project](https://github.com/GoogleCloudPlatform/cloud-build-samples/).
+
+Cloud Build (as well as [Cloud Deploy](#cloud-deploy)) offer two modes of running their worker pools in Google Cloud (both are fully managed and share the same APIs): 
+- in a shared pool - global and can access the Internet
+- in a private pool - regional and run in a peered VPC network
+- in a hybrid pool - Anthos onfrastructure
+
+Private pools allow you greater control, scale, and security:
+- can specify the types of machines that will perform the build process
+- choose the country to run CI/CD pipelines in (for data locality requirements)
+- keep a warm pool of machines to avoid long queue times
+- scale to over 100 concurrent builds
+- place the CI/CD worker pool inside a peered VPC and apply service controls to perimeter
+
+The private pools are hosted in a Google-owned VPC, network called the service producer network. 
+When setting them up, user can decide to peer VPC with Google’s network to communicate with VPC resources over private IP addresses. 
+Otherwise, can also choose to not peer networks, and the private pool will use a public endpoint to communicate with VPC resources. 
+This is primarily used if only interested in configuring machine types and sizes or deploying in a specific region. 
+
+Hybrid pool runs on Anthos infrastructure on-premises or in multi-cloud environments.
+It offers the highest flexibility, because one can run CI/CD pipelines on any Anthos environment, 
+whether in a cloud environment in Google Cloud, Azure, or AWS, or own premises running on VMware or bare metal.
+
+Cloud Build uses the open source [Tekton](https://tekton.dev/) project in the background, 
+and hybrid pools allow Anthos customers to run Tekton CI/CD pipelines inside Kubernetes cluster. 
+These pipelines are 100% compatible with Cloud Build and Google Cloud Deploy.
 
 More info [here](https://cloud.google.com/cloud-build/docs/) and [sketchnote](https://thecloudgirl.dev/CloudBuild.html).
 
@@ -1584,6 +1879,17 @@ By default Terraform writes some data into the terraform.tfstate file. This stat
 More info [here](https://developer.hashicorp.com/terraform/language), [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs) and [here](https://cloud.google.com/docs/terraform).
 
 See [Terraform sample configurations](cheatsheets.md#terraform).
+
+#### Google Cloud Foundation Toolkit
+
+The Cloud Foundation toolkit provides a series of reference templates in TerraForm, which reflect Google Cloud best practices. 
+These off the shelf templates can be used to quickly build a repeatable, enterprise ready foundation in Google Cloud. 
+
+Designed specifically to meet the compliance and security needs of enterprises. By creating a foundational environment using these templates, 
+user can be confident that best practices are implemented out of the box, including key security and governance controls. 
+Don't need to spend time developing your own templates and patterns for Google Cloud. Instead, can build on open source templates
+and focus only on the customizations, which are unique to the company and it's workloads. 
+
 
 ### Migration to Google Cloud  
 
@@ -1660,7 +1966,7 @@ A **role** is a list of permissions defined by IAM and can be one of the three t
 
 **Note:** It's considered better to use predefined roles over custom roles. Google has predefined roles for a reason, and it should be an exceptional use case that requires custom roles (e.g. production environment required very limited permissions).
 
-**Note:** Custom roles can only be applied at orgs or projects, not folders!
+**Note:** Custom roles can only be applied at organizations or projects, not folders!
 
 Basic roles:
 - **roles/viewer** - permissions for read-only actions that do not affect state, such as viewing (but not modifying) existing resources or data
@@ -1680,6 +1986,12 @@ Some example predefined roles:
 - **Compute Admin** - full control of all Compute Engine resources.
 - **Network Admin** - permissions to create, modify and delete network resources, except for firewall rules and SSL - certificates (read only)
 - **Storage admin** - contains permissions to create, modify, and delete disks, images, and snapshots
+
+[Complete list of predefined roles](https://cloud.google.com/iam/docs/understanding-roles#predefined_roles) is available.
+
+The role granularity differs depending on the role, meaning there exist roles that can only be granted to all resources in a project (cannot be granted on a specific resource).
+One example is Cloud SQL client, role that enables connecting to SQL instances. As of June 2021 it enabled connecting to all SQL instances in the project.
+IAM resource granularity is a moving target, so this example might change in the future (or might have already changed). 
 
 ##### Policy 
 
@@ -1732,6 +2044,17 @@ Cloud Monitoring can provide usage metrics for service accounts and service acco
 
 **Note**: service account can also be used from services external to Google Cloud, download a service account key when creating the service account and then use that key from the external process to call the Cloud Platform APIs.
 
+In order to you service account from an application one needs to:
+- Create service account via the console - `gcloud iam service-accounts create quiz-account --display-name "My Service Account"`
+- Generate and download credentials file - `gcloud iam service-accounts keys create key.json --iam-account=my-service-account@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com`
+- Set environment variable GOOGLE_APPLICATION_CREDENTIALS to the path to the file - `export GOOGLE_APPLICATION_CREDENTIALS=key.json`
+- Authenticate in code with default credentials
+  - Application default credentials will first check for the GOOGLE_APPLICATION_CREDENTIALS environment variable
+  - If set, will use the service account file that the variable points to
+  - If not set will use the default service account that Compute Engine, Google Kubernetes Engine, App Engine and Cloud Functions provide
+  - If default service account does not exist, an error will occur
+- Make sure to create the necessary IAM permissions to enable the service account to access all required APIs, `gcloud projects get-iam-policy $DEVSHELL_PROJECT_ID --format json > iam.json` and `gcloud projects set-iam-policy $DEVSHELL_PROJECT_ID iam_modified.json`
+
 More info about service accounts [here](https://cloud.google.com/iam/docs/understanding-service-accounts).
 
 #### Cloud Audit Logs
@@ -1774,7 +2097,11 @@ More info [here](https://cloud.google.com/dlp/docs/) and [sketchnote](https://th
 
 #### Identity Platform
 
-Identity Platform is a service that make it easy (by providing  back-end services, SDKs, and UI libraries) to authenticate users to your apps and services. In other words, it provides sign up and sign-in for end user applications. A broad range of protocol support is available, including SAML, OpenID, e-mail and password, phone, social, and Apple.
+Identity Platform is a service that make it easy (by providing  back-end services, SDKs, and UI libraries) to authenticate 
+users to your apps and services. In other words, it provides sign up and sign-in for end user applications. A broad range 
+of protocol support is available, including SAML, OpenID, e-mail and password, phone, social, and Apple.
+
+UI libraries/SDKs are available for Android, iOS, and web while admin SDKs are available for Node.js, Java, Python, and more. 
 
 More info [here](https://cloud.google.com/identity-platform/docs).
 
@@ -1826,6 +2153,15 @@ Scanning public GCP endpoints for web-based vulnerabilities looking for things l
 
 More info [here](https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview) and [here](https://cloud.google.com/security-scanner/docs/).
 
+
+#### Secret Manager
+
+Used to store and manage secrets. Google recommends that it's use to store sensitive information such as SQL credentials
+and then pass secrets as environment variables or mount as a volume to enable applications to access them.
+
+More info [here](https://cloud.google.com/secret-manager/docs/).
+
+
 #### Rest
 
 - [Assured Workloads](https://cloud.google.com/assured-workloads/docs) - workload compliance controls
@@ -1835,7 +2171,6 @@ More info [here](https://cloud.google.com/security-command-center/docs/concepts-
 - [Cloud Key Management Service](https://cloud.google.com/kms/docs/) - hosted key management service
 - [Resource Manager](https://cloud.google.com/resource-manager/docs/) - project metadata management
 - [Managed Service for Microsoft Active Directory](https://cloud.google.com/managed-microsoft-ad/docs/) - managed Microsoft Active Directory
-- [Secret Manager](https://cloud.google.com/secret-manager/docs/) - store and manage secrets
 - [Titan Security Key](https://cloud.google.com/titan-security-key/) - two-factor authentication (2FA) device
 - [Chronicle](https://chronicle.security/products/platform) - find threats from security telemetry
 - [VirusTotal](https://chronicle.security/products/virustotal/) - research/hunt for malware 
@@ -1864,42 +2199,159 @@ See [Hybrid and multi-cloud network topologies](https://cloud.google.com/archite
 
 See [sketchnote](https://thecloudgirl.dev/datascience.html) about data science in Google Cloud.
 
+#### Vertex AI
 
+A fully managed platform for Machine Learning and contains various services.
+
+More info [here](https://cloud.google.com/vertex-ai) and a bit more in depth info about 5 basic services can be 
+found at [Vertex AI Foundations for secure and compliant ML/AI deployment blog](https://cloud.google.com/blog/topics/developers-practitioners/vertex-ai-foundations-secure-and-compliant-mlai-deployment).
+
+##### Workbench
+
+Managed Jupyter notebooks, basically, am IDE for data science stuff, 
+used when prototyping with Spark on Google Cloud, BigQuery, Dataproc, and the like.
+
+More info [here](https://cloud.google.com/ertex-ai/docs/workbench).
+
+
+##### Feature Store
+
+A central repository for storing, tracking, and sharing features - the little bits of data that help ML models make predictions.
+
+More info [here](https://cloud.google.com/vertex-ai/ocs/featurestore/overview).
+
+
+##### Training
+
+Managed Kubernetes clusters that execute ML training code, 
+can used when want to train a model fast as it distributes jobs across multiple cluster nodes.
+
+More info [here](https://cloud.google.com/ai-platform/training/ocs/overview).
+
+
+##### Predictions
+
+Autoscaled model serving predictions based on trained ML model.
+It used as online prediction for real-time, synchronous inference as well as batch prediction helps with asynchronous tasks, such as applying ML to data in BigQuery
+
+More info [here](https://cloud.google.com/ai-platform/rediction/docs/overview).
+
+
+##### Pipelines
+
+Machine learning operations part of Vertex AI workflow.
+It used to string together the other core services in a chain of automation.
+
+More info [here](https://cloud.google.com/vertex-ai/docs/pipelines/introduction).
+
+
+##### Other
+
+- [AutoML](https://cloud.google.com/vertex-ai/docs/training-verview#automl) - custom low-code models
+- [Data Labeling](https://cloud.google.com/vertex-ai/docs/tart/ai-platform-users#data_labeling) - data labeling by humans
+- [Matching Engine](https://cloud.google.com/vertex-ai/ocs/matching-engine) - vector similarity searches
+- [Explainable AI](https://cloud.google.com/vertex-ai/ocs/explainable-ai) - understand ML model predictions.
+- [Metadata](https://cloud.google.com/ertex-ai/docs/ml-metadata/introduction) - artifact, lineage, and execution tracking
+- [Model Monitoring](https://cloud.google.com/vertexi/docs/model-monitoring/overview) - monitor models for skew/drift
+- [Tensorboard](https://loud.google.com/vertex-ai/docs/experiments/tensorboard-overview) - managed TensorBoard for ML-experiment Visualization
+- [Vizier](https://cloud.google.com/vertex-ai/docsizier) - black-box hyperparameter tuning
+
+
+
+#### Cloud Video Intelligence
+
+Search every moment of a video file to extract and understand the video's entities at the shot, frame or video level. 
+Annotates videos stored in cloud storage and helps identify key known entities of a video and when they occur within the video. 
+It is a pre-trained model for the recognition of items, places, and actions.
+
+More info [here](https://cloud.google.com/video-intelligence/docs/).
+
+
+#### Cloud Vision
+
+Perform complex image detection like detecting landmarks, logos, faces and explicit content. 
+It can also categorize objects under labels and perform optical character recognition.
+
+More info [here](https://cloud.google.com/vision/docs/).
+
+
+#### Speech-To-Text
+
+Convert audio to text, handles 110 languages and variants to support global user base.
+Can transcribe the text of users dictating to an application's microphone, enable command and control through voice, transcribe audio files and more. 
+
+More info [here](https://cloud.google.com/speech/docs/).
+
+
+#### Text-To-Speech
+
+Convert textor Speech Synthesis Markup Language (SSML) to audio, natural-sounding, synthetic human speech as playable audio.
+
+More info [here](https://cloud.google.com/text-to-speech/docs/).
+
+
+#### Cloud Translation
+
+Translate an arbitrary string into any supported language. Websites and applications can use Translation for fast, dynamic translation of text from a source language to a target language. 
+
+More info [here ](https://cloud.google.com/translate/docs/).
+
+
+#### Natural Language
+
+Extract information about entities such as people, places and events that are mentioned in text documents, news articles or blog posts. 
+Can use the API to understand sentiment about a product on social media or parse intent from customer conversations.
+
+More info [here](https://cloud.google.com/natural-language/docs/).
+
+
+#### Other
 - [Deep Learning VM Images](https://cloud.google.com/deep-learning-vm/docs/) - preconfigured VMs for deep learning
 - [Deep Learning Containers](https://cloud.google.com/ai-platform/deep-learning-containers/docs/) - preconfigured containers for deep learning
 - [Cloud TPU](https://cloud.google.com/tpu/docs/) - hardware acceleration for ML
-- [Vertex AI](https://cloud.google.com/vertex-ai) - managed platform for ML
-  - [AutoML](https://cloud.google.com/vertex-ai/docs/training-verview#automl) - custom low-code models
-  - [Data Labeling](https://cloud.google.com/vertex-ai/docs/tart/ai-platform-users#data_labeling) - data labeling by humans
-  - [Workbench](https://cloud.google.com/ertex-ai/docs/workbench) - Jupyter-based environment for Data Science
-  - [Matching Engine](https://cloud.google.com/vertex-ai/ocs/matching-engine) - vector similarity searches
-  - [Predictions](https://cloud.google.com/ai-platform/rediction/docs/overview) - autoscaled model serving
-  - [Training](https://cloud.google.com/ai-platform/training/ocs/overview) - distributed AI training
-  - [Explainable AI](https://cloud.google.com/vertex-ai/ocs/explainable-ai) - understand ML model predictions.
-  - [Feature Store](https://cloud.google.com/vertex-ai/ocs/featurestore/overview) - managed ML feature repository
-  - [Metadata](https://cloud.google.com/ertex-ai/docs/ml-metadata/introduction) - artifact, lineage, and execution tracking
-  - [Model Monitoring](https://cloud.google.com/vertexi/docs/model-monitoring/overview) - monitor models for skew/drift
-  - [Tensorboard](https://loud.google.com/vertex-ai/docs/experiments/tensorboard-overview) - managed TensorBoard for ML-experiment Visualization
-  - [Vizier](https://cloud.google.com/vertex-ai/docsizier) - black-box hyperparameter tuning
-- [Speech-To-Text](https://cloud.google.com/speech/docs/) - convert audio to text
-- [Text-To-Speech](https://cloud.google.com/text-to-speech/docs/) - convert text to audio
-- [Cloud Translation](https://cloud.google.com/translate/docs/) - language detection and translation
-- [Natural Language](https://cloud.google.com/natural-language/docs/reference/rest) - natural language understanding (sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations)
 - [Contact Center AI](https://cloud.google.com/solutions/contact-center/) - AI in your contact center
 - [Dialogflow](https://cloud.google.com/dialogflow-enterprise/docs/) - create conversational interfaces
 - [Document AI](https://cloud.google.com/document-understanding/docs/) - analyze, classify, search documents
 - [Recommendations AI](https://cloud.google.com/recommendations-ai/docs/) - create custom recommendations
 - [Talent Solutions](https://cloud.google.com/job-discovery/docs/) - job search with ML
-- [Cloud Video Intelligence API](https://cloud.google.com/video-intelligence/docs/) - scene-level video annotation (pre-trained model for the recognition of items,  places, and actions)
-- [Cloud Vision](https://cloud.google.com/vision/docs/) - image recognition and classification
 - [Vision Product Search](https://cloud.google.com/vision/product-search/docs/) - visual search for products
 
 
-### Mobile (Firebase)  
-  
+### Firebase
+
+A mobile and web application development platform with a few storage options for web and mobile development with Google Cloud.
+
+#### Cloud Storage for Firebase
+
+Stores user-generated data and files to Google Cloud Storage.  Firebase SDKs for Cloud Storage provide simple and intuitive authentication for developers.
+
+Ideal use cases include saving user-generated images, pictures, videos, objects and blogs from your mobile or web applications.
+
+More info [here](https://firebase.google.com/products/storage/).
+
+### Firebase Realtime Database
+
+Stores and syncs data with Firebase's NoSQL cloud database. 
+Data is synced across all clients in real time so that it remains available when app goes offline.
+An ideal storage solution for mobile and web applications that require responsiveness when offline.
+
+Firebase Realtime Database is Firebase's original database but Firestore is now recommended instead for most developers starting a new projects.
+
+More info [here](https://firebase.google.com/products/realtime-database/).
+
+
+#### Firebase Hosting
+
+A fast and secure way to host static resources for a web app.
+It is ideal for URL rewriting, atomic release management and Firebase integration of web or mobile app.
+
+More info [here](https://firebase.google.com/products/hosting/) .
+
+
+#### Other 
+
 - [Cloud Firestore](https://firebase.google.com/products/firestore/) - document store and sync
 - [Cloud Functions for Firebase](https://firebase.google.com/products/functions/) - event-driven serverless applications
-- [Cloud Storage for Firebase](https://firebase.google.com/products/storage/) - object storage and serving
 - [Crashlytics](https://fabric.io/kits/android/crashlytics/summary) - crash reporting and analytics
 - [Firebase A/B Testing](https://firebase.google.com/products/ab-testing/) - create A/B test experiments
 - [Firebase App Distribution](https://firebase.google.com/products/app-distribution/) - trusted tester early access
@@ -1907,11 +2359,9 @@ See [sketchnote](https://thecloudgirl.dev/datascience.html) about data science i
 - [Firebase Cloud Messaging](https://firebase.google.com/products/cloud-messaging/) - send device notifications
 - [Firebase Dynamic Links](https://firebase.google.com/products/dynamic-links/) - link to app content
 - [Firebase Extensions](https://firebase.google.com/products/extensions) - pre-packaged development solutions
-- [Firebase Hosting](https://firebase.google.com/products/hosting/) - web hosting with CDN/SSL
 - [Firebase In-App Messaging](https://firebase.google.com/products/in-app-messaging/) - send in-app contextual messages
 - [Firebase Performance Monitoring](https://firebase.google.com/products/performance/) - app/web performance monitoring
 - [Firebase Predictions](https://firebase.google.com/products/predictions/) - predict user targeting
-- [Firebase Realtime Database](https://firebase.google.com/products/realtime-database/) - real-time data synchronization
 - [Firebase Remote Config](https://firebase.google.com/docs/remote-config/) - remotely configure installed apps
 - [Firebase Test Lab](https://firebase.google.com/docs/test-lab/) - mobile testing device farm
 - [Google Analytics for Firebase](https://firebase.google.com/products/analytics/) - mobile app analytics
