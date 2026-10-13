@@ -41,7 +41,7 @@ To install on Linux: `curl https://sdk.cloud.google.com | bash`.
 - `gcloud compute instances list` - list compute instances
 - `gcloud compute instances list --filter="name=('somename')"` - list compute instances with filtering
 - `gcloud compute instances move` - move instance between zones (within a region)
-- `gcloud beta compute reset-windows-password machinename` - reset windows password of the machine
+- `gcloud compute reset-windows-password vm-host --user user_name` - reset a password for user user_name on host vm-host
 - `gcloud compute firewall-rules list` - list firewall rules
 - `gcloud compute firewall-rules list --filter="network='default' AND ALLOW:'icmp'" ` - list firewall rules with filtering
 - `gcloud compute firewall-rules list --filter=ALLOW:'80' ` - list firewall rules with filtering

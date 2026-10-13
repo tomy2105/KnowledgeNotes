@@ -9,6 +9,7 @@
 - [Command prompt keyboard shortcuts](#command-prompt-keyboard-shortcuts)
 - [God mode](#god-mode)
 - [Using Windows 10 File Explorer menu in Windows 11](#using-windows-10-file-explorer-menu-in-windows-11)
+- [Cleaning Docker](#cleaning-docker)
 
 <!-- tocstop -->
 
@@ -151,3 +152,40 @@ Windows Registry Editor Version 5.00
 ```
 
 After change open Task Manager, the Details pane and restart explorer.exe process(es).
+
+## Cleaning Docker
+
+1. Clean Up Docker Data Run the following to remove unused containers, images, and volumes:
+
+```
+docker system prune -a --volumes
+```
+
+Make sure to start or containers you need to preserve before doing this!!!
+
+
+2. Shut Down Docker & WSL
+
+```
+wsl --shutdown
+```
+
+3. Compact the VHDX File 
+
+If on Windows Pro/En Open PowerShell as Administrator and run:
+
+```
+Optimize-VHD -Path "$Env:LocalAppData\Docker\wsl\disk\docker_data.vhdx" -Mode Full
+Optimize-VHD -Path "$Env:LocalAppData\Docker\wsl\main\ext4.vhdx" -Mode Full
+```
+
+If on Windows Home run:
+
+```
+diskpart
+select vdisk file="C:\Users\<User>\AppData\Local\Docker\wsl\disk\docker_data.vhdx"
+compact vdisk
+select vdisk file="C:\Users\<User>\AppData\Local\Docker\wsl\main\ext4.vhdx"
+compact vdisk
+exit
+```
